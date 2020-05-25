@@ -1,0 +1,9 @@
+High level description of ssd keras training & testing files
+
+1. ssd300_training_aux_img_input_multi_resolution.py
+This file is used for training an auxillary image input model i.e. the model takes an image and an auxillary mask as input. This mask contains predictions from the other collaborating
+cameras. The regular ssd300 model takes only as image as input, so its architecture had to be modified to accomodate a mask as input as well. Steps in this file are:
+(a) create a model instance (This includes all the layers involved in the architecture of SSD 300)
+(b) Load pre-trainied weights in the model (model is kind of a wrapper and weights can be loaded into it)
+(c) Create Datagenerators (these creates batches of data (and their labels) for the model to be trained). Generators read data using parse_xml method (for VOC dataset). This step includes formatting 
+	filenames and loading images in the memory (if indicated so). Then generate method would generate the batches from the dataset.

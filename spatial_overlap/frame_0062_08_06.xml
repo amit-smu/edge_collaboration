@@ -1,0 +1,26 @@
+<annotation>
+	<folder>View_008</folder>
+	<filename>frame_0062.jpg</filename>
+	<path>D:/GitRepo/edge_computing/edge_collaboration/dataset/View_008/frame_0062.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>720</width>
+		<height>576</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>spatial_overlap</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>199</xmin>
+			<ymin>93</ymin>
+			<xmax>720</xmax>
+			<ymax>546</ymax>
+		</bndbox>
+	</object>
+</annotation>

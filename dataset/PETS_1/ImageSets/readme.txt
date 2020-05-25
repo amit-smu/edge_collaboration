@@ -1,0 +1,2 @@
+The training & testing files contains frame numbers which are used for training & testing of regression models (check the regression_estimator_multi_pts.py)
+Trainval contains frame names which were used for k-fold cross validation testing of regression models.
