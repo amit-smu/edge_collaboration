@@ -36,7 +36,7 @@ if __name__ == "__main__":
     ref_cam = 7
     collab_cam = 8
     gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates(ref_cam, collab_cam)
-    max_pixel_intensity = 170
+    max_pixel_intensity = 245
 
     iou_scores = []
     est_area_global = []
