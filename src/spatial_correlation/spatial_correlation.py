@@ -126,20 +126,6 @@ def get_smallest_polygon(coords):
     print("")
 
 
-def create_frame_name(f_num):
-    """
-    crearte frame name from frame number
-    :param f_num:
-    :return:
-    """
-    if f_num < 10:
-        return "frame_000{}".format(f_num)
-    elif f_num < 100:
-        return "frame_00{}".format(f_num)
-    elif f_num < 1000:
-        return "frame_0{}".format(f_num)
-
-
 def draw_rect(coords, img, color):
     """
     draw rectangle with given points
@@ -200,25 +186,12 @@ def match_objects(objects_1, objects_2):
     object_mappings = []
 
     for obj1 in objects_1:
-        # best_score = 1000
-        # matching_obj = -1
         for obj2 in objects_2:
-            # color_score, sift_score, eucl_distance = get_scores(obj1, obj2)
-            # color_score, sift_score, eucl_distance = get_scores(obj1, obj2)
-
-            # total_score = sift_score + (1 - color_score)
-            # total_score = eucl_distance
-            # if total_score < best_score:
-            #     matching_obj = obj2
-            #     best_score = total_score
             obj_same = utils.same_objects(obj1['embedding'], obj2['embedding'])
             if obj_same:
                 # add it to dataframe
                 object_mappings.append(
                     [obj1['rand_id'], obj2['rand_id'], 1.0, obj1['location'], obj2['location']])
-        # if best_score <= EUCL_THRESHOLD and matching_obj != -1:
-        #     object_mappings.append(
-        #         [obj1['rand_id'], matching_obj['rand_id'], best_score, obj1['location'], matching_obj['location']])
 
     dataframe = None
     if len(object_mappings) > 0:
@@ -391,6 +364,7 @@ if __name__ == "__main__":
     view_1_name = "View_007"
     view_2_name = "View_008"
     EUCL_THRESHOLD = 12
+    image_size = (720, 576)  # PETS dataset (width, height)
 
     SAME_OBJECTS_ANALYSIS = False  # whether to do same obj analysis or not
     INCLUDE_COLOR = False
@@ -398,19 +372,19 @@ if __name__ == "__main__":
     INCLUDE_EMBEDDING = True
 
     # create white images (used for marking the mapped areas)
-    image_size = (720, 576)  # PETS dataset (width, height)
     view_1_area = np.full((image_size[1], image_size[0]), 255, dtype=np.uint8)
     view_2_area = np.full((image_size[1], image_size[0]), 255, dtype=np.uint8)
     view_1_area_copy = view_1_area.copy()
     view_2_area_copy = view_2_area.copy()
 
     # ground truth spatial overlap area coordinates
-    # gt_box_coords_vw_1 = [100, 200, 300, 350]  # [x1,y1,x2,y2]
     gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates("07", "08")
     gt_box_coords_vw_2 = get_gt_sp_overlap_coordinates("08", "07")
+
     # estimated spatial overlap area coordinates
     est_box_coords_vw1_global = []
     est_box_coords_vw2_global = []
+
     # iou values for most recent estimated spatial overlap frames
     iou_values_1 = []
     iou_values_2 = []
@@ -419,9 +393,9 @@ if __name__ == "__main__":
     view_2_grnd_truth = pd.read_csv("{}/{}.txt".format(dir_name, view_2_name), delimiter=" ")
 
     # frame_number = 1
-    for frame_number in range(100, 450):
+    for frame_number in range(0, 635):  # 80% training data
         print("frame number : {}".format(frame_number))
-        frame_name = create_frame_name(frame_number)
+        frame_name = "frame_{:04d}".format(frame_number)
 
         view_1_frame = cv2.imread("{}/{}/{}.jpg".format(dir_name, view_1_name, frame_name))
         view_2_frame = cv2.imread("{}/{}/{}.jpg".format(dir_name, view_2_name, frame_name))
@@ -436,16 +410,6 @@ if __name__ == "__main__":
         # compute object features for each object in frame
         view_1_obj_features = []
         view_2_obj_features = []
-        # for _, obj in view_1_objects.iterrows():
-        #     img = view_1_frame[obj['ymin']:obj['ymax'], obj['xmin']:obj['xmax']]
-        #     obj_location = [(obj['xmin'], obj['ymin']), (obj['xmax'], obj['ymax'])]
-        #     view_1_obj_features.append(get_object_features(img, obj_location))
-        #
-        # for _, obj in view_2_objects.iterrows():
-        #     img = view_2_frame[obj['ymin']:obj['ymax'], obj['xmin']:obj['xmax']]
-        #     obj_location = [(obj['xmin'], obj['ymin']), (obj['xmax'], obj['ymax'])]
-        #     view_2_obj_features.append(get_object_features(img, obj_location))
-
         view_1_obj_features = get_all_objects_features(view_1_objects, view_1_frame)
         view_2_obj_features = get_all_objects_features(view_2_objects, view_2_frame)
 
@@ -461,6 +425,7 @@ if __name__ == "__main__":
                                view_1_obj_features=view_1_obj_features, view_2_obj_features=view_2_obj_features)
 
         cv2.imwrite("intermediate_frames/marked_area_cam_7_f_{}.jpg".format(frame_number), view_1_area)
+        cv2.imwrite("intermediate_frames/marked_area_cam_8_f_{}.jpg".format(frame_number), view_2_area)
 
         # visualize matched objects
         if DEBUG:
@@ -477,49 +442,12 @@ if __name__ == "__main__":
                 cv2.putText(view_2_frame, "{}_{}".format(rand_num, score), (obj2_loc[0][0], obj2_loc[0][1] - 10),
                             cv2.FONT_HERSHEY_PLAIN, 1.5, (255, 255, 0), 1)
 
-        # for obj1 in view_1_obj_features:
-        #     for obj2 in view_2_obj_features:
-        #         obj_same = compare_objects(obj1, obj2)
-        #         if obj_same:
-        #             # objects matched
-        #             vw_1_matching_obj_coord.append(obj1['location'])
-        #             vw_2_matching_obj_coord.append(obj2['location'])
-        #
-        #             if DEBUG:
-        #                 # visualize matched objects
-        #                 rand_num = random.randint(10000, 99999)
-        #                 obj1_loc = obj1['location']
-        #                 cv2.rectangle(view_1_frame, (obj1_loc[0]), (obj1_loc[1]), (255, 255, 0), 4)
-        #                 cv2.putText(view_1_frame, "{}".format(rand_num), (obj1_loc[0][0], obj1_loc[0][1] - 10),
-        #                             cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 0), 2)
-        #
-        #                 obj2_loc = obj2['location']
-        #                 cv2.rectangle(view_2_frame, (obj2_loc[0]), (obj2_loc[1]), (255, 255, 0), 4)
-        #                 cv2.putText(view_2_frame, "{}".format(rand_num), (obj2_loc[0][0], obj2_loc[0][1] - 10),
-        #                             cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 0), 2)
-        #
-        #             # remove this object from list
-        #             view_2_obj_features.remove(obj2)
-        #             break
-        #         else:
-        #             continue
-
-        # if no objects are matched, continue
-        # if len(vw_1_matching_obj_coord) == 0 or len(vw_2_matching_obj_coord) == 0:
-        #     continue
-
-        # common area between the 2 views
-        # min_x_1, max_x_1, min_y_1, max_y_1 = get_min_max_coords(vw_1_matching_obj_coord)
         est_box_coords_vw1 = get_fitting_rect_coordinates(view_1_obj_features, dataframe=obj_mappings,
                                                           column="obj_id_1")
         # min_x_2, max_x_2, min_y_2, max_y_2 = get_min_max_coords(vw_2_matching_obj_coord)
         est_box_coords_vw2 = get_fitting_rect_coordinates(view_2_obj_features, dataframe=obj_mappings,
                                                           column="obj_id_2")
 
-        # # draw polygons
-        # poly_pts_v_1 = np.array([[min_x_1, min_y_1], [max_x_1, max_y_1]], np.int32)
-        # poly_pts_v_1 = np.array([[min_x_1, min_y_1], [max_x_1, max_y_1]], np.int32)
-        # add newly found spatial area coordinates to global list (created using previous frames)
         if len(est_box_coords_vw1_global) > 0:
             est_box_coords_vw1_global = update_est_sp_overlap_area(current_box_coords=est_box_coords_vw1,
                                                                    prev_box_coords=est_box_coords_vw1_global)
@@ -558,17 +486,6 @@ if __name__ == "__main__":
             cv2.imshow("Camera_2", view_2_frame)
 
             cv2.waitKey(1)
-
-    # cv2.rectangle(view_1_frame, (min_x_1, min_y_1), (max_x_1, max_y_1), (0, 255, 0), 2)
-    # cv2.rectangle(view_2_frame, (min_x_2, min_y_2), (max_x_2, max_y_2), (0, 255, 0), 2)
-    # cv2.imshow("view_1_frame", view_1_frame)
-    # cv2.imshow("view_2_frame", view_2_frame)
-    # cv2.waitKey(-1)
-
-    # visualize final estimated spatial overlap and ground truth overlap
-    # draw_rect(gt_box_coords_vw_1, view_1_frame, (255, 0, 0))
-    # draw_rect(est_box_coords_vw1_global, view_1_frame, (0, 0, 255))
-    # cv2.imshow("frame_1", view_1_frame)
 
     # plot number of frames vs iou of estimated spatial overlap
 

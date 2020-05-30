@@ -94,10 +94,10 @@ if __name__ == "__main__":
     print(metrics.classification_report(y_true=y_test, y_pred=y_pred))
 
     # write svm model to disk
-    filename = "svm_model_8_samples.sav"
-    pickle.dump(classifier, open(filename, 'wb'))
+    # filename = "svm_model_8_samples.sav"
+    # pickle.dump(classifier, open(filename, 'wb'))
 
-    loaded_model = pickle.load(open(filename, 'rb'))
-    y_pred_loaded = loaded_model.predict(X_test)
+    # loaded_model = pickle.load(open(filename, 'rb'))
+    # y_pred_loaded = loaded_model.predict(X_test)
 
-    print("same predictions: {}".format(y_pred is y_pred_loaded))
+    # print("same predictions: {}".format(y_pred is y_pred_loaded))

@@ -1,3 +1,7 @@
+"""
+object detection performance evaluation script. Uses the auxillary input DNN for testing
+"""
+
 from keras import backend as K
 from keras.models import load_model
 from keras.optimizers import Adam
@@ -11,7 +15,7 @@ from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
 from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 from keras_layers.keras_layer_L2Normalization import L2Normalization
-from data_generator.object_detection_2d_data_generator_aux_multi_resolution_evaluation_512 import DataGenerator
+from data_generator.obj_det_2d_data_gen_aux_mixed_res_eval_512 import DataGenerator
 from eval_utils.average_precision_evaluator_single_image_multi_resolution import Evaluator
 
 import os
@@ -75,20 +79,14 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 ###############################################    DATA GENERATORS     ################################################
-
-
 # TODO: Set the paths to the dataset here.
-# Pascal_VOC_dataset_images_dir = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/JPEGImages/'
-# Pascal_VOC_dataset_annotations_dir = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/Annotations/'
-# Pascal_VOC_dataset_image_set_filename = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/test_subset_500.txt'
+# PETS_images_dir = '../dataset/PETS_org/JPEGImages_cropped_400x400'
+# PETS_annotations_dir = '../dataset/PETS_org/Annotations_cropped_400x400'
+# PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_crop_400x400.txt'
 
-# PETS_images_dir = '../dataset/PETS/JPEGImages'
-# PETS_annotations_dir = '../dataset/PETS/Annotations'
-# PETS_test_image_set_filename = '../dataset/PETS/ImageSets/Main/test_100.txt'
-
-PETS_images_dir = '../dataset/PETS_org/JPEGImages_cropped_400x400'
-PETS_annotations_dir = '../dataset/PETS_org/Annotations_cropped_400x400'
-PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_crop_400x400.txt'
+PETS_images_dir = '../dataset/PETS_org/JPEGImages'
+PETS_annotations_dir = '../dataset/PETS_org/Annotations'
+PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_12.txt'
 
 # WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
 # WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
@@ -150,7 +148,7 @@ print("testing for : {}\n".format(test_dataset))
 # ##############################################    EVALUATION     ################################################
 
 avg_prec_list = []
-for i in range(3):
+for i in range(2):
     evaluator = Evaluator(model=model,
                           n_classes=n_classes,
                           data_generator=dataset,
