@@ -1,12 +1,13 @@
 """
-object detection performance evaluation script. Uses the auxillary input DNN for testing and input images are
-mixed resolution. Prior contains bounding boxes for shred regions and non-shared regions are black in prior
+Evaluation script for SSD512 architecture where mask/prior is created using detected boxes + regression
+ based coordinate mapping, instead of rand ground truth
 """
 
 from keras import backend as K
 from keras.models import load_model
 from keras.optimizers import Adam
 from scipy.misc import imread
+import tensorflow as tf
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -16,7 +17,8 @@ from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
 from keras_layers.keras_layer_DecodeDetections import DecodeDetections
 from keras_layers.keras_layer_DecodeDetectionsFast import DecodeDetectionsFast
 from keras_layers.keras_layer_L2Normalization import L2Normalization
-from data_generator.obj_det_2d_data_gen_aux_mixed_res_eval_512 import DataGenerator
+from data_generator.obj_det_2d_data_gen_aux_mixed_res_img_dnn_eval_512 import DataGenerator
+# from data_generator.object_detection_2d_data_generator_aux_multi_resolution_evaluation_512 import DataGenerator
 from eval_utils.average_precision_evaluator_single_image_multi_resolution import Evaluator
 
 import os
@@ -33,6 +35,19 @@ model_mode = 'inference'
 # ####################################     Load Weights/MODEL here    ##########################################
 # # 1: Build the Keras model
 K.clear_session()  # Clear previous models from memory.
+
+###################################
+# TensorFlow wizardry
+config = tf.ConfigProto()
+
+# Don't pre-allocate memory; allocate as-needed
+config.gpu_options.allow_growth = True
+
+# Only allow a total of half the GPU memory to be allocated
+config.gpu_options.per_process_gpu_memory_fraction = 1
+
+# Create a session with the above options specified.
+K.tensorflow_backend.set_session(tf.Session(config=config))
 
 model = ssd_512_aux(image_size=(img_height, img_width, 3),
                     n_classes=20,
@@ -79,19 +94,29 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
+# ###################### VARIABLES #########################################################
+ref_cam = 1
+collab_cam = 4
+
+test_dataset = "WILDTRACK"
+# test_dataset = "PETS"
+# test_dataset = "VOC"
+
+collaborating_cams = 1
+test_img_res = 512
+
+# ###########################################################################################
 ###############################################    DATA GENERATORS     ################################################
+
 # TODO: Set the paths to the dataset here.
-# PETS_images_dir = '../dataset/PETS_org/JPEGImages_cropped_400x400'
-# PETS_annotations_dir = '../dataset/PETS_org/Annotations_cropped_400x400'
-# PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_crop_400x400.txt'
 
-PETS_images_dir = '../dataset/PETS_org/JPEGImages'
-PETS_annotations_dir = '../dataset/PETS_org/Annotations'
-PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_12.txt'
-
-# WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
-# WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-# WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test.txt"
+PETS_images_dir = r"../dataset/PETS_1/JPEGImages_det_boxes_r{}_c{}_{}".format(ref_cam, collab_cam,
+                                                                              ref_cam)
+PETS_annotations_dir = r"../dataset/PETS_1/Annotations_det_boxes_r{}_c{}_{}".format(ref_cam,
+                                                                                    collab_cam,
+                                                                                    ref_cam)
+PETS_test_image_set_filename = "../dataset/PETS_1/ImageSets/Main/test_crop_r{}_c{}_300.txt".format(ref_cam,
+                                                                                                   collab_cam)
 
 WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
 WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
@@ -104,15 +129,13 @@ classes = ['background',
            'chair', 'cow', 'diningtable', 'dog',
            'horse', 'motorbike', 'person', 'pottedplant',
            'sheep', 'sofa', 'train', 'tvmonitor']
-# classes = ['background', 'person']
 
-# test_dataset = "WILDTRACK"
-test_dataset = "PETS"
-# test_dataset = "VOC"
 
 print("Evaluating for : {}\n".format(test_dataset))
+print("ref_cam: {}, collab_cam :{}\n".format(ref_cam, collab_cam))
 
-dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None, N=1, resolution=512)
+dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None, N=collaborating_cams,
+                        resolution=test_img_res, ref_cam=ref_cam, collab_cam=collab_cam, test_dataset=test_dataset)
 
 if test_dataset == "PETS":
     dataset.parse_xml(images_dirs=[PETS_images_dir],
@@ -123,6 +146,7 @@ if test_dataset == "PETS":
                       exclude_truncated=False,
                       exclude_difficult=False,
                       ret=False)
+
 if test_dataset == "WILDTRACK":
     dataset.parse_xml(images_dirs=[WT_dataset_images_dir],
                       image_set_filenames=[WT_dataset_test_image_set_filename],
