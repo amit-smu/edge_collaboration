@@ -886,6 +886,40 @@ class DataGenerator:
         self.dataset_indices = np.arange(self.dataset_size,
                                          dtype=np.int32)  # Instead of shuffling the HDF5 dataset, we will shuffle this index list.
 
+    def create_mixed_res_imges_WT(self, batch_x):
+        """
+        create mixed-resolution images (based on teh collaborating and reference cameras)
+        :return:
+        """
+        SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
+        print("shared area resolution: {}".format(SHARED_AREA_RES))
+        shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
+        # map shared region to 512x512 (data gen image size)
+        xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
+        xmin_tr = int((xmin_org / 1920.0) * 512)
+        ymin_tr = int((ymin_org / 1080.0) * 512)
+        xmax_tr = int((xmax_org / 1920.0) * 512)
+        ymax_tr = int((ymax_org / 1080.0) * 512)
+        # shared_reg_coords_transformed = [xmin_tr, ymin_tr, xmax_tr, ymax_tr]  # coords in 512x512 image size
+
+        # compute new resolution for shared area
+        reg_width = xmax_tr - xmin_tr  # width of shared region in 512x512 image
+        reg_height = ymax_tr - ymin_tr
+        reg_width_tr = int((reg_width / 512.0) * SHARED_AREA_RES[0])  # new width as per 224x224 overall resolution
+        reg_height_tr = int((reg_height / 512.0) * SHARED_AREA_RES[1])
+        shared_reg_target_res = (reg_width_tr, reg_height_tr)  # shared area res as per 224x224 overall img res
+
+        batch_x_mixed_res = []
+        # modify each image
+        for img in batch_x:
+            shared_reg = img[ymin_tr:ymax_tr, xmin_tr:xmax_tr]
+            temp = cv2.resize(shared_reg, dsize=shared_reg_target_res, interpolation=cv2.INTER_CUBIC)
+            shared_reg = cv2.resize(temp, dsize=(reg_width, reg_height), interpolation=cv2.INTER_CUBIC)
+            img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = shared_reg
+            batch_x_mixed_res.append(img)
+        # assert batch_x.shape == batch_x_mixed_res.shape
+        return np.array(batch_x_mixed_res)
+
     def apply_resolution_transform(self, batch_x_data, batch_y_data, factor):
         # scale = Scale(factor=factor, clip_boxes=True, box_filter=None, background=(255, 255, 255))
         # assert scale is not None
@@ -1336,6 +1370,7 @@ class DataGenerator:
             # if self.crop_size is not None:
             #     batch_X, batch_y = self.crop_images(batch_x_data=batch_X, batch_y_data=batch_y)
 
+            batch_X = self.create_mixed_res_imges_WT(batch_X)
             batch_X, batch_y = self.apply_resolution_transform(batch_x_data=batch_X, batch_y_data=batch_y,
                                                                factor=self.resolution / 512)
 

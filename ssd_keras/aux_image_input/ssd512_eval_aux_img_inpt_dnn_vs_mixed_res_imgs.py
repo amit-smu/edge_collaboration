@@ -118,9 +118,9 @@ PETS_annotations_dir = r"../dataset/PETS_1/Annotations_det_boxes_r{}_c{}_{}".for
 PETS_test_image_set_filename = "../dataset/PETS_1/ImageSets/Main/test_crop_r{}_c{}_300.txt".format(ref_cam,
                                                                                                    collab_cam)
 
-WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
-WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_cam_1.txt"
+WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
+WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
+WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700_cam_1.txt"
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
