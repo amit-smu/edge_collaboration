@@ -891,15 +891,22 @@ class DataGenerator:
         create mixed-resolution images (based on teh collaborating and reference cameras)
         :return:
         """
-        SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
+        SHARED_AREA_RES = (512, 512)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
-        shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
+        # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
+        #shared_reg_coords = [0, 0, 298, 700]  # gt overlap cam 1, 4 (projected on view 1) Cropped images (700x700)
+        shared_reg_coords = [0, 0, 700, 466]
+        print("shared reg coords : {}".format(shared_reg_coords))
         # map shared region to 512x512 (data gen image size)
         xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
-        xmin_tr = int((xmin_org / 1920.0) * 512)
-        ymin_tr = int((ymin_org / 1080.0) * 512)
-        xmax_tr = int((xmax_org / 1920.0) * 512)
-        ymax_tr = int((ymax_org / 1080.0) * 512)
+        # xmin_tr = int((xmin_org / 1920.0) * 512)
+        # ymin_tr = int((ymin_org / 1080.0) * 512)
+        # xmax_tr = int((xmax_org / 1920.0) * 512)
+        # ymax_tr = int((ymax_org / 1080.0) * 512)
+        xmin_tr = int((xmin_org / 700.0) * 512)
+        ymin_tr = int((ymin_org / 700.0) * 512)
+        xmax_tr = int((xmax_org / 700.0) * 512)
+        ymax_tr = int((ymax_org / 700.0) * 512)
         # shared_reg_coords_transformed = [xmin_tr, ymin_tr, xmax_tr, ymax_tr]  # coords in 512x512 image size
 
         # compute new resolution for shared area
@@ -964,14 +971,16 @@ class DataGenerator:
 
         return batch_X_multi_res
 
-    def dump_raw_data(self, batch_x_data, batch_y_data):
+    def dump_raw_data(self, batch_x_data, batch_y_data, batch_img_ids):
         # print("dumping data")
         temp_dir = "./temp"
         # out_file = open("{}/batch_y_data.csv".format(temp_dir), 'a')
-        index = random.randint(1, 1000000)
+        #index = random.randint(1, 1000000)
+        index = 0
 
         for bx_data, by_data in zip(batch_x_data, batch_y_data):
-            img_file_name = "{}/{}.png".format(temp_dir, index)
+            #img_file_name = "{}/{}.png".format(temp_dir, index)
+            img_file_name = "{}/{}.png".format(temp_dir, batch_img_ids[index])
             # draw bounding box on the image
             for bbox in by_data:
                 cv2.rectangle(bx_data, (bbox[1], bbox[2]), (bbox[3], bbox[4]), (0, 255, 0), 2)
@@ -1371,11 +1380,11 @@ class DataGenerator:
             #     batch_X, batch_y = self.crop_images(batch_x_data=batch_X, batch_y_data=batch_y)
 
             batch_X = self.create_mixed_res_imges_WT(batch_X)
-            batch_X, batch_y = self.apply_resolution_transform(batch_x_data=batch_X, batch_y_data=batch_y,
-                                                               factor=self.resolution / 512)
+            #batch_X, batch_y = self.apply_resolution_transform(batch_x_data=batch_X, batch_y_data=batch_y,
+            #                                                   factor=self.resolution / 512)
 
             # ########################## Dump batch data ############################################
-            self.dump_raw_data(batch_x_data=batch_X.copy(), batch_y_data=batch_y.copy())
+            self.dump_raw_data(batch_x_data=batch_X.copy(), batch_y_data=batch_y.copy(), batch_img_ids=batch_image_ids)
             #########################################################################################
             # Compose the output.
             #########################################################################################

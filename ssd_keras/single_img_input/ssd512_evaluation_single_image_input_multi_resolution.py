@@ -75,8 +75,8 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 ############################################### VARIABLES #######################
-# test_dataset = "WILDTRACK"
-test_dataset = "PETS"
+test_dataset = "WILDTRACK"
+#test_dataset = "PETS"
 # test_dataset = "VOC"
 test_img_resolution = 512
 ###############################################    DATA GENERATORS     ################################################
@@ -97,7 +97,7 @@ PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_crop_400
 
 WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
 WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
-WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700.txt"
+WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700_cam_1.txt"
 #
 # WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
 # WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
@@ -126,16 +126,6 @@ if test_dataset == "PETS":
                       exclude_truncated=False,
                       exclude_difficult=False,
                       ret=False)
-# if test_dataset == "VOC":
-#     dataset.parse_xml(images_dirs=[Pascal_VOC_dataset_images_dir],
-#                       image_set_filenames=[Pascal_VOC_dataset_image_set_filename],
-#                       annotations_dirs=[Pascal_VOC_dataset_annotations_dir],
-#                       classes=classes,
-#                       include_classes='all',
-#                       exclude_truncated=False,
-#                       exclude_difficult=False,
-#                       ret=False)
-
 if test_dataset == "WILDTRACK":
     dataset.parse_xml(images_dirs=[WT_dataset_images_dir],
                       image_set_filenames=[WT_dataset_test_image_set_filename],
@@ -150,7 +140,7 @@ if test_dataset == "WILDTRACK":
 print("testing for : {}\n".format(test_dataset))
     ###############################################    EVALUATION     ################################################
 avg_precisions = []
-for i in range(3):
+for i in range(1):
     evaluator = Evaluator(model=model,
                           n_classes=n_classes,
                           data_generator=dataset,

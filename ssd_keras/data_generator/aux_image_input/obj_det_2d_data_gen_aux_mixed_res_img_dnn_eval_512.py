@@ -37,6 +37,7 @@ from keras_loss_function.keras_ssd_loss import SSDLoss
 from keras import backend as K
 from keras.optimizers import Adam
 from sklearn.preprocessing import PolynomialFeatures
+import sys
 
 try:
     import h5py
@@ -1222,7 +1223,7 @@ class DataGenerator:
         """
         DUMP_DATA = False
         shared_reg_bbox = []  # xmin, ymin, xmax, ymax of shared region (drawn on collaborating cam)
-        ICOV_TH = 0.25  # min icov value to select an object
+        ICOV_TH = 0.10  # min icov value to select an object
         batch_x_prior = []
         # self.collab_cam = 1
         for i in range(len(batch_file_names)):
@@ -1237,7 +1238,9 @@ class DataGenerator:
                 file_name = file_name[:-1 * img_name_len]
                 # file_name = "{}/{}".format(file_name, self.collab_cam)
                 collab_file_path = "{}/{}".format(file_name, collab_img_id)
-                shared_reg_bbox = [1089, 6, 1914, 1071]  # ground truth shared region b/w cam 1,4 (projected on view 4)
+                #shared_reg_bbox = [1089, 6, 1914, 1071]  # ground truth shared region b/w cam 1,4 (projected on view 4)
+                #shared_reg_bbox = [6,4,908,1074]
+                shared_reg_bbox = [1, 1, 242, 509] # 1920,1080 projected to 512x512
                 # shared_reg_bbox = [479, 0, 700, 700]  # ground truth shared region b/w cam 1,4 (projected on view 4)
                 # shared_reg_bbox = [0, 0, 298, 700]  # ground truth shared region b/w cam 1,4 (projected on view 4)
                 # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
@@ -1254,109 +1257,15 @@ class DataGenerator:
             # read image file
             # print(img_id, collab_file_path)
             # print(collab_file_path)
-            collab_img = cv2.imread(collab_file_path)
-            assert collab_img is not None
+            #collab_img = cv2.imread(collab_file_path)
+            #assert collab_img is not None
             # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
             annot_dir = "../dataset/Wildtrack_dataset/Annotations"
             # objects = self.detect_objects(collab_img)
-            # objects = self.detect_objects(cv2.imread(batch_file_names[i]))
+            objects = self.detect_objects(cv2.imread(batch_file_names[i]))
             # objects = self.get_gt_objects(collab_img_id[:-4], annot_dir)
-            objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
-            if len(objects) == 0:
-                batch_x_prior.append(aux_channel)
-                continue
-            # if DUMP_DATA:
-            #     for obj in objects:
-            #         cv2.rectangle(collab_img, (obj[2], obj[3]), (obj[4], obj[5]), (255, 0, 0), 2)
-            #         cv2.imwrite("temp/{}".format(collab_img_id), collab_img)
-
-            # map coordinates to reference camera coordinate system
-            # select objects in shared region
-            shared_reg_objects = []
-            for obj in objects:
-                obj_bbox = [obj[2], obj[3], obj[4], obj[5]]
-                icov = self.bb_icov(obj_bbox, shared_reg_bbox)
-                if icov >= ICOV_TH:
-                    shared_reg_objects.append(obj)
-
-            if len(shared_reg_objects) == 0:
-                batch_x_prior.append(aux_channel)
-                continue
-
-            if self.img_type_prefix == "PNGImages":  # WILDTRACK
-                mapped_objects = self.map_coordinates_WT(shared_reg_objects)
-            elif self.img_type_prefix == "JPEGImages":  # WILDTRACK
-                # objects = self.map_coordinates_PETS(objects, collab_img_id, batch_img_ids[i])
-                mapped_objects = self.map_coordinates_PETS(shared_reg_objects)
-
-            # create prior using detected boxes
-            # prior = self.darknet_randomize(objects, False)
-            # prior = np.full(shape=(512, 512, 1), fill_value=114, dtype=np.uint8)
-            # print("total obj: {}, shared region objects : {}, mapped obj: {}".format(len(objects),
-            #                                                                          len(shared_reg_objects),
-            #                                                                          len(mapped_objects)))
-            for obj in mapped_objects:
-                # if obj[0] == 15:
-                xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
-                aux_channel[ymin:ymax, xmin:xmax] = 255
-                # if DUMP_DATA:
-            #             batch_img = cv2.imread(batch_file_names[i])
-            #             assert batch_img is not None
-            #             cv2.rectangle(batch_img, (xmin, ymin), (xmax, ymax), (0, 0, 255), 2)
-            # if DUMP_DATA:
-            #     print(batch_img_ids[i])
-            # cv2.imwrite("temp/{}.jpg".format(batch_img_ids[i]), batch_img)
-            # aux_channel = np.full((512, 512, 1), 255, dtype=np.uint8)
-            batch_x_prior.append(aux_channel)
-        return np.array(batch_x_prior)
-
-    def get_aux_channel_detected_boxes_cropped_images(self, batch_file_names, batch_img_ids):
-        """
-        create mask using detected bounding boxes
-        :return:
-        """
-        DUMP_DATA = False
-        shared_reg_bbox = []  # xmin, ymin, xmax, ymax of shared region (drawn on collaborating cam)
-        ICOV_TH = 0.25  # min icov value to select an object
-        batch_x_prior = []
-        # self.collab_cam = 1
-        for i in range(len(batch_file_names)):
-            aux_channel = np.full((512, 512, 1), 114, dtype=np.uint8)
-            if self.img_type_prefix == "PNGImages":  # WILDTRACK
-                img_id = batch_img_ids[i]
-                collab_img_id = "C{}_{}.png".format(self.collab_cam, img_id[3:])
-                file_name = batch_file_names[i]
-                # print(file_name)
-                # print(img_id)
-                img_name_len = len(img_id) + 4
-                file_name = file_name[:-1 * img_name_len]
-                # file_name = "{}/{}".format(file_name, self.collab_cam)
-                collab_file_path = "{}/{}".format(file_name, collab_img_id)
-                # shared_reg_bbox = [1089, 6, 1914, 1071]  # ground truth shared region b/w cam 1,4 (projected on view 4)
-                # shared_reg_bbox = [479, 0, 700, 700]  # ground truth shared region b/w cam 1,4 (projected on view 4)
-                shared_reg_bbox = [0, 0, 298, 700]  # ground truth shared region b/w cam 1,4 (projected on view 4)
-                # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
-            elif self.img_type_prefix == "JPEGImages":
-                img_id = batch_img_ids[i]
-                collab_img_id = "frame_{}_{}.jpg".format(self.collab_cam, img_id[8:])
-                file_name = batch_file_names[i]
-                img_name_len = len(img_id) + 4
-                file_name = file_name[:-1 * img_name_len]
-                file_name = "{}_{}".format(file_name[:-3], self.collab_cam)
-                collab_file_path = "{}/{}".format(file_name, collab_img_id)
-                # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
-
-            # read image file
-            # print(img_id, collab_file_path)
-            print(collab_file_path)
-            collab_img = cv2.imread(collab_file_path)
-            assert collab_img is not None
-            # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-            annot_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
-            # objects = self.detect_objects(collab_img)
-            # objects = self.detect_objects(cv2.imread(batch_file_names[i]))
-            # objects = self.get_gt_objects(collab_img_id[:-4])
-            objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
+            #objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
+            
             if len(objects) == 0:
                 batch_x_prior.append(aux_channel)
                 continue
@@ -1393,6 +1302,135 @@ class DataGenerator:
             for obj in shared_reg_objects:
                 # if obj[0] == 15:
                 xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
+                aux_channel[ymin:ymax, xmin:xmax] = 255
+                # if DUMP_DATA:
+            #             batch_img = cv2.imread(batch_file_names[i])
+            #             assert batch_img is not None
+            #             cv2.rectangle(batch_img, (xmin, ymin), (xmax, ymax), (0, 0, 255), 2)
+            # if DUMP_DATA:
+            #     print(batch_img_ids[i])
+            # cv2.imwrite("temp/{}.jpg".format(batch_img_ids[i]), batch_img)
+            # aux_channel = np.full((512, 512, 1), 255, dtype=np.uint8)
+            batch_x_prior.append(aux_channel)
+        return np.array(batch_x_prior)
+
+    def get_aux_channel_detected_boxes_cropped_images(self, batch_file_names, batch_img_ids):
+        """
+        create mask using detected bounding boxes
+        :return:
+        """
+        DUMP_DATA = False
+        shared_reg_bbox = []  # xmin, ymin, xmax, ymax of shared region (drawn on collaborating cam)
+        ICOV_TH = 0.10  # min icov value to select an object
+        batch_x_prior = []
+        collab_img_res = (160, 160) # resolution of collaborating cam image
+        print("collab_img_resolution : {}".format(collab_img_res))
+        # self.collab_cam = 1
+        for i in range(len(batch_file_names)):
+            aux_channel = np.full((512, 512, 1), 114, dtype=np.uint8)
+            if self.img_type_prefix == "PNGImages":  # WILDTRACK
+                img_id = batch_img_ids[i]
+                collab_img_id = "C{}_{}.png".format(self.collab_cam, img_id[3:])
+                file_name = batch_file_names[i]
+                # print(file_name)
+                # print(img_id)
+                img_name_len = len(img_id) + 4
+                file_name = file_name[:-1 * img_name_len]
+                # file_name = "{}/{}".format(file_name, self.collab_cam)
+                collab_file_path = "{}/{}".format(file_name, collab_img_id)
+                # shared_reg_bbox = [1089, 6, 1914, 1071]  # ground truth shared region b/w cam 1,4 (projected on view 4)
+                # shared_reg_bbox = [479, 0, 700, 700]  # ground truth shared region b/w cam 1,4 (projected on view 4)
+                #shared_reg_bbox = [0, 0, 298, 700]  # ground truth shared region b/w cam 1,4 (projected on view 4)
+                shared_reg_bbox= [466, 0, 700, 700] # gt shared region in 700x700 image
+                # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
+            elif self.img_type_prefix == "JPEGImages":
+                img_id = batch_img_ids[i]
+                collab_img_id = "frame_{}_{}.jpg".format(self.collab_cam, img_id[8:])
+                file_name = batch_file_names[i]
+                img_name_len = len(img_id) + 4
+                file_name = file_name[:-1 * img_name_len]
+                file_name = "{}_{}".format(file_name[:-3], self.collab_cam)
+                collab_file_path = "{}/{}".format(file_name, collab_img_id)
+                # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
+
+            # read image file
+            # print(img_id, collab_file_path)
+            # print(collab_file_path)
+            # collab_img = cv2.imread(collab_file_path)
+            # assert collab_img is not None
+            # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
+            annot_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
+            # objects = self.detect_objects(collab_img)
+            collab_img = cv2.imread(batch_file_names[i])
+            collab_img = cv2.resize(collab_img, dsize=collab_img_res, interpolation=cv2.INTER_CUBIC)
+            collab_img = cv2.resize(collab_img, dsize=(700, 700), interpolation=cv2.INTER_CUBIC)
+            objects = self.detect_objects(collab_img)
+            cv2.imwrite("temp/{}_2.png".format(batch_img_ids[i]), collab_img)
+            #objects = self.detect_objects(cv2.imread(batch_file_names[i]))
+            # objects = self.get_gt_objects(collab_img_id[:-4])
+            #objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
+            #if batch_img_ids[i] == "C1_00000035":
+            #   print("total objects in gt: {}".format(len(objects))) 
+            if len(objects) == 0:
+                batch_x_prior.append(aux_channel)
+                continue
+            # if DUMP_DATA:
+            #     for obj in objects:
+            #         cv2.rectangle(collab_img, (obj[2], obj[3]), (obj[4], obj[5]), (255, 0, 0), 2)
+            #         cv2.imwrite("temp/{}".format(collab_img_id), collab_img)
+
+            # map coordinates to reference camera coordinate system
+            # select objects in shared region
+            shared_reg_objects = []
+            for obj in objects:
+                obj_bbox = [obj[2], obj[3], obj[4], obj[5]]
+                icov = self.bb_icov(obj_bbox, shared_reg_bbox)
+                if icov >= ICOV_TH:
+                    shared_reg_objects.append(obj)
+
+            #if batch_img_ids[i] == "C1_00000035":
+            #   print("total objects in shared reg: {}".format(len(shared_reg_objects)))
+            #   print(shared_reg_objects) 
+               #sys.exit(-1)
+
+            if len(shared_reg_objects) == 0:
+                batch_x_prior.append(aux_channel)
+                continue
+
+            # convert shared reg objects to 512x512 coords
+            temp = []
+            for obj in shared_reg_objects:
+                xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
+                xmin = int((xmin / 700.0) * 512)
+                ymin = int((ymin / 700.0) * 512)
+                xmax = int((xmax / 700.0) * 512)
+                ymax = int((ymax / 700.0) * 512)
+                temp.append([obj[0], obj[1], xmin, ymin, xmax, ymax])
+            shared_reg_objects = temp
+            
+            #if batch_img_ids[i] == "C1_00000035":
+            #   print("total objects in shared reg: {}".format(len(shared_reg_objects)))
+            #   print(shared_reg_objects) 
+               #sys.exit(-1) 
+            # if self.img_type_prefix == "PNGImages":  # WILDTRACK
+            #     mapped_objects = self.map_coordinates_WT(shared_reg_objects)
+            # elif self.img_type_prefix == "JPEGImages":  # WILDTRACK
+            #     # objects = self.map_coordinates_PETS(objects, collab_img_id, batch_img_ids[i])
+            #     mapped_objects = self.map_coordinates_PETS(shared_reg_objects)
+
+            # create prior using detected boxes
+            # prior = self.darknet_randomize(objects, False)
+            # prior = np.full(shape=(512, 512, 1), fill_value=114, dtype=np.uint8)
+            # print("total obj: {}, shared region objects : {}, mapped obj: {}".format(len(objects),
+            #                                                                          len(shared_reg_objects),
+            #                                                                          len(mapped_objects)))
+            for obj in shared_reg_objects:
+                # if obj[0] == 15:
+                xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
+                xmin = max(0, xmin)
+                ymin = max(0, ymin)
+                xmax = max(0, xmax)
+                ymax = max(0, ymax)
                 aux_channel[ymin:ymax, xmin:xmax] = 255
                 # if DUMP_DATA:
             #             batch_img = cv2.imread(batch_file_names[i])
@@ -1516,16 +1554,19 @@ class DataGenerator:
 
         return np.array(batch_y_auxillary)
 
-    def dump_raw_data(self, batch_x_data, batch_y_data, batch_x_aux):
+    def dump_raw_data(self, batch_x_data, batch_y_data, batch_x_aux, batch_img_ids):
         # print("dumping data")
         temp_dir = "./temp"
         # out_file = open("{}/batch_y_data.csv".format(temp_dir), 'a')
-        index = random.randint(1, 1000000)
-
+        #index = random.randint(1, 1000000)
+        index = 0
         for bx_data, by_data, bx_aux in zip(batch_x_data, batch_y_data, batch_x_aux):
-            img_file_name = "{}/{}.png".format(temp_dir, index)
-            mask_file_name = "{}/{}_mask.png".format(temp_dir, index)
-            # draw bounding box on the image
+            #img_file_name = "{}/{}.png".format(temp_dir, index)
+            #mask_file_name = "{}/{}_mask.png".format(temp_dir, index)
+            img_file_name = "{}/{}.png".format(temp_dir, batch_img_ids[index])
+            mask_file_name = "{}/{}_mask.png".format(temp_dir, batch_img_ids[index])
+
+	    # draw bounding box on the image
             for bbox in by_data:
                 cv2.rectangle(bx_data, (bbox[1], bbox[2]), (bbox[3], bbox[4]), (0, 255, 0), 2)
 
@@ -1542,15 +1583,17 @@ class DataGenerator:
         """
         SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
-        # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
-        shared_reg_coords = [0, 0, 298,
-                             700]  # gt overlap cam 1, 4 (projected on view 1) (for 700x700 img,calculated manually)
+        #shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
+        shared_reg_coords = [466, 0, 700, 700]
+        print("shared reg coords: {}".format(shared_reg_coords))
+        #shared_reg_coords = [0, 0, 298,
+        #                     700]  # gt overlap cam 1, 4 (projected on view 1) (for 700x700 img,calculated manually)
         # map shared region to 512x512 (data gen image size)
         xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
-        # xmin_tr = int((xmin_org / 1920.0) * 512)
-        # ymin_tr = int((ymin_org / 1080.0) * 512)
-        # xmax_tr = int((xmax_org / 1920.0) * 512)
-        # ymax_tr = int((ymax_org / 1080.0) * 512)
+        #xmin_tr = int((xmin_org / 1920.0) * 512)
+        #ymin_tr = int((ymin_org / 1080.0) * 512)
+        #xmax_tr = int((xmax_org / 1920.0) * 512)
+        #ymax_tr = int((ymax_org / 1080.0) * 512)
         xmin_tr = int((xmin_org / 700.0) * 512)
         ymin_tr = int((ymin_org / 700.0) * 512)
         xmax_tr = int((xmax_org / 700.0) * 512)
@@ -1956,7 +1999,7 @@ class DataGenerator:
             # batch_X_aux = self.get_aux_channels_batch(batch_X_data=batch_X, batch_y_data=batch_y, randomize=True)
             # batch_X_aux = self.get_aux_channels_batch_darknet_randomization(batch_X_data=batch_X, batch_y_data=batch_y,
             #                                                                 randomize=True)
-            # batch_X_aux = self.get_aux_channel_detected_boxes(batch_filenames, batch_image_ids)
+            #batch_X_aux = self.get_aux_channel_detected_boxes(batch_filenames, batch_image_ids)
             batch_X_aux = self.get_aux_channel_detected_boxes_cropped_images(batch_filenames, batch_image_ids)
 
             # create mixed resolution images in the batch
@@ -1971,7 +2014,7 @@ class DataGenerator:
 
             # batch_X = self.apply_resolution_transform(batch_X)
 
-            self.dump_raw_data(batch_x_data=batch_X.copy(), batch_y_data=batch_y, batch_x_aux=batch_X_aux)
+            self.dump_raw_data(batch_x_data=batch_X.copy(), batch_y_data=batch_y, batch_x_aux=batch_X_aux, batch_img_ids=batch_image_ids)
 
             # print("shape of batch_x_aux : {}".format(batch_X_aux.shape))
             ########################################################################################
