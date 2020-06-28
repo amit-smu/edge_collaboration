@@ -894,7 +894,7 @@ class DataGenerator:
         SHARED_AREA_RES = (512, 512)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
-        #shared_reg_coords = [0, 0, 298, 700]  # gt overlap cam 1, 4 (projected on view 1) Cropped images (700x700)
+        # shared_reg_coords = [0, 0, 298, 700]  # gt overlap cam 1, 4 (projected on view 1) Cropped images (700x700)
         shared_reg_coords = [0, 0, 700, 466]
         print("shared reg coords : {}".format(shared_reg_coords))
         # map shared region to 512x512 (data gen image size)
@@ -927,17 +927,12 @@ class DataGenerator:
         # assert batch_x.shape == batch_x_mixed_res.shape
         return np.array(batch_x_mixed_res)
 
-    def apply_resolution_transform(self, batch_x_data, batch_y_data, factor):
+    def apply_resolution_transform(self, batch_x_data):
         # scale = Scale(factor=factor, clip_boxes=True, box_filter=None, background=(255, 255, 255))
         # assert scale is not None
         batch_x_transformed = []
-        batch_y_transformed = []
-
-        # transform each image and labels
-
-        # print(batch_y_data[0])
-
-        for img, label in zip(batch_x_data, batch_y_data):
+        # batch_y_transformed = []
+        for img in batch_x_data:
             # img_t, label_t = scale(image=img, labels=label)
             # img_t = cv2.cvtColor(img_t, code=cv2.COLOR_BGR2RGB)
             # batch_x_transformed.append(img_t)
@@ -945,8 +940,9 @@ class DataGenerator:
             img_t = cv2.resize(img, dsize=(self.resolution, self.resolution), interpolation=cv2.INTER_CUBIC)
             img_t = cv2.resize(img_t, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
             batch_x_transformed.append(img_t)
-            batch_y_transformed.append(label)
-        return np.array(batch_x_transformed), np.array(batch_y_transformed)
+            # batch_y_transformed.append(label)
+        # return np.array(batch_x_transformed), np.array(batch_y_transformed)
+        return np.array(batch_x_transformed)
 
     def apply_multi_resolutions_transform(self, batch_images):
         """
@@ -975,11 +971,11 @@ class DataGenerator:
         # print("dumping data")
         temp_dir = "./temp"
         # out_file = open("{}/batch_y_data.csv".format(temp_dir), 'a')
-        #index = random.randint(1, 1000000)
+        # index = random.randint(1, 1000000)
         index = 0
 
         for bx_data, by_data in zip(batch_x_data, batch_y_data):
-            #img_file_name = "{}/{}.png".format(temp_dir, index)
+            # img_file_name = "{}/{}.png".format(temp_dir, index)
             img_file_name = "{}/{}.png".format(temp_dir, batch_img_ids[index])
             # draw bounding box on the image
             for bbox in by_data:
@@ -1379,8 +1375,9 @@ class DataGenerator:
             # if self.crop_size is not None:
             #     batch_X, batch_y = self.crop_images(batch_x_data=batch_X, batch_y_data=batch_y)
 
-            batch_X = self.create_mixed_res_imges_WT(batch_X)
-            #batch_X, batch_y = self.apply_resolution_transform(batch_x_data=batch_X, batch_y_data=batch_y,
+            # batch_X = self.create_mixed_res_imges_WT(batch_X)
+            batch_X = self.apply_resolution_transform(batch_x_data=batch_X)
+            # batch_X, batch_y = self.apply_resolution_transform(batch_x_data=batch_X, batch_y_data=batch_y,
             #                                                   factor=self.resolution / 512)
 
             # ########################## Dump batch data ############################################

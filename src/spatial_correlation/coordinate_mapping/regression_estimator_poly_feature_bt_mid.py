@@ -134,8 +134,8 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     print("\nRMSE_Raw: {}, RMSE_mean: {}, RMSE_Std: {}".format(rmse_list, np.mean(rmse_list), np.std(rmse_list)))
 
     # write model to a file
-    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}".format(degree,
-                                                                                                                src_cam)
+    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}_full_img" \
+        .format(degree, src_cam)
     with open(model_file_path, 'wb') as output:
         pickle.dump(best_model, output)
         print("best_rmse : {}".format(min_rmse))
@@ -188,13 +188,13 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
 
 if __name__ == "__main__":
     DEBUG = True
-    img_dir = "../../../dataset/PETS_1/JPEGImages"
-    annot_dir = "../../../dataset/PETS_1/Annotations"
+    img_dir = "../../../dataset/PETS_org/JPEGImages"
+    annot_dir = "../../../dataset/PETS_org/Annotations"
 
     # ref_cam = 7
     # collab_cams = [8,6,5]
-    src_cam = 57
-    dst_cam = 75
+    src_cam = 87
+    dst_cam = 78
 
     src_points, dst_points = [], []
 

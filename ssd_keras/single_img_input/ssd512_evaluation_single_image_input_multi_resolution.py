@@ -75,10 +75,12 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 ############################################### VARIABLES #######################
-test_dataset = "WILDTRACK"
-#test_dataset = "PETS"
+# test_dataset = "WILDTRACK"
+test_dataset = "PETS"
 # test_dataset = "VOC"
 test_img_resolution = 512
+print("Evaluating for dataset : {}\n".format(test_dataset))
+print("test_img_resolutIOn: {}".format(test_img_resolution))
 ###############################################    DATA GENERATORS     ################################################
 
 
@@ -87,21 +89,21 @@ test_img_resolution = 512
 # Pascal_VOC_dataset_annotations_dir = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/Annotations/'
 # Pascal_VOC_dataset_image_set_filename = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/test_subset_500.txt'
 
-# PETS_images_dir = '../dataset/PETS_org/JPEGImages'
-# PETS_annotations_dir = '../dataset/PETS_org/Annotations'
-# PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_12.txt'
+PETS_images_dir = '../dataset/PETS_org/JPEGImages'
+PETS_annotations_dir = '../dataset/PETS_org/Annotations'
+PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_cam_7.txt'
 
-PETS_images_dir = '../dataset/PETS_org/JPEGImages_cropped_400x400'
-PETS_annotations_dir = '../dataset/PETS_org/Annotations_cropped_400x400'
-PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_crop_400x400.txt'
+# PETS_images_dir = '../dataset/PETS_org/JPEGImages_cropped_400x400'
+# PETS_annotations_dir = '../dataset/PETS_org/Annotations_cropped_400x400'
+# PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_crop_400x400.txt'
 
-WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
-WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
-WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700_cam_1.txt"
+# WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
+# WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
+# WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700_cam_1.txt"
 #
-# WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
-# WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-# WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test.txt"
+WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
+WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
+WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_cam_1.txt"
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
@@ -111,9 +113,6 @@ classes = ['background',
            'horse', 'motorbike', 'person', 'pottedplant',
            'sheep', 'sofa', 'train', 'tvmonitor']
 # classes = ['background', 'person']
-
-
-print("Evaluating for dataset : {}\n".format(test_dataset))
 
 
 dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None, resolution=test_img_resolution)
@@ -138,7 +137,7 @@ if test_dataset == "WILDTRACK":
                       ret=False)
 
 print("testing for : {}\n".format(test_dataset))
-    ###############################################    EVALUATION     ################################################
+###############################################    EVALUATION     ################################################
 avg_precisions = []
 for i in range(1):
     evaluator = Evaluator(model=model,

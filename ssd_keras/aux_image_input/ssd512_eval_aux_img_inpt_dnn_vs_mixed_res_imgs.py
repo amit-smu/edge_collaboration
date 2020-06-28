@@ -1,7 +1,8 @@
 """
+Main script
 Evaluation script for SSD512 architecture where mask/prior is created using detected boxes + regression
- based coordinate mapping, instead of rand ground truth
- DNN is tested against the mixed-resolution image (rather than one resolution images earlier)
+based coordinate mapping, instead of rand ground truth
+DNN is tested against the mixed-resolution image (rather than one resolution images earlier)
 """
 
 from keras import backend as K
@@ -96,11 +97,11 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 # ###################### VARIABLES #########################################################
-ref_cam = 1
-collab_cam = 4
+ref_cam = 7
+collab_cam = 8
 
-test_dataset = "WILDTRACK"
-# test_dataset = "PETS"
+# test_dataset = "WILDTRACK"
+test_dataset = "PETS"
 # test_dataset = "VOC"
 
 collaborating_cams = 1
@@ -111,20 +112,24 @@ test_img_res = 512
 
 # TODO: Set the paths to the dataset here.
 
-PETS_images_dir = r"../dataset/PETS_1/JPEGImages_det_boxes_r{}_c{}_{}".format(ref_cam, collab_cam,
-                                                                              ref_cam)
-PETS_annotations_dir = r"../dataset/PETS_1/Annotations_det_boxes_r{}_c{}_{}".format(ref_cam,
-                                                                                    collab_cam,
-                                                                                    ref_cam)
-PETS_test_image_set_filename = "../dataset/PETS_1/ImageSets/Main/test_crop_r{}_c{}_300.txt".format(ref_cam,
-                                                                                                   collab_cam)
+# PETS_images_dir = r"../dataset/PETS_1/JPEGImages_det_boxes_r{}_c{}_{}".format(ref_cam, collab_cam,
+#                                                                               ref_cam)
+# PETS_annotations_dir = r"../dataset/PETS_1/Annotations_det_boxes_r{}_c{}_{}".format(ref_cam,
+#                                                                                     collab_cam,
+#                                                                                     ref_cam)
+# PETS_test_image_set_filename = "../dataset/PETS_1/ImageSets/Main/test_crop_r{}_c{}_300.txt".format(ref_cam,
+#                                                                                                    collab_cam)
 
-WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
-WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
-WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700_cam_1.txt"
-#WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
-#WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-#WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_cam_1.txt"
+PETS_images_dir = '../dataset/PETS_org/JPEGImages'
+PETS_annotations_dir = '../dataset/PETS_org/Annotations'
+PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_12.txt'
+
+# WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
+# WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
+# WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700_cam_1.txt"
+WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
+WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
+WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_cam_1.txt"
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
@@ -133,7 +138,6 @@ classes = ['background',
            'chair', 'cow', 'diningtable', 'dog',
            'horse', 'motorbike', 'person', 'pottedplant',
            'sheep', 'sofa', 'train', 'tvmonitor']
-
 
 print("Evaluating for : {}\n".format(test_dataset))
 print("ref_cam: {}, collab_cam :{}\n".format(ref_cam, collab_cam))
