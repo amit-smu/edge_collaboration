@@ -73,8 +73,8 @@ if __name__ == "__main__":
     formatted_annot_dir = "../../dataset/Wildtrack_dataset/annotations"
     org_annot_dir = "../../dataset/Wildtrack_dataset/annotations_positions"
 
-    camera_views = ["C1", "C2", "C3", "C4", "C5", "C6"]
-
+    # camera_views = ["C1", "C2", "C3", "C4", "C5", "C6", "C7"]
+    camera_views = ["C7"]
     for view in camera_views:
         print("converting for view: {}".format(view))
         for img_num in range(0, 2000, 5):

@@ -305,7 +305,7 @@ if __name__ == "__main__":
     # view_1_name = "View_007"
     # view_2_name = "View_008"
     # EUCL_THRESHOLD = 12
-    DEBUG = True
+    DEBUG = False
 
     image_size = (1920, 1080)  # WILDTRACK dataset (width, height)
     # SAME_OBJECTS_ANALYSIS = False  # whether to do same obj analysis or not
@@ -314,7 +314,7 @@ if __name__ == "__main__":
     INCLUDE_EMBEDDING = True
 
     ref_cam = 1
-    collab_cams = [6]
+    collab_cams = [4]
     colors = [(255, 255, 0), (0, 255, 0), (0, 0, 255)]
     color_index = 0
 
@@ -373,8 +373,8 @@ if __name__ == "__main__":
                                                        frame_name=frame_name)
             view_2_obj_features = extract_obj_features(view_num=c_cam, view_img=view_2_frame,
                                                        frame_name=frame_name)
-            print("view_1_features: {}, view_2_obj_features: {}".format(len(view_1_obj_features),
-                                                                        len(view_2_obj_features)))
+            # print("view_1_features: {}, view_2_obj_features: {}".format(len(view_1_obj_features),
+            #                                                             len(view_2_obj_features)))
             # for _, obj in view_1_objects.iterrows():
             #     img = view_1_frame[obj['ymin']:obj['ymax'], obj['xmin']:obj['xmax']]
             #     obj_location = [(obj['xmin'], obj['ymin']), (obj['xmax'], obj['ymax'])]
@@ -400,7 +400,7 @@ if __name__ == "__main__":
             mark_matching_obj_area(obj_mappings=obj_mappings, view_1_area=view_1_area, view_2_area=view_2_area,
                                    view_1_obj_features=view_1_obj_features, view_2_obj_features=view_2_obj_features)
             # save marked area for this loop
-            cv2.imwrite("intermediate_frames/marked_area_cam_1_f_{}.jpg".format(frame_number), view_1_area)
+            cv2.imwrite("intermediate_frames/marked_area_cam_r1_c{}_f_{}.jpg".format(c_cam, frame_number), view_1_area)
 
             # visualize matched objects
             if DEBUG:
@@ -483,14 +483,14 @@ if __name__ == "__main__":
         # ############## ############### draw final estimated area and actual overlap area on a frame from reference camera ####################
         cv2.rectangle(ref_cam_frame_est, (est_box_coords_vw1_global[0], est_box_coords_vw1_global[1]),
                       (est_box_coords_vw1_global[2], est_box_coords_vw1_global[3]), colors[color_index], 2)
-        cv2.putText(ref_cam_frame_est, "estimated_{}{}".format(ref_cam, c_cam),
+        cv2.putText(ref_cam_frame_est, "Estimated Overlap",
                     (est_box_coords_vw1_global[0] + 20, est_box_coords_vw1_global[1] - 5),
                     cv2.FONT_HERSHEY_COMPLEX_SMALL,
                     1.2, colors[color_index], 2)
         color_index += 1
         cv2.rectangle(ref_cam_frame_est, (gt_box_coords_vw_1[0], gt_box_coords_vw_1[1]),
                       (gt_box_coords_vw_1[2], gt_box_coords_vw_1[3]), colors[color_index], 2)
-        cv2.putText(ref_cam_frame_est, "actual_{}_{}".format(ref_cam, c_cam),
+        cv2.putText(ref_cam_frame_est, "Actual Overlap",
                     (gt_box_coords_vw_1[0] + 20, gt_box_coords_vw_1[1] + 15), cv2.FONT_HERSHEY_COMPLEX_SMALL,
                     1.2, colors[color_index], 2)
         # color_index += 1
@@ -506,9 +506,9 @@ if __name__ == "__main__":
         # cv2.imshow("view_2_mark_area", view_2_area)
         # cv2.imwrite("view_1_area.jpg", view_1_area)
         # cv2.imwrite("ref_cam_frame_est.jpg", ref_cam_frame_est)
-        cv2.imwrite("../performance_analysis/spatial_area_estimation_WT/cam_{}_{}_area.jpg".format(ref_cam, c_cam),
+        cv2.imwrite("../performance_analysis/spatial_area_estimation_WT/cam_{}_{}_area_1.jpg".format(ref_cam, c_cam),
                     view_1_area)
-        cv2.imwrite("../performance_analysis/spatial_area_estimation_WT/cam_{}_{}_area.jpg".format(c_cam, ref_cam),
+        cv2.imwrite("../performance_analysis/spatial_area_estimation_WT/cam_{}_{}_area_1.jpg".format(c_cam, ref_cam),
                     view_2_area)
         cv2.waitKey(-1)
 
@@ -521,9 +521,9 @@ if __name__ == "__main__":
         # plt.title("Iou Score vs No of Frames", fontsize=18)
         #
         # dump iou scores
-        # with open("iou_vs_fnumber.txt", 'w') as iou_output:
-        #     for iou in iou_values_1:
-        #         iou_output.write("{}\n".format(iou))
+        with open("iou_vs_fnumber_cam_1_{}.txt".format(c_cam), 'w') as iou_output:
+            for iou in iou_values_1:
+                iou_output.write("{}\n".format(iou))
 
         # break
 

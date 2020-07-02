@@ -14,7 +14,7 @@ import random
 from sklearn import svm
 
 # global variables
-DEBUG = False
+DEBUG = True
 THR_color_hist = 0.2
 THR_sift = 0.3
 
@@ -133,7 +133,7 @@ def draw_rect(coords, img, color):
     :param img:
     :return:
     """
-    cv2.rectangle(img, (coords[0], coords[1]), (coords[2], coords[3]), color, 2)
+    cv2.rectangle(img, (coords[0], coords[1]), (coords[2], coords[3]), color, 3)
 
 
 def update_est_sp_overlap_area(current_box_coords, prev_box_coords):
@@ -187,7 +187,14 @@ def match_objects(objects_1, objects_2):
 
     for obj1 in objects_1:
         for obj2 in objects_2:
-            obj_same = utils.same_objects(obj1['embedding'], obj2['embedding'])
+            # obj_same = utils.same_objects(obj1['embedding'], obj2['embedding'])
+
+            euc_dist = utils.get_eucl_distance(obj1['embedding'], obj2['embedding'])
+            if euc_dist <= 18.35:  # empirically chosen value
+                obj_same = True
+            else:
+                obj_same = False
+
             if obj_same:
                 # add it to dataframe
                 object_mappings.append(
@@ -393,7 +400,9 @@ if __name__ == "__main__":
     view_2_grnd_truth = pd.read_csv("{}/{}.txt".format(dir_name, view_2_name), delimiter=" ")
 
     # frame_number = 1
-    for frame_number in range(0, 635):  # 80% training data
+    iou_vw1 = 0
+    iou_vw2 = 0
+    for frame_number in range(0, 400):  # 80% training data
         print("frame number : {}".format(frame_number))
         frame_name = "frame_{:04d}".format(frame_number)
 
@@ -419,28 +428,32 @@ if __name__ == "__main__":
 
         obj_mappings = match_objects(view_1_obj_features, view_2_obj_features)
         if obj_mappings is None:
+            cv2.imwrite("intermediate_frames/marked_area_cam_7_f_{}.jpg".format(frame_number), view_1_area)
+            cv2.imwrite("intermediate_frames/marked_area_cam_8_f_{}.jpg".format(frame_number), view_2_area)
+            iou_values_1.append(iou_vw1)
+            iou_values_2.append(iou_vw2)
             continue
         # mark overlapping areas
         mark_matching_obj_area(obj_mappings=obj_mappings, view_1_area=view_1_area, view_2_area=view_2_area,
                                view_1_obj_features=view_1_obj_features, view_2_obj_features=view_2_obj_features)
 
-        cv2.imwrite("intermediate_frames/marked_area_cam_7_f_{}.jpg".format(frame_number), view_1_area)
-        cv2.imwrite("intermediate_frames/marked_area_cam_8_f_{}.jpg".format(frame_number), view_2_area)
+        # cv2.imwrite("intermediate_frames/marked_area_cam_7_f_{}.jpg".format(frame_number), view_1_area)
+        # cv2.imwrite("intermediate_frames/marked_area_cam_8_f_{}.jpg".format(frame_number), view_2_area)
 
         # visualize matched objects
-        if DEBUG:
-            for index, row in obj_mappings.iterrows():
-                rand_num = random.randint(10000, 99999)
-                score = np.round(row['matching_score'], 2)
-                obj1_loc = row['obj_id_1_loc']
-                cv2.rectangle(view_1_frame, (obj1_loc[0]), (obj1_loc[1]), (255, 255, 0), 4)
-                cv2.putText(view_1_frame, "{}_{}".format(rand_num, score), (obj1_loc[0][0], obj1_loc[0][1] - 10),
-                            cv2.FONT_HERSHEY_PLAIN, 1.5, (255, 255, 0), 1)
-
-                obj2_loc = row['obj_id_2_loc']
-                cv2.rectangle(view_2_frame, (obj2_loc[0]), (obj2_loc[1]), (255, 255, 0), 4)
-                cv2.putText(view_2_frame, "{}_{}".format(rand_num, score), (obj2_loc[0][0], obj2_loc[0][1] - 10),
-                            cv2.FONT_HERSHEY_PLAIN, 1.5, (255, 255, 0), 1)
+        # if DEBUG:
+        #     for index, row in obj_mappings.iterrows():
+        #         rand_num = random.randint(10000, 99999)
+        #         score = np.round(row['matching_score'], 2)
+        #         obj1_loc = row['obj_id_1_loc']
+        #         cv2.rectangle(view_1_frame, (obj1_loc[0]), (obj1_loc[1]), (255, 255, 0), 4)
+        #         cv2.putText(view_1_frame, "{}_{}".format(rand_num, score), (obj1_loc[0][0], obj1_loc[0][1] - 10),
+        #                     cv2.FONT_HERSHEY_PLAIN, 1.5, (255, 255, 0), 1)
+        #
+        #         obj2_loc = row['obj_id_2_loc']
+        #         cv2.rectangle(view_2_frame, (obj2_loc[0]), (obj2_loc[1]), (255, 255, 0), 4)
+        #         cv2.putText(view_2_frame, "{}_{}".format(rand_num, score), (obj2_loc[0][0], obj2_loc[0][1] - 10),
+        #                     cv2.FONT_HERSHEY_PLAIN, 1.5, (255, 255, 0), 1)
 
         est_box_coords_vw1 = get_fitting_rect_coordinates(view_1_obj_features, dataframe=obj_mappings,
                                                           column="obj_id_1")
@@ -468,22 +481,22 @@ if __name__ == "__main__":
 
         if DEBUG:
             draw_rect(gt_box_coords_vw_1, view_1_frame, (0, 255, 0))
-            cv2.putText(view_1_frame, "ground_truth", (gt_box_coords_vw_1[0], gt_box_coords_vw_1[1] - 10),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (0, 255, 0), 1)
+            cv2.putText(view_1_frame, "Actual Overlap", (gt_box_coords_vw_1[0], gt_box_coords_vw_1[1] - 10),
+                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1.5, (0, 255, 0), 0)
             draw_rect(est_box_coords_vw1_global, view_1_frame, (0, 0, 255))
-            cv2.putText(view_1_frame, "estimated overlap",
-                        (est_box_coords_vw1_global[0], est_box_coords_vw1_global[1] - 10),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (0, 0, 255), 1)
+            cv2.putText(view_1_frame, "Estimated Overlap",
+                        (est_box_coords_vw1_global[0], est_box_coords_vw1_global[1] + 20),
+                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 1.5, (0, 0, 255), 1)
             cv2.imshow("Camera_1", view_1_frame)
 
-            draw_rect(gt_box_coords_vw_2, view_2_frame, (0, 255, 0))
-            cv2.putText(view_2_frame, "ground_truth", (gt_box_coords_vw_2[0], gt_box_coords_vw_2[1] - 10),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (0, 255, 0), 1)
-            draw_rect(est_box_coords_vw2_global, view_2_frame, (0, 0, 255))
-            cv2.putText(view_2_frame, "estimated overlap",
-                        (est_box_coords_vw2_global[0], est_box_coords_vw2_global[1] - 10),
-                        cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (0, 0, 255), 1)
-            cv2.imshow("Camera_2", view_2_frame)
+            # draw_rect(gt_box_coords_vw_2, view_2_frame, (0, 255, 0))
+            # cv2.putText(view_2_frame, "ground_truth", (gt_box_coords_vw_2[0], gt_box_coords_vw_2[1] - 10),
+            #             cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (0, 255, 0), 1)
+            # draw_rect(est_box_coords_vw2_global, view_2_frame, (0, 0, 255))
+            # cv2.putText(view_2_frame, "estimated overlap",
+            #             (est_box_coords_vw2_global[0], est_box_coords_vw2_global[1] - 10),
+            #             cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (0, 0, 255), 1)
+            # cv2.imshow("Camera_2", view_2_frame)
 
             cv2.waitKey(1)
 
@@ -521,5 +534,6 @@ if __name__ == "__main__":
         for value in iou_values_2:
             cam8.write("{}\n".format(value))
 
+    cv2.waitKey(-1)
     # plt.show()
     # cv2.waitKey(-1)

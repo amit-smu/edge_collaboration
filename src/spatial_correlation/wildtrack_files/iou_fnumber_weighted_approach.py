@@ -36,7 +36,7 @@ if __name__ == "__main__":
     ref_cam = 1
     collab_cam = 4
     gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates(ref_cam, collab_cam)
-    max_pixel_intensity = 100
+    max_pixel_intensity = 170
 
     iou_scores = []
     est_area_global = []
@@ -45,12 +45,13 @@ if __name__ == "__main__":
     # frame_list = sorted(frame_list)
     frame_list = np.arange(0, 2000, 5)
     for f_num in frame_list:
-        f_name = "marked_area_cam_1_f_{}.jpg".format(f_num)
+        f_name = "marked_area_cam_r1_c4_f_{}.jpg".format(f_num)
         # print(f_name)
         frame_path = "{}/{}".format("intermediate_frames", f_name)
         print(frame_path)
 
         if not os.path.exists(frame_path):
+            print("path doesn't exist")
             continue
         frame = cv2.imread(frame_path)
         assert frame is not None

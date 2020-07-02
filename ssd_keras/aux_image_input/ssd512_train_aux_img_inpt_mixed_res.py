@@ -6,6 +6,7 @@ from math import ceil
 import numpy as np
 from matplotlib import pyplot as plt
 
+import tensorflow as tf
 from models.keras_ssd512_aux import ssd_512_aux
 from keras_loss_function.keras_ssd_loss import SSDLoss
 from keras_layers.keras_layer_AnchorBoxes import AnchorBoxes
@@ -58,6 +59,19 @@ normalize_coords = True
 
 K.clear_session()  # Clear previous models from memory.
 
+# #########################################################################################
+# TensorFlow wizardry
+config = tf.ConfigProto()
+
+# Don't pre-allocate memory; allocate as-needed
+config.gpu_options.allow_growth = True
+
+# Only allow a fraction of the GPU memory to be allocated
+config.gpu_options.per_process_gpu_memory_fraction = 0.75
+
+# Create a session with the above options specified.
+K.tensorflow_backend.set_session(tf.Session(config=config))
+# ###########################################################################################
 # model = ssd_512(image_size=(img_height, img_width, img_channels),
 #                 n_classes=n_classes,
 #                 mode='training',
@@ -148,17 +162,22 @@ val_dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None
 # VOC_2007_images_dir = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/JPEGImages/'
 # VOC_2012_images_dir = '../dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/JPEGImages/'
 # PETS_images_dir = '../dataset/model_training_data_pets/images/single_image_input/'
-PETS_images_dir = '../dataset/PETS_org/JPEGImages/'
-VOC_2007_images_dir = '/root/dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/JPEGImages/'
-VOC_2012_images_dir = '/root/dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/JPEGImages/'
 
+# VOC_2007_images_dir = '/root/dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/JPEGImages/'
+# VOC_2012_images_dir = '/root/dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/JPEGImages/'
+# VOC_2007_annotations_dir = '/root/dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/Annotations/'
+# VOC_2012_annotations_dir = '/root/dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/Annotations/'
+# VOC_2007_test_image_set_filename = '/root//dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/test_subset_500.txt'
+# VOC_2007_trainval_image_set_filename = '/root/dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/trainval_subset.txt'
+# VOC_2012_trainval_image_set_filename = '/root/dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/ImageSets/Main/trainval_subset.txt'
 # The directories that contain the annotations.
 # VOC_2007_annotations_dir = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/Annotations/'
 # VOC_2012_annotations_dir = '../dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/Annotations/'
 # PETS_annotations_dir = '../dataset/model_training_data_pets/annotations/single_image_input/'
+PETS_images_dir = '../dataset/PETS_org/JPEGImages/'
 PETS_annotations_dir = '../dataset/PETS_org/Annotations'
-VOC_2007_annotations_dir = '/root/dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/Annotations/'
-VOC_2012_annotations_dir = '/root/dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/Annotations/'
+PETS_trainval_image_set_filename = '../dataset/PETS_org/ImageSets/Main/trainval_70.txt'
+PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30.txt'
 
 # The paths to the image sets.
 # VOC_2007_train_image_set_filename = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/train.txt'
@@ -168,20 +187,15 @@ VOC_2012_annotations_dir = '/root/dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/A
 # VOC_2007_trainval_image_set_filename = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/trainval.txt'
 # VOC_2012_trainval_image_set_filename = '../dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/ImageSets/Main/trainval.txt'
 # PETS_trainval_image_set_filename = '../dataset/model_training_data_pets/ImageSets/Main/trainval.txt'
-PETS_trainval_image_set_filename = '../dataset/PETS_org/ImageSets/Main/trainval_88.txt'
-VOC_2007_trainval_image_set_filename = '/root/dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/trainval_subset.txt'
-VOC_2012_trainval_image_set_filename = '/root/dataset/PASCAL_VOC/VOC2012/VOCdevkit/VOC2012/ImageSets/Main/trainval_subset.txt'
 
 # VOC_2007_test_image_set_filename = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/test.txt'
 # VOC_2007_test_image_set_filename = '../../datasets/VOCdevkit/VOC2007/ImageSets/Main/test.txt'
 # PETS_test_image_set_filename = '../dataset/model_training_data_pets/ImageSets/Main/test.txt'
-PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_12.txt'
-VOC_2007_test_image_set_filename = '/root//dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/test_subset_500.txt'
 
 WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
 WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-WT_dataset_trainval_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/trainval.txt"
-WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test.txt"
+WT_dataset_trainval_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/trainval_70.txt"
+WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_30.txt"
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
@@ -348,7 +362,7 @@ def lr_schedule(epoch):
 # TODO: Set the filepath under which you want to save the model.
 model_checkpoint = ModelCheckpoint(
     # filepath='aux_input_trained_models/ssd512_pascal_07+12_all_classes_randomized_black_white_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
-    filepath='aux_input_trained_models/ssd512+PETS+WT_person_darknet_randomized_gt_white_black_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
+    filepath='aux_input_trained_models/ssd512+PETS+WT_dknet_rand_gt_wh_black_max_epoch_250_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
     monitor='val_loss',
     verbose=1,
     save_best_only=True,
@@ -357,9 +371,10 @@ model_checkpoint = ModelCheckpoint(
     period=1)
 # model_checkpoint.best =
 
-csv_logger = CSVLogger(filename='aux_input_trained_models/ssd512_pascal_PETS+WT_person_classes_randomized_training_log.csv',
-                       separator=',',
-                       append=True)
+csv_logger = CSVLogger(
+    filename='aux_input_trained_models/ssd512_pascal_PETS+WT_person_classes_randomized_training_log.csv',
+    separator=',',
+    append=True)
 
 learning_rate_scheduler = LearningRateScheduler(schedule=lr_schedule,
                                                 verbose=1)
@@ -376,7 +391,7 @@ callbacks = [model_checkpoint,
 print("training starting...")
 # If you're resuming a previous training, set `initial_epoch` and `final_epoch` accordingly.
 initial_epoch = 0
-final_epoch = 180
+final_epoch = 250
 steps_per_epoch = ceil(train_dataset_size / batch_size) + 50
 
 history = model.fit_generator(generator=train_generator,

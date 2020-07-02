@@ -111,7 +111,7 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
 
     # #################### LOAD REGRESSION MODEL ######################################
     reg_model = None
-    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}".format(degree,
+    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}_full_img".format(degree,
                                                                                                                 src_cam)
     print("degree: {}, src_cam: {}\n".format(degree, src_cam))
     with open(model_file_path, 'rb') as input_file:
@@ -136,13 +136,13 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
 
 if __name__ == "__main__":
     DEBUG = True
-    img_dir = "../../../dataset/PETS_1/JPEGImages"
-    annot_dir = "../../../dataset/PETS_1/Annotations"
+    img_dir = "../../../dataset/PETS_org/JPEGImages"
+    annot_dir = "../../../dataset/PETS_org/Annotations"
 
     # ref_cam = 7
     # collab_cams = [8,6,5]
-    src_cam = 87
-    dst_cam = 78
+    src_cam = 8
+    dst_cam = 7
 
     src_points, dst_points = [], []
 
@@ -221,8 +221,8 @@ if __name__ == "__main__":
             s_point = list(map(int, s_point))
             d_point = list(map(int, d_point))
 
-            cv2.circle(src_img, (s_point[0], s_point[1]), 2, (0, 255, 0), 1)
-            cv2.circle(dst_img, (d_point[0], d_point[1]), 2, (0, 255, 0), 1)
+            cv2.circle(src_img, (s_point[2], s_point[3]), 2, (0, 255, 0), 1)
+            cv2.circle(dst_img, (d_point[2], d_point[3]), 2, (0, 255, 0), 1)
 
         cv2.imshow("src_img_{}".format(i), src_img)
         cv2.imshow("dst_img_{}".format(i), dst_img)

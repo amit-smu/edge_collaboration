@@ -98,12 +98,13 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     # plt.plot(x_axis, test_scores, 'r')
     # plt.plot(x_axis, RMSE_scores, 'b')
     # plt.show()
-    degree = 1
+    degree = 4
     poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
     model = LinearRegression()
     # transform data
 
     X_poly = poly_features.fit_transform(X)
+
 
     #################### cross-validation ##########################
     kfolds = KFold(n_splits=5, shuffle=True, random_state=10)
@@ -193,8 +194,10 @@ if __name__ == "__main__":
 
     # ref_cam = 7
     # collab_cams = [8,6,5]
-    src_cam = 87
-    dst_cam = 78
+    # src_cam = 87
+    # dst_cam = 78
+    src_cam = 8
+    dst_cam = 7
 
     src_points, dst_points = [], []
 

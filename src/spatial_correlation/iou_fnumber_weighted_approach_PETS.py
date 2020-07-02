@@ -36,14 +36,15 @@ if __name__ == "__main__":
     ref_cam = 7
     collab_cam = 8
     gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates(ref_cam, collab_cam)
-    max_pixel_intensity = 170
+    max_pixel_intensity = 245
+    print("max_pixel_intensity: {}".format(max_pixel_intensity))
 
     iou_scores = []
     est_area_global = []
 
     # frame_list = os.listdir("intermediate_frames/")
     # frame_list = sorted(frame_list)
-    frame_list = np.arange(100, 450, 1)
+    frame_list = np.arange(0, 634, 1)
     for f_num in frame_list:
         f_name = "marked_area_cam_7_f_{}.jpg".format(f_num)
         # print(f_name)
@@ -65,6 +66,15 @@ if __name__ == "__main__":
             if frame[r, c] <= max_pixel_intensity:
                 desired_coordinates.append((c, r))  # x,y
 
+        # find xmin (iterate row-wise)
+        # rows, cols = frame.shape
+        # xmin = -1
+        # for c in range(cols):
+        #     for r in range(rows):
+        #         if frame[r, c] <= max_pixel_intensity:
+        #             xmin, ymin = c, r
+        #             break
+        #
         # estimate enclosing rectangle for all these points
         if len(desired_coordinates) == 0:
             iou_scores.append(0)
@@ -93,7 +103,7 @@ if __name__ == "__main__":
             cv2.rectangle(frame_copy, (est_area_global[0], est_area_global[1]),
                           (est_area_global[2], est_area_global[3]),
                           (255, 0, 0), 2)
-            cv2.imwrite("final_area.jpg", frame_copy)
+            cv2.imwrite("final_area_PETS.jpg", frame_copy)
 
         # break
     for i in iou_scores:
