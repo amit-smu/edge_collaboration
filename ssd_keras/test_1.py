@@ -1,12 +1,9 @@
-img_path = "../dataset/PETS/JPEGImages/78_0046.jpg"
+import cv2
+import numpy as np
 
-t_split = img_path.split("JPEGImages/")
-frame_num = img_path[-8:-4]
-print("frame_num: {}".format(frame_num))
+img = np.full((512, 512, 3), fill_value=114, dtype=np.uint8)
+img[100:300, 200:350] = 255
+cv2.imshow("image", img)
 
-reference_cam = 7
-collaborating_cams = [8, 6, 5]
-for c in range(1):
-    annot_name = "{}{}_{}.xml".format(collaborating_cams[c], reference_cam, frame_num)
-    annot_path = "{}Annotations/{}".format(t_split[0], annot_name)
-    print(annot_path)
+print(img.shape)
+cv2.waitKey(-1)

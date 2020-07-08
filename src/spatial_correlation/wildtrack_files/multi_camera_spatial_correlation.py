@@ -95,7 +95,7 @@ def match_objects(objects_1, objects_2):
             #     matching_obj = obj2
             #     best_score = total_score
             euc_dist = utils.get_eucl_distance(obj1['embedding'], obj2['embedding'])
-            if euc_dist <= 10:
+            if euc_dist <= EUCL_DIST:
                 obj_same = True
             else:
                 obj_same = False
@@ -312,9 +312,10 @@ if __name__ == "__main__":
     # INCLUDE_COLOR = False
     # INCLUDE_SIFT = True
     INCLUDE_EMBEDDING = True
+    EUCL_DIST = 20.34  # empirically calculated distance
 
-    ref_cam = 1
-    collab_cams = [4]
+    ref_cam = 5
+    collab_cams = [7]
     colors = [(255, 255, 0), (0, 255, 0), (0, 0, 255)]
     color_index = 0
 

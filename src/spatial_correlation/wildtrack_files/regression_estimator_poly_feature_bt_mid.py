@@ -98,7 +98,7 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     # plt.plot(x_axis, test_scores, 'r')
     # plt.plot(x_axis, RMSE_scores, 'b')
     # plt.show()
-    degree = 2
+    # degree = 2
     poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
     model = LinearRegression()
     # transform data
@@ -134,8 +134,9 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     print("\nRMSE_Raw: {}, RMSE_mean: {}, RMSE_Std: {}".format(rmse_list, np.mean(rmse_list), np.std(rmse_list)))
 
     # write model to a file
-    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}".format(degree,
-                                                                                                                src_cam)
+    model_file_path = "regression_models/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img".format(degree,
+                                                                                                              src_cam,
+                                                                                                              dst_cam)
     with open(model_file_path, 'wb') as output:
         pickle.dump(best_model, output)
         print("best_rmse : {}".format(min_rmse))
@@ -158,12 +159,13 @@ if __name__ == "__main__":
     DEBUG = True
 
     image_size = (1920, 1080)  # WILDTRACK dataset (width, height)
-    dir_name = "../../../dataset/Wildtrack_dataset_full\Wildtrack_dataset"
-    img_dir = "../../../dataset/Wildtrack_dataset_full\Wildtrack_dataset\Image_subsets"
-    annot_dir = "../../../dataset/Wildtrack_dataset_full\Wildtrack_dataset/annotations_positions"
+    dir_name = "../../../dataset/Wildtrack_dataset"
+    img_dir = "../../../dataset/Wildtrack_dataset/Image_subsets"
+    annot_dir = "../../../dataset/Wildtrack_dataset/annotations_positions"
 
-    src_cam = 4
+    src_cam = 6
     dst_cam = 1
+    degree = 12
 
     src_points, dst_points = [], []
 

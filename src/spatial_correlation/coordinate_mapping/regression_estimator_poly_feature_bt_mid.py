@@ -98,7 +98,7 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     # plt.plot(x_axis, test_scores, 'r')
     # plt.plot(x_axis, RMSE_scores, 'b')
     # plt.show()
-    degree = 4
+
     poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
     model = LinearRegression()
     # transform data
@@ -135,8 +135,8 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     print("\nRMSE_Raw: {}, RMSE_mean: {}, RMSE_Std: {}".format(rmse_list, np.mean(rmse_list), np.std(rmse_list)))
 
     # write model to a file
-    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}_full_img" \
-        .format(degree, src_cam)
+    model_file_path = "regression_models/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img" \
+        .format(degree, src_cam, dst_cam)
     with open(model_file_path, 'wb') as output:
         pickle.dump(best_model, output)
         print("best_rmse : {}".format(min_rmse))
@@ -196,8 +196,10 @@ if __name__ == "__main__":
     # collab_cams = [8,6,5]
     # src_cam = 87
     # dst_cam = 78
-    src_cam = 8
-    dst_cam = 7
+    src_cam = 7
+    dst_cam = 5
+    degree = 6
+
 
     src_points, dst_points = [], []
 
