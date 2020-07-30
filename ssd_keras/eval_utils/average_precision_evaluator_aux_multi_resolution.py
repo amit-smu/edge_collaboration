@@ -667,8 +667,8 @@ class Evaluator:
                 true_positives.append(true_pos)
                 false_positives.append(false_pos)
                 # amit
-                true_positives.append(0)
-                false_positives.append(0)
+                # true_positives.append(0)
+                # false_positives.append(0)
 
                 cumulative_true_pos = np.cumsum(true_pos)  # Cumulative sums of the true positives
                 cumulative_false_pos = np.cumsum(false_pos)  # Cumulative sums of the false positives
