@@ -1087,14 +1087,15 @@ class DataGenerator:
         extract shared rgion from given batch of images and adjust gt labels accordingly
         :return:
         """
-        ICOV_TH = 0.65
+        ICOV_TH = 0.75
         MODIFY_LABELS = True  # modify orginal labels (for micro study 2 )
         SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
 
-        shared_reg_coords = [0, 0, 1920, 1080]
+        shared_reg_coords = [640, 0, 1920, 1080]
         print("shared reg coords: {}".format(shared_reg_coords))
-        # map shared region to 512x512 (data gen image size)
+        batch_labels = deepcopy(self.labels[t_batch_indices[0]:t_batch_indices[1]])
+
         xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
         xmin_tr = int((xmin_org / 1920.0) * 512)
         ymin_tr = int((ymin_org / 1080.0) * 512)
@@ -1122,12 +1123,8 @@ class DataGenerator:
 
             # adjust ground truth labels accordingly
             img_modified_lables = []
-
-            # print("img_labels: {}\n".format(img_labels))
             for obj in img_labels:
-                # print("obj : {}\n".format(obj))
                 obj_bbox = [obj[1], obj[2], obj[3], obj[4]]
-                # print("obj_bbox: {}\n".format(obj_bbox))
                 icov = self.bb_icov(obj_bbox, shared_reg_coords)
                 if icov >= ICOV_TH:
                     # convert labels to 512x512 coordinates
@@ -1135,13 +1132,13 @@ class DataGenerator:
                     # obj[2] = int((obj[2] / 1080.0) * 512)
                     # obj[3] = int((obj[3] / 1920.0) * 512)
                     # obj[4] = int((obj[4] / 1080.0) * 512)
-                    img_modified_lables.append(obj)
-            # print("modified img lables : {}\n".format(img_modified_lables))
+                    temp = [obj[0], obj[1], obj[2], obj[3], obj[4]]
+                    img_modified_lables.append(temp)
+                else:
+                    img_modified_lables.append([18, 0, 0, 1920, 1080])
             batch_modified_labels.append(img_modified_lables)
-            # sys.exit(-1)
-        # assert batch_x.shape == batch_x_mixed_res.shape
-        # replace orginal labels with modeified labels
-        self.labels[t_batch_indices[0]:t_batch_indices[1]] = batch_modified_labels
+        if MODIFY_LABELS:
+            self.labels[t_batch_indices[0]:t_batch_indices[1]] = batch_modified_labels
         return np.array(batch_x_mixed_res), batch_modified_labels
 
     def extract_shared_region_PETS(self, batch_x, batch_labels, t_batch_indices):
@@ -1149,13 +1146,15 @@ class DataGenerator:
         extract shared rgion from given batch of images and adjust gt labels accordingly
         :return:
         """
-        ICOV_TH = 0.65
+        ICOV_TH = 0.75
         MODIFY_LABELS = True  # modify orginal labels (for micro study 2 )
-        SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
+        SHARED_AREA_RES = (512, 512)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
 
-        shared_reg_coords = [0, 0, 238, 576]
+        shared_reg_coords = [0, 0, 720, 576]
         print("shared reg coords: {}".format(shared_reg_coords))
+
+        batch_labels = deepcopy(self.labels[t_batch_indices[0]:t_batch_indices[1]])
         # map shared region to 512x512 (data gen image size)
         xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
         xmin_tr = int((xmin_org / 720.0) * 512)
@@ -1184,10 +1183,7 @@ class DataGenerator:
 
             # adjust ground truth labels accordingly
             img_modified_lables = []
-
-            # print("img_labels: {}\n".format(img_labels))
             for obj in img_labels:
-                # print("obj : {}\n".format(obj))
                 obj_bbox = [obj[1], obj[2], obj[3], obj[4]]
                 # print("obj_bbox: {}\n".format(obj_bbox))
                 icov = self.bb_icov(obj_bbox, shared_reg_coords)
@@ -1197,13 +1193,13 @@ class DataGenerator:
                     # obj[2] = int((obj[2] / 576.0) * 512)
                     # obj[3] = int((obj[3] / 720.0) * 512)
                     # obj[4] = int((obj[4] / 576.0) * 512)
-                    img_modified_lables.append(obj)
-            # print("modified img lables : {}\n".format(img_modified_lables))
+                    temp = [obj[0], obj[1], obj[2], obj[3], obj[4]]
+                    img_modified_lables.append(temp)
+                else:
+                    img_modified_lables.append([18, 0, 0, 720, 576])
             batch_modified_labels.append(img_modified_lables)
-            # sys.exit(-1)
-        # assert batch_x.shape == batch_x_mixed_res.shape
-        # replace orginal labels with modeified labels
-        self.labels[t_batch_indices[0]:t_batch_indices[1]] = batch_modified_labels
+        if MODIFY_LABELS:
+            self.labels[t_batch_indices[0]:t_batch_indices[1]] = batch_modified_labels
         return np.array(batch_x_mixed_res), batch_modified_labels
 
     def generate(self,
@@ -1417,7 +1413,7 @@ class DataGenerator:
             else:
                 batch_y = None
 
-            #############################################################################################
+            ##############################################################################################
             # amit : store the indices of batch
             t_batch_indices = [current, current + batch_size]  # temp variable
             #############################################################################################
@@ -1578,11 +1574,13 @@ class DataGenerator:
             # ########################## Dump batch data ############################################
 
             if self.test_dataset == "WILDTRACK":
-                batch_X, batch_original_labels = self.extract_shared_region_WT(batch_X, batch_y, t_batch_indices)
+                batch_X, batch_original_labels = self.extract_shared_region_WT(batch_X, batch_original_labels,
+                                                                               t_batch_indices)
                 # batch_X = batch_X
             elif self.test_dataset == "PETS":
                 # batch_X = self.create_mixed_res_imges_PETS(batch_X)
-                eatch_X, batch_original_labels = self.extract_shared_region_PETS(batch_X, batch_y, t_batch_indices)
+                batch_X, batch_original_labels = self.extract_shared_region_PETS(batch_X, batch_original_labels,
+                                                                                 t_batch_indices)
 
             else:
                 print("WRONG Dataset")
@@ -1594,7 +1592,7 @@ class DataGenerator:
             #########################################################################################
             # Compose the output.
             #########################################################################################
-            print(returns)
+            #print(returns)
             ret = []
             if 'processed_images' in returns: ret.append(batch_X)
             if 'encoded_labels' in returns: ret.append(batch_y_encoded)
