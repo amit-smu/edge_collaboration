@@ -165,7 +165,7 @@ if __name__ == "__main__":
 
     src_cam = 6
     dst_cam = 1
-    degree = 12
+    degree = 4
 
     src_points, dst_points = [], []
 

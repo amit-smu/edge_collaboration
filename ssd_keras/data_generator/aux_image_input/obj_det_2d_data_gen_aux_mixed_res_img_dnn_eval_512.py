@@ -1269,7 +1269,7 @@ class DataGenerator:
             collab_img = cv2.imread(collab_file_path)
             assert collab_img is not None
             # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-            objects = self.detect_objects(collab_img)   
+            objects = self.detect_objects(collab_img)
             # objects = self.detect_objects(cv2.imread(batch_file_names[i]))
             # objects = self.get_gt_objects_WT(collab_img_id[:-4], annot_dir)
             # objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)

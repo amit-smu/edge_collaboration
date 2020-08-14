@@ -39,15 +39,18 @@ def bb_iou(boxA, boxB):
 
 def plot_regression_results(iou_values):
     print()
-    iou_ticks = [0.1, 0.2, 0.4, 0.6, 0.7, 0.8, 1]
+    iou_ticks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     iou_fractions = []
     for tick in iou_ticks:
         # find fraction of iou values above this iou
-        target_iou = [i for i in iou_values if i >= tick]
+        target_iou = [j for j in iou_values if j >= tick]
         total_iou = len(iou_values)
         fraction = len(target_iou) / total_iou
-        iou_fractions.append(np.round(fraction, decimals=2))
-    print(iou_fractions)
+        iou_fractions.append(np.round(fraction * 100.0, decimals=2))
+    print(iou_ticks)
+    for t in iou_fractions:
+        print(t)
+    # print(iou_fractions)
 
 
 def compute_iou_score(pred_coords, actual_coords):
@@ -105,14 +108,16 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     X = X.values
     Y = Y.values
 
-    degree = 3
     poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
     X_poly = poly_features.fit_transform(X)
 
     # #################### LOAD REGRESSION MODEL ######################################
     reg_model = None
-    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}_full_img".format(degree,
-                                                                                                                src_cam)
+    # model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}_full_img".format(
+    #     degree,
+    #     src_cam)
+    model_file_path = "regression_models/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img" \
+        .format(degree, src_cam, dst_cam)
     print("degree: {}, src_cam: {}\n".format(degree, src_cam))
     with open(model_file_path, 'rb') as input_file:
         reg_model = pickle.load(input_file)
@@ -125,12 +130,11 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
         row_pred = np.array(row_pred, dtype=np.int32)
         # score = compute_iou_score(row_pred[0], actual_bbox=Y[index])
         score = compute_iou_score(pred_coords=row_pred[0], actual_coords=Y[index])
-
         iou_scores.append(score)
     plot_regression_results(iou_scores)
-    plt.figure()
-    plt.title(src_cam)
-    plt.scatter(x=np.arange(0, len(iou_scores)), y=iou_scores)
+    # plt.figure()
+    # plt.title(src_cam)
+    # plt.scatter(x=np.arange(0, len(iou_scores)), y=iou_scores)
     plt.show()
 
 
@@ -141,8 +145,9 @@ if __name__ == "__main__":
 
     # ref_cam = 7
     # collab_cams = [8,6,5]
-    src_cam = 8
-    dst_cam = 7
+    src_cam = 5
+    dst_cam = 8
+    degree = 1
 
     src_points, dst_points = [], []
 
@@ -152,7 +157,8 @@ if __name__ == "__main__":
     # read training frame names
     trainval_frames = np.loadtxt("../../../dataset/PETS_1/ImageSets/trainval.txt", dtype=np.int32)
     test_frames = np.loadtxt("../../../dataset/PETS_1/ImageSets/test.txt", dtype=np.int32)
-    # for i in range(0, 794):
+    print("test_frames : {}".format(len(test_frames)))
+
     for i in test_frames:
         src_annot_name = "frame_{}_{:04d}.xml".format(src_cam, i)
         src_annot_path = "{}/{}".format(annot_dir, src_annot_name)

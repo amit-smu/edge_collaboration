@@ -55,15 +55,17 @@ def compute_iou_score(pred_coords, actual_coords):
 
 
 def plot_regression_results(iou_values):
-    iou_ticks = [0.1, 0.2, 0.4, 0.6, 0.7, 0.8, 1]
+    iou_ticks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     iou_fractions = []
     for tick in iou_ticks:
         # find fraction of iou values above this iou
         target_iou = [i for i in iou_values if i >= tick]
         total_iou = len(iou_values)
         fraction = len(target_iou) / total_iou
-        iou_fractions.append(np.round(fraction, decimals=2))
-    print(iou_fractions)
+        iou_fractions.append(np.round(fraction * 100.0, decimals=2))
+    print(iou_ticks)
+    for t in iou_fractions:
+        print(t)
 
 
 def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
@@ -98,14 +100,16 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     X = X.values
     Y = Y.values
 
-    degree = 3
     poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
     X_poly = poly_features.fit_transform(X)
 
     # #################### LOAD REGRESSION MODEL ######################################
     reg_model = None
-    model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}".format(degree,
-                                                                                                                src_cam)
+    # model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}".format(degree,
+    #                                                                                                             src_cam)
+    model_file_path = "regression_models/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img".format(degree,
+                                                                                                              src_cam,
+                                                                                                              dst_cam)
     print("degree: {}, src_cam: {}\n".format(degree, src_cam))
     with open(model_file_path, 'rb') as input_file:
         reg_model = pickle.load(input_file)
@@ -121,9 +125,9 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
 
         iou_scores.append(score)
     plot_regression_results(iou_scores)
-    plt.figure()
-    plt.title(src_cam)
-    plt.scatter(x=np.arange(0, len(iou_scores)), y=iou_scores)
+    # plt.figure()
+    # plt.title(src_cam)
+    # plt.scatter(x=np.arange(0, len(iou_scores)), y=iou_scores)
     plt.show()
 
 
@@ -141,25 +145,26 @@ def check_coordinates_for_error(s_view):
 
 
 if __name__ == "__main__":
-    DEBUG = True
+    DEBUG = False
 
     image_size = (1920, 1080)  # WILDTRACK dataset (width, height)
     dir_name = "../../../dataset/Wildtrack_dataset"
     img_dir = "../../../dataset/Wildtrack_dataset/Image_subsets"
     annot_dir = "../../../dataset/Wildtrack_dataset/annotations_positions"
 
-    src_cam = 4
-    dst_cam = 1
+    src_cam = 7
+    dst_cam = 5
+    degree = 5
 
     src_points, dst_points = [], []
 
     # read training frame names
     # trainval_frames = np.loadtxt("{}/ImageSets/trainval.txt".format(dir_name), dtype=np.int32)
     test_frames = np.loadtxt("{}/ImageSets/test.txt".format(dir_name), dtype=np.int32)
-
+    print("test_frames : {}".format(len(test_frames)))
     for i in test_frames:
         src_annot_name = "{:08d}.json".format(i)
-        print("frame : {}".format(src_annot_name))
+        # print("frame : {}".format(src_annot_name))
         src_annot_path = "{}/{}".format(annot_dir, src_annot_name)
         gt_data = pd.read_json(src_annot_path)
 
