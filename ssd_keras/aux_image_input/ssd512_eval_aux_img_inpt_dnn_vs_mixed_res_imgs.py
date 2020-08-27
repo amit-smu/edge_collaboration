@@ -98,18 +98,20 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 # ###################### VARIABLES #########################################################
-ref_cam = 8
-collab_cam = 5
+ref_cam = 5
+collab_cam = 7
 
-#test_dataset = "WILDTRACK"
-test_dataset = "PETS"
-# test_dataset = "VOC"
+test_dataset = "WILDTRACK"
+# test_dataset = "PETS"
 
 collaborating_cams = 1
-test_img_res = 160
-
+# test_img_res = 160
+# ############ variable for image compression test ############
+# TEST_RESOLUTION = 224
+COMPRESSED = False  # testing for compression
 # ###########################################################################################
-###############################################    DATA GENERATORS     ################################################
+
+# ##############################################    DATA GENERATORS     ################################################
 
 # TODO: Set the paths to the dataset here.
 
@@ -128,6 +130,8 @@ PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30_cam_8
 # WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
 # WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
 # WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700_cam_1.txt"
+# WT_dataset_images_dir = "../dataset/image_compression_data_kmeans_k_16/WT_data/33%_left_sh_reg/{}".format(
+#     TEST_RESOLUTION)
 WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
 WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
 WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_30_cam_5.txt"
@@ -144,7 +148,8 @@ print("Evaluating for : {}\n".format(test_dataset))
 print("ref_cam: {}, collab_cam :{}\n".format(ref_cam, collab_cam))
 
 dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None, N=collaborating_cams,
-                        resolution=test_img_res, ref_cam=ref_cam, collab_cam=collab_cam, test_dataset=test_dataset)
+                        ref_cam=ref_cam, collab_cam=collab_cam, test_dataset=test_dataset,
+                        compression=True)
 
 if test_dataset == "PETS":
     dataset.parse_xml(images_dirs=[PETS_images_dir],

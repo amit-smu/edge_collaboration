@@ -107,7 +107,8 @@ class DataGenerator:
                  resolution=512,
                  ref_cam=1,
                  collab_cam=4,
-                 test_dataset="PETS"):
+                 test_dataset="PETS",
+                 compression=False):
         '''
         Initializes the data generator. You can either load a dataset directly here in the constructor,
         e.g. an HDF5 dataset, or you can use one of the parser methods to read in a dataset.
@@ -156,6 +157,8 @@ class DataGenerator:
         '''
 
         #############################################################################################
+        self.compression = compression
+        print("Compression: {}".format(self.compression))
 
         self.N = N  # number of cameras collaborating for PETS dataset
         print("\nnumber of collaborating cameras :{}\n".format(self.N))
@@ -629,11 +632,11 @@ class DataGenerator:
 
             # ########################################################################################################
             # PETS or WILDTRAck
-            if images_dir.__contains__("PNG"):
+            if self.test_dataset == "WILDTRACK":
                 # WILDTRACK
                 img_type = "png"
                 self.img_type_prefix = "PNGImages"
-            else:
+            elif self.test_dataset == "PETS":
                 # PETS
                 img_type = "jpg"
                 self.img_type_prefix = "JPEGImages"
@@ -709,6 +712,10 @@ class DataGenerator:
                 it = self.filenames
             for filename in it:
                 with Image.open(filename) as image:
+                    # ############################ my code ###########################################
+                    if self.compression:
+                        image = image.convert("RGB")  # convert image from P mode to RGB
+                    # ############################ my code ###########################################
                     self.images.append(np.array(image, dtype=np.uint8))
 
         if ret:
@@ -1235,7 +1242,7 @@ class DataGenerator:
         batch_x_prior = []
         for i in range(len(batch_file_names)):
             aux_channel = np.full((512, 512, 1), 114, dtype=np.uint8)
-            if self.img_type_prefix == "PNGImages":  # WILDTRACK
+            if self.test_dataset == "WILDTRACK":  # WILDTRACK
                 img_id = batch_img_ids[i]
                 collab_img_id = "C{}_{}.png".format(self.collab_cam, img_id[3:])
                 file_name = batch_file_names[i]
@@ -1246,11 +1253,12 @@ class DataGenerator:
                 # file_name = "{}/{}".format(file_name, self.collab_cam)
                 collab_file_path = "{}/{}".format(file_name, collab_img_id)
                 # shared_reg_bbox = [1089, 6, 1914, 1071]  # gt for camera 1, 4
-                shared_reg_bbox = [197, 146, 1467, 1040]  # for camera 5, 7
+                # shared_reg_bbox = [197, 146, 1467, 1040]  # for camera 5, 7
                 # shared_reg_bbox = [203, 202, 1719, 981]  # gt for camera 6, 1
+                shared_reg_bbox = [0, 0, 1920, 1080]
                 annot_dir = "../dataset/Wildtrack_dataset/Annotations"
 
-            elif self.img_type_prefix == "JPEGImages":  # PETS dataset
+            elif self.test_dataset == "PETS":  # PETS dataset
                 img_id = batch_img_ids[i]
                 collab_img_id = "frame_{}_{}.jpg".format(self.collab_cam, img_id[8:])
                 file_name = batch_file_names[i]
@@ -1260,19 +1268,23 @@ class DataGenerator:
                 collab_file_path = "{}/{}".format(file_name, collab_img_id)
                 # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
                 # shared_reg_bbox = [155, 92, 720, 516]  # in collab cam perspective (cam 7 , 8)
-                shared_reg_bbox = [128, 104, 694, 520]  # in collab cam perspective (cam 8, 5) 
-                # shared_reg_bbox = [21, 100, 571, 493]  # in collab cam perspective (cam 5, 7) 
+                # shared_reg_bbox = [128, 104, 694, 520]  # in collab cam perspective (cam 8, 5)
+                # shared_reg_bbox = [21, 100, 571, 493]  # in collab cam perspective (cam 5, 7)
+                shared_reg_bbox = [0, 0, 720, 576]
                 annot_dir = "../dataset/PETS_org/Annotations"
+            else:
+                print("Wrong Dataset!")
+                sys.exit(-1)
             # read image file
             # print(img_id, collab_file_path)
             # print(collab_file_path)
             collab_img = cv2.imread(collab_file_path)
             assert collab_img is not None
             # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-            objects = self.detect_objects(collab_img)
+            # objects = self.detect_objects(collab_img)
             # objects = self.detect_objects(cv2.imread(batch_file_names[i]))
             # objects = self.get_gt_objects_WT(collab_img_id[:-4], annot_dir)
-            # objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
+            objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
             if len(objects) == 0:
                 batch_x_prior.append(aux_channel)
                 continue
@@ -1315,6 +1327,7 @@ class DataGenerator:
             #                                                                          len(mapped_objects)))
 
             # convert shared reg objects to 512x512
+            # mapped_objects = shared_reg_objects
             temp = []
             for obj in mapped_objects:
                 xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
@@ -1323,12 +1336,12 @@ class DataGenerator:
                 ymin = max(0, ymin)
                 xmax = max(0, xmax)
                 ymax = max(0, ymax)
-                if self.img_type_prefix == "PNGImages":  # WILDTRACK
+                if self.test_dataset == "WILDTRACK":  # WILDTRACK
                     xmin = int((xmin / 1920.0) * 512)
                     ymin = int((ymin / 1080.0) * 512)
                     xmax = int((xmax / 1920.0) * 512)
                     ymax = int((ymax / 1080.0) * 512)
-                elif self.img_type_prefix == "JPEGImages":  # PETS
+                elif self.test_dataset == "PETS":  # PETS
                     xmin = int((xmin / 720.0) * 512)
                     ymin = int((ymin / 576.0) * 512)
                     xmax = int((xmax / 720.0) * 512)
@@ -1340,10 +1353,6 @@ class DataGenerator:
                 # if obj[0] == 15:
                 xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
                 aux_channel[ymin:ymax, xmin:xmax] = 255
-            # if DUMP_DATA:
-            #     print(batch_img_ids[i])
-            # cv2.imwrite("temp/{}.jpg".format(batch_img_ids[i]), batch_img)
-            # aux_channel = np.full((512, 512, 1), 255, dtype=np.uint8)
             batch_x_prior.append(aux_channel)
         return np.array(batch_x_prior)
 
@@ -1353,14 +1362,16 @@ class DataGenerator:
         actual performance
         :return:
         """
-        DUMP_DATA = True
+        DUMP_DATA = False
+        RANDOMIZE = True
+        N = 1  # number of collaborating cameras
         shared_reg_bbox = []  # xmin, ymin, xmax, ymax of shared region (drawn on collaborating cam)
         PRIOR_ICOV_TH = 0.10  # min icov value to select an object
         batch_x_prior = []
         # self.collab_cam = 1
         for i in range(len(batch_file_names)):
             aux_channel = np.full((512, 512, 1), 114, dtype=np.uint8)
-            if self.img_type_prefix == "PNGImages":  # WILDTRACK
+            if self.test_dataset == "WILDTRACK":  # WILDTRACK
                 img_id = batch_img_ids[i]
                 collab_img_id = "C{}_{}.png".format(self.collab_cam, img_id[3:])
                 file_name = batch_file_names[i]
@@ -1370,11 +1381,11 @@ class DataGenerator:
                 file_name = file_name[:-1 * img_name_len]
                 # file_name = "{}/{}".format(file_name, self.collab_cam)
                 collab_file_path = "{}/{}".format(file_name, collab_img_id)
-                shared_reg_bbox = [0, 0, 1280, 1080]  # shared regino coords
+                shared_reg_bbox = [0, 0, 640, 1080]  # shared regino coords
                 #               print("shared_reg_bbox : {}".format(shared_reg_bbox))
                 annot_dir = "../dataset/Wildtrack_dataset/Annotations"
 
-            elif self.img_type_prefix == "JPEGImages":  # PETS dataset
+            elif self.test_dataset == "PETS":  # PETS dataset
                 img_id = batch_img_ids[i]
                 collab_img_id = "frame_{}_{}.jpg".format(self.collab_cam, img_id[8:])
                 file_name = batch_file_names[i]
@@ -1384,7 +1395,7 @@ class DataGenerator:
                 collab_file_path = "{}/{}".format(file_name, collab_img_id)
                 # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
                 # shared_reg_bbox = [155, 92, 720, 516]  # in collab cam perspective (cam 7 , 8)
-                shared_reg_bbox = [0, 0, 720, 380]  # in collab cam perspective (cam 8, 5)
+                shared_reg_bbox = [0, 0, 720, 576]  # in collab cam perspective (cam 8, 5)
                 # shared_reg_bbox = [21, 100, 571, 493]  # in collab cam perspective (cam 5, 7)
                 annot_dir = "../dataset/PETS_org/Annotations"
             # read image file
@@ -1394,10 +1405,6 @@ class DataGenerator:
             if len(objects) == 0:
                 batch_x_prior.append(aux_channel)
                 continue
-            # if DUMP_DATA:
-            #     for obj in objects:
-            #         cv2.rectangle(collab_img, (obj[2], obj[3]), (obj[4], obj[5]), (255, 0, 0), 2)
-            #         cv2.imwrite("temp/{}".format(collab_img_id), collab_img)
 
             # map coordinates to reference camera coordinate system
             # select objects in shared region
@@ -1412,12 +1419,6 @@ class DataGenerator:
                 batch_x_prior.append(aux_channel)
                 continue
 
-            # if DUMP_DATA:
-            #    ref_img = cv2.imread(batch_file_names[i])
-            #    for obj in mapped_objects:
-            #        cv2.rectangle(ref_img, (obj[2], obj[3]), (obj[4], obj[5]), (255, 0, 0), 2)
-            #        cv2.imwrite("temp/{}_1.png".format(img_id), ref_img)
-
             # convert shared reg objects to 512x512
             temp = []
             for obj in shared_reg_objects:
@@ -1427,13 +1428,13 @@ class DataGenerator:
                 ymin = max(0, ymin)
                 xmax = max(0, xmax)
                 ymax = max(0, ymax)
-                if self.img_type_prefix == "PNGImages":  # WILDTRACK
+                if self.test_dataset == "WILDTRACK":  # WILDTRACK
                     img_id = batch_img_ids[i]
                     xmin = int((xmin / 1920.0) * 512)
                     ymin = int((ymin / 1080.0) * 512)
                     xmax = int((xmax / 1920.0) * 512)
                     ymax = int((ymax / 1080.0) * 512)
-                elif self.img_type_prefix == "JPEGImages":  # PETS dataset
+                elif self.test_dataset == "PETS":  # PETS dataset
                     # img_id = batch_img_ids[i]
                     xmin = int((xmin / 720.0) * 512)
                     ymin = int((ymin / 576.0) * 512)
@@ -1442,18 +1443,13 @@ class DataGenerator:
                 temp.append([obj[0], obj[1], xmin, ymin, xmax, ymax])
             mapped_objects = temp
 
-            # open file for dumping prior attributes like width, height of bbox
-            # file_name = "prior_attr_{}%_{}_micro_study.txt"
-            # prior_attr_file = open()
-            for obj in mapped_objects:
-                # if obj[0] == 15:
-                xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
-
-                aux_channel[ymin:ymax, xmin:xmax] = 255
-                # if DUMP_DATA:
-            #             batch_img = cv2.imread(batch_file_names[i])
-            #             assert batch_img is not None
-            #             cv2.rectangle(batch_img, (xmin, ymin), (xmax, ymax), (0, 0, 255), 2)
+            if RANDOMIZE:
+                aux_channel = self.randomize_added_collab(objects=mapped_objects, n_cams=N)
+            else:
+                for obj in mapped_objects:
+                    # if obj[0] == 15:
+                    xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
+                    aux_channel[ymin:ymax, xmin:xmax] = 255
             batch_x_prior.append(aux_channel)
         return np.array(batch_x_prior)
 
@@ -1471,7 +1467,7 @@ class DataGenerator:
         # self.collab_cam = 1
         for i in range(len(batch_file_names)):
             aux_channel = np.full((512, 512, 1), 114, dtype=np.uint8)
-            if self.img_type_prefix == "PNGImages":  # WILDTRACK
+            if self.test_dataset == "WILDTRACK":  # WILDTRACK
                 img_id = batch_img_ids[i]
                 collab_img_id = "C{}_{}.png".format(self.collab_cam, img_id[3:])
                 file_name = batch_file_names[i]
@@ -1487,7 +1483,7 @@ class DataGenerator:
                 shared_reg_bbox = [466, 0, 700, 700]  # gt shared region in 700x700 image
                 # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
                 annot_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
-            elif self.img_type_prefix == "JPEGImages":
+            elif self.test_dataset == "PETS":
                 img_id = batch_img_ids[i]
                 collab_img_id = "frame_{}_{}.jpg".format(self.collab_cam, img_id[8:])
                 file_name = batch_file_names[i]
@@ -1728,7 +1724,7 @@ class DataGenerator:
         create mixed-resolution images (based on teh collaborating and reference cameras)
         :return:
         """
-        SHARED_AREA_RES = (222, 220)  # min possible region of shared region (with same obj det accuracy)
+        SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [28, 101, 617, 492] # cam 7, 8
@@ -1772,11 +1768,11 @@ class DataGenerator:
         create mixed-resolution images (based on teh collaborating and reference cameras)
         :return:
         """
-        SHARED_AREA_RES = (156, 156)  # min possible region of shared region (with same obj det accuracy)
+        SHARED_AREA_RES = (224, 224)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [51, 139, 1507, 1041]  # for camera 5, 7
-        shared_reg_coords = [0, 0, 1920, 1080]  # for camera 6, 1
+        shared_reg_coords = [0, 0, 640, 1080]  # for camera 6, 1
         print("shared reg coords: {}".format(shared_reg_coords))
         # shared_reg_coords = [0, 0, 298,
         #                     700]  # gt overlap cam 1, 4 (projected on view 1) (for 700x700 img,calculated manually)
@@ -1786,12 +1782,7 @@ class DataGenerator:
         ymin_tr = int((ymin_org / 1080.0) * 512)
         xmax_tr = int((xmax_org / 1920.0) * 512)
         ymax_tr = int((ymax_org / 1080.0) * 512)
-        # xmin_tr = int((xmin_org / 700.0) * 512)
-        # ymin_tr = int((ymin_org / 700.0) * 512)
-        # xmax_tr = int((xmax_org / 700.0) * 512)
-        # ymax_tr = int((ymax_org / 700.0) * 512)
         # shared_reg_coords_transformed = [xmin_tr, ymin_tr, xmax_tr, ymax_tr]  # coords in 512x512 image size
-
         # compute new resolution for shared area
         reg_width = xmax_tr - xmin_tr  # width of shared region in 512x512 image
         reg_height = ymax_tr - ymin_tr
@@ -1816,11 +1807,11 @@ class DataGenerator:
         :return:
         """
         ICOV_TH = 0.75
-        MODIFY_LABELS = True  # modify orginal labels (for micro study 2 )
-        SHARED_AREA_RES = (224, 224)  # min possible region of shared region (with same obj det accuracy)
+        MODIFY_LABELS = False  # modify orginal labels (for micro study 2 )
+        SHARED_AREA_RES = (160, 160)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [51, 139, 1507, 1041]  # for camera 5, 7
-        shared_reg_coords = [0, 0, 720, 380]  # for camera 6, 1
+        shared_reg_coords = [0, 0, 720, 576]  # for camera 6, 1
         print("shared reg coords: {}".format(shared_reg_coords))
         batch_labels = deepcopy(self.labels[t_batch_indices[0]:t_batch_indices[1]])
 
@@ -1880,7 +1871,7 @@ class DataGenerator:
         SHARED_AREA_RES = (160, 160)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [51, 139, 1507, 1041]  # for camera 5, 7
-        shared_reg_coords = [0, 0, 1280, 1080]  # for camera 6, 1
+        shared_reg_coords = [0, 0, 1920, 1080]  # for camera 6, 1
 
         print("shared reg coords: {}".format(shared_reg_coords))
         batch_labels = deepcopy(self.labels[t_batch_indices[0]:t_batch_indices[1]])
@@ -1957,6 +1948,47 @@ class DataGenerator:
             obj[4] = int(obj[4] * (org_w / 512.0))
             obj[5] = int(obj[5] * (org_h / 512.0))
         return y_pred_decoded
+
+    def randomize_added_collab(self, objects, n_cams):
+        """
+        randomize the ground truth labels and create a prior (mask). Method is used for added collaboration study in
+        paper
+        :param batch_y_data: transformed labels/annotations
+        :return:
+        """
+        img_height = 512
+        img_width = 512
+        aux_channel = np.full((img_height, img_width, 1), 114, dtype=np.uint8)
+        if n_cams < 1:
+            return aux_channel
+        # for obj in objects:
+        #     # if obj[0] == 15:
+        #     xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
+        #     aux_channel[ymin:ymax, xmin:xmax] = 255
+        # n_cams = n_cams - 1
+        for n in range(n_cams):
+            # print("randomizing")
+            for index, obj in enumerate(objects):
+                xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
+
+                width_rnum = np.random.uniform(-0.10, 0.10)
+                height_rnum = np.random.uniform(-0.10, 0.10)
+                obj_width = xmax - xmin
+                obj_height = ymax - ymin
+
+                xmin = int(xmin + (obj_width * width_rnum))
+                ymin = int(ymin + (obj_height * height_rnum))
+                xmax = int(xmin + obj_width + (obj_width * width_rnum))
+                ymax = int(ymin + obj_height + (obj_height * height_rnum))
+
+                # check for out of frame values
+                xmin = max(0, xmin)
+                ymin = max(0, ymin)
+                xmax = min(img_width, xmax)
+                ymax = min(img_height, ymax)
+                aux_channel[ymin:ymax, xmin:xmax] = 255
+
+        return aux_channel
 
     def generate(self,
                  batch_size=32,
@@ -2156,9 +2188,6 @@ class DataGenerator:
             # Get the labels for this batch (if there are any).
             if not (self.labels is None):
                 batch_y = deepcopy(self.labels[current:current + batch_size])
-                # print(type(batch_y))
-
-                # sys.exit(-1)
             else:
                 batch_y = None
 
@@ -2320,8 +2349,8 @@ class DataGenerator:
             # batch_X_aux = self.get_aux_channels_batch(batch_X_data=batch_X, batch_y_data=batch_y, randomize=True)
             # batch_X_aux = self.get_aux_channels_batch_darknet_randomization(batch_X_data=batch_X, batch_y_data=batch_y,
             #                                                                 randomize=True)
-            batch_X_aux = self.get_aux_channel_detected_boxes(batch_filenames, batch_image_ids)
-            # batch_X_aux = self.get_aux_channel_detected_boxes_micro_study(batch_filenames, batch_image_ids)
+            # batch_X_aux = self.get_aux_channel_detected_boxes(batch_filenames, batch_image_ids)
+            batch_X_aux = self.get_aux_channel_detected_boxes_micro_study(batch_filenames, batch_image_ids)
             # batch_X_aux = self.get_aux_channel_detected_boxes_cropped_images(batch_filenames, batch_image_ids)
 
             # create mixed resolution images in the batch
@@ -2334,8 +2363,6 @@ class DataGenerator:
                 sys.exit(-1)
 
             # ############################### Compare shared regions Avg Prec Scores ##########################
-            # print("Returns: {}\n".format(returns))
-
             # if self.test_dataset == "WILDTRACK":
             #     batch_X, batch_original_labels = self.extract_shared_region_WT(batch_X, batch_y, t_batch_indices)
             # elif self.test_dataset == "PETS":

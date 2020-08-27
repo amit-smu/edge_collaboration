@@ -898,7 +898,7 @@ class DataGenerator:
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [0, 0, 298, 700]  # gt overlap cam 1, 4 (projected on view 1) Cropped images (700x700)
-        shared_reg_coords = [0, 0, 1920, 1080]
+        shared_reg_coords = [0, 0, 640, 1080]
         print("shared reg coords : {}".format(shared_reg_coords))
         # map shared region to 512x512 (data gen image size)
         xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
@@ -1089,10 +1089,10 @@ class DataGenerator:
         """
         ICOV_TH = 0.75
         MODIFY_LABELS = True  # modify orginal labels (for micro study 2 )
-        SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
+        SHARED_AREA_RES = (160, 160)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
 
-        shared_reg_coords = [640, 0, 1920, 1080]
+        shared_reg_coords = [0, 0, 1920, 1080]
         print("shared reg coords: {}".format(shared_reg_coords))
         batch_labels = deepcopy(self.labels[t_batch_indices[0]:t_batch_indices[1]])
 
@@ -1135,7 +1135,7 @@ class DataGenerator:
                     temp = [obj[0], obj[1], obj[2], obj[3], obj[4]]
                     img_modified_lables.append(temp)
                 else:
-                    img_modified_lables.append([18, 0, 0, 1920, 1080])
+                    img_modified_lables.append([18, 0, 0, 1, 1])
             batch_modified_labels.append(img_modified_lables)
         if MODIFY_LABELS:
             self.labels[t_batch_indices[0]:t_batch_indices[1]] = batch_modified_labels
@@ -1148,10 +1148,10 @@ class DataGenerator:
         """
         ICOV_TH = 0.75
         MODIFY_LABELS = True  # modify orginal labels (for micro study 2 )
-        SHARED_AREA_RES = (512, 512)  # min possible region of shared region (with same obj det accuracy)
+        SHARED_AREA_RES = (160, 160)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
 
-        shared_reg_coords = [0, 0, 720, 576]
+        shared_reg_coords = [238, 0, 720, 576]
         print("shared reg coords: {}".format(shared_reg_coords))
 
         batch_labels = deepcopy(self.labels[t_batch_indices[0]:t_batch_indices[1]])
@@ -1555,7 +1555,6 @@ class DataGenerator:
                 else:
                     batch_y_encoded = label_encoder(batch_y, diagnostics=False)
                     batch_matched_anchors = None
-
             else:
                 batch_y_encoded = None
                 batch_matched_anchors = None
@@ -1565,8 +1564,13 @@ class DataGenerator:
             # if self.crop_size is not None:
             #     batch_X, batch_y = self.crop_images(batch_x_data=batch_X, batch_y_data=batch_y)
 
-            # batch_X = self.create_mixed_res_imges_WT(batch_X)
-            # batch_X = self.create_mixed_res_imges_PETS(batch_X)
+            # if self.test_dataset == "WILDTRACK":
+            #     batch_X = self.create_mixed_res_imges_WT(batch_X)
+            # elif self.test_dataset == "PETS":
+            #     batch_X = self.create_mixed_res_imges_PETS(batch_X)
+            # else:
+            #     print("WRONG Dataset")
+            #     sys.exit(-1)
             #  batch_X = self.apply_resolution_transform(batch_x_data=batch_X)
             # batch_X, batch_y = self.apply_resolution_transform(batch_x_data=batch_X, batch_y_data=batch_y,
             #                                                   factor=self.resolution / 512)
@@ -1581,18 +1585,17 @@ class DataGenerator:
                 # batch_X = self.create_mixed_res_imges_PETS(batch_X)
                 batch_X, batch_original_labels = self.extract_shared_region_PETS(batch_X, batch_original_labels,
                                                                                  t_batch_indices)
-
             else:
                 print("WRONG Dataset")
                 sys.exit(-1)
 
             # self.dump_raw_data(batch_x_data=batch_X.copy(), batch_y_data=batch_y.copy(), batch_img_ids=batch_image_ids)
-            self.dump_raw_data(batch_x_data=batch_X.copy(), batch_y_data=batch_original_labels,
+            self.dump_raw_data(batch_x_data=deepcopy(batch_X), batch_y_data=batch_original_labels,
                                batch_img_ids=batch_image_ids)
             #########################################################################################
             # Compose the output.
             #########################################################################################
-            #print(returns)
+            # print(returns)
             ret = []
             if 'processed_images' in returns: ret.append(batch_X)
             if 'encoded_labels' in returns: ret.append(batch_y_encoded)

@@ -144,7 +144,8 @@ if __name__ == "__main__":
     # dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None)
 
     output_dir = "temp"
-    PETS_images_dir = '../dataset/model_training_data_pets/images/single_image_input/'
+    # PETS_images_dir = '../dataset/model_training_data_pets/images/single_image_input/'
+    PETS_images_dir = '../dataset/compressed_data/knn_k_128/PETS_data/33%_left_sh_reg/512'
     PETS_annotations_dir = '../dataset/model_training_data_pets/annotations/single_image_input/'
     PETS_test_image_set_filename = '../dataset/model_training_data_pets/ImageSets/Main/test.txt'
 
@@ -152,9 +153,10 @@ if __name__ == "__main__":
     # WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
     # WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_crop_700x700.txt"
 
-    WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
+    # WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
+    WT_dataset_images_dir = "../dataset/compressed_data/knn_k_128/WT_data/33%_left_sh_reg/512"
     WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-    WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test.txt"
+    WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_30_cam_5.txt"
 
     # read input images and predict
     # DATASET = "PETS"
@@ -166,6 +168,11 @@ if __name__ == "__main__":
         images_dir = WT_dataset_images_dir
         annot_dir = WT_dataset_annotations_dir
         image_type = "png"
+    elif DATASET == "PETS":
+        test_file_name = PETS_test_image_set_filename
+        images_dir = PETS_images_dir
+        annot_dir = PETS_annotations_dir
+        image_type = "jpg"
 
     # read test image names
     with open(test_file_name) as f:
@@ -243,7 +250,7 @@ if __name__ == "__main__":
         img = draw_gt(annot_path, img_org)
 
         # write image to file
-        cv2.imwrite("{}/{}.{}".format(output_dir, file_id, image_type), img_org)
+        cv2.imwrite("{}/{}.{}".format(output_dir, file_id, image_type), img)
 
         # break
 
