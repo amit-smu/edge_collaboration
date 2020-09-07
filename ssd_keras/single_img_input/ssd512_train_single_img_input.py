@@ -1,3 +1,7 @@
+"""
+main script
+Script to train SSD512 model for single image input (baseline model)
+"""
 from keras.optimizers import Adam, SGD
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TerminateOnNaN, CSVLogger
 from keras import backend as K
@@ -16,7 +20,8 @@ from keras_layers.keras_layer_L2Normalization import L2Normalization
 from ssd_encoder_decoder.ssd_input_encoder import SSDInputEncoder
 from ssd_encoder_decoder.ssd_output_decoder import decode_detections, decode_detections_fast
 
-from data_generator.object_detection_2d_data_generator_multi_resolution import DataGenerator
+# from data_generator.object_detection_2d_data_generator_multi_resolution import DataGenerator
+from data_generator.obj_det_2d_data_gen_single_train_512 import DataGenerator
 from data_generator.object_detection_2d_geometric_ops import Resize
 from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channels
 from data_generator.data_augmentation_chain_original_ssd import SSDDataAugmentation

@@ -147,7 +147,7 @@ if __name__ == "__main__":
     # collab_cams = [8,6,5]
     src_cam = 5
     dst_cam = 8
-    degree = 1
+    degree = 4
 
     src_points, dst_points = [], []
 
@@ -155,8 +155,8 @@ if __name__ == "__main__":
     # random_frame_sampling()
 
     # read training frame names
-    trainval_frames = np.loadtxt("../../../dataset/PETS_1/ImageSets/trainval.txt", dtype=np.int32)
-    test_frames = np.loadtxt("../../../dataset/PETS_1/ImageSets/test.txt", dtype=np.int32)
+    trainval_frames = np.loadtxt("../../../../dataset/PETS_1/ImageSets/trainval.txt", dtype=np.int32)
+    test_frames = np.loadtxt("../../../../dataset/PETS_1/ImageSets/test.txt", dtype=np.int32)
     print("test_frames : {}".format(len(test_frames)))
 
     for i in test_frames:

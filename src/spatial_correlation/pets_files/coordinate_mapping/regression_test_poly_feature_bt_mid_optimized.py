@@ -41,7 +41,6 @@ def bb_iou(boxA, boxB):
 
 
 def plot_regression_results(iou_values):
-    print()
     iou_ticks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
     iou_fractions = []
     for tick in iou_ticks:
@@ -50,9 +49,9 @@ def plot_regression_results(iou_values):
         total_iou = len(iou_values)
         fraction = len(target_iou) / total_iou
         iou_fractions.append(np.round(fraction * 100.0, decimals=2))
-    print(iou_ticks)
-    for t in iou_fractions:
-        print(t)
+
+    for k, t in enumerate(iou_fractions):
+        print(iou_ticks[k], int(t))
     # print(iou_fractions)
 
 
@@ -137,21 +136,22 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     if NORMALIZE:
         min_max_scalar = load_scalar()
         X = min_max_scalar.transform(X)
-        Y = min_max_scalar.transform(Y)
+        # Y = min_max_scalar.transform(Y)
 
     X_poly = poly_features.fit_transform(X)
     # #################### LOAD REGRESSION MODEL ######################################
     reg_model = load_regression_model()
     assert reg_model is not None
-    r_score = reg_model.score(X=X_poly, y=Y)
-    rmse = np.sqrt(mean_squared_error(y_true=Y, y_pred=reg_model.predict(X_poly)))
-    print("Test!! RMSE : {}, R2: {}".format(rmse, r_score))
-    sys.exit(-1)
+    # r_score = reg_model.score(X=X_poly, y=Y)
+    # rmse = np.sqrt(mean_squared_error(y_true=Y, y_pred=reg_model.predict(X_poly)))
+    # print("Test!! RMSE : {}, R2: {}".format(rmse, r_score))
+    # sys.exit(-1)
     # ##################### COMPUTE IoU SCORES ########################################
     iou_scores = []
     for index, row in enumerate(X_poly):
         row = np.reshape(row, newshape=(1, -1))
         row_pred = reg_model.predict(row)
+        row_pred = min_max_scalar.inverse_transform(row_pred)
         row_pred = np.array(row_pred, dtype=np.int32)
         # score = compute_iou_score(row_pred[0], actual_bbox=Y[index])
         score = compute_iou_score(pred_coords=row_pred[0], actual_coords=Y[index])
@@ -168,16 +168,17 @@ if __name__ == "__main__":
     img_dir = "{}/PETS_org/JPEGImages".format(DATASET_DIR)
     annot_dir = "{}/PETS_org/Annotations".format(DATASET_DIR)
 
-    src_cam = 7  # collab cam
+    src_cam = 8  # collab cam
     dst_cam = 5  # ref cam
-    degree = 3
+    degree = 4
     src_points = []
     dst_points = []
 
     # read training frame names
-    # test_frames = np.loadtxt("{}/PETS_org/ImageSets/Main/coord_mapping_test_30.txt".format(DATASET_DIR),
-    #                          dtype=np.int32)
-    for i in range(548, 796):
+    test_frames = np.loadtxt("{}/PETS_1/ImageSets/test.txt".format(DATASET_DIR),
+                             dtype=np.int32)
+    for i in test_frames:  # last 30% frames kept for testing
+        # for i in range(548, 796):  # last 30% frames kept for testing
         src_annot_name = "frame_{}_{:04d}.xml".format(src_cam, i)
         src_annot_path = "{}/{}".format(annot_dir, src_annot_name)
 

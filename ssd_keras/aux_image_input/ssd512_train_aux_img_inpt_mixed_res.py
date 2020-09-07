@@ -17,7 +17,8 @@ from keras_layers.keras_layer_L2Normalization import L2Normalization
 from ssd_encoder_decoder.ssd_input_encoder import SSDInputEncoder
 from ssd_encoder_decoder.ssd_output_decoder import decode_detections, decode_detections_fast
 
-from data_generator.object_detection_2d_data_generator_aux_multi_resolution_512 import DataGenerator
+# from data_generator.object_detection_2d_data_generator_aux_multi_resolution_512 import DataGenerator
+from data_generator.obj_det_2d_data_gen_aux_mixed_res_train_512 import DataGenerator
 from data_generator.object_detection_2d_geometric_ops import Resize
 from data_generator.object_detection_2d_photometric_ops import ConvertTo3Channels
 from data_generator.data_augmentation_chain_original_ssd import SSDDataAugmentation
@@ -88,7 +89,6 @@ K.tensorflow_backend.set_session(tf.Session(config=config))
 #                 swap_channels=swap_channels,
 #                 confidence_thresh=0.5)
 
-
 model = ssd_512_aux(image_size=(img_height, img_width, 3),
                     n_classes=20,
                     mode='training',
@@ -110,7 +110,7 @@ model = ssd_512_aux(image_size=(img_height, img_width, 3),
                     nms_max_output_size=400)
 
 print("model instance created...")
-####################################     Load Weights here    ##########################################
+# ###################################     Load Weights here    ##########################################
 # 2: Load some weights into the model.
 
 # # TODO: Set the path to the weights you want to load.
@@ -219,14 +219,6 @@ train_dataset.parse_xml(images_dirs=[WT_dataset_images_dir,
                         exclude_truncated=False,
                         exclude_difficult=False,
                         ret=False)
-# train_dataset.parse_xml(images_dirs=[WT_dataset_images_dir],
-#                         image_set_filenames=[WT_dataset_trainval_image_set_filename],
-#                         annotations_dirs=[WT_dataset_annotations_dir],
-#                         classes=classes,
-#                         include_classes='all',
-#                         exclude_truncated=False,
-#                         exclude_difficult=False,
-#                         ret=False)
 print("parsing complete for training dataset..")
 
 print("parsing xml for validation dataset..")
@@ -244,33 +236,7 @@ val_dataset.parse_xml(images_dirs=[WT_dataset_images_dir,
                       exclude_difficult=True,
                       ret=False)
 
-# val_dataset.parse_xml(images_dirs=[PETS_images_dir,
-#                                    VOC_2007_images_dir],
-#                       image_set_filenames=[PETS_test_image_set_filename,
-#                                            VOC_2007_test_image_set_filename],
-#                       annotations_dirs=[PETS_annotations_dir,
-#                                         VOC_2007_annotations_dir],
-#                       classes=classes,
-#                       include_classes='all',
-#                       exclude_truncated=False,
-#                       exclude_difficult=True,
-#                       ret=False)
 print("parsing compelete for validation dataset..")
-
-# Optional: Convert the dataset into an HDF5 dataset. This will require more disk space, but will
-# speed up the training. Doing this is not relevant in case you activated the `load_images_into_memory`
-# option in the constructor, because in that cas the images are in memory already anyway. If you don't
-# want to create HDF5 datasets, comment out the subsequent two function calls.
-
-# train_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07+12_trainval.h5',
-#                                   resize=False,
-#                                   variable_image_size=True,
-#                                   verbose=True)
-#
-# val_dataset.create_hdf5_dataset(file_path='dataset_pascal_voc_07_test.h5',
-#                                 resize=False,
-#                                 variable_image_size=True,
-#                                 verbose=True)
 
 # 3: Set the batch size.
 
@@ -362,7 +328,7 @@ def lr_schedule(epoch):
 # TODO: Set the filepath under which you want to save the model.
 model_checkpoint = ModelCheckpoint(
     # filepath='aux_input_trained_models/ssd512_pascal_07+12_all_classes_randomized_black_white_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
-    filepath='aux_input_trained_models/ssd512+PETS+WT_dknet_rand_gt_wh_black_max_epoch_250_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
+    filepath='aux_input_trained_models/ssd512+PETS+WT_dknet_rand_gt_mixed_res_img_wh_black_max_epoch_250_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
     monitor='val_loss',
     verbose=1,
     save_best_only=True,
@@ -372,7 +338,7 @@ model_checkpoint = ModelCheckpoint(
 # model_checkpoint.best =
 
 csv_logger = CSVLogger(
-    filename='aux_input_trained_models/ssd512_pascal_PETS+WT_person_classes_randomized_training_log.csv',
+    filename='aux_input_trained_models/ssd512+PETS+WT_dknet_rand_gt_mixed_res_img_wh_black_max_epoch_250_training_log.csv',
     separator=',',
     append=True)
 

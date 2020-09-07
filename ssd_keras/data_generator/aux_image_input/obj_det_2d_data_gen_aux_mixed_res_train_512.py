@@ -31,12 +31,7 @@ import sys
 from tqdm import tqdm, trange
 from xml.etree import ElementTree
 import random
-import pickle
-from models.keras_ssd512 import ssd_512
-from keras_loss_function.keras_ssd_loss import SSDLoss
-from keras import backend as K
-from keras.optimizers import Adam
-from sklearn.preprocessing import PolynomialFeatures
+import time
 
 try:
     import h5py
@@ -101,12 +96,7 @@ class DataGenerator:
                  image_ids=None,
                  eval_neutral=None,
                  labels_output_format=('class_id', 'xmin', 'ymin', 'xmax', 'ymax'),
-                 verbose=True,
-                 N=1,
-                 resolution=512,
-                 ref_cam=1,
-                 collab_cam=4,
-                 test_dataset="PETS"):
+                 verbose=True):
         '''
         Initializes the data generator. You can either load a dataset directly here in the constructor,
         e.g. an HDF5 dataset, or you can use one of the parser methods to read in a dataset.
@@ -154,37 +144,14 @@ class DataGenerator:
                 take a bit longer.
         '''
 
-        #############################################################################################
+        ##############################################################################################
+        self.temp_index = 0
+        # self.train_resolution = train_resolution
+        # print("\ntraining on resolution: {}\n".format(self.train_resolution))
 
-        self.N = N  # number of cameras collaborating for PETS dataset
-        print("\nnumber of collaborating cameras :{}\n".format(self.N))
-        self.img_type_prefix = "JPEGImages"
-
-        self.resolution = resolution
-        print("Resolution: {}\n".format(self.resolution))
-
-        self.ref_cam = ref_cam
-        self.collab_cam = collab_cam
-        self.test_dataset = test_dataset
-        print("test_dataset: {}".format(self.test_dataset))
-
-        print("Loading DNN model..")
-        # load DNN model
-        self.single_img_model = self.initialize_model()
-        assert self.single_img_model is not None
-        print("model loaded..")
-
-        # load regression model
-        print("loading regression model..")
-        if self.test_dataset == "WILDTRACK":
-            self.load_regression_model_WT()
-        elif self.test_dataset == "PETS":
-            self.load_regression_model_PETS()
-        else:
-            print("wrong dataset specified..")
-        print("regression model loaded..")
-
-        #############################################################################################
+        print("setting numpy random seed to 10..")
+        np.random.seed(10)
+        ###############################################################################################
 
         self.labels_output_format = labels_output_format
         self.labels_format = {'class_id': labels_output_format.index('class_id'),
@@ -271,82 +238,6 @@ class DataGenerator:
             self.load_hdf5_dataset(verbose=verbose)
         else:
             self.hdf5_dataset = None
-
-    def initialize_model(self):
-        img_height = 512
-        img_width = 512
-
-        # ####################################     Load Weights/MODEL here    ##########################################
-        # # 1: Build the Keras model
-        # K.clear_session()  # Clear previous models from memory.
-
-        single_img_model = ssd_512(image_size=(img_height, img_width, 3),
-                                   n_classes=20,
-                                   mode='inference',
-                                   l2_regularization=0.0005,
-                                   scales=[0.07, 0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1.05],
-                                   # The scales for MS COCO are [0.07, 0.15, 0.33, 0.51, 0.69, 0.87, 1.05]
-                                   aspect_ratios_per_layer=[[1.0, 2.0, 0.5],
-                                                            [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
-                                                            [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
-                                                            [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
-                                                            [1.0, 2.0, 0.5, 3.0, 1.0 / 3.0],
-                                                            [1.0, 2.0, 0.5],
-                                                            [1.0, 2.0, 0.5]],
-                                   two_boxes_for_ar1=True,
-                                   steps=[8, 16, 32, 64, 128, 256, 512],
-                                   offsets=[0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5],
-                                   clip_boxes=False,
-                                   variances=[0.1, 0.1, 0.2, 0.2],
-                                   normalize_coords=True,
-                                   subtract_mean=[123, 117, 104],
-                                   swap_channels=[2, 1, 0],
-                                   confidence_thresh=0.5,
-                                   iou_threshold=0.45,
-                                   top_k=200,
-                                   nms_max_output_size=400)
-
-        # 2: Load the trained weights into the model.
-
-        # TODO: Set the path of the trained weights.
-        weights_path = './single_img_models/ssd512_PETS+WT_person_180_epoch-179_loss-2.8713_val_loss-2.7450.h5'
-
-        print(weights_path + "\n")
-
-        single_img_model.load_weights(weights_path, by_name=True)
-
-        # 3: Compile the model so that Keras won't complain the next time you load it.
-
-        adam = Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
-
-        ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
-
-        single_img_model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
-
-        return single_img_model
-
-    def load_regression_model_WT(self):
-        degree = 3
-        src_cam = self.collab_cam
-        model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}" \
-            .format(degree, src_cam)
-        print("degree: {}, src_cam: {}\n".format(degree, src_cam))
-        self.reg_model = None
-        with open(model_file_path, 'rb') as input_file:
-            self.reg_model = pickle.load(input_file)
-            assert self.reg_model is not None
-
-    def load_regression_model_PETS(self):
-        degree = 3
-        src_cam = self.collab_cam
-        model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}{}" \
-            .format(degree, src_cam, self.ref_cam)
-        print(model_file_path)
-        print("degree: {}, src_cam: {}, ref_cam :{}\n".format(degree, src_cam, self.ref_cam))
-        self.reg_model = None
-        with open(model_file_path, 'rb') as input_file:
-            self.reg_model = pickle.load(input_file)
-            assert self.reg_model is not None
 
     def load_hdf5_dataset(self, verbose=True):
         '''
@@ -615,29 +506,26 @@ class DataGenerator:
                 image_ids = [line.strip() for line in f]  # Note: These are strings, not integers.
                 self.image_ids += image_ids
 
+            # PETS or WILDTRAck
+            if images_dir.__contains__("PNG"):
+                # WILDTRACK
+                img_type = "png"
+            else:
+                # PETS
+                img_type = "jpg"
+
             if verbose:
                 it = tqdm(image_ids, desc="Processing image set '{}'".format(os.path.basename(image_set_filename)),
                           file=sys.stdout)
             else:
                 it = image_ids
 
-            # ########################################################################################################
-            # PETS or WILDTRAck
-            if images_dir.__contains__("PNG"):
-                # WILDTRACK
-                img_type = "png"
-                self.img_type_prefix = "PNGImages"
-            else:
-                # PETS
-                img_type = "jpg"
-                self.img_type_prefix = "JPEGImages"
-            # ########################################################################################################
-
             # Loop over all images in this dataset.
             for image_id in it:
 
-                filename = '{}'.format(image_id) + '.{}'.format(img_type)
+                # filename = '{}'.format(image_id) + '.jpg'
                 # filename = '{}'.format(image_id) + '.png'
+                filename = '{}'.format(image_id) + '.{}'.format(img_type)
                 self.filenames.append(os.path.join(images_dir, filename))
 
                 if not annotations_dir is None:
@@ -692,6 +580,10 @@ class DataGenerator:
 
                     self.labels.append(boxes)
                     self.eval_neutral.append(eval_neutr)
+
+        # ########################## Remove filenames which don't have any person bounding boxes in labels ###########
+
+        ##############################################################################################################
 
         self.dataset_size = len(self.filenames)
         self.dataset_indices = np.arange(self.dataset_size, dtype=np.int32)
@@ -998,173 +890,84 @@ class DataGenerator:
                                          dtype=np.int32)  # Instead of shuffling the HDF5 dataset, we will shuffle this index list.
 
     def translate_coordinates(self, coordinates, org_width, org_height):
-        xmin1 = int((coordinates[0] / org_width) * self.test_resolution[0])
-        ymin1 = int((coordinates[1] / org_height) * self.test_resolution[1])
-        xmax1 = int((coordinates[2] / org_width) * self.test_resolution[0])
-        ymax1 = int((coordinates[3] / org_height) * self.test_resolution[1])
+        xmin1 = int((coordinates[0] / org_width) * self.train_resolution[0])
+        ymin1 = int((coordinates[1] / org_height) * self.train_resolution[1])
+        xmax1 = int((coordinates[2] / org_width) * self.train_resolution[0])
+        ymax1 = int((coordinates[3] / org_height) * self.train_resolution[1])
 
         return xmin1, ymin1, xmax1, ymax1
 
-    def map_coordinates_WT(self, org_objects, collab_img_id, ref_img_id):
-        # print("Len of org_objects: {}".format(len(org_objects)))
-        degree = 3
-        poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
+    def randomize_box_coords(self, annot_path, aux_channel, randomize):
+        SHIFT_RANGE = 70  # number of pixels to shift
+        WIDTH_RANGE = 10
+        HEIGHT_RANGE = 10
+        aux_height, aux_width, _ = aux_channel.shape
+        # load object coordinates from xml
+        root = ElementTree.parse(annot_path).getroot()
 
-        # convert objct coordinates to full WT image (regression was trained on full image coordinates)
-        gt_overlap_4_1 = (1089, 6, 1914, 1071)
-        gt_overlap_1_4 = (6, 4, 908, 1074)  # projected on view 1
+        # find orginial size of annotation file
+        size = root.find("size")
+        annot_width = int(size[0].text)
+        annot_height = int(size[1].text)
 
-        for obj in org_objects:
-            obj[2] = obj[2] + gt_overlap_4_1[0]
-            obj[3] = obj[3] + gt_overlap_4_1[1]
-            obj[4] = obj[4] + gt_overlap_4_1[0]
-            obj[5] = obj[5] + gt_overlap_4_1[1]
+        objects = root.findall("object")
+        for obj in objects:
+            # if obj[0].text == "person":
+            if 1 == 1:
+                # bndbox = obj[4]
+                bndbox = obj.find('bndbox')
+                xmin = int(float(bndbox[0].text))
+                ymin = int(float(bndbox[1].text))
+                xmax = int(float(bndbox[2].text))
+                ymax = int(float(bndbox[3].text))
 
-        # ################ TEst ############################################
-        collab_img = cv2.imread("../dataset/Wildtrack_dataset/PNGImages/{}".format(collab_img_id))
-        # print(ref_img_id)
-        ref_img = cv2.imread("../dataset/Wildtrack_dataset/PNGImages/{}.png".format(ref_img_id))
-        assert collab_img is not None
-        assert ref_img is not None
+                # translate coordinates to desired resolution
+                xmin, ymin, xmax, ymax = self.translate_coordinates([xmin, ymin, xmax, ymax], org_width=annot_width,
+                                                                    org_height=annot_height)
 
-        # for obj in org_objects:
-        #     cv2.rectangle(collab_img, (obj[2], obj[3]), (obj[4], obj[5]), (0, 0, 255), 2)
-        # cv2.imwrite("temp/{}".format(collab_img_id), collab_img)
+                if randomize:
+                    width = xmax - xmin
+                    height = ymax - ymin
 
-        # remove class id and conf score from detected objcts
-        X = []
-        for obj in org_objects:
-            xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
-            src_width = xmax - xmin
-            src_height = ymax - ymin
-            src_bt_mid_x = xmin + (src_width // 2)
-            X.append([src_bt_mid_x, ymax, src_width, src_height])
+                    # random perturbations
+                    shift_amt = random.randint(-1 * SHIFT_RANGE, SHIFT_RANGE)
+                    shift_amt_y = random.randint(-1 * SHIFT_RANGE, SHIFT_RANGE)
+                    width_amt = random.randint(-1 * WIDTH_RANGE, WIDTH_RANGE)
+                    height_amt = random.randint(-1 * HEIGHT_RANGE, HEIGHT_RANGE)
+                    # shift left or right
+                    # if flag == "LEFT":
+                    #     xmin = max(0, xmin - shift_amt)
+                    #     xmax = max(1, xmin + width)
+                    # elif flag == "RIGHT":
+                    #     xmin = min(aux_width, xmin + shift_amt) - 1
+                    #     xmax = min(aux_width, xmin + width)
 
-        X = np.array(X)
-        X_poly = poly_features.fit_transform(X)
+                    # mark the aux channel
+                    xmin = xmin + shift_amt
+                    ymin = ymin + shift_amt_y
+                    xmax = xmin + width
+                    ymax = ymin + height
+                    # xmax = xmin + (width + width_amt)
+                    # ymax = ymin + (height + height_amt)
 
-        # map coordinates
-        mapped_objects = []
-        for index, row in enumerate(X_poly):
-            row = np.reshape(row, newshape=(1, -1))
-            row_pred = self.reg_model.predict(row)
-            dst_bt_mid_x, dst_ymax, dst_width, dst_height = np.array(row_pred[0], dtype=np.int32)
-            # compute coordinates from mid point and width height
-            d_xmin = dst_bt_mid_x - (dst_width // 2)
-            d_ymin = dst_ymax - dst_height
-            d_xmax = dst_bt_mid_x + (dst_width // 2)
+                    # handle overflow outside aux channel dimensions
+                    xmin = max(0, xmin)
+                    ymin = max(0, ymin)
+                    xmax = min(aux_width, xmax)
+                    ymax = min(aux_height, ymax)
 
-            # draw mapped coordinteas on referce image
-            # cv2.rectangle(ref_img, (d_xmin, d_ymin), (d_xmax, dst_ymax), (0, 255, 0), 2)
-            # convert mapped coordintse from full image coords to sub-sample image coords
-            d_xmin = d_xmin - gt_overlap_1_4[0]
-            d_ymin = d_ymin - gt_overlap_1_4[1]
-            d_xmax = d_xmax - gt_overlap_1_4[0]
-            dst_ymax = dst_ymax - gt_overlap_1_4[1]
+                aux_channel[ymin:ymax, xmin:xmax] = 255
 
-            # rescale coordintes to 512x512 image
-            width = gt_overlap_1_4[2] - gt_overlap_1_4[0]
-            height = gt_overlap_1_4[3] - gt_overlap_1_4[1]
-            d_xmin = int((d_xmin / width) * 512.0)
-            d_ymin = int((d_ymin / height) * 512.0)
-            d_xmax = int((d_xmax / width) * 512.0)
-            dst_ymax = int((dst_ymax / height) * 512.0)
+        return aux_channel
 
-            mapped_objects.append([(org_objects[index])[0], (org_objects[index])[1], d_xmin, d_ymin, d_xmax, dst_ymax])
-
-        # cv2.imwrite("temp/{}.jpg".format(ref_img_id), ref_img)
-        return mapped_objects
-
-    def map_coordinates_PETS(self, org_objects):
-        # print("Len of org_objects: {}".format(len(org_objects)))
-        degree = 3
-        poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
-
-        # convert objct coordinates to full PETS image (regression was trained on full image coordinates)
-        # gt_overlap_c_r = (155, 92, 720, 516)
-        # gt_overlap_c_r = (0, 0, 0, 0)
-        # gt_overlap_r_c = (28, 101, 617, 492)  # projected on view 7
-
-        # dimensions of overlap area in reference camra
-        # olap_rf_area_w = float(gt_overlap_r_c[2] - gt_overlap_r_c[0])  # ref cam's overlap area width
-        # olap_rf_area_h = float(gt_overlap_r_c[3] - gt_overlap_r_c[1])
-
-        PETS_org_size = (720, 576)  # w,h
-        # intermediate_width = float(PETS_org_size[0] - gt_overlap_r_c[0])
-        # intermediate_height = float(PETS_org_size[1] - gt_overlap_r_c[1])
-
-        # for obj in org_objects:
-        #     obj[2] = obj[2] + gt_overlap_c_r[0]
-        #     obj[3] = obj[3] + gt_overlap_c_r[1]
-        #     obj[4] = obj[4] + gt_overlap_c_r[0]
-        #     obj[5] = obj[5] + gt_overlap_c_r[1]
-
-        # ############## Test ##########################
-        # collab_img = cv2.imread("../dataset/PETS_org/JPEGImages_cropped_r7_c8_8/{}".format(collab_img_id))
-        # print(ref_img_id)
-        # ref_img = cv2.imread("../dataset/PETS_org/JPEGImages_cropped_r7_c8_7/{}.jpg".format(ref_img_id))
-        # assert collab_img is not None
-        # assert ref_img is not None
-
-        # for obj in org_objects:
-        #     cv2.rectangle(collab_img, (obj[2], obj[3]), (obj[4], obj[5]), (0, 0, 255), 2)
-        # cv2.imwrite("temp/{}".format(collab_img_id), collab_img)
-        # ###############################################
-
-        # remove class id and conf score from detected objcts
-        X = []
-        for obj in org_objects:
-            xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
-            src_width = xmax - xmin
-            src_height = ymax - ymin
-            src_bt_mid_x = xmin + (src_width // 2)
-            X.append([src_bt_mid_x, ymax, src_width, src_height])
-
-        X = np.array(X)
-        X_poly = poly_features.fit_transform(X)
-
-        # map coordinates
-        mapped_objects = []
-        for index, row in enumerate(X_poly):
-            row = np.reshape(row, newshape=(1, -1))
-            row_pred = self.reg_model.predict(row)
-            dst_bt_mid_x, dst_ymax, dst_width, dst_height = np.array(row_pred[0], dtype=np.int32)
-            # compute coordinates from mid point and width height
-            d_xmin = dst_bt_mid_x - (dst_width // 2)
-            d_ymin = dst_ymax - dst_height
-            d_xmax = dst_bt_mid_x + (dst_width // 2)
-
-            # draw mapped coordinates on reference image
-            # cv2.rectangle(ref_img, (d_xmin, d_ymin), (d_xmax, dst_ymax), (0, 255, 0), 2)
-
-            # convert mapped coordintse from full image coords to overlap area coords of reference camera
-            # d_xmin = d_xmin - gt_overlap_r_c[0]
-            # d_ymin = d_ymin - gt_overlap_r_c[1]
-            # d_xmax = d_xmax - gt_overlap_r_c[0]
-            # dst_ymax = dst_ymax - gt_overlap_r_c[1]
-            #
-            # # scale coordinates to size of org overlap area size in reference camera
-            # d_xmin = int(d_xmin * (olap_rf_area_w / intermediate_width))
-            # d_ymin = int(d_ymin * (olap_rf_area_h / intermediate_height))
-            # d_xmax = int(d_xmax * (olap_rf_area_w / intermediate_width))
-            # dst_ymax = int(dst_ymax * (olap_rf_area_h / intermediate_height))
-
-            # scale coords to 512x512 (ref cam imge is scaled to this res by data generator)
-            # d_xmin = int(d_xmin * (512.0 / olap_rf_area_w))
-            # d_ymin = int(d_ymin * (512.0 / olap_rf_area_h))
-            # d_xmax = int(d_xmax * (512.0 / olap_rf_area_w))
-            # dst_ymax = int(dst_ymax * (512.0 / olap_rf_area_h))
-
-            mapped_objects.append([(org_objects[index])[0], (org_objects[index])[1], d_xmin, d_ymin, d_xmax, dst_ymax])
-        # write image to file
-        # cv2.imwrite("temp/{}.jpg".format(ref_img_id), ref_img)
-
-        return mapped_objects
-
-    def get_aux_channels_batch_darknet_randomization(self, batch_X_data, batch_y_data, randomize):
+    def get_aux_channels_batch_2(self, batch_X_data, batch_y_data, randomize):
         """
-        create randomization as done during darknet training
+        randomize the ground truth labels and create a prior (mask). Creates different kind of randomization (similar
+        to darknet one by Venget).
+        :param batch_y_data: transformed labels/annotations
+        :return:
         """
+
         img_height = 512
         img_width = 512
         batch_y_auxillary = []
@@ -1182,153 +985,45 @@ class DataGenerator:
                 # add remaining objects to the prior
                 class_id, xmin, ymin, xmax, ymax = obj
                 if randomize:
-                    width_rnum = np.random.uniform(-0.20, 0.20)
-                    height_rnum = np.random.uniform(-0.20, 0.20)
+                    r_int = np.random.randint(1, 10)
+                    if r_int <= 8:
+                        # if True:
+                        width_rnum = np.random.uniform(-0.20, 0.20)
+                        height_rnum = np.random.uniform(-0.20, 0.20)
 
-                    obj_width = xmax - xmin
-                    obj_height = ymax - ymin
+                        obj_width = xmax - xmin
+                        obj_height = ymax - ymin
 
-                    xmin = int(xmin + (obj_width * width_rnum))
-                    ymin = int(ymin + (obj_height * height_rnum))
-                    xmax = int(xmin + obj_width + (obj_width * width_rnum))
-                    ymax = int(ymin + obj_height + (obj_height * height_rnum))
+                        xmin = int(xmin + (obj_width * width_rnum))
+                        ymin = int(ymin + (obj_height * height_rnum))
+                        xmax = int(xmin + obj_width + (obj_width * width_rnum))
+                        ymax = int(ymin + obj_height + (obj_height * height_rnum))
 
-                    # check for out of frame values
-                    xmin = max(0, xmin)
-                    ymin = max(0, ymin)
-                    xmax = min(img_width, xmax)
-                    ymax = min(img_height, ymax)
+                        # check for out of frame values
+                        xmin = max(0, xmin)
+                        ymin = max(0, ymin)
+                        xmax = min(img_width, xmax)
+                        ymax = min(img_height, ymax)
 
-                    aux_channel[ymin:ymax, xmin:xmax] = 255
-
+                        aux_channel[ymin:ymax, xmin:xmax] = 255
+                    # elif r_int == 9:
+                    #     # white prior (false positive)
+                    # aux_channel[:, :] = 255
+                    else:
+                        rand_int = random.randint(1, 2)
+                        if rand_int == 1:
+                            aux_channel[:, :] = 114
+                        else:
+                            aux_channel[:, :] = 255
                 else:
                     aux_channel[ymin:ymax, xmin:xmax] = 255
+            # if self.temp_index < 500:
+            #     cv2.imwrite("temp/img_{}.jpg".format(self.temp_index), batch_X_data[index])
+            #     cv2.imwrite("temp/img_{}_mask.jpg".format(self.temp_index), aux_channel)
+            #     self.temp_index += 1
             batch_y_auxillary.append(aux_channel)
 
         return np.array(batch_y_auxillary)
-
-    def get_aux_channel_detected_boxes(self, batch_file_names, batch_img_ids):
-        """
-        create mask using detected bounding boxes
-        :return:
-        """
-        DUMP_DATA = False
-        batch_x_prior = []
-        # self.collab_cam = 1
-        for i in range(len(batch_file_names)):
-            if self.img_type_prefix == "PNGImages":  # WILDTRACK
-                img_id = batch_img_ids[i]
-                collab_img_id = "C{}_{}.png".format(self.collab_cam, img_id[3:])
-                file_name = batch_file_names[i]
-                img_name_len = len(img_id) + 4
-                file_name = file_name[:-1 * img_name_len]
-                file_name = "{}_{}".format(file_name[:-3], self.collab_cam)
-                collab_file_path = "{}/{}".format(file_name, collab_img_id)
-                # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
-            elif self.img_type_prefix == "JPEGImages":
-                img_id = batch_img_ids[i]
-                collab_img_id = "frame_{}_{}.jpg".format(self.collab_cam, img_id[8:])
-                file_name = batch_file_names[i]
-                img_name_len = len(img_id) + 4
-                file_name = file_name[:-1 * img_name_len]
-                file_name = "{}_{}".format(file_name[:-3], self.collab_cam)
-                collab_file_path = "{}/{}".format(file_name, collab_img_id)
-                # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
-
-            # read image file
-            # print(img_id, collab_file_path)
-            collab_img = cv2.imread(collab_file_path)
-            assert collab_img is not None
-            # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-            objects = self.detect_objects(collab_img)
-            # if DUMP_DATA:
-            #     for obj in objects:
-            #         cv2.rectangle(collab_img, (obj[2], obj[3]), (obj[4], obj[5]), (255, 0, 0), 2)
-            #         cv2.imwrite("temp/{}".format(collab_img_id), collab_img)
-
-            # map coordinates to reference camera coordinate system
-            if len(objects) > 0:
-                if self.img_type_prefix == "PNGImages":  # WILDTRACK
-                    objects = self.map_coordinates_WT(objects, collab_img_id, batch_img_ids[i])
-                elif self.img_type_prefix == "JPEGImages":  # WILDTRACK
-                    # objects = self.map_coordinates_PETS(objects, collab_img_id, batch_img_ids[i])
-                    objects = self.map_coordinates_PETS(objects)
-
-            # create prior using detected boxes
-            prior = self.darknet_randomize(objects, False)
-            # prior = np.full(shape=(512, 512, 1), fill_value=114, dtype=np.uint8)
-            # for obj in objects:
-            #     if obj[0] == 15:
-            #         xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
-            #         prior[ymin:ymax, xmin:xmax] = 255
-            #         if DUMP_DATA:
-            #             batch_img = cv2.imread(batch_file_names[i])
-            #             assert batch_img is not None
-            #             cv2.rectangle(batch_img, (xmin, ymin), (xmax, ymax), (0, 0, 255), 2)
-            # if DUMP_DATA:
-            #     print(batch_img_ids[i])
-            # cv2.imwrite("temp/{}.jpg".format(batch_img_ids[i]), batch_img)
-            batch_x_prior.append(prior)
-        return np.array(batch_x_prior)
-
-    def darknet_randomize(self, objects, randomize):
-        """
-        randomize the ground truth labels and create a prior (mask). Creates different kind of randomization (similar
-        to darknet one by Venget).
-        :param batch_y_data: transformed labels/annotations
-        :return:
-        """
-
-        img_height = 512
-        img_width = 512
-
-        aux_channel = np.full((img_height, img_width, 1), 114, dtype=np.uint8)
-
-        for index, obj in enumerate(objects):
-
-            # for i, obj in enumerate(img_annot):
-            # ignore X% of boxes (no prior for them)
-            r_int_1 = np.random.randint(1, 10)
-            if r_int_1 > 8:
-                continue
-            # add remaining objects to the prior
-            xmin, ymin, xmax, ymax = obj[2:]
-            if randomize:
-                r_int = np.random.randint(1, 10)
-                if r_int <= 10:
-                    # if True:
-                    width_rnum = np.random.uniform(-0.20, 0.20)
-                    height_rnum = np.random.uniform(-0.20, 0.20)
-
-                    obj_width = xmax - xmin
-                    obj_height = ymax - ymin
-
-                    xmin = int(xmin + (obj_width * width_rnum))
-                    ymin = int(ymin + (obj_height * height_rnum))
-                    xmax = int(xmin + obj_width + (obj_width * width_rnum))
-                    ymax = int(ymin + obj_height + (obj_height * height_rnum))
-
-                    # check for out of frame values
-                    xmin = max(0, xmin)
-                    ymin = max(0, ymin)
-                    xmax = min(img_width, xmax)
-                    ymax = min(img_height, ymax)
-
-                    aux_channel[ymin:ymax, xmin:xmax] = 255
-                # elif r_int == 9:
-                #     # white prior (false positive)
-                # aux_channel[:, :] = 255
-                else:
-                    rand_int = random.randint(1, 2)
-                    if rand_int == 1:
-                        aux_channel[:, :] = 114
-                    else:
-                        aux_channel[:, :] = 255
-            else:
-                aux_channel[ymin:ymax, xmin:xmax] = 255
-            # batch_y_auxillary.append(aux_channel)
-
-        return aux_channel
 
     def get_aux_channels_batch(self, batch_X_data, batch_y_data, randomize):
         """
@@ -1340,72 +1035,349 @@ class DataGenerator:
         batch_y_auxillary = []
 
         for index, img_annot in enumerate(batch_y_data):
-            aux_channel = np.full((img_height, img_width, 1), 117, dtype=np.uint8)
-            for i in range(self.N):
-                for obj in img_annot:
-                    class_id, xmin, ymin, xmax, ymax = obj
-                    if randomize:
-                        xmin = xmin + random.randint(-20, 20)
-                        ymin = ymin + random.randint(-20, 20)
+            aux_channel = np.full((img_height, img_width, 1), 114, dtype=np.uint8)
+            for obj in img_annot:
+                class_id, xmin, ymin, xmax, ymax = obj
+
+                if randomize:
+                    r_int = random.randint(1, 10)
+                    if r_int <= 9:
+                        # if True:
+                        xmin = xmin + random.randint(-30, 30)
+                        ymin = ymin + random.randint(-30, 30)
                         xmax = xmax + random.randint(0, 20)
                         ymax = ymax + random.randint(0, 20)
                         aux_channel[ymin:ymax, xmin:xmax] = 255
+                    # elif r_int == 9:
+                    #     # white prior (false positive)
+                    # aux_channel[:, :] = 255
                     else:
-                        aux_channel[ymin:ymax, xmin:xmax] = 255
+                        rand_int = random.randint(1, 2)
+                        if rand_int == 1:
+                            aux_channel[:, :] = 114
+                        else:
+                            aux_channel[:, :] = 255
+                else:
+                    aux_channel[ymin:ymax, xmin:xmax] = 255
             # if self.temp_index < 500:
             #     cv2.imwrite("temp/img_{}.jpg".format(self.temp_index), batch_X_data[index])
             #     cv2.imwrite("temp/img_{}_mask.jpg".format(self.temp_index), aux_channel)
             #     self.temp_index += 1
-            # aux_channel[:, :] = 0
             batch_y_auxillary.append(aux_channel)
 
         return np.array(batch_y_auxillary)
 
-    def dump_raw_data(self, batch_x_data, batch_y_data, batch_x_aux):
-        # print("dumping data")
+    def get_aux_channels(self, img_height, img_width, batch_file_names):
+        """
+        generate auxillary channel (information from collaboration) for a given image. Random shifts in ground truth
+        for VOC.
+        :param img_height:
+        :param img_width:
+        :param batch_file_names:
+        :return:
+        """
+        batch_x_auxillary = []
+
+        for i in range(len(batch_file_names)):
+            aux_channel = np.full((img_height, img_width, 1), 0, dtype=np.uint8)
+            img_path = batch_file_names[i]
+            annot_path = img_path.replace("JPEGImages", "Annotations")[:-4]  # strip jpg
+            annot_path = "{}.xml".format(annot_path)
+
+            if i < 20:
+                aux_channel = self.randomize_box_coords(annot_path, aux_channel, randomize=False)
+            else:
+                aux_channel = self.randomize_box_coords(annot_path, aux_channel, randomize=False)
+
+            batch_x_auxillary.append(aux_channel)
+
+        return np.array(batch_x_auxillary)
+
+    # def apply_multi_resolutions_transform(self, batch_images):
+    #     """
+    #     take batch images (numpy arrays) and convert to multiple resolutions. Assuming batch size = 32
+    #     :param batch_images:
+    #     :return:
+    #     """
+    #     batch_X_multi_res = []
+    #     org_resolution = (300, 300)
+    #     # resolutions = [(256, 256), (128, 128), (96, 96)]
+    #     resolutions = [(256, 256), (196, 196), (128, 128)]
+    #     for img_index in range(len(batch_images)):
+    #
+    #         if img_index < 8:
+    #             # first 8 images rescaled to first resolution
+    #             pil_image = Image.fromarray(batch_images[img_index])
+    #             # downscale & upsacle the image
+    #             pil_image_resized = pil_image.resize(resolutions[0], resample=Image.LANCZOS)
+    #             pil_image_resized = pil_image_resized.resize(org_resolution, resample=Image.LANCZOS)
+    #             batch_X_multi_res.append(np.array(pil_image_resized, dtype=np.uint8))
+    #
+    #         elif img_index < 16:
+    #             pil_image = Image.fromarray(batch_images[img_index])
+    #             # downscale the image
+    #             pil_image_resized = pil_image.resize(resolutions[1], resample=Image.LANCZOS)
+    #             pil_image_resized = pil_image_resized.resize(org_resolution, resample=Image.LANCZOS)
+    #             batch_X_multi_res.append(np.array(pil_image_resized, dtype=np.uint8))
+    #
+    #         elif img_index < 24:
+    #             pil_image = Image.fromarray(batch_images[img_index])
+    #             # downscale the image
+    #             pil_image_resized = pil_image.resize(resolutions[2], resample=Image.LANCZOS)
+    #             pil_image_resized = pil_image_resized.resize(org_resolution, resample=Image.LANCZOS)
+    #             batch_X_multi_res.append(np.array(pil_image_resized, dtype=np.uint8))
+    #
+    #         else:
+    #             # no change in resolutions
+    #             batch_X_multi_res.append(batch_images[img_index])
+    #
+    #     return batch_X_multi_res
+
+    def apply_resolution_transform(self, batch_images):
+        org_resolution = (300, 300)
+        if self.train_resolution == org_resolution:
+            return batch_images
+
+        # print("going to change resolution..")
+        batch_X_multi_res = []
+        # resolutions = [(256, 256), (128, 128), (96, 96)]
+        # resolutions = [(256, 256), (196, 196), (128, 128)]
+        for img_index in range(len(batch_images)):
+            t_img = batch_images[img_index]
+            t_img = cv2.resize(t_img, dsize=self.train_resolution)
+            t_img = cv2.resize(t_img, dsize=org_resolution)
+            batch_X_multi_res.append(t_img)
+
+        return batch_X_multi_res
+
+    def get_mixed_res_batch(self, b_images, b_file_ids, b_filenames, b_ydata):
+        """
+        method to create mixed resolution images as well as their corresponding priors. The shared region
+        and its resolution are chosen at random from a set of values.
+        :param b_images:
+        :param b_file_ids:
+        :param b_file_names:
+        :return:
+        """
+        resolutions = [512, 480, 360, 224, 160, 96]
+        priors = []
+        for i in range(len(b_file_ids)):
+            # print("file id : {}".format(b_file_ids[i]))
+            # print("file name : {}".format(b_filenames[i]))
+            img_ext = (b_filenames[i])[-3:]
+            image_size = (512, 512)
+            # if img_ext == "png":  # WILDTRACK
+            #     image_size = (1920, 1080)
+            # elif img_ext == "jpg":  # PETS
+            #     image_size = (720, 576)
+            # else:
+            #     print("Wrong extension.. : {}".format(img_ext))
+            # randomly choose shared region resolution
+            shared_reg_res = np.random.choice(resolutions)
+            # select (x1, y1, x2, y2 in percentage)
+            x1_rand = np.random.randint(0, 40)
+            y1_rand = np.random.randint(0, 40)
+            x2_rand = np.random.randint(60, 100)
+            y2_rand = np.random.randint(60, 100)
+            # translate as per image size
+            x1 = int((x1_rand * image_size[0]) / 100)
+            y1 = int((y1_rand * image_size[1]) / 100)
+            x2 = int((x2_rand * image_size[0]) / 100)
+            y2 = int((y2_rand * image_size[1]) / 100)
+            # translate coordinates to 512x512 coordinates
+            # x1_tr = int((x1 / image_size[0]) * 512)
+            # y1_tr = int((y1 / image_size[1]) * 512)
+            # x2_tr = int((x2 / image_size[0]) * 512)
+            # y2_tr = int((y2 / image_size[1]) * 512)
+            # create mixed-res image in this area
+            x1_tr = x1
+            y1_tr = y1
+            x2_tr = x2
+            y2_tr = y2
+            # print(x1_tr, y1_tr, x2_tr, y2_tr)
+            reg_width = x2_tr - x1_tr  # width of shared region in 512x512 image
+            reg_height = y2_tr - y1_tr
+            reg_width_tr = int((reg_width / 512.0) * shared_reg_res)  # width as per new resolution
+            reg_height_tr = int((reg_height / 512.0) * shared_reg_res)
+            shared_reg = (b_images[i])[y1_tr:y2_tr, x1_tr:x2_tr]
+            temp = cv2.resize(shared_reg, dsize=(reg_width_tr, reg_height_tr), interpolation=cv2.INTER_CUBIC)
+            shared_reg = cv2.resize(temp, dsize=(reg_width, reg_height), interpolation=cv2.INTER_CUBIC)
+            (b_images[i])[y1_tr:y2_tr, x1_tr:x2_tr] = shared_reg
+            p = self.create_prior(image_id=b_file_ids[i], shared_reg_bbox=[x1, y1, x2, y2], img_ext=img_ext,
+                                  img_ydata=b_ydata[i])
+            priors.append(p)
+        return b_images, np.array(priors)
+
+    def get_gt_objects(self, img_name, annotation_dir):
+        """
+        get the ground truth objects using given image path
+        :param img_path:
+        :return:
+        """
+        objects = []
+        annot_name = "{}.xml".format(img_name)
+        annot_path = "{}/{}".format(annotation_dir, annot_name)
+        root = ElementTree.parse(annot_path).getroot()
+        persons = root.findall('object')
+        for p in persons:
+            bndbox = p.find('bndbox')
+            xmin = int(bndbox[0].text)
+            ymin = int(bndbox[1].text)
+            xmax = int(bndbox[2].text)
+            ymax = int(bndbox[3].text)
+            objects.append([15, 1, xmin, ymin, xmax, ymax])
+            # print(xmin, ymin, xmax, ymax)
+        return objects
+
+    def bb_icov(self, obj_bbox, area_bbox):
+        # determine the (x, y)-coordinates of the intersection rectangle
+        boxA = obj_bbox
+        boxB = area_bbox
+        # print("boxA: {}".format(boxA))
+        # print("boxB: {}".format(boxB))
+        xA = max(boxA[0], boxB[0])
+        yA = max(boxA[1], boxB[1])
+        xB = min(boxA[2], boxB[2])
+        yB = min(boxA[3], boxB[3])
+        # compute the area of intersection rectangle
+        interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
+        # compute the area of both the prediction and ground-truth rectangles
+        boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
+        # boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
+        # compute the intersection over union by taking the intersection
+        icov = interArea / float(boxAArea)
+        return np.round(icov, decimals=2)
+
+    def randomize_priors(self, prior_objects, randomize):
+        """
+        randomize the ground truth labels (similar to darknet one by Venget).
+        :param batch_y_data: transformed labels/annotations
+        :return:
+        """
+        img_height = 512
+        img_width = 512
+        aux_channel = np.full((img_height, img_width, 1), 114, dtype=np.uint8)
+        for i, obj in enumerate(prior_objects):
+            # ignore X% of boxes (no prior for them)
+            r_int_1 = np.random.randint(1, 10)
+            if r_int_1 > 8:
+                continue
+            # add remaining objects to the prior
+            class_id, xmin, ymin, xmax, ymax = obj
+            if randomize:
+                r_int = np.random.randint(1, 10)
+                if r_int <= 8:
+                    # if True:
+                    width_rnum = np.random.uniform(-0.15, 0.15)
+                    height_rnum = np.random.uniform(-0.15, 0.15)
+                    obj_width = xmax - xmin
+                    obj_height = ymax - ymin
+
+                    xmin = int(xmin + (obj_width * width_rnum))
+                    ymin = int(ymin + (obj_height * height_rnum))
+                    xmax = int(xmin + obj_width + (obj_width * width_rnum))
+                    ymax = int(ymin + obj_height + (obj_height * height_rnum))
+                    # check for out of frame values
+                    xmin = max(0, xmin)
+                    ymin = max(0, ymin)
+                    xmax = min(img_width, xmax)
+                    ymax = min(img_height, ymax)
+
+                    aux_channel[ymin:ymax, xmin:xmax] = 255
+                else:
+                    rand_int = random.randint(1, 2)
+                    if rand_int == 1:
+                        aux_channel[:, :] = 114
+                    else:
+                        aux_channel[:, :] = 255
+            else:
+                aux_channel[ymin:ymax, xmin:xmax] = 255
+        return aux_channel
+
+    def create_prior(self, image_id, shared_reg_bbox, img_ext, img_ydata):
+        """
+        create prior for the given image within the provided shared region
+        :param img_ext:
+        :param file_name:
+        :param shared_reg_coords:
+        :return:
+        """
+        PRIOR_ICOV_TH = 0.10  # min icov value to select an object
+        RANDOMIZE = True
+
+        if img_ext == "png":
+            image_size = (1920, 1080)
+            annot_dir = "../dataset/Wildtrack_dataset/Annotations"
+        elif img_ext == "jpg":
+            image_size = (720, 576)
+            annot_dir = "../dataset/PETS_org/Annotations"
+        else:
+            print("Wrong extension.. : {}".format(img_ext))
+
+        aux_channel = np.full((512, 512, 1), 114, dtype=np.uint8)
+        # annot_id = "{}.xml".format(image_id)
+        # objects = self.get_gt_objects(image_id, annot_dir)
+        objects = img_ydata
+        if len(objects) == 0:
+            return aux_channel
+        shared_reg_objects = []
+        for obj in objects:
+            obj_bbox = obj[1:]
+            icov = self.bb_icov(obj_bbox, shared_reg_bbox)
+            if icov >= PRIOR_ICOV_TH:
+                shared_reg_objects.append(obj)
+        if len(shared_reg_objects) == 0:
+            return aux_channel
+        temp = []
+        for obj in shared_reg_objects:
+            xmin, ymin, xmax, ymax = int(obj[1]), int(obj[2]), int(obj[3]), int(obj[4])
+            # remove negative coordiantes
+            xmin = max(0, xmin)
+            ymin = max(0, ymin)
+            xmax = max(0, xmax)
+            ymax = max(0, ymax)
+            # xmin = int((xmin / image_size[0]) * 512)
+            # ymin = int((ymin / image_size[1]) * 512)
+            # xmax = int((xmax / image_size[0]) * 512)
+            # ymax = int((ymax / image_size[1]) * 512)
+            temp.append([obj[0], xmin, ymin, xmax, ymax])
+        mapped_objects = temp
+        if RANDOMIZE:
+            aux_channel = self.randomize_priors(prior_objects=mapped_objects, randomize=True)
+        else:
+            for obj in mapped_objects:
+                xmin, ymin, xmax, ymax = int(obj[1]), int(obj[2]), int(obj[3]), int(obj[4])
+                aux_channel[ymin:ymax, xmin:xmax] = 255
+        return aux_channel
+
+    def dump_gen_data(self, batch_x_data, batch_x_aux_data, b_encoded):
         temp_dir = "./temp"
         # out_file = open("{}/batch_y_data.csv".format(temp_dir), 'a')
         index = random.randint(1, 1000000)
-
-        for bx_data, by_data, bx_aux in zip(batch_x_data, batch_y_data, batch_x_aux):
-            img_file_name = "{}/{}.png".format(temp_dir, index)
-            mask_file_name = "{}/{}_mask.png".format(temp_dir, index)
-            # draw bounding box on the image
-            for bbox in by_data:
-                cv2.rectangle(bx_data, (bbox[1], bbox[2]), (bbox[3], bbox[4]), (0, 255, 0), 2)
-
+        for bx_data, bax_data, by_data in zip(batch_x_data, batch_x_aux_data, b_encoded):
+            img_file_name = "{}/{}.jpg".format(temp_dir, index)
+            mask_file_name = "{}/{}_mask.jpg".format(temp_dir, index)
+            # print("img_file shape : {}, mask shape : {}".format(bx_data.shape, bax_data.shape))
             cv2.imwrite(img_file_name, bx_data)
-            cv2.imwrite(mask_file_name, bx_aux)
+            cv2.imwrite(mask_file_name, bax_data)
             # out_file.write("{},{}\n".format(index, len(by_data)))
             index += 1
-        # print("finished dumping data")
+            # self.temp_index += 1
+        # out_file.close()
 
-    def detect_objects(self, img):
-        """
-        method to detect bounding boxes from using a specific DNN model
-        :param input_img:
-        :return:
-        """
-        org_h, org_w, _ = img.shape
-        img = cv2.resize(img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-        input_images = [img]
-        input_images = np.array(input_images)
-
-        y_pred = self.single_img_model.predict(input_images)
-
-        confidence_threshold = 0.5
-        y_pred_thresh = [y_pred[k][y_pred[k, :, 1] > confidence_threshold] for k in range(y_pred.shape[0])]
-        np.set_printoptions(precision=2, suppress=True, linewidth=90)
-        y_pred_decoded = y_pred_thresh
-        y_pred_decoded = y_pred_decoded[0].tolist()
-
-        # scle object coordinates back to org image size
-        for obj in y_pred_decoded:
-            obj[2] = int(obj[2] * (org_w / 512.0))
-            obj[3] = int(obj[3] * (org_h / 512.0))
-            obj[4] = int(obj[4] * (org_w / 512.0))
-            obj[5] = int(obj[5] * (org_h / 512.0))
-        return y_pred_decoded
+    def dump_raw_data(self, batch_x_data, batch_y_data, batch_x_aux, batch_img_ids):
+        temp_dir = "./temp"
+        index = 0
+        for bx_data, by_data, bx_aux in zip(batch_x_data, batch_y_data, batch_x_aux):
+            img_file_name = "{}/{}.png".format(temp_dir, batch_img_ids[index])
+            mask_file_name = "{}/{}_mask.png".format(temp_dir, batch_img_ids[index])
+            for bbox in by_data:
+                if len(bbox) == 1 or bbox[0] != 15:
+                    continue
+                cv2.rectangle(bx_data, (bbox[1], bbox[2]), (bbox[3], bbox[4]), (0, 255, 0), 2)
+            cv2.imwrite(img_file_name, bx_data)
+            cv2.imwrite(mask_file_name, bx_aux)
+            index += 1
 
     def generate(self,
                  batch_size=32,
@@ -1414,7 +1386,8 @@ class DataGenerator:
                  label_encoder=None,
                  returns={'processed_images', 'encoded_labels'},
                  keep_images_without_gt=False,
-                 degenerate_box_handling='remove'):
+                 degenerate_box_handling='remove',
+                 ):
         '''
         Generates batches of samples and (optionally) corresponding labels indefinitely.
 
@@ -1725,11 +1698,26 @@ class DataGenerator:
             # CAUTION: Converting `batch_X` into an array will result in an empty batch if the images have varying sizes
             #          or varying numbers of channels. At this point, all images must have the same size and the same
             #          number of channels.
+            # apply multi-resolution filter to batch_X
+            # if self.train_resolution != (300, 300):
+            #     # batch_X = self.apply_multi_resolutions_transform(batch_images=batch_X)
+            #     batch_X = self.apply_resolution_transform(batch_images=batch_X)
 
-            # if self.test_resolution != (300, 300):
-            #     # print("going to change resolution..")
-            #     batch_X = self.apply_multi_resolutions_transform(batch_images=batch_X)
+            #########################################################################################
+            # Generate auxillary input for all the files in the batch.
+            #########################################################################################
+            # print("batch size : {}".format(len(batch_filenames)))
+            # print("batch filename : {}".format(batch_filenames[0]))
+            # batch_X_aux = np.array(batch_X_aux)
+            # print("shape of batch_X_aux : {}".format(batch_X_aux.shape))
 
+            # print("shape of batch_x_aux : {}".format(batch_X_aux.shape))
+
+            # # apply multi-resolution filter to batch_X
+            # if self.train_resolution != (300, 300):
+            #     # batch_X = self.apply_multi_resolutions_transform(batch_images=batch_X)
+            #     batch_X = self.apply_resolution_transform(batch_images=batch_X)
+            ########################################################################################
             batch_X = np.array(batch_X)
             # print("shape of batch_X : {}".format(batch_X.shape))
 
@@ -1756,23 +1744,25 @@ class DataGenerator:
                 batch_y_encoded = None
                 batch_matched_anchors = None
 
-            # ################################ Generate Priors ####################################################
-
-            # batch_X_aux = self.get_aux_channels_batch(batch_X_data=batch_X, batch_y_data=batch_y, randomize=True)
-            # batch_X_aux = self.get_aux_channels_batch_darknet_randomization(batch_X_data=batch_X, batch_y_data=batch_y,
-            #                                                                 randomize=True)
-            batch_X_aux = self.get_aux_channel_detected_boxes(batch_filenames, batch_image_ids)
-
-            batch_X = self.apply_resolution_transform(batch_X)
-
-            self.dump_raw_data(batch_x_data=batch_X.copy(), batch_y_data=batch_y, batch_x_aux=batch_X_aux)
-
-            # print("shape of batch_x_aux : {}".format(batch_X_aux.shape))
-            ########################################################################################
-
             #########################################################################################
             # Compose the output.
             #########################################################################################
+
+            # batch_X_aux = self.get_aux_channels(300, 300, batch_filenames)
+            # time1 = time.time()
+            # batch_X_aux = self.get_aux_channels_batch_2(batch_X_data=batch_X, batch_y_data=batch_y, randomize=True)
+            batch_X, batch_X_aux = self.get_mixed_res_batch(b_images=batch_X, b_file_ids=batch_image_ids,
+                                                            b_filenames=batch_filenames, b_ydata=batch_y)
+
+            # time2 = time.time()
+            # print(time2 - time1)
+            ####################################################################################################################
+            # dump data generated by generator
+            # print("dumping data ...")
+            # self.dump_gen_data(batch_x_data=batch_X, batch_x_aux_data=batch_X_aux, b_encoded=batch_y_encoded)
+            # self.dump_raw_data(batch_x_data=batch_X, batch_y_data=batch_y, batch_x_aux=batch_X_aux,
+            #                    batch_img_ids=batch_image_ids)
+            # print("data dumped..")
 
             ret = []
             if 'processed_images' in returns: ret.append([batch_X, batch_X_aux])
@@ -1787,21 +1777,6 @@ class DataGenerator:
             if 'original_labels' in returns: ret.append(batch_original_labels)
 
             yield ret
-
-    def apply_resolution_transform(self, batch_x):
-        batch_x_transformed = []
-        batch_y_transformed = []
-        # transform each image and labels
-
-        for img in batch_x:
-            # img_t, label_t = scale(image=img, labels=label)
-            # img_t = cv2.cvtColor(img_t, code=cv2.COLOR_BGR2RGB)
-            # batch_x_transformed.append(img_t)
-            # batch_y_transformed.append(label_t)
-            img_t = cv2.resize(img, dsize=(self.resolution, self.resolution), interpolation=cv2.INTER_CUBIC)
-            img_t = cv2.resize(img_t, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-            batch_x_transformed.append(img_t)
-        return np.array(batch_x_transformed)
 
     def save_dataset(self,
                      filenames_path='filenames.pkl',

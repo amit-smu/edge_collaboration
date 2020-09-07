@@ -218,9 +218,9 @@ if __name__ == "__main__":
     img_dir = "{}/PETS_org/JPEGImages".format(DATASET_DIR)
     annot_dir = "{}/PETS_org/Annotations".format(DATASET_DIR)
 
-    src_cam = 7  # collab cam
+    src_cam = 8  # collab cam
     dst_cam = 5  # ref cam
-    degree = 1
+    degree = 5
     TRAINING_FRAMES = 796 - 249  # total frames to be used for training
 
     s_pts_train = []  # source/dst points for testing and training
