@@ -2,6 +2,7 @@
 regression estimator for coordinate mapping from one frame to another. Linear regression
 use multiple points from each bounding box. These points are on the road.
 Optimized version -- including feature normalization, regularization etc.
+main file used for coordinate mapping
 """
 
 import cv2
@@ -209,25 +210,19 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
               "wb") as ofile:
         pickle.dump(model, ofile)
 
-    # model_file_path = "regression_models/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img_optimized" \
-    #     .format(degree, src_cam, dst_cam)
-    # with open(model_file_path, 'wb') as output:
-    #     pickle.dump(best_model, output)
-    #     print("best_rmse : {}".format(min_rmse))
-
 
 if __name__ == "__main__":
     DEBUG = False
     NORMALIZE = False
     REGULARIZE = False
     DATASET_DIR = "../../../../dataset"
-    img_dir = "{}/PETS_org/JPEGImages".format(DATASET_DIR)
-    annot_dir = "{}/PETS_org/Annotations".format(DATASET_DIR)
+    img_dir = "{}/Wildtrack_dataset/PNGImages".format(DATASET_DIR)
+    annot_dir = "{}/Wildtrack_dataset/Annotations".format(DATASET_DIR)
 
-    src_cam = 5  # collab cam
-    dst_cam = 8  # ref cam
-    degree = 4
-    TRAINING_FRAMES = 547  # out of 796 total, 249 frames kept for testing
+    src_cam = 7  # collab cam
+    dst_cam = 5  # ref cam
+    degree = 5
+    TRAINING_FRAMES = 1400  # out of 400 total, 119 frames kept for testing. Frame no range = (0, 2000)
 
     s_pts_train = []  # source/dst points for testing and training
     d_pts_train = []
@@ -238,11 +233,11 @@ if __name__ == "__main__":
     # read training frame names
     # trainval_frames = np.loadtxt("{}/PETS_org/ImageSets/Main/coord_mapping_trainval_70.txt".format(DATASET_DIR),
     #                              dtype=np.int32)
-    for i in range(0, 795):
-        src_annot_name = "frame_{}_{:04d}.xml".format(src_cam, i)
+    for i in range(0, 2000, 5):
+        src_annot_name = "C{}_{:08d}.xml".format(src_cam, i)
         src_annot_path = "{}/{}".format(annot_dir, src_annot_name)
 
-        dst_annot_name = "frame_{}_{:04d}.xml".format(dst_cam, i)
+        dst_annot_name = "C{}_{:08d}.xml".format(dst_cam, i)
         dst_annot_path = "{}/{}".format(annot_dir, dst_annot_name)
 
         if not (os.path.exists(src_annot_path) and os.path.exists(dst_annot_path)):

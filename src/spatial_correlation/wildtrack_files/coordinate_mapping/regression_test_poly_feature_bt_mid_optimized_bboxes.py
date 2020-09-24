@@ -1,6 +1,5 @@
 """
-test the linear regression models created using polynomial features, of degree d. Metric used is IoU score
-between estimated bounding box and actual bounding box in a camera view.
+this module draws the actual and transformed bboxes
 """
 
 import cv2
@@ -159,7 +158,41 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
         score = compute_iou_score(pred_coords=row_pred[0], actual_coords=Y[index])
         iou_scores.append(score)
     plot_regression_results(iou_scores)
-    # plt.show()
+
+
+def transform_coordinates(s_points):
+    poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
+
+    df = pd.DataFrame(data=s_points,
+                      columns=['src_xmin', 'src_ymin', 'src_xmax', 'src_ymax'])
+    df = df.astype('float')
+    df['src_width'] = df['src_xmax'] - df['src_xmin']
+    df['src_height'] = df['src_ymax'] - df['src_ymin']
+    df['src_bt_mid_x'] = df['src_xmin'] + df['src_width'] / 2
+    # df['src_bt_mid_y'] = df['src_ymax']
+
+    df = df.astype('int32')
+    X = df[['src_bt_mid_x', 'src_ymax', 'src_width', 'src_height']]
+    # convert to 2d np array
+    X = X.values
+    if NORMALIZE:
+        min_max_scalar = load_scalar()
+        X = min_max_scalar.transform(X)
+    X_poly = poly_features.fit_transform(X)
+    # #################### LOAD REGRESSION MODEL ######################################
+    reg_model = load_regression_model()
+    assert reg_model is not None
+    y_pred = reg_model.predict(X_poly)
+
+    df2 = pd.DataFrame(data=y_pred,
+                       columns=['dst_bt_mid_x', 'dst_ymax', 'dst_width', 'dst_height'])
+    df2['dst_xmin'] = df2['dst_bt_mid_x'] - df2['dst_width'] / 2
+    df2['dst_ymin'] = df2['dst_ymax'] - df2['dst_height']
+    df2['dst_xmax'] = df2['dst_xmin'] + df2['dst_width']
+
+    df2 = df2.astype('int32')
+    y_pred = df2[['dst_xmin', 'dst_ymin', 'dst_xmax', 'dst_ymax']]
+    return y_pred.values
 
 
 if __name__ == "__main__":
@@ -167,25 +200,26 @@ if __name__ == "__main__":
     NORMALIZE = False
     REGULARIZE = False
     DATASET_DIR = "../../../../dataset"
-    img_dir = "{}/PETS_org/JPEGImages".format(DATASET_DIR)
-    annot_dir = "{}/PETS_org/Annotations".format(DATASET_DIR)
+    img_dir = "{}/Wildtrack_dataset/PNGImages".format(DATASET_DIR)
+    annot_dir = "{}/Wildtrack_dataset/Annotations".format(DATASET_DIR)
 
-    src_cam = 5  # collab cam
-    dst_cam = 8  # ref cam
-    degree = 4
-    src_points = []
-    dst_points = []
+    src_cam = 4  # collab cam
+    dst_cam = 1  # ref cam
+    degree = 3
 
     # read training frame names
     # test_frames = np.loadtxt("{}/PETS_1/ImageSets/test.txt".format(DATASET_DIR),
     #                          dtype=np.int32)
-    test_frames = range(548, 795)  # last 30% frames kept for testing
+    test_frames = range(1405, 1450, 5)  # last 30% frames kept for testing
     for i in test_frames:
+        print(i)
         # for i in range(548, 796):  # last 30% frames kept for testing
-        src_annot_name = "frame_{}_{:04d}.xml".format(src_cam, i)
+        src_points = []
+        dst_points = []
+        src_annot_name = "C{}_{:08d}.xml".format(src_cam, i)
         src_annot_path = "{}/{}".format(annot_dir, src_annot_name)
 
-        dst_annot_name = "frame_{}_{:04d}.xml".format(dst_cam, i)
+        dst_annot_name = "C{}_{:08d}.xml".format(dst_cam, i)
         dst_annot_path = "{}/{}".format(annot_dir, dst_annot_name)
 
         if not (os.path.exists(src_annot_path) and os.path.exists(dst_annot_path)):
@@ -217,26 +251,13 @@ if __name__ == "__main__":
                     dst_points.append([d_xmin, d_ymin, d_xmax, d_ymax])
                     break
 
-    # visualize points
-    if DEBUG:
-        src_img_name = "frame_{}_{:04d}.jpg".format(src_cam, i)
-        src_img_path = "{}/{}".format(img_dir, src_img_name)
-        src_img = cv2.imread(src_img_path)
-
-        dst_img_name = "frame_{}_{:04d}.jpg".format(dst_cam, i)
+        pred_points = transform_coordinates(s_points=src_points)
+        # draw prdicted points
+        dst_img_name = "C{}_{:08d}.png".format(dst_cam, i)
         dst_img_path = "{}/{}".format(img_dir, dst_img_name)
         dst_img = cv2.imread(dst_img_path)
-
-        # draw all trainig points
-        for s_point, d_point in zip(src_points, dst_points):
-            s_point = list(map(int, s_point))
-            d_point = list(map(int, d_point))
-
-            cv2.circle(src_img, (s_point[2], s_point[3]), 2, (0, 255, 0), 1)
-            cv2.circle(dst_img, (d_point[2], d_point[3]), 2, (0, 255, 0), 1)
-
-        cv2.imshow("src_img_{}".format(i), src_img)
-        cv2.imshow("dst_img_{}".format(i), dst_img)
-        cv2.waitKey(0)
-    print("\ntotal points: src {}, dst {}\n".format(len(src_points), len(dst_points)))
-    test_poly_feature_linear_reg_bt_pt_height_width(s_points=src_points, d_points=dst_points)
+        for index, p_point in enumerate(pred_points):
+            a_point = np.array(dst_points[index], dtype=np.int32)
+            cv2.rectangle(dst_img, (p_point[0], p_point[1]), (p_point[2], p_point[3]), (0, 0, 255), 3)
+            cv2.rectangle(dst_img, (a_point[0], a_point[1]), (a_point[2], a_point[3]), (0, 255, 0), 2)
+            cv2.imwrite("./temp/{}".format(dst_img_name), dst_img)

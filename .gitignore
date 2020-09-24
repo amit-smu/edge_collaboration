@@ -20,3 +20,6 @@ ssd_keras/**/*.png
 ssd_keras/**/*.jpg
 ssd_keras/**/*.h5
 ssd_keras/temp/*
+src/**/regression_models/*
+src/**/*.zip
+ssd_keras/**/*.zip

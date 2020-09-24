@@ -1,7 +1,7 @@
 """
 regression estimator for coordinate mapping from one frame to another. Linear regression
 use multiple points from each bounding box. These points are on the road.
-Final file used for regression
+Final file used for regression (obsolete -- optimized version has replaced this one)
 """
 
 import cv2

@@ -159,7 +159,6 @@ def test_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
         score = compute_iou_score(pred_coords=row_pred[0], actual_coords=Y[index])
         iou_scores.append(score)
     plot_regression_results(iou_scores)
-    # plt.show()
 
 
 if __name__ == "__main__":
@@ -167,11 +166,11 @@ if __name__ == "__main__":
     NORMALIZE = False
     REGULARIZE = False
     DATASET_DIR = "../../../../dataset"
-    img_dir = "{}/PETS_org/JPEGImages".format(DATASET_DIR)
-    annot_dir = "{}/PETS_org/Annotations".format(DATASET_DIR)
+    img_dir = "{}/Wildtrack_dataset/PNGImages".format(DATASET_DIR)
+    annot_dir = "{}/Wildtrack_dataset/Annotations".format(DATASET_DIR)
 
-    src_cam = 5  # collab cam
-    dst_cam = 8  # ref cam
+    src_cam = 7  # collab cam
+    dst_cam = 5  # ref cam
     degree = 4
     src_points = []
     dst_points = []
@@ -179,13 +178,13 @@ if __name__ == "__main__":
     # read training frame names
     # test_frames = np.loadtxt("{}/PETS_1/ImageSets/test.txt".format(DATASET_DIR),
     #                          dtype=np.int32)
-    test_frames = range(548, 795)  # last 30% frames kept for testing
+    test_frames = range(1405, 2000, 5)  # last 30% frames kept for testing
     for i in test_frames:
         # for i in range(548, 796):  # last 30% frames kept for testing
-        src_annot_name = "frame_{}_{:04d}.xml".format(src_cam, i)
+        src_annot_name = "C{}_{:08d}.xml".format(src_cam, i)
         src_annot_path = "{}/{}".format(annot_dir, src_annot_name)
 
-        dst_annot_name = "frame_{}_{:04d}.xml".format(dst_cam, i)
+        dst_annot_name = "C{}_{:08d}.xml".format(dst_cam, i)
         dst_annot_path = "{}/{}".format(annot_dir, dst_annot_name)
 
         if not (os.path.exists(src_annot_path) and os.path.exists(dst_annot_path)):

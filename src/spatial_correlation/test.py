@@ -1,15 +1,9 @@
-l = []
-for i in range(5):
-    d = {
-        'key1': i,
-        'key2': i + 10
-    }
-    l.append(d)
+import numpy as np
+from sklearn import preprocessing as pp
 
-print(l)
-for d in l:
-    if d['key1'] == 2:
-        l.remove(d)
-        print(l)
+a = [[1, 10, 20, 30], [2, 20, 40, 60], [3, 30, 60, 90]]
+a = np.array(a)
+print(a)
 
-print(l)
+b =
+print(a)

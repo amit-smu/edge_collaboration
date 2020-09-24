@@ -29,7 +29,7 @@ from data_generator.object_detection_2d_misc_utils import apply_inverse_transfor
 
 import os
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+os.environ["CUDA_VISIBLE_DEVICES"] = "7"
 
 img_height = 512  # Height of the model input images
 img_width = 512  # Width of the model input images
@@ -304,7 +304,7 @@ print("parsing compelete for validation dataset..")
 
 # 3: Set the batch size.
 
-batch_size = 16  # Change the batch size if you like, or if you run into GPU memory issues.
+batch_size = 8  # Change the batch size if you like, or if you run into GPU memory issues.
 
 # 4: Set the image transformations for pre-processing and data augmentation options.
 
@@ -391,7 +391,7 @@ def lr_schedule(epoch):
 
 # TODO: Set the filepath under which you want to save the model.
 model_checkpoint = ModelCheckpoint(
-    filepath='single_img_models/ssd512_PETS+WT_max_epoch_250_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
+    filepath='single_img_models/ssd512_PETS+WT_mixed_res_img_max_epoch_250_epoch-{epoch:02d}_loss-{loss:.4f}_val_loss-{val_loss:.4f}.h5',
     monitor='val_loss',
     verbose=1,
     save_best_only=True,
@@ -400,7 +400,7 @@ model_checkpoint = ModelCheckpoint(
     period=1)
 # model_checkpoint.best =
 
-csv_logger = CSVLogger(filename='single_img_models/ssd512_pascal_07+12_all_classes_training_log.csv',
+csv_logger = CSVLogger(filename='single_img_models/ssd512_PETS_WT_mixed_res_img_training_log.csv',
                        separator=',',
                        append=True)
 

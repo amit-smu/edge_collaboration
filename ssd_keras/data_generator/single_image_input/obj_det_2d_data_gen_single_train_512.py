@@ -140,6 +140,9 @@ class DataGenerator:
             verbose (bool, optional): If `True`, prints out the progress for some constructor operations that may
                 take a bit longer.
         '''
+        print("setting numpy random seed to 10..")
+        np.random.seed(10)
+
         self.labels_output_format = labels_output_format
         self.labels_format = {'class_id': labels_output_format.index('class_id'),
                               'xmin': labels_output_format.index('xmin'),
@@ -912,6 +915,51 @@ class DataGenerator:
 
         return batch_X_multi_res
 
+    def get_mixed_res_batch(self, b_images, b_file_ids):
+        """
+        method to create mixed resolution images as well as their corresponding priors. The shared region
+        and its resolution are chosen at random from a set of values.
+        :param b_images:
+        :param b_file_ids:
+        :param b_file_names:
+        :return:
+        """
+        resolutions = [512, 480, 360, 224, 160, 96]
+        priors = []
+        for i in range(len(b_file_ids)):
+            image_size = (512, 512)
+            shared_reg_res = np.random.choice(resolutions)
+            # select (x1, y1, x2, y2 in percentage)
+            x1_rand = np.random.randint(0, 40)
+            y1_rand = np.random.randint(0, 40)
+            x2_rand = np.random.randint(60, 100)
+            y2_rand = np.random.randint(60, 100)
+            # translate as per image size
+            x1 = int((x1_rand * image_size[0]) / 100)
+            y1 = int((y1_rand * image_size[1]) / 100)
+            x2 = int((x2_rand * image_size[0]) / 100)
+            y2 = int((y2_rand * image_size[1]) / 100)
+            x1_tr = x1
+            y1_tr = y1
+            x2_tr = x2
+            y2_tr = y2
+            # print(x1_tr, y1_tr, x2_tr, y2_tr)
+            reg_width = x2_tr - x1_tr  # width of shared region in 512x512 image
+            reg_height = y2_tr - y1_tr
+            reg_width_tr = int((reg_width / 512.0) * shared_reg_res)  # width as per new resolution
+            reg_height_tr = int((reg_height / 512.0) * shared_reg_res)
+            shared_reg = (b_images[i])[y1_tr:y2_tr, x1_tr:x2_tr]
+            temp = cv2.resize(shared_reg, dsize=(reg_width_tr, reg_height_tr), interpolation=cv2.INTER_CUBIC)
+            shared_reg = cv2.resize(temp, dsize=(reg_width, reg_height), interpolation=cv2.INTER_CUBIC)
+            (b_images[i])[y1_tr:y2_tr, x1_tr:x2_tr] = shared_reg
+        return b_images
+
+    def dump_raw_data(self, batch_x_data, batch_img_ids):
+        temp_dir = "./temp"
+        for bx_data, b_img_id in zip(batch_x_data, batch_img_ids):
+            img_file_name = "{}/{}.png".format(temp_dir, b_img_id)
+            cv2.imwrite(img_file_name, bx_data)
+
     def generate(self,
                  batch_size=32,
                  shuffle=True,
@@ -1262,6 +1310,9 @@ class DataGenerator:
                 batch_y_encoded = None
                 batch_matched_anchors = None
 
+            batch_X = self.get_mixed_res_batch(b_images=batch_X, b_file_ids=batch_image_ids)
+
+            # self.dump_raw_data(batch_x_data=batch_X, batch_img_ids=batch_image_ids)
             #########################################################################################
             # Compose the output.
             #########################################################################################

@@ -103,11 +103,11 @@ class DataGenerator:
                  eval_neutral=None,
                  labels_output_format=('class_id', 'xmin', 'ymin', 'xmax', 'ymax'),
                  verbose=True,
-                 N=1,
-                 resolution=512,
-                 ref_cam=1,
-                 collab_cam=4,
-                 test_dataset="PETS",
+                 N=None,
+                 resolution=None,
+                 ref_cam=None,
+                 collab_cam=None,
+                 test_dataset=None,
                  compression=False):
         '''
         Initializes the data generator. You can either load a dataset directly here in the constructor,
@@ -162,7 +162,7 @@ class DataGenerator:
 
         self.N = N  # number of cameras collaborating for PETS dataset
         print("\nnumber of collaborating cameras :{}\n".format(self.N))
-        self.img_type_prefix = "JPEGImages"
+        # self.img_type_prefix = "JPEGImages"
 
         self.resolution = resolution
         print("Resolution: {}\n".format(self.resolution))
@@ -170,7 +170,8 @@ class DataGenerator:
         self.ref_cam = ref_cam
         self.collab_cam = collab_cam
         self.test_dataset = test_dataset
-        print("test_dataset: {}".format(self.test_dataset))
+        print("test_dataset: {}, ref_cam : {}, collab_cam : {}".format(self.test_dataset, self.ref_cam,
+                                                                       self.collab_cam))
 
         print("Loading single image object detector model..")
         # load DNN model
@@ -179,6 +180,7 @@ class DataGenerator:
         print("model loaded..")
 
         # load regression model
+        self.reg_model = None
         print("loading regression model..")
         if self.test_dataset == "WILDTRACK":
             self.load_regression_model_WT()
@@ -186,6 +188,7 @@ class DataGenerator:
             self.load_regression_model_PETS()
         else:
             print("wrong dataset specified..")
+            sys.exit(-1)
         print("regression model loaded..")
 
         #############################################################################################
@@ -328,16 +331,17 @@ class DataGenerator:
         return single_img_model
 
     def load_regression_model_WT(self):
-        degree = 5
+        degree = 4
         src_cam = self.collab_cam
         dst_cam = self.ref_cam
         # model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}" \
         #     .format(degree, src_cam)
-        model_file_path = "regression_models/WT/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img" \
-            .format(degree, src_cam, dst_cam)
-        print(model_file_path)
-        print("degree: {}, src_cam: {}\n".format(degree, src_cam))
-        self.reg_model = None
+        # model_file_path = "regression_models/WT/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img" \
+        #     .format(degree, src_cam, dst_cam)
+        model_file_path = "regression_models/WT/lin_reg_deg_{}_src_{}_dst_{}_optimized".format(degree, src_cam, dst_cam)
+        print("Regression model : {}".format(model_file_path))
+        print("degree: {}, src_cam: {}, dst_cam : {}".format(degree, src_cam, dst_cam))
+        # self.reg_model = None
         with open(model_file_path, 'rb') as input_file:
             self.reg_model = pickle.load(input_file)
             assert self.reg_model is not None
@@ -348,11 +352,13 @@ class DataGenerator:
         dst_cam = self.ref_cam
         # model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}{}" \
         #     .format(degree, src_cam, self.ref_cam)
-        model_file_path = "regression_models/PETS/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img" \
-            .format(degree, src_cam, dst_cam)
-        print(model_file_path)
-        print("degree: {}, src_cam: {}, ref_cam :{}\n".format(degree, src_cam, self.ref_cam))
-        self.reg_model = None
+        # model_file_path = "regression_models/PETS/poly_feature_l_reg_deg_{}_inter_false_src_{}_dst_{}_full_img" \
+        #     .format(degree, src_cam, dst_cam)
+        model_file_path = "regression_models/PETS/lin_reg_deg_{}_src_{}_dst_{}_optimized".format(degree, src_cam,
+                                                                                                 dst_cam)
+        print("Regression model : {}".format(model_file_path))
+        print("degree: {}, src_cam: {}, ref_cam :{}".format(degree, src_cam, dst_cam))
+        # self.reg_model = None
         with open(model_file_path, 'rb') as input_file:
             self.reg_model = pickle.load(input_file)
             assert self.reg_model is not None
@@ -1209,7 +1215,7 @@ class DataGenerator:
 
         return np.array(batch_y_auxillary)
 
-    def get_gt_objects_WT(self, img_name, WT_annotation_dir):
+    def get_gt_objects(self, img_name, annotation_dir):
         """
         get the ground truth objects using given image path
         :param img_path:
@@ -1218,7 +1224,7 @@ class DataGenerator:
         objects = []
 
         annot_name = "{}.xml".format(img_name)
-        annot_path = "{}/{}".format(WT_annotation_dir, annot_name)
+        annot_path = "{}/{}".format(annotation_dir, annot_name)
         root = ElementTree.parse(annot_path).getroot()
         persons = root.findall('object')
         for p in persons:
@@ -1281,10 +1287,10 @@ class DataGenerator:
             collab_img = cv2.imread(collab_file_path)
             assert collab_img is not None
             # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-            # objects = self.detect_objects(collab_img)
+            objects = self.detect_objects(collab_img)
             # objects = self.detect_objects(cv2.imread(batch_file_names[i]))
-            # objects = self.get_gt_objects_WT(collab_img_id[:-4], annot_dir)
-            objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
+            objects = self.get_gt_objects(collab_img_id[:-4], annot_dir)
+            # objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
             if len(objects) == 0:
                 batch_x_prior.append(aux_channel)
                 continue
@@ -1313,20 +1319,6 @@ class DataGenerator:
                 # objects = self.map_coordinates_PETS(objects, collab_img_id, batch_img_ids[i])
                 mapped_objects = self.map_coordinates_PETS(shared_reg_objects)
 
-            # if DUMP_DATA:
-            #    ref_img = cv2.imread(batch_file_names[i])
-            #    for obj in mapped_objects:
-            #        cv2.rectangle(ref_img, (obj[2], obj[3]), (obj[4], obj[5]), (255, 0, 0), 2)
-            #        cv2.imwrite("temp/{}_1.png".format(img_id), ref_img)
-
-            # create prior using detected boxes
-            # prior = self.darknet_randomize(objects, False)
-            # prior = np.full(shape=(512, 512, 1), fill_value=114, dtype=np.uint8)
-            # print("total obj: {}, shared region objects : {}, mapped obj: {}".format(len(objects),
-            #                                                                          len(shared_reg_objects),
-            #                                                                          len(mapped_objects)))
-
-            # convert shared reg objects to 512x512
             # mapped_objects = shared_reg_objects
             temp = []
             for obj in mapped_objects:
@@ -1350,7 +1342,6 @@ class DataGenerator:
             mapped_objects = temp
 
             for obj in mapped_objects:
-                # if obj[0] == 15:
                 xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
                 aux_channel[ymin:ymax, xmin:xmax] = 255
             batch_x_prior.append(aux_channel)
@@ -1381,7 +1372,7 @@ class DataGenerator:
                 file_name = file_name[:-1 * img_name_len]
                 # file_name = "{}/{}".format(file_name, self.collab_cam)
                 collab_file_path = "{}/{}".format(file_name, collab_img_id)
-                shared_reg_bbox = [51, 139, 1507, 1041]  # shared regino coords
+                shared_reg_bbox = [0, 0, 1920, 1080]  # shared regino coords
                 annot_dir = "../dataset/Wildtrack_dataset/Annotations"
 
             elif self.test_dataset == "PETS":  # PETS dataset
@@ -1400,14 +1391,13 @@ class DataGenerator:
             # print("shared region coords : {}\n".format(shared_reg_bbox))
             # read image file
             # objects = self.get_gt_objects(collab_img_id[:-4], annot_dir)
-            objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
-            print(batch_file_names[i])
-            objects = self.detect_objects(cv2.imread("{}".format(batch_file_names[i])))
+            objects = self.get_gt_objects(batch_img_ids[i], annot_dir)
+            # print(batch_file_names[i])
+            # objects = self.detect_objects(cv2.imread("{}".format(batch_file_names[i])))
 
             if len(objects) == 0:
                 batch_x_prior.append(aux_channel)
                 continue
-
             # map coordinates to reference camera coordinate system
             # select objects in shared region
             shared_reg_objects = []
@@ -1420,7 +1410,6 @@ class DataGenerator:
             if len(shared_reg_objects) == 0:
                 batch_x_prior.append(aux_channel)
                 continue
-
             # convert shared reg objects to 512x512
             temp = []
             for obj in shared_reg_objects:
@@ -1444,7 +1433,6 @@ class DataGenerator:
                     ymax = int((ymax / 576.0) * 512)
                 temp.append([obj[0], obj[1], xmin, ymin, xmax, ymax])
             mapped_objects = temp
-
             if RANDOMIZE:
                 aux_channel = self.randomize_added_collab(objects=mapped_objects, n_cams=N)
             else:
@@ -1452,6 +1440,7 @@ class DataGenerator:
                     # if obj[0] == 15:
                     xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
                     aux_channel[ymin:ymax, xmin:xmax] = 255
+            # aux_channel = np.full((512,512,1), (255), dtype=np.uint8)
             batch_x_prior.append(aux_channel)
         return np.array(batch_x_prior)
 
@@ -1770,11 +1759,11 @@ class DataGenerator:
         create mixed-resolution images (based on teh collaborating and reference cameras)
         :return:
         """
-        SHARED_AREA_RES = (224, 224)  # min possible region of shared region (with same obj det accuracy)
+        SHARED_AREA_RES = (70, 70)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [51, 139, 1507, 1041]  # for camera 5, 7
-        shared_reg_coords = [51, 139, 1507, 1041]  # for camera 6, 1
+        shared_reg_coords = [0, 0, 1920, 1080]  # for camera 6, 1
         print("shared reg coords: {}".format(shared_reg_coords))
         # shared_reg_coords = [0, 0, 298,
         #                     700]  # gt overlap cam 1, 4 (projected on view 1) (for 700x700 img,calculated manually)
@@ -1809,7 +1798,7 @@ class DataGenerator:
         :return:
         """
         ICOV_TH = 0.75
-        MODIFY_LABELS = False  # modify orginal labels (for micro study 2 )
+        MODIFY_LABELS = True  # modify orginal labels (for micro study 2 )
         SHARED_AREA_RES = (160, 160)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [51, 139, 1507, 1041]  # for camera 5, 7
@@ -1833,6 +1822,7 @@ class DataGenerator:
 
         batch_x_mixed_res = []
         batch_modified_labels = []
+        batch_processed_labels = []  # labels after resizing to 512x512
         # modify each image
         for img, img_labels in zip(batch_x, batch_labels):
             mixed_res_img = np.full((512, 512, 3), fill_value=114, dtype=np.uint8)
@@ -1845,23 +1835,28 @@ class DataGenerator:
 
             # adjust ground truth labels accordingly
             img_modified_lables = []
+            img_processed_labels = []  # labels after resizing to 512x512
             for obj in img_labels:
                 obj_bbox = [obj[1], obj[2], obj[3], obj[4]]
                 icov = self.bb_icov(obj_bbox, shared_reg_coords)
                 if icov >= ICOV_TH:
-                    # convert labels to 512x512 coordinates
-                    # obj[1] = int((obj[1] / 720.0) * 512)
-                    # obj[2] = int((obj[2] / 576.0) * 512)
-                    # obj[3] = int((obj[3] / 720.0) * 512)
-                    # obj[4] = int((obj[4] / 576.0) * 512)
                     temp = [obj[0], obj[1], obj[2], obj[3], obj[4]]
                     img_modified_lables.append(temp)
+                    # store processed labeles for this image
+                    obj_p = [obj[0]]
+                    # convert labels to 512x512 coordinates
+                    obj_p.append(int((obj[1] / 720.0) * 512))
+                    obj_p.append(int((obj[2] / 576.0) * 512))
+                    obj_p.append(int((obj[3] / 720.0) * 512))
+                    obj_p.append(int((obj[4] / 576.0) * 512))
+                    img_processed_labels.append(obj_p)
                 else:
                     img_modified_lables.append([18, 0, 0, 720, 576])
             batch_modified_labels.append(img_modified_lables)
+            batch_processed_labels.append(img_processed_labels)
         if MODIFY_LABELS:
             self.labels[t_batch_indices[0]:t_batch_indices[1]] = batch_modified_labels
-        return np.array(batch_x_mixed_res), batch_modified_labels
+        return np.array(batch_x_mixed_res), batch_modified_labels, batch_processed_labels
 
     def extract_shared_region_WT(self, batch_x, batch_labels, t_batch_indices):
         """
@@ -1893,6 +1888,7 @@ class DataGenerator:
 
         batch_x_mixed_res = []
         batch_modified_labels = []
+        batch_processed_labels = []  # labels after resizing to 512x512
         # modify each image
         for img, img_labels in zip(batch_x, batch_labels):
             mixed_res_img = np.full((512, 512, 3), fill_value=114, dtype=np.uint8)
@@ -1905,24 +1901,29 @@ class DataGenerator:
 
             # adjust ground truth labels accordingly
             img_modified_lables = []
+            img_processed_labels = []  # labels after resizing to 512x512
             for obj in img_labels:
                 obj_bbox = [obj[1], obj[2], obj[3], obj[4]]
                 icov = self.bb_icov(obj_bbox, shared_reg_coords)
                 if icov >= ICOV_TH:
-                    # convert labels to 512x512 coordinates
-                    # obj[1] = int((obj[1] / 1920.0) * 512)
-                    # obj[2] = int((obj[2] / 1080.0) * 512)
-                    # obj[3] = int((obj[3] / 1920.0) * 512)
-                    # obj[4] = int((obj[4] / 1080.0) * 512)
                     temp = [obj[0], obj[1], obj[2], obj[3], obj[4]]
                     img_modified_lables.append(temp)
+                    # store processed labeles for this image
+                    obj_p = [obj[0]]
+                    # convert labels to 512x512 coordinates
+                    obj_p.append(int((obj[1] / 1920.0) * 512))
+                    obj_p.append(int((obj[2] / 1080.0) * 512))
+                    obj_p.append(int((obj[3] / 1920.0) * 512))
+                    obj_p.append(int((obj[4] / 1080.0) * 512))
+                    img_processed_labels.append(obj_p)
                 else:
                     img_modified_lables.append([18, 0, 0, 1920, 1080])
             batch_modified_labels.append(img_modified_lables)
+            batch_processed_labels.append(img_processed_labels)
         # replace orginal labels with modeified labels
         if MODIFY_LABELS:
             self.labels[t_batch_indices[0]:t_batch_indices[1]] = batch_modified_labels
-        return np.array(batch_x_mixed_res), batch_modified_labels
+        return np.array(batch_x_mixed_res), batch_modified_labels, batch_processed_labels
 
     def detect_objects(self, img):
         """
@@ -1936,7 +1937,6 @@ class DataGenerator:
         input_images = np.array(input_images)
 
         y_pred = self.single_img_model.predict(input_images)
-
         confidence_threshold = 0.5
         y_pred_thresh = [y_pred[k][y_pred[k, :, 1] > confidence_threshold] for k in range(y_pred.shape[0])]
         np.set_printoptions(precision=2, suppress=True, linewidth=90)
@@ -2351,10 +2351,11 @@ class DataGenerator:
             # batch_X_aux = self.get_aux_channels_batch(batch_X_data=batch_X, batch_y_data=batch_y, randomize=True)
             # batch_X_aux = self.get_aux_channels_batch_darknet_randomization(batch_X_data=batch_X, batch_y_data=batch_y,
             #                                                                 randomize=True)
-            # batch_X_aux = self.get_aux_channel_detected_boxes(batch_filenames, batch_image_ids)
-            batch_X_aux = self.get_aux_channel_detected_boxes_micro_study(batch_filenames, batch_image_ids)
+            batch_X_aux = self.get_aux_channel_detected_boxes(batch_filenames, batch_image_ids)
+            # batch_X_aux = self.get_aux_channel_detected_boxes_micro_study(batch_filenames, batch_image_ids)
             # batch_X_aux = self.get_aux_channel_detected_boxes_cropped_images(batch_filenames, batch_image_ids)
 
+            # ############################### Create mixed resolution images ##########################
             # create mixed resolution images in the batch
             if self.test_dataset == "WILDTRACK":
                 batch_X = self.create_mixed_res_imges_WT(batch_X)
@@ -2366,9 +2367,13 @@ class DataGenerator:
 
             # ############################### Compare shared regions Avg Prec Scores ##########################
             # if self.test_dataset == "WILDTRACK":
-            #     batch_X, batch_original_labels = self.extract_shared_region_WT(batch_X, batch_y, t_batch_indices)
+            #     batch_X, batch_original_labels, batch_processed_labels = self.extract_shared_region_WT(batch_X,
+            #                                                                                            batch_original_labels,
+            #                                                                                            t_batch_indices)
             # elif self.test_dataset == "PETS":
-            #     batch_X, batch_original_labels = self.extract_shared_region_PETS(batch_X, batch_y, t_batch_indices)
+            #     batch_X, batch_original_labels, batch_processed_labels = self.extract_shared_region_PETS(batch_X,
+            #                                                                                              batch_original_labels,
+            #                                                                                              t_batch_indices)
             # else:
             #     print("WRONG Dataset")
             #     sys.exit(-1)

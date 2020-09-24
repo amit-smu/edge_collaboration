@@ -81,9 +81,8 @@ model = ssd_512_aux(image_size=(img_height, img_width, 3),
 
 # TODO: Set the path of the trained weights.
 # weights_path = './trained_models/VGG_VOC0712_SSD_300x300_ft_iter_120000.h5'
-# weights_path = './aux_input_trained_models/ssd512_pascal_PETS+WT_person_class_randomized_white_black_epoch-117_loss-3.2106_val_loss-3.0541.h5'
-# weights_path = './aux_input_trained_models/ssd512+PETS+WT_person_darknet_randomized_gt_white_black_epoch-173_loss-2.8278_val_loss-2.7035.h5'
-weights_path = './aux_input_trained_models/ssd512+PETS+WT_dknet_rand_gt_wh_black_max_epoch_250_epoch-237_loss-2.9101_val_loss-3.1128.h5'
+weights_path = './aux_input_trained_models/ssd512+PETS+WT_dknet_rand_gt_mixed_res_img_wh_black_max_epoch_250_epoch-237_loss-2.6609_val_loss-2.8466.h5'
+# weights_path = './aux_input_trained_models/ssd512+PETS+WT_dknet_rand_gt_wh_black_max_epoch_250_epoch-237_loss-2.9101_val_loss-3.1128.h5'
 
 print(weights_path + "\n")
 
@@ -98,16 +97,16 @@ ssd_loss = SSDLoss(neg_pos_ratio=3, alpha=1.0)
 model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 
 # ###################### VARIABLES #########################################################
-ref_cam = 5
-collab_cam = 7
+ref_cam = 1
+collab_cam = 4
 
 test_dataset = "WILDTRACK"
-#test_dataset = "PETS"
+# test_dataset = "PETS"
 
 collaborating_cams = 1
 # test_img_res = 160
 # ############ variable for image compression test ############
-TEST_RESOLUTION = 512
+# TEST_RESOLUTION = 512
 COMPRESSED = False  # testing for compression
 # ###########################################################################################
 
@@ -125,7 +124,7 @@ COMPRESSED = False  # testing for compression
 
 PETS_images_dir = '../dataset/PETS_org/JPEGImages'
 PETS_annotations_dir = '../dataset/PETS_org/Annotations'
-PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30_cam_8.txt'
+PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30_cam_{}.txt'.format(ref_cam)
 
 # WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
 # WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
@@ -133,7 +132,7 @@ PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30_cam_8
 # WT_dataset_images_dir ="../dataset/compressed_data/knn_k_128/WT_data/33%_left_sh_reg/{}".format(TEST_RESOLUTION)
 WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
 WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_30_cam_5.txt"
+WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_30_cam_{}.txt".format(ref_cam)
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
@@ -148,7 +147,7 @@ print("ref_cam: {}, collab_cam :{}\n".format(ref_cam, collab_cam))
 
 dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None, N=collaborating_cams,
                         ref_cam=ref_cam, collab_cam=collab_cam, test_dataset=test_dataset,
-                        compression=True)
+                        compression=COMPRESSED)
 
 if test_dataset == "PETS":
     dataset.parse_xml(images_dirs=[PETS_images_dir],
@@ -165,8 +164,8 @@ if test_dataset == "WILDTRACK":
                       image_set_filenames=[WT_dataset_test_image_set_filename],
                       annotations_dirs=[WT_dataset_annotations_dir],
                       classes=classes,
-                      # include_classes='all',
-                      include_classes=[15],
+                      include_classes='all',
+                      # include_classes=[15],
                       exclude_truncated=False,
                       exclude_difficult=False,
                       ret=False)
@@ -190,7 +189,7 @@ for i in range(1):
                         matching_iou_threshold=0.5,
                         border_pixels='include',
                         sorting_algorithm='quicksort',
-                        average_precision_mode='sample',
+                        average_precision_mode='integrate',
                         num_recall_points=11,
                         ignore_neutral_boxes=True,
                         return_precisions=True,

@@ -82,24 +82,14 @@ model.compile(optimizer=adam, loss=ssd_loss.compute_loss)
 ############################################### VARIABLES #######################
 # test_dataset = "WILDTRACK"
 test_dataset = "PETS"
-# test_dataset = "VOC"
-test_img_resolution = 160
-print("test_dataset : {}, test_img_resolution : {}\n".format(test_dataset, test_img_resolution))
+test_img_resolution = None
+ref_cam = 8
+# print("test_dataset : {}, test_img_resolution : {}\n".format(test_dataset, test_img_resolution))
 ###############################################    DATA GENERATORS     ################################################
-
-
 # TODO: Set the paths to the dataset here.
-# Pascal_VOC_dataset_images_dir = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/JPEGImages/'
-# Pascal_VOC_dataset_annotations_dir = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/Annotations/'
-# Pascal_VOC_dataset_image_set_filename = '../dataset/PASCAL_VOC/VOC2007/VOCdevkit/VOC2007/ImageSets/Main/test_subset_500.txt'
-
 PETS_images_dir = '../dataset/PETS_org/JPEGImages'
 PETS_annotations_dir = '../dataset/PETS_org/Annotations'
-PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30_cam_8.txt'
-
-#PETS_images_dir = '../dataset/PETS_org/JPEGImages_cropped_400x400'
-#PETS_annotations_dir = '../dataset/PETS_org/Annotations_cropped_400x400'
-#PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_crop_400x400.txt'
+PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30_cam_{}.txt'.format(ref_cam)
 
 # WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages_cropped_700x700"
 # WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations_cropped_700x700"
@@ -107,7 +97,7 @@ PETS_test_image_set_filename = '../dataset/PETS_org/ImageSets/Main/test_30_cam_8
 #
 WT_dataset_images_dir = "../dataset/Wildtrack_dataset/PNGImages"
 WT_dataset_annotations_dir = "../dataset/Wildtrack_dataset/Annotations"
-WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_30_cam_5.txt"
+WT_dataset_test_image_set_filename = "../dataset/Wildtrack_dataset/ImageSets/Main/test_30_cam_{}.txt".format(ref_cam)
 
 # The XML parser needs to now what object class names to look for and in which order to map them to integers.
 classes = ['background',
@@ -116,10 +106,9 @@ classes = ['background',
            'chair', 'cow', 'diningtable', 'dog',
            'horse', 'motorbike', 'person', 'pottedplant',
            'sheep', 'sofa', 'train', 'tvmonitor']
-# classes = ['background', 'person']
 
-
-dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None, resolution=test_img_resolution, test_dataset=test_dataset)
+dataset = DataGenerator(load_images_into_memory=True, hdf5_dataset_path=None, resolution=test_img_resolution,
+                        test_dataset=test_dataset)
 if test_dataset == "PETS":
     dataset.parse_xml(images_dirs=[PETS_images_dir],
                       image_set_filenames=[PETS_test_image_set_filename],
@@ -135,12 +124,12 @@ if test_dataset == "WILDTRACK":
                       annotations_dirs=[WT_dataset_annotations_dir],
                       classes=classes,
                       # include_classes='all',
-                      include_classes=[15],
+                      include_classes='all',
                       exclude_truncated=False,
                       exclude_difficult=False,
                       ret=False)
 
-print("testing for : {}\n".format(test_dataset))
+# print("testing for : {}\n".format(test_dataset))
 ###############################################    EVALUATION     ################################################
 avg_precisions = []
 for i in range(1):
@@ -157,7 +146,7 @@ for i in range(1):
                         matching_iou_threshold=0.5,
                         border_pixels='include',
                         sorting_algorithm='quicksort',
-                        average_precision_mode='sample',
+                        average_precision_mode='integrate',
                         num_recall_points=11,
                         ignore_neutral_boxes=True,
                         return_precisions=True,
