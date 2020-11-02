@@ -402,7 +402,7 @@ if __name__ == "__main__":
     # frame_number = 1
     iou_vw1 = 0
     iou_vw2 = 0
-    for frame_number in range(0, 400):  # 80% training data
+    for frame_number in range(0, 400):  # 50% training data
         print("frame number : {}".format(frame_number))
         frame_name = "frame_{:04d}".format(frame_number)
 

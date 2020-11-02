@@ -105,8 +105,6 @@ if __name__ == "__main__":
                           (255, 0, 0), 2)
             cv2.imwrite("final_area_PETS.jpg", frame_copy)
 
-        # break
     for i in iou_scores:
         print(i)
 
-        # cv2.waitKey(-1)
