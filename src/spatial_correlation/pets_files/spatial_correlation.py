@@ -36,7 +36,7 @@ def get_object_features(img_obj, obj_loc, obj_id):
     if INCLUDE_SIFT:
         features['sift'] = utils.compute_sift_features(img_obj)
     if INCLUDE_EMBEDDING:
-        features['embedding'] = utils.get_obj_embedding(img_obj, temp_dir_path="../temp_files")
+        features['embedding'] = utils.get_obj_embedding(img_obj, temp_dir_path="temp_files")
     return features
 
 
@@ -171,7 +171,7 @@ def get_gt_sp_overlap_coordinates(view_1, view_2):
     :return:
     """
     xml_file_name = "frame_0062_{}_{}.xml".format(view_1, view_2)
-    sp_overlap_dir = "../../dataset/spatial_overlap/PETS"
+    sp_overlap_dir = "{}/spatial_overlap/PETS".format(dir_name)
     xml_path = "{}/{}".format(sp_overlap_dir, xml_file_name)
     return get_bb_coords(xml_path=xml_path)
 
@@ -367,9 +367,11 @@ def weighted_spatial_overlap_performance(masked_image, gt_overlap_area):
 
 
 if __name__ == "__main__":
-    dir_name = "../../dataset/"
-    view_1_name = "View_007"
-    view_2_name = "View_008"
+    dir_name = "../../../dataset/"
+    ref_cam = 5
+    collab_cam = 7
+    view_1_name = "View_{:03d}".format(ref_cam)
+    view_2_name = "View_{:03d}".format(collab_cam)
     EUCL_THRESHOLD = 12
     image_size = (720, 576)  # PETS dataset (width, height)
 
@@ -385,8 +387,8 @@ if __name__ == "__main__":
     view_2_area_copy = view_2_area.copy()
 
     # ground truth spatial overlap area coordinates
-    gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates("07", "08")
-    gt_box_coords_vw_2 = get_gt_sp_overlap_coordinates("08", "07")
+    gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates("{:02d}".format(ref_cam), "{:02d}".format(collab_cam))
+    gt_box_coords_vw_2 = get_gt_sp_overlap_coordinates("{:02d}".format(collab_cam), "{:02d}".format(ref_cam))
 
     # estimated spatial overlap area coordinates
     est_box_coords_vw1_global = []
@@ -428,8 +430,8 @@ if __name__ == "__main__":
 
         obj_mappings = match_objects(view_1_obj_features, view_2_obj_features)
         if obj_mappings is None:
-            cv2.imwrite("intermediate_frames/marked_area_cam_7_f_{}.jpg".format(frame_number), view_1_area)
-            cv2.imwrite("intermediate_frames/marked_area_cam_8_f_{}.jpg".format(frame_number), view_2_area)
+            cv2.imwrite("intermediate_frames/marked_area_cam_{}_f_{}.jpg".format(ref_cam, frame_number), view_1_area)
+            cv2.imwrite("intermediate_frames/marked_area_cam_{}_f_{}.jpg".format(collab_cam, frame_number), view_2_area)
             iou_values_1.append(iou_vw1)
             iou_values_2.append(iou_vw2)
             continue
@@ -437,6 +439,8 @@ if __name__ == "__main__":
         mark_matching_obj_area(obj_mappings=obj_mappings, view_1_area=view_1_area, view_2_area=view_2_area,
                                view_1_obj_features=view_1_obj_features, view_2_obj_features=view_2_obj_features)
 
+        cv2.imwrite("intermediate_frames/marked_area_cam_{}_f_{}.jpg".format(ref_cam, frame_number), view_1_area)
+        cv2.imwrite("intermediate_frames/marked_area_cam_{}_f_{}.jpg".format(collab_cam, frame_number), view_2_area)
         # cv2.imwrite("intermediate_frames/marked_area_cam_7_f_{}.jpg".format(frame_number), view_1_area)
         # cv2.imwrite("intermediate_frames/marked_area_cam_8_f_{}.jpg".format(frame_number), view_2_area)
 
@@ -527,10 +531,10 @@ if __name__ == "__main__":
     plt.yticks(fontsize=18)
     plt.title("Camera 8", fontsize=18)
 
-    with open("camera_7_iou_vs_frames.txt", 'w') as cam7:
+    with open("camera_{}_iou_vs_frames.txt".format(ref_cam), 'w') as cam7:
         for value in iou_values_1:
             cam7.write("{}\n".format(value))
-    with open("camera_8_iou_vs_frames.txt", 'w') as cam8:
+    with open("camera_{}_iou_vs_frames.txt".format(collab_cam), 'w') as cam8:
         for value in iou_values_2:
             cam8.write("{}\n".format(value))
 

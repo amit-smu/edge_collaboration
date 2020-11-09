@@ -347,7 +347,7 @@ class DataGenerator:
             assert self.reg_model is not None
 
     def load_regression_model_PETS(self):
-        degree = 4
+        degree = 3
         src_cam = self.collab_cam
         dst_cam = self.ref_cam
         # model_file_path = "regression_models/poly_feature_linear_regression_deg_{}_interaction_false_cam_{}{}" \
@@ -1019,7 +1019,7 @@ class DataGenerator:
     def map_coordinates_WT(self, org_objects):
         # print("Len of org_objects: {}".format(len(org_objects)))
         img_res = (1920, 1080)
-        degree = 5
+        degree = 4
         poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
         # convert objct coordinates to full WT image (regression was trained on full image coordinates)
         # gt_overlap_4_1 = (1089, 6, 1914, 1071)
@@ -1085,7 +1085,7 @@ class DataGenerator:
 
     def map_coordinates_PETS(self, org_objects):
         # print("Len of org_objects: {}".format(len(org_objects)))
-        degree = 4
+        degree = 3
         poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
 
         # convert objct coordinates to full PETS image (regression was trained on full image coordinates)
@@ -1261,7 +1261,7 @@ class DataGenerator:
                 # shared_reg_bbox = [1089, 6, 1914, 1071]  # gt for camera 1, 4
                 # shared_reg_bbox = [197, 146, 1467, 1040]  # for camera 5, 7
                 # shared_reg_bbox = [203, 202, 1719, 981]  # gt for camera 6, 1
-                shared_reg_bbox = [0, 0, 1920, 1080]
+                shared_reg_bbox = [51, 139, 1507, 1041]
                 annot_dir = "../dataset/Wildtrack_dataset/Annotations"
 
             elif self.test_dataset == "PETS":  # PETS dataset
@@ -1274,9 +1274,9 @@ class DataGenerator:
                 collab_file_path = "{}/{}".format(file_name, collab_img_id)
                 # print("{}, {}, {}\n".format(batch_file_names[i], batch_img_ids[i], collab_file_path))
                 # shared_reg_bbox = [155, 92, 720, 516]  # in collab cam perspective (cam 7 , 8)
-                # shared_reg_bbox = [128, 104, 694, 520]  # in collab cam perspective (cam 8, 5)
-                # shared_reg_bbox = [21, 100, 571, 493]  # in collab cam perspective (cam 5, 7)
-                shared_reg_bbox = [0, 0, 720, 576]
+                # shared_reg_bbox = [267, 85, 716, 537]  # in collab cam perspective (cam 8, 5)
+                shared_reg_bbox = [91, 142, 693, 510]  # in collab cam perspective (cam 5, 7)
+                # shared_reg_bbox = [128, 104, 694, 520]
                 annot_dir = "../dataset/PETS_org/Annotations"
             else:
                 print("Wrong Dataset!")
@@ -1284,13 +1284,13 @@ class DataGenerator:
             # read image file
             # print(img_id, collab_file_path)
             # print(collab_file_path)
-            collab_img = cv2.imread(collab_file_path)
-            assert collab_img is not None
+            # collab_img = cv2.imread(collab_file_path)
+            # assert collab_img is not None
             # collab_img = cv2.resize(collab_img, dsize=(512, 512), interpolation=cv2.INTER_CUBIC)
-            objects = self.detect_objects(collab_img)
+            # objects = self.detect_objects(collab_img)
             # objects = self.detect_objects(cv2.imread(batch_file_names[i]))
-            objects = self.get_gt_objects(collab_img_id[:-4], annot_dir)
-            # objects = self.get_gt_objects_WT(batch_img_ids[i], annot_dir)
+            # objects = self.get_gt_objects(collab_img_id[:-4], annot_dir)
+            objects = self.get_gt_objects(batch_img_ids[i], annot_dir)
             if len(objects) == 0:
                 batch_x_prior.append(aux_channel)
                 continue
@@ -1312,14 +1312,14 @@ class DataGenerator:
                 batch_x_prior.append(aux_channel)
                 continue
 
-            # map coordnates to other camera view
-            if self.img_type_prefix == "PNGImages":  # WILDTRACK
-                mapped_objects = self.map_coordinates_WT(shared_reg_objects)
-            elif self.img_type_prefix == "JPEGImages":  # WILDTRACK
-                # objects = self.map_coordinates_PETS(objects, collab_img_id, batch_img_ids[i])
-                mapped_objects = self.map_coordinates_PETS(shared_reg_objects)
+            # # map coordnates to other camera view
+            # if self.img_type_prefix == "PNGImages":  # WILDTRACK
+            #     mapped_objects = self.map_coordinates_WT(shared_reg_objects)
+            # elif self.img_type_prefix == "JPEGImages":  # WILDTRACK
+            #     # objects = self.map_coordinates_PETS(objects, collab_img_id, batch_img_ids[i])
+            #     mapped_objects = self.map_coordinates_PETS(shared_reg_objects)
 
-            # mapped_objects = shared_reg_objects
+            mapped_objects = shared_reg_objects
             temp = []
             for obj in mapped_objects:
                 xmin, ymin, xmax, ymax = int(obj[2]), int(obj[3]), int(obj[4]), int(obj[5])
@@ -1715,12 +1715,16 @@ class DataGenerator:
         create mixed-resolution images (based on teh collaborating and reference cameras)
         :return:
         """
-        SHARED_AREA_RES = (160, 160)  # min possible region of shared region (with same obj det accuracy)
+        COMPRESSION = True
+        COMPRESSION_QUALITY = 2  # [0 to 95] for jpeg
+        print("Compression Quality : {}".format(COMPRESSION_QUALITY))
+
+        SHARED_AREA_RES = (70, 70)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [28, 101, 617, 492] # cam 7, 8
-        shared_reg_coords = [0, 0, 720, 576]  # cam 8, 5
-        # shared_reg_coords = [91, 142, 693, 510] # cam 5, 7
+        # shared_reg_coords = [267, 85, 716, 537]  # cam 8, 5
+        shared_reg_coords = [91, 142, 693, 510]  # cam 5, 7
         print("shared reg coords: {}".format(shared_reg_coords))
         # shared_reg_coords = [0, 0, 298,
         #                     700]  # gt overlap cam 1, 4 (projected on view 1) (for 700x700 img,calculated manually)
@@ -1746,9 +1750,16 @@ class DataGenerator:
         batch_x_mixed_res = []
         # modify each image
         for img in batch_x:
-            shared_reg = img[ymin_tr:ymax_tr, xmin_tr:xmax_tr]
+            shared_reg = deepcopy(img[ymin_tr:ymax_tr, xmin_tr:xmax_tr])
             temp = cv2.resize(shared_reg, dsize=shared_reg_target_res, interpolation=cv2.INTER_CUBIC)
             shared_reg = cv2.resize(temp, dsize=(reg_width, reg_height), interpolation=cv2.INTER_CUBIC)
+
+            # encode image if compression is on...
+            if COMPRESSION:
+                img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = 255
+                status, buffer = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, COMPRESSION_QUALITY])
+                img = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
+
             img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = shared_reg
             batch_x_mixed_res.append(img)
         # assert batch_x.shape == batch_x_mixed_res.shape
@@ -1759,11 +1770,15 @@ class DataGenerator:
         create mixed-resolution images (based on teh collaborating and reference cameras)
         :return:
         """
+        COMPRESSION = True
+        COMPRESSION_QUALITY = 1  # [0 to 9] for png
+        print("Compression Quality : {}".format(COMPRESSION_QUALITY))
+
         SHARED_AREA_RES = (70, 70)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [51, 139, 1507, 1041]  # for camera 5, 7
-        shared_reg_coords = [0, 0, 1920, 1080]  # for camera 6, 1
+        shared_reg_coords = [51, 139, 1507, 1041]  # for camera 6, 1
         print("shared reg coords: {}".format(shared_reg_coords))
         # shared_reg_coords = [0, 0, 298,
         #                     700]  # gt overlap cam 1, 4 (projected on view 1) (for 700x700 img,calculated manually)
@@ -1787,6 +1802,13 @@ class DataGenerator:
             shared_reg = img[ymin_tr:ymax_tr, xmin_tr:xmax_tr]
             temp = cv2.resize(shared_reg, dsize=shared_reg_target_res, interpolation=cv2.INTER_CUBIC)
             shared_reg = cv2.resize(temp, dsize=(reg_width, reg_height), interpolation=cv2.INTER_CUBIC)
+
+            # encode image if compression is on...
+            if COMPRESSION:
+                img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = 255
+                status, buffer = cv2.imencode(".png", img, [cv2.IMWRITE_PNG_COMPRESSION, COMPRESSION_QUALITY])
+                img = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
+
             img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = shared_reg
             batch_x_mixed_res.append(img)
         # assert batch_x.shape == batch_x_mixed_res.shape

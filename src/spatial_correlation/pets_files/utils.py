@@ -129,5 +129,5 @@ def bb_iou(boxA, boxB):
 
 
 # load svm model
-# model_file = open("../svm_model_8_samples(82_82).sav", 'rb')
-# classifier = pickle.load(model_file)
+model_file = open("svm_model_8_samples(82_82).sav", 'rb')
+classifier = pickle.load(model_file)

@@ -30,8 +30,9 @@ def get_energy_consumption(pixel_count):
 
 
 if __name__ == "__main__":
-    ORG_RES = (1920, 1080)
-    shared_reg_key = "WT_5_7"
+    # ORG_RES = (1920, 1080)
+    ORG_RES = (720, 576)
+    shared_reg_key = "PETS_5_7"
 
     SHARED_REG_RES = (70, 70)
     NON_SHARED_REG_RES = (512, 512)
@@ -70,10 +71,10 @@ if __name__ == "__main__":
     print("new total pixel count : {}\n".format(total_pixel_count))
 
     # calculate energy savings
-    print("Energy Savings!!.....")
-    initial_energy_consumption = get_energy_consumption(org_pixel_count)
-    print("Initial Energy : {}".format(initial_energy_consumption))
-    collab_energy_consumption = get_energy_consumption(total_pixel_count)
-    print("Collab Energy Consumption: {}".format(collab_energy_consumption))
-    energy_savings = (100 * (initial_energy_consumption - collab_energy_consumption)) / initial_energy_consumption
-    print("Energy Savings: {}".format(energy_savings))
+    # print("Energy Savings!!.....")
+    # initial_energy_consumption = get_energy_consumption(org_pixel_count)
+    # print("Initial Energy : {}".format(initial_energy_consumption))
+    # collab_energy_consumption = get_energy_consumption(total_pixel_count)
+    # print("Collab Energy Consumption: {}".format(collab_energy_consumption))
+    # energy_savings = (100 * (initial_energy_consumption - collab_energy_consumption)) / initial_energy_consumption
+    # print("Energy Savings: {}".format(energy_savings))

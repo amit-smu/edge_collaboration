@@ -314,7 +314,7 @@ if __name__ == "__main__":
     INCLUDE_EMBEDDING = True
     EUCL_DIST = 20.34  # empirically calculated distance
 
-    ref_cam = 5
+    ref_cam = 4
     collab_cams = [7]
     colors = [(255, 255, 0), (0, 255, 0), (0, 0, 255)]
     color_index = 0
@@ -325,9 +325,7 @@ if __name__ == "__main__":
 
     for c_cam in collab_cams:
         view_2_name = "C{}".format(c_cam)
-
         # create white images (used for marking the mapped areas)
-
         view_1_area = np.full((image_size[1], image_size[0]), 255, dtype=np.uint8)
         view_2_area = np.full((image_size[1], image_size[0]), 255, dtype=np.uint8)
         view_1_area_copy = view_1_area.copy()
@@ -396,12 +394,16 @@ if __name__ == "__main__":
             obj_mappings = match_objects(view_1_obj_features, view_2_obj_features)
 
             if obj_mappings is None:
+                iou_values_1.append(iou_vw1)
+                cv2.imwrite("intermediate_frames/marked_area_cam_r{}_c{}_f_{}.jpg".format(ref_cam, c_cam, frame_number),
+                            view_1_area)
                 continue
             # mark overlapping areas
             mark_matching_obj_area(obj_mappings=obj_mappings, view_1_area=view_1_area, view_2_area=view_2_area,
                                    view_1_obj_features=view_1_obj_features, view_2_obj_features=view_2_obj_features)
             # save marked area for this loop
-            cv2.imwrite("intermediate_frames/marked_area_cam_r1_c{}_f_{}.jpg".format(c_cam, frame_number), view_1_area)
+            cv2.imwrite("intermediate_frames/marked_area_cam_r{}_c{}_f_{}.jpg".format(ref_cam, c_cam, frame_number),
+                        view_1_area)
 
             # visualize matched objects
             if DEBUG:
@@ -448,7 +450,7 @@ if __name__ == "__main__":
             iou_vw2 = utils.bb_iou(gt_box_coords_vw_2, est_box_coords_vw2_global)
             iou_values_2.append(iou_vw2)
 
-            if DEBUG:
+            if True:
                 # draw_rect(gt_box_coords_vw_1, view_1_frame, (0, 255, 0))
                 cv2.rectangle(view_1_frame, (gt_box_coords_vw_1[0], gt_box_coords_vw_1[1]),
                               (gt_box_coords_vw_1[2], gt_box_coords_vw_1[3]), (0, 255, 0), 2)
@@ -479,7 +481,7 @@ if __name__ == "__main__":
                             cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.7, (0, 0, 255), 1)
                 cv2.imshow("Camera_2", view_2_frame)
 
-                cv2.waitKey(-1)
+                cv2.waitKey(1)
 
         # ############## ############### draw final estimated area and actual overlap area on a frame from reference camera ####################
         cv2.rectangle(ref_cam_frame_est, (est_box_coords_vw1_global[0], est_box_coords_vw1_global[1]),
@@ -525,6 +527,7 @@ if __name__ == "__main__":
         with open("iou_vs_fnumber_cam_1_{}.txt".format(c_cam), 'w') as iou_output:
             for iou in iou_values_1:
                 iou_output.write("{}\n".format(iou))
+                print(iou)
 
         # break
 

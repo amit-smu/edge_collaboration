@@ -27,26 +27,26 @@ def get_gt_sp_overlap_coordinates(view_1, view_2):
     :return:
     """
     xml_file_name = "frame_0062_{:02d}_{:02d}.xml".format(view_1, view_2)
-    sp_overlap_dir = "../../dataset/spatial_overlap/PETS/"
+    sp_overlap_dir = "../../../dataset/spatial_overlap/PETS/"
     xml_path = "{}/{}".format(sp_overlap_dir, xml_file_name)
     return get_bb_coords(xml_path=xml_path)
 
 
 if __name__ == "__main__":
-    ref_cam = 7
-    collab_cam = 8
-    gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates(ref_cam, collab_cam)
+    ref_cam = 5
+    collab_cam = 7
+
     max_pixel_intensity = 245
     print("max_pixel_intensity: {}".format(max_pixel_intensity))
 
     iou_scores = []
     est_area_global = []
-
+    gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates(ref_cam, collab_cam)
     # frame_list = os.listdir("intermediate_frames/")
     # frame_list = sorted(frame_list)
-    frame_list = np.arange(0, 634, 1)
+    frame_list = np.arange(0, 400, 1)
     for f_num in frame_list:
-        f_name = "marked_area_cam_7_f_{}.jpg".format(f_num)
+        f_name = "marked_area_cam_{}_f_{}.jpg".format(ref_cam, f_num)
         # print(f_name)
         frame_path = "{}/{}".format("intermediate_frames", f_name)
         print(frame_path)
@@ -107,4 +107,3 @@ if __name__ == "__main__":
 
     for i in iou_scores:
         print(i)
-

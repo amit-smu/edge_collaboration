@@ -894,11 +894,15 @@ class DataGenerator:
         create mixed-resolution images (based on teh collaborating and reference cameras)
         :return:
         """
-        SHARED_AREA_RES = (96, 96)  # min possible region of shared region (with same obj det accuracy)
+        COMPRESSION = True
+        COMPRESSION_QUALITY = 2  # [0 to 95] for jpeg
+        print("Compression Quality : {}".format(COMPRESSION_QUALITY))
+
+        SHARED_AREA_RES = (512, 512)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [0, 0, 298, 700]  # gt overlap cam 1, 4 (projected on view 1) Cropped images (700x700)
-        shared_reg_coords = [0, 0, 1268, 1080]
+        shared_reg_coords = [6, 4, 908, 1074]
         print("shared reg coords : {}".format(shared_reg_coords))
         # map shared region to 512x512 (data gen image size)
         xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
@@ -925,6 +929,13 @@ class DataGenerator:
             shared_reg = img[ymin_tr:ymax_tr, xmin_tr:xmax_tr]
             temp = cv2.resize(shared_reg, dsize=shared_reg_target_res, interpolation=cv2.INTER_CUBIC)
             shared_reg = cv2.resize(temp, dsize=(reg_width, reg_height), interpolation=cv2.INTER_CUBIC)
+
+            # encode image if compression is on...
+            if COMPRESSION:
+                img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = 255
+                status, buffer = cv2.imencode(".png", img, [cv2.IMWRITE_PNG_COMPRESSION, COMPRESSION_QUALITY])
+                img = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
+
             img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = shared_reg
             batch_x_mixed_res.append(img)
         # assert batch_x.shape == batch_x_mixed_res.shape
@@ -937,11 +948,15 @@ class DataGenerator:
         :return:
         :return:
         """
-        SHARED_AREA_RES = (224, 224)  # min possible region of shared region (with same obj det accuracy)
+        COMPRESSION = True
+        COMPRESSION_QUALITY = 2  # [0 to 95] for jpeg
+        print("Compression Quality : {}".format(COMPRESSION_QUALITY))
+
+        SHARED_AREA_RES = (512, 512)  # min possible region of shared region (with same obj det accuracy)
         print("shared area resolution: {}".format(SHARED_AREA_RES))
         # shared_reg_coords = [6, 4, 908, 1074]  # gt overlap cam 1, 4 (projected on view 1)
         # shared_reg_coords = [0, 0, 298, 700]  # gt overlap cam 1, 4 (projected on view 1) Cropped images (700x700)
-        shared_reg_coords = [238, 0, 720, 576]
+        shared_reg_coords = [91, 142, 693, 510]
         print("shared reg coords : {}".format(shared_reg_coords))
         # map shared region to 512x512 (data gen image size)
         xmin_org, ymin_org, xmax_org, ymax_org = shared_reg_coords  # in org cam resolution (1920x1080 for WT)
@@ -968,6 +983,13 @@ class DataGenerator:
             shared_reg = img[ymin_tr:ymax_tr, xmin_tr:xmax_tr]
             temp = cv2.resize(shared_reg, dsize=shared_reg_target_res, interpolation=cv2.INTER_CUBIC)
             shared_reg = cv2.resize(temp, dsize=(reg_width, reg_height), interpolation=cv2.INTER_CUBIC)
+
+            # encode image if compression is on...
+            if COMPRESSION:
+                img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = 255
+                status, buffer = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, COMPRESSION_QUALITY])
+                img = cv2.imdecode(buffer, cv2.IMREAD_COLOR)
+
             img[ymin_tr:ymax_tr, xmin_tr:xmax_tr] = shared_reg
             batch_x_mixed_res.append(img)
         # assert batch_x.shape == batch_x_mixed_res.shape

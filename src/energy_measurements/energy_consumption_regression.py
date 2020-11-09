@@ -12,9 +12,9 @@ from sklearn.model_selection import cross_val_score, KFold
 import pickle
 
 if __name__ == "__main__":
-    DEGREE = 4
+    DEGREE = 1
     in_file_path = "img_nw_trans_measurements_rpi.csv"
-    output_filename = "img_nw_trans_energy_model_rpi"
+    output_filename = "img_storage_energy_model_rpi"
 
     data = pd.read_csv(in_file_path, delimiter="\t")
     # print(data)
@@ -52,22 +52,47 @@ if __name__ == "__main__":
     print("cross-validation scores: {}, avg : {}".format(score, np.mean(score)))
     # write model to disk
 
+    input_dta_size = [1244160, 107588, 61625, 25599, 20416, 16111, 14502]
+    input_dta_size = [1244160, 104651, 59241, 23219, 18235, 14480, 13319]
+    input_dta_size = [6220800, 269977, 262068, 262378, 258856, 257468, 257189]
+    input_dta_size = [6220800, 166693, 161354, 159840, 156701, 155796, 155557]
+    # input_dta_size = [6220800, 427233, 297654]
+    # input_dta_size = [1244160, 374184, 408771, 427233, 297654]
+
     with open(output_filename, 'wb') as out:
         # test prediction
-        input_values = np.array([[414720]])
-        # input_values = np.array([[2073600]])
-        input_values = poly_features.transform(input_values)
-        print(final_model.predict(input_values))
-        pickle.dump(final_model, out)
+        # input_values = np.array([[414720*3]])
+        # input_values = np.array([[2073600 * 3]])
+        # input_values = poly_features.transform(input_values)
+        # print(final_model.predict(input_values))
+        # # pickle.dump(final_model, out)
+        #
+        # # input_values = np.array([[124728*3]])
+        # input_values = np.array([[265417 * 3]])
+        # input_values = poly_features.transform(input_values)
+        # print(final_model.predict(input_values))
+        #
+        # # input_values = np.array([[136257*3]])
+        # input_values = np.array([[257508 * 3]])
+        # input_values = poly_features.transform(input_values)
+        # print(final_model.predict(input_values))
 
-    with open(output_filename, 'rb') as inp:
-        model = pickle.load(inp)
-        input_values = np.array([[124728]])
-        # input_values = np.array([[142411]])
-        input_values = poly_features.transform(input_values)
-        print(final_model.predict(input_values))
+        for data in input_dta_size:
+            input_values = np.array([[data]])
+            input_values = poly_features.transform(input_values)
+            energy_consumption = final_model.predict(input_values)
+            energy_consumption = np.round(energy_consumption, decimals=2)
+            # print("size: {}, energy: {}".format(data, energy_consumption))
+            print(energy_consumption[0])
 
-        input_values = np.array([[960000]])
-        # input_values = np.array([[99218]])
-        input_values = poly_features.transform(input_values)
-        print(final_model.predict(input_values))
+    # with open(output_filename, 'rb') as inp:
+    #     model = pickle.load(inp)
+    #     input_values = np.array([[124728]])
+    #     # input_values = np.array([[142411]])
+    #     input_values = poly_features.transform(input_values)
+    #     print(final_model.predict(input_values))
+    #
+    #     input_values = np.array([[960000]])
+    #     # input_values = np.array([[99218]])
+    #     input_values = poly_features.transform(input_values)
+    #     print(final_model.predict(input_values))
