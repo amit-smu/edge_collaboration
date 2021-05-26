@@ -23,3 +23,6 @@ ssd_keras/temp/*
 src/**/regression_models/*
 src/**/*.zip
 ssd_keras/**/*.zip
+yolov3/**/temp/*
+yolov4/**/temp/*
+yolov4/**/*.png

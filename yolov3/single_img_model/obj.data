@@ -1,0 +1,5 @@
+classes= 1
+train= ../single_img_model/data/train.txt
+valid= ../single_img_model/data/test.txt
+names= ../single_img_model/data/obj.names
+backup= ../single_img_model/model_backup
