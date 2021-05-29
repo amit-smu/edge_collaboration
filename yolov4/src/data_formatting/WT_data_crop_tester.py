@@ -2,8 +2,8 @@ import cv2
 import os
 
 if __name__ == "__main__":
-    in_dir = r"D:/My Drive/yolov3/prior_img_model/data/Images"
-    annot_dir = r"D:/My Drive/yolov3/prior_img_model/data/Images"
+    in_dir = r"D:\My Drive\yolov3\test_data_1920\data_org\Images"
+    annot_dir = r"D:\My Drive\yolov3\test_data_1920\data_org\Images"
 
     filenames = os.listdir(in_dir)
     for name in filenames:
@@ -15,10 +15,10 @@ if __name__ == "__main__":
         with open("{}/{}.txt".format(annot_dir, name[:-4]), 'r') as annot:
             line = annot.readline().strip("\n").split(" ")
             while len(line) > 2:
-                mid_x = float(line[1]) * 1056
-                mid_y = float(line[2]) * 1056
-                width = float(line[3]) * 1056
-                height = float(line[4]) * 1056
+                mid_x = float(line[1]) * 1920
+                mid_y = float(line[2]) * 1080
+                width = float(line[3]) * 1920
+                height = float(line[4]) * 1080
 
                 xmin = int(mid_x - (width / 2))
                 xmax = int(mid_x + (width / 2))

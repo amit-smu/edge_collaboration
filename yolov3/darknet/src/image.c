@@ -252,7 +252,14 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
                     strcat(labelstr, ", ");
                     strcat(labelstr, names[j]);
                 }
-                printf("%s: %.0f%%\n", names[j], dets[i].prob[j]*100);
+                // *********** amit ********************
+                box bx = dets[i].bbox;
+                int left_amit  = (bx.x-bx.w/2.)*im.w;
+                int top_amit   = (bx.y-bx.h/2.)*im.h;
+                int width_amit = bx.w * im.w;
+                int height_amit = bx.h * im.h;
+//                printf("Img width=%d, height=%d\n", im.w, im.h);
+                printf("%s: %.0f%%, %d %d %d %d\n", names[j], dets[i].prob[j]*100, left_amit, top_amit, width_amit, height_amit);
             }
         }
         if(class >= 0){
