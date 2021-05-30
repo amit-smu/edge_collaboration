@@ -684,10 +684,7 @@ void parse_net_options(list *options, network *net)
     net->center = option_find_int_quiet(options, "center",0);
     net->clip = option_find_float_quiet(options, "clip", 0);
 
-    //*******************************amit *****************************************************************
-    net->prior = option_find_int_quiet(options, "prior",0);
-//    net->load_weights_from = option_find_int_quiet(options, "load_weights_from", 0);
-    //*******************************amit *****************************************************************
+    net->prior = option_find_int_quiet(options, "prior", 0);
 
     net->angle = option_find_float_quiet(options, "angle", 0);
     net->aspect = option_find_float_quiet(options, "aspect", 1);
@@ -1312,9 +1309,6 @@ void load_weights_upto(network *net, char *filename, int start, int cutoff)
 
 void load_weights(network *net, char *filename)
 {
-//    load_weights_upto(net, filename, 0, net->n);
-// **************************amit **********************************************
-    load_weights_upto(net, filename, net->load_weights_from, net->n);
-// **************************amit **********************************************
+    load_weights_upto(net, filename, 0, net->n);
 }
 

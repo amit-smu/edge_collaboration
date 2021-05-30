@@ -204,9 +204,9 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(s_points, d_points):
     rmse = np.sqrt(mean_squared_error(y_true=Y, y_pred=model.predict(X_poly)))
     print("Training!! RMSE : {}, R2: {}".format(round(rmse), np.round(r_score, decimals=2)))
 
-    with open("regression_models/min_max_scalar_src_{}_dst_{}_PETS".format(src_cam, dst_cam), 'wb') as ofile:
+    with open("./regression_models/min_max_scalar_src_{}_dst_{}_WT".format(src_cam, dst_cam), 'wb') as ofile:
         pickle.dump(min_max_scalar, ofile)
-    with open("regression_models/lin_reg_deg_{}_src_{}_dst_{}_optimized".format(degree, src_cam, dst_cam),
+    with open("./regression_models/lin_reg_deg_{}_src_{}_dst_{}_optimized".format(degree, src_cam, dst_cam),
               "wb") as ofile:
         pickle.dump(model, ofile)
 
@@ -215,13 +215,12 @@ if __name__ == "__main__":
     DEBUG = False
     NORMALIZE = False
     REGULARIZE = False
-    DATASET_DIR = "../../../../dataset"
-    img_dir = "{}/Wildtrack_dataset/PNGImages".format(DATASET_DIR)
-    annot_dir = "{}/Wildtrack_dataset/Annotations".format(DATASET_DIR)
+    img_dir = r"G:\Datasets\Wildtrack_dataset\PNGImages"
+    annot_dir = r"G:\Datasets\Wildtrack_dataset\Annotations"
 
-    src_cam = 7  # collab cam
+    src_cam = 3  # collab cam
     dst_cam = 5  # ref cam
-    degree = 5
+    degree = 1
     TRAINING_FRAMES = 1400  # out of 400 total, 119 frames kept for testing. Frame no range = (0, 2000)
 
     s_pts_train = []  # source/dst points for testing and training

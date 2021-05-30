@@ -33,9 +33,9 @@ def draw_gt(image, image_name):
 
 
 if __name__ == "__main__":
-    labels_dir =r"G:\Datasets\Wildtrack_dataset\labels"
+    labels_dir =r"G:\Datasets\Wildtrack_dataset\labels_yolo"
     img_dir = r"G:\Datasets\Wildtrack_dataset\PNGImages"
-    result_file = "result.txt"
+    result_file = r"G:\GitRepo\mAP\input\detection-results\result.txt"
 
     SEPARATOR_KEY = "Enter Image Path:"
     IMG_FORMAT = ".png"

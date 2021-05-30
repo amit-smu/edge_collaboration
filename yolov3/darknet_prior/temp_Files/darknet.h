@@ -477,6 +477,8 @@ typedef struct network{
     int gpu_index;
     tree *hierarchy;
 
+    int prior;
+
     float *input;
     float *truth;
     float *delta;
@@ -486,10 +488,6 @@ typedef struct network{
     float *cost;
     float clip;
 
-    //**************** amit **************
-    int prior;
-    int load_weights_from;
-    //**************** amit **************
 #ifdef GPU
     float *input_gpu;
     float *truth_gpu;
@@ -568,9 +566,6 @@ typedef struct load_args{
     int scale;
     int center;
     int coords;
-    //**************** amit **************
-    int prior;
-    //**************** amit **************
     float jitter;
     float angle;
     float aspect;
@@ -703,14 +698,8 @@ image load_image(char *filename, int w, int h, int c);
 image load_image_color(char *filename, int w, int h);
 image make_image(int w, int h, int c);
 image resize_image(image im, int w, int h);
-//**************** amit ******************************************************
-image resize_prior(image im, int w, int h);
-//**************** amit ******************************************************
 void censor_image(image im, int dx, int dy, int w, int h);
 image letterbox_image(image im, int w, int h);
-//**************** amit *****************************************************
-image letterbox_prior(image im, int w, int h);
-//**************** amit *****************************************************
 image crop_image(image im, int dx, int dy, int w, int h);
 image center_crop_image(image im, int w, int h);
 image resize_min(image im, int min);

@@ -2,8 +2,8 @@ import cv2
 import os
 
 if __name__ == "__main__":
-    in_dir = r"D:\My Drive\yolov3\test_data_1920\data_org\Images"
-    annot_dir = r"D:\My Drive\yolov3\test_data_1920\data_org\Images"
+    in_dir = r"G:\Datasets\Wildtrack_dataset\PNGImages"
+    annot_dir = r"G:\Datasets\Wildtrack_dataset\labels_yolo"
 
     filenames = os.listdir(in_dir)
     for name in filenames:
@@ -11,6 +11,7 @@ if __name__ == "__main__":
             continue
         if name.__contains__("prior"):
             continue
+        name = "C1_00001400.png"
         img = cv2.imread("{}/{}".format(in_dir, name), cv2.IMREAD_UNCHANGED)
         with open("{}/{}.txt".format(annot_dir, name[:-4]), 'r') as annot:
             line = annot.readline().strip("\n").split(" ")
