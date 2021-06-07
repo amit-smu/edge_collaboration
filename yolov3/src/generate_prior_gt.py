@@ -28,7 +28,7 @@ if __name__ == "__main__":
     img_out_dir = "./temp"
     cam_pair = "5_7"
 
-    IOU_TH = 0.5
+    IOU_TH = 0.2
     width, height = (1920.0, 1080.0)
     resolutions = [1056, 512, 416, 320, 224, 128]
     spatial_overlap = {
@@ -69,7 +69,7 @@ if __name__ == "__main__":
                 bottom = int(min(mid_y + box_height / 2, height - 1))
 
                 #  check overlap with shared region
-                if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[cam_pair]) >= 0.5:
+                if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[cam_pair]) >= IOU_TH:
                     prior[top:bottom, left:right] = 250
 
                     # cv2.rectangle(image, (left, top), (right, bottom), (0, 255, 0))

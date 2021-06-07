@@ -20,10 +20,10 @@ def draw_gt(image, image_name):
             # width = float(width)
             # height = float(height)
 
-            mid_x = float(line[1]) * 1920
-            mid_y = float(line[2]) * 1080
-            width = float(line[3]) * 1920
-            height = float(line[4]) * 1080
+            mid_x = float(line[1]) * 1456
+            mid_y = float(line[2]) * 902
+            width = float(line[3]) * 1456
+            height = float(line[4]) * 902
 
             xmin = int(mid_x - (width / 2))
             xmax = int(mid_x + (width / 2))
@@ -33,8 +33,8 @@ def draw_gt(image, image_name):
 
 
 if __name__ == "__main__":
-    labels_dir =r"G:\Datasets\Wildtrack_dataset\labels_yolo"
-    img_dir = r"G:\Datasets\Wildtrack_dataset\PNGImages"
+    labels_dir =r"./temp"
+    img_dir = r"./temp/"
     result_file = r"G:\GitRepo\mAP\input\detection-results\result.txt"
 
     SEPARATOR_KEY = "Enter Image Path:"
@@ -50,7 +50,9 @@ if __name__ == "__main__":
                 # get the image name (the final component of a image_path)
                 # e.g., from 'data/horses_1' to 'horses_1'
                 if image_name is not None:
-                    cv2.imwrite("{}/{}.png".format("./temp/", image_name), image)
+                    # cv2.imwrite("{}/{}.png".format("./detection_temp/", image_name), image)
+                    cv2.imshow("image", image)
+                    cv2.waitKey(-1)
                     # break
                 image_name = os.path.basename(image_path.group(1))
                 image = cv2.imread("{}/{}.png".format(img_dir, image_name))

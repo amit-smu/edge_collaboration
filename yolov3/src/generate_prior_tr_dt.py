@@ -1,5 +1,5 @@
 """
-module to generate priors for transformed (using coordiante mapper) ground truth of collaborative model
+generate prior from transformed detected boxes from collaborating camera
 """
 import cv2
 import numpy as np
@@ -47,7 +47,8 @@ def transform_coords(mid_x, bt_y, bw, bh):
 
 if __name__ == "__main__":
     img_dir = r"G:\Datasets\Wildtrack_dataset\PNGImages"
-    label_dir = r"G:\Datasets\Wildtrack_dataset\labels_yolo"
+    # label_dir = r"G:\Datasets\Wildtrack_dataset\labels_yolo"
+    label_dir = r"G:\GitRepo\mAP\input\detection-results"
     img_out_dir = "./temp"
     cam_pair = "7_5"  # transform one camera to another
 
@@ -80,42 +81,26 @@ if __name__ == "__main__":
                 line = line.strip()
 
                 # read gt for this image
-                _, mid_x, mid_y, box_width, box_height = [x for x in line.split()]
-
-                mid_x = float(mid_x) * width
-                mid_y = float(mid_y) * height
-                box_width = float(box_width) * width
-                box_height = float(box_height) * height
-
-                # enforce constraints
-                # left = int(max(1, mid_x - box_width / 2))
-                # top = int(max(1, mid_y - box_height / 2))
-                # right = int(min(mid_x + box_width / 2, width - 1))
-                # bottom = int(min(mid_y + box_height / 2, height - 1))
-
-                left = int(mid_x - box_width / 2)
-                top = int(mid_y - box_height / 2)
-                right = int(mid_x + box_width / 2)
-                bottom = int(mid_y + box_height / 2)
+                left, top, right, bottom = [int(x) for x in line.split()[2:]]
 
                 #  check overlap with shared region
                 if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[cam_pair]) >= IOU_TH:
-                    mid_x = max(1, mid_x)
-                    bt_y = max(1, mid_y + box_height / 2)
+                    box_width = right - left
+                    box_height = bottom - top
+                    bt_mid_x = int(max(1, left + box_width / 2))
 
-                    mid_x, bt_y, box_width, box_height = transform_coords(mid_x, bt_y, box_width, box_height)
+                    bt_mid_x, bottom, box_width, box_height = transform_coords(bt_mid_x, bottom, box_width, box_height)
 
-                    left = int(max(1, mid_x - box_width / 2))
-                    # top = int(max(1, mid_y - box_height / 2))
-                    top = int(max(1, bt_y - box_height))
-                    right = int(min(width - 1, mid_x + box_width / 2))
-                    # bottom = int(min(height-1, mid_y + box_height / 2))
-                    bottom = int(min(height - 1, bt_y))
+                    left = int(max(1, bt_mid_x - box_width / 2))
+                    top = int(max(1, bottom - box_height))
+                    right = int(min(width - 1, bt_mid_x + box_width / 2))
+                    bottom = int(min(height - 1, bottom))
 
                     collab_pair = cam_pair[::-1]  # reverse the string
                     if bb_icov(gt_box=[left, top, right, bottom],
                                cropped_img_box=spatial_overlap[collab_pair]) >= IOU_TH:
-                        prior[top:bottom, left:right] = 250
+                        # prior[top:bottom, left:right] = 250
+                        prior[:, :] = 0
 
             prior_name = "C{}_{:08d}_prior.png".format(cam_pair[2], i)
             print(prior_name)
