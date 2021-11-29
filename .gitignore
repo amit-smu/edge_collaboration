@@ -25,3 +25,4 @@ src/**/*.zip
 ssd_keras/**/*.zip
 yolov4/**/temp/*
 yolov3/**/temp/*
+rpi_hardware/**/*.jpg

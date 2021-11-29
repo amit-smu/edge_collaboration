@@ -1,0 +1,3029 @@
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_1.jpg: Predicted in 0.036204 seconds.
+person: 100%, 368 385 96 347
+person: 100%, 807 343 110 415
+person: 100%, 718 379 109 347
+person: 100%, 501 398 119 324
+person: 99%, 277 417 83 286
+person: 98%, 0 392 104 484
+person: 97%, 970 399 64 153
+person: 62%, 577 420 65 218
+person: 53%, 624 517 45 88
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_2.jpg: Predicted in 0.031744 seconds.
+tvmonitor: 99%, 873 425 114 83
+backpack: 50%, 253 595 53 79
+person: 100%, 390 387 95 331
+person: 100%, 478 380 111 384
+person: 100%, 587 418 70 221
+person: 99%, 700 398 99 348
+person: 99%, 299 411 96 301
+person: 99%, 781 351 98 364
+person: 98%, -4 369 137 485
+person: 64%, 994 403 49 144
+person: 55%, 639 497 40 100
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_3.jpg: Predicted in 0.031829 seconds.
+tvmonitor: 96%, 851 426 132 80
+suitcase: 59%, 282 595 52 86
+person: 100%, 436 387 128 372
+person: 100%, 323 420 78 278
+person: 100%, 7 374 146 462
+person: 99%, 602 420 81 216
+person: 98%, 678 374 92 360
+person: 91%, 760 379 93 330
+person: 90%, 1001 397 61 143
+person: 90%, 691 351 151 401
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_4.jpg: Predicted in 0.031743 seconds.
+tvmonitor: 98%, 840 424 147 87
+suitcase: 61%, 305 586 53 86
+person: 100%, 22 382 149 442
+person: 99%, 671 350 168 417
+person: 99%, 430 388 126 373
+person: 99%, 336 418 92 275
+person: 92%, 647 378 105 362
+person: 83%, 1014 396 54 145
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_5.jpg: Predicted in 0.031723 seconds.
+tvmonitor: 99%, 842 423 145 86
+person: 100%, 503 407 112 300
+person: 100%, 396 375 123 405
+person: 99%, 639 375 119 397
+person: 98%, 46 379 151 428
+person: 79%, 1027 396 39 144
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_6.jpg: Predicted in 0.031707 seconds.
+tvmonitor: 99%, 844 423 141 85
+dog: 83%, 321 635 62 109
+person: 100%, 522 388 100 311
+person: 100%, 348 369 145 434
+person: 99%, 71 385 137 411
+person: 98%, 619 391 109 369
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_7.jpg: Predicted in 0.031694 seconds.
+tvmonitor: 98%, 843 424 143 84
+dog: 86%, 277 630 77 123
+person: 100%, 307 375 153 432
+person: 99%, 710 414 74 213
+person: 99%, 618 382 103 395
+person: 99%, 544 392 91 268
+person: 97%, 95 385 136 419
+person: 58%, 428 448 75 212
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_8.jpg: Predicted in 0.031699 seconds.
+tvmonitor: 99%, 844 424 142 85
+handbag: 80%, 187 487 68 133
+dog: 83%, 234 622 87 150
+person: 100%, 725 410 75 213
+person: 100%, 292 383 150 433
+person: 99%, 420 428 104 247
+person: 99%, 571 352 147 446
+person: 98%, 121 413 127 353
+person: 57%, 407 437 67 235
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_9.jpg: Predicted in 0.031744 seconds.
+tvmonitor: 98%, 845 424 139 84
+dog: 84%, 212 655 101 120
+person: 100%, 275 379 146 429
+person: 100%, 541 356 150 455
+person: 99%, 445 410 81 270
+person: 99%, 750 410 71 232
+person: 97%, 146 405 130 343
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_10.jpg: Predicted in 0.031958 seconds.
+tvmonitor: 96%, 843 423 144 85
+suitcase: 74%, 436 568 47 71
+dog: 74%, 206 640 91 151
+person: 100%, 255 374 146 450
+person: 99%, 535 362 140 448
+person: 98%, 766 406 79 220
+person: 96%, 464 412 72 268
+person: 94%, 651 388 85 287
+person: 84%, 170 415 100 325
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_11.jpg: Predicted in 0.031856 seconds.
+tvmonitor: 99%, 851 423 133 86
+dog: 64%, 199 643 95 158
+person: 100%, 535 354 154 475
+person: 100%, 227 372 172 474
+person: 100%, 658 391 82 283
+person: 90%, 796 400 67 199
+person: 72%, 466 399 70 265
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_12.jpg: Predicted in 0.031811 seconds.
+tvmonitor: 88%, 861 424 122 83
+suitcase: 64%, 729 563 53 53
+handbag: 57%, 495 620 53 99
+backpack: 72%, 592 446 96 164
+dog: 55%, 178 668 90 146
+person: 100%, 228 360 162 493
+person: 100%, 671 389 88 288
+person: 100%, 526 338 162 499
+person: 94%, 815 405 63 136
+person: 84%, 471 351 97 354
+person: 65%, 735 427 45 145
+person: 64%, 1033 406 42 130
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_13.jpg: Predicted in 0.031856 seconds.
+tvmonitor: 90%, 883 422 100 86
+dog: 97%, 153 675 101 164
+person: 100%, 190 356 174 520
+person: 100%, 689 396 84 268
+person: 100%, 517 345 156 501
+person: 97%, 830 406 72 131
+person: 95%, 457 347 89 357
+person: 93%, 407 442 54 158
+person: 86%, 321 447 74 270
+person: 66%, 1037 411 38 121
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_14.jpg: Predicted in 0.031743 seconds.
+tvmonitor: 57%, 909 425 76 75
+backpack: 51%, 449 650 86 93
+dog: 90%, 111 665 96 169
+person: 100%, 161 340 172 552
+person: 100%, 501 335 151 561
+person: 100%, 704 393 94 279
+person: 98%, 850 406 71 129
+person: 97%, 311 418 104 288
+person: 97%, 428 357 101 339
+person: 65%, 785 424 50 188
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_15.jpg: Predicted in 0.031742 seconds.
+tvmonitor: 81%, 927 432 57 62
+suitcase: 63%, 934 522 27 23
+person: 100%, 128 333 220 596
+person: 100%, 732 393 89 268
+person: 100%, 478 324 145 582
+person: 97%, 412 351 99 357
+person: 95%, 870 406 67 130
+person: 94%, 341 419 86 280
+person: 63%, 703 500 47 103
+person: 61%, 1036 416 38 118
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_16.jpg: Predicted in 0.031841 seconds.
+person: 100%, 110 338 202 593
+person: 100%, 345 349 138 401
+person: 100%, 458 336 136 596
+person: 99%, 578 416 71 234
+person: 99%, 747 394 80 257
+person: 97%, 883 401 83 187
+person: 77%, 864 408 38 115
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_17.jpg: Predicted in 0.032305 seconds.
+umbrella: 51%, 58 633 122 231
+person: 100%, 105 311 198 647
+person: 100%, 894 399 78 204
+person: 100%, 303 338 152 430
+person: 100%, 428 315 150 647
+person: 99%, 764 386 86 275
+person: 99%, 580 423 83 223
+person: 58%, 1042 417 32 114
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_18.jpg: Predicted in 0.031732 seconds.
+handbag: 51%, 85 666 94 183
+umbrella: 52%, 89 693 90 171
+person: 100%, 82 312 238 669
+person: 100%, 400 307 157 659
+person: 100%, 286 348 141 459
+person: 100%, 904 402 84 191
+person: 99%, 790 385 80 231
+person: 99%, 597 413 89 230
+person: 56%, 1039 412 37 123
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_19.jpg: Predicted in 0.031683 seconds.
+handbag: 58%, 668 548 49 56
+handbag: 57%, 30 645 130 223
+person: 100%, 62 288 254 723
+person: 100%, 383 293 174 717
+person: 100%, 911 398 94 196
+person: 99%, 615 413 88 232
+person: 98%, 253 338 135 429
+person: 95%, 800 388 79 163
+person: 63%, 1038 416 36 115
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_20.jpg: Predicted in 0.031888 seconds.
+person: 100%, 29 297 267 734
+person: 100%, 360 289 221 743
+person: 99%, 911 398 71 198
+person: 98%, 628 413 79 227
+person: 98%, 976 417 62 143
+person: 96%, 815 393 85 148
+person: 59%, 219 363 113 379
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_21.jpg: Predicted in 0.033208 seconds.
+suitcase: 55%, 276 719 103 111
+handbag: 52%, 15 629 94 300
+person: 100%, 17 286 245 760
+person: 100%, 634 416 86 225
+person: 99%, 327 258 237 817
+person: 99%, 917 400 76 190
+person: 95%, 998 410 67 133
+person: 94%, 829 394 85 152
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_22.jpg: Predicted in 0.031744 seconds.
+suitcase: 78%, 248 714 115 148
+person: 100%, 0 307 252 710
+person: 100%, 302 273 248 789
+person: 100%, 657 423 83 212
+person: 99%, 925 404 73 189
+person: 98%, 1010 407 63 132
+person: 88%, 844 397 83 145
+person: 60%, 494 429 67 247
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_23.jpg: Predicted in 0.031736 seconds.
+person: 100%, -1 262 187 817
+person: 100%, 288 275 263 773
+person: 100%, 684 422 73 208
+person: 95%, 939 414 61 147
+person: 93%, 508 402 73 258
+person: 79%, 861 402 73 123
+person: 66%, 1035 399 40 137
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_24.jpg: Predicted in 0.031723 seconds.
+person: 100%, 524 425 80 243
+person: 99%, 254 244 270 843
+person: 99%, 695 422 75 207
+person: 98%, 8 329 163 637
+person: 93%, 938 411 61 131
+person: 87%, 66 405 105 420
+person: 82%, 863 397 80 152
+person: 51%, 5 333 79 777
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_25.jpg: Predicted in 0.031709 seconds.
+suitcase: 64%, 708 541 35 57
+backpack: 61%, 274 395 168 181
+person: 100%, 1 358 97 501
+person: 100%, 546 409 78 229
+person: 99%, 218 256 262 808
+person: 98%, 715 418 75 208
+person: 96%, 949 416 53 154
+person: 83%, 1035 405 43 131
+person: 81%, 881 405 67 131
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_26.jpg: Predicted in 0.032595 seconds.
+person: 100%, 77 228 329 853
+person: 99%, 564 411 81 244
+person: 93%, 957 412 59 158
+person: 93%, 741 417 72 217
+person: 92%, 886 396 70 208
+person: 89%, 0 376 76 521
+person: 84%, 1037 410 40 126
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_27.jpg: Predicted in 0.031925 seconds.
+suitcase: 68%, 747 535 33 50
+person: 100%, 576 395 83 254
+person: 100%, 9 250 290 817
+person: 96%, 752 419 75 200
+person: 94%, 893 404 64 132
+person: 90%, 961 407 53 135
+person: 85%, 1038 410 40 129
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_28.jpg: Predicted in 0.032296 seconds.
+person: 100%, 588 412 83 235
+person: 100%, 898 393 67 219
+person: 99%, 773 414 73 205
+person: 94%, 967 408 60 140
+person: 82%, 8 -44 303 1182
+person: 56%, 1040 406 37 130
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_29.jpg: Predicted in 0.031804 seconds.
+tvmonitor: 86%, 846 430 79 73
+person: 100%, 910 401 67 210
+person: 99%, 595 405 88 222
+person: 97%, 978 402 58 150
+person: 96%, 21 169 465 924
+person: 95%, 792 414 74 202
+person: 88%, 1033 407 44 133
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_30.jpg: Predicted in 0.031667 seconds.
+person: 100%, 922 395 67 212
+person: 100%, 37 45 542 1004
+person: 100%, 616 411 89 222
+person: 90%, 992 406 53 136
+person: 80%, 801 399 75 199
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_31.jpg: Predicted in 0.031762 seconds.
+person: 100%, 162 67 520 1009
+person: 99%, 932 400 61 209
+person: 99%, 637 408 75 223
+person: 91%, 1001 407 59 134
+person: 90%, 809 398 75 198
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_32.jpg: Predicted in 0.031771 seconds.
+person: 100%, 223 111 496 965
+person: 99%, 944 391 70 218
+person: 89%, 1007 407 57 124
+person: 72%, 654 423 73 213
+person: 70%, 833 418 63 115
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_33.jpg: Predicted in 0.031785 seconds.
+person: 100%, 283 118 507 954
+person: 100%, 966 398 61 211
+person: 86%, 1020 404 51 125
+person: 85%, 666 450 51 144
+person: 73%, 846 423 60 131
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_34.jpg: Predicted in 0.031765 seconds.
+person: 100%, 317 170 599 880
+person: 95%, 981 400 52 191
+person: 86%, 1033 410 43 124
+person: 82%, 859 420 58 106
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_35.jpg: Predicted in 0.031735 seconds.
+tvmonitor: 50%, 865 421 119 94
+person: 100%, 395 152 368 916
+person: 89%, 873 422 57 135
+person: 85%, 987 403 57 140
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_36.jpg: Predicted in 0.031760 seconds.
+person: 100%, 393 234 367 822
+person: 94%, 889 425 56 137
+person: 91%, 996 400 66 142
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_37.jpg: Predicted in 0.031838 seconds.
+tvmonitor: 82%, 859 424 124 92
+tvmonitor: 55%, 385 241 55 42
+person: 100%, 406 228 350 833
+person: 86%, 901 428 57 129
+person: 81%, 1003 401 64 137
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_38.jpg: Predicted in 0.031735 seconds.
+tvmonitor: 55%, 387 244 52 38
+tvmonitor: 53%, 849 432 86 75
+person: 100%, 380 240 345 822
+person: 98%, 914 420 55 163
+person: 81%, 1015 397 56 145
+person: 63%, 646 454 61 131
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_39.jpg: Predicted in 0.031733 seconds.
+tvmonitor: 66%, 849 428 92 77
+person: 100%, 359 241 327 843
+person: 98%, 631 419 70 193
+person: 94%, 925 423 56 158
+person: 83%, 1017 402 55 138
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_40.jpg: Predicted in 0.031703 seconds.
+tvmonitor: 52%, 847 426 110 78
+person: 100%, 297 243 283 834
+person: 97%, 617 424 78 184
+person: 87%, 1021 401 53 136
+person: 79%, 935 423 52 153
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_41.jpg: Predicted in 0.031839 seconds.
+tvmonitor: 76%, 849 425 113 80
+person: 100%, 240 261 279 807
+person: 98%, 597 424 76 185
+person: 94%, 950 420 49 156
+person: 65%, 1022 409 49 129
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_42.jpg: Predicted in 0.031732 seconds.
+tvmonitor: 88%, 846 423 120 82
+person: 100%, 208 269 286 783
+person: 99%, 582 436 73 176
+person: 90%, 955 420 49 152
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_43.jpg: Predicted in 0.031827 seconds.
+tvmonitor: 90%, 849 424 128 80
+person: 100%, 209 299 227 732
+person: 99%, 564 430 76 174
+person: 95%, 961 423 54 152
+person: 92%, 434 444 48 168
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_44.jpg: Predicted in 0.031996 seconds.
+tvmonitor: 84%, 846 423 133 81
+person: 100%, 206 323 218 654
+person: 97%, 972 422 55 151
+person: 96%, 541 436 78 170
+person: 58%, 467 455 52 144
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_45.jpg: Predicted in 0.031763 seconds.
+tvmonitor: 95%, 848 422 134 86
+person: 100%, 224 322 280 638
+person: 98%, 505 432 78 183
+person: 94%, 978 422 56 138
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_46.jpg: Predicted in 0.031784 seconds.
+tvmonitor: 92%, 844 423 142 86
+person: 100%, 294 332 186 600
+person: 79%, 981 419 57 143
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_47.jpg: Predicted in 0.031726 seconds.
+tvmonitor: 93%, 844 422 143 85
+person: 100%, 353 339 164 589
+person: 92%, 983 419 58 143
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_48.jpg: Predicted in 0.031735 seconds.
+tvmonitor: 95%, 844 422 145 86
+person: 100%, 391 349 222 525
+person: 91%, 986 419 56 136
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_49.jpg: Predicted in 0.031733 seconds.
+tvmonitor: 96%, 843 423 147 86
+person: 100%, 463 345 194 503
+person: 81%, 993 416 50 143
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_50.jpg: Predicted in 0.031763 seconds.
+tvmonitor: 95%, 841 423 149 85
+person: 100%, 520 347 152 507
+person: 76%, 1010 409 58 134
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_51.jpg: Predicted in 0.031927 seconds.
+tvmonitor: 97%, 841 423 148 86
+person: 100%, 568 349 172 476
+person: 63%, 1020 408 48 133
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_52.jpg: Predicted in 0.031788 seconds.
+tvmonitor: 98%, 844 422 144 86
+person: 100%, 604 374 190 441
+person: 72%, 1033 411 44 126
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_53.jpg: Predicted in 0.031742 seconds.
+tvmonitor: 99%, 844 423 145 85
+person: 100%, 645 362 144 447
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_54.jpg: Predicted in 0.031819 seconds.
+tvmonitor: 98%, 843 423 146 86
+person: 100%, 645 367 148 422
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_55.jpg: Predicted in 0.031720 seconds.
+tvmonitor: 99%, 843 423 145 86
+person: 100%, 655 372 156 412
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_56.jpg: Predicted in 0.031764 seconds.
+tvmonitor: 99%, 843 423 145 86
+person: 100%, 656 376 145 395
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_57.jpg: Predicted in 0.031742 seconds.
+tvmonitor: 99%, 844 423 144 86
+person: 100%, 675 380 113 365
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_58.jpg: Predicted in 0.031678 seconds.
+tvmonitor: 99%, 844 423 144 85
+person: 100%, 668 387 131 351
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_59.jpg: Predicted in 0.031802 seconds.
+tvmonitor: 99%, 845 423 142 86
+person: 100%, 688 373 125 383
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_60.jpg: Predicted in 0.031860 seconds.
+tvmonitor: 98%, 842 423 147 87
+person: 100%, 720 374 110 362
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_61.jpg: Predicted in 0.031743 seconds.
+tvmonitor: 98%, 843 423 144 86
+person: 98%, 737 379 101 302
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_62.jpg: Predicted in 0.031764 seconds.
+tvmonitor: 97%, 849 423 137 84
+person: 95%, 754 390 117 280
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_63.jpg: Predicted in 0.031812 seconds.
+tvmonitor: 96%, 877 420 113 92
+person: 70%, 794 385 107 160
+person: 51%, 793 360 100 384
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_64.jpg: Predicted in 0.032000 seconds.
+tvmonitor: 88%, 903 423 81 80
+person: 89%, 821 394 101 139
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_65.jpg: Predicted in 0.032914 seconds.
+tvmonitor: 72%, 927 432 59 63
+person: 100%, 853 396 126 277
+person: 98%, 522 415 51 183
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_66.jpg: Predicted in 0.031901 seconds.
+tvmonitor: 69%, 851 435 51 68
+person: 100%, 891 391 107 279
+person: 100%, 535 416 80 196
+person: 73%, 475 410 61 208
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_67.jpg: Predicted in 0.031714 seconds.
+tvmonitor: 96%, 845 428 82 76
+person: 100%, 909 391 106 284
+person: 100%, 556 407 70 200
+person: 94%, 442 403 69 204
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_68.jpg: Predicted in 0.031677 seconds.
+tvmonitor: 98%, 849 427 92 78
+person: 100%, 931 381 100 285
+person: 100%, 570 406 80 203
+person: 100%, 403 414 74 210
+person: 99%, 0 255 142 760
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_69.jpg: Predicted in 0.031735 seconds.
+tvmonitor: 94%, 846 424 120 83
+backpack: 65%, 4 367 88 254
+person: 100%, 944 387 93 279
+person: 100%, 582 408 74 198
+person: 100%, 3 274 151 711
+person: 96%, 381 417 66 209
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_70.jpg: Predicted in 0.031770 seconds.
+tvmonitor: 93%, 847 424 132 83
+backpack: 56%, 40 394 122 212
+person: 100%, 584 400 74 212
+person: 100%, 959 386 93 264
+person: 99%, 22 267 217 695
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_71.jpg: Predicted in 0.032157 seconds.
+tvmonitor: 96%, 845 422 142 85
+backpack: 76%, 117 374 122 198
+person: 100%, 97 266 220 657
+person: 100%, 584 410 72 205
+person: 100%, 972 388 81 254
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_72.jpg: Predicted in 0.031764 seconds.
+tvmonitor: 94%, 844 421 143 85
+backpack: 74%, 178 406 117 176
+person: 100%, 153 269 198 637
+person: 100%, 576 395 78 220
+person: 97%, 973 395 86 245
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_73.jpg: Predicted in 0.031933 seconds.
+tvmonitor: 96%, 844 423 146 85
+person: 100%, 566 387 86 235
+person: 100%, 226 277 175 617
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_74.jpg: Predicted in 0.031763 seconds.
+tvmonitor: 94%, 844 423 145 86
+backpack: 65%, 291 392 112 156
+person: 100%, 551 400 83 228
+person: 100%, 278 283 166 578
+person: 63%, 1003 395 69 145
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_75.jpg: Predicted in 0.031751 seconds.
+tvmonitor: 93%, 844 422 145 86
+person: 100%, 525 399 100 229
+person: 100%, 307 305 167 539
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_76.jpg: Predicted in 0.033081 seconds.
+tvmonitor: 96%, 843 422 145 85
+person: 100%, 513 380 99 249
+person: 100%, 370 315 150 492
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_77.jpg: Predicted in 0.031719 seconds.
+tvmonitor: 97%, 845 422 142 86
+person: 100%, 410 326 154 468
+person: 99%, 524 393 75 250
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_78.jpg: Predicted in 0.031779 seconds.
+tvmonitor: 97%, 844 422 144 87
+backpack: 55%, 440 417 108 159
+person: 100%, 431 331 170 458
+person: 83%, 145 401 79 252
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_79.jpg: Predicted in 0.031836 seconds.
+tvmonitor: 97%, 846 422 141 88
+person: 100%, 486 328 133 444
+person: 96%, 112 408 90 278
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_80.jpg: Predicted in 0.031762 seconds.
+tvmonitor: 98%, 843 422 144 85
+person: 100%, 441 379 108 288
+person: 100%, 529 346 131 422
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_81.jpg: Predicted in 0.031792 seconds.
+tvmonitor: 98%, 844 422 144 86
+person: 100%, 548 346 174 395
+person: 100%, 420 370 109 291
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_82.jpg: Predicted in 0.031726 seconds.
+tvmonitor: 98%, 844 424 145 85
+person: 100%, 410 369 103 307
+person: 99%, 576 341 140 411
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_83.jpg: Predicted in 0.031809 seconds.
+tvmonitor: 99%, 844 423 144 86
+person: 100%, 405 371 105 307
+person: 100%, 611 373 126 343
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_84.jpg: Predicted in 0.032112 seconds.
+tvmonitor: 99%, 844 423 144 86
+person: 100%, 389 355 103 346
+person: 100%, 635 344 135 380
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_85.jpg: Predicted in 0.031768 seconds.
+tvmonitor: 99%, 844 422 144 87
+person: 100%, 382 365 112 336
+person: 100%, 657 357 113 368
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_86.jpg: Predicted in 0.031728 seconds.
+tvmonitor: 99%, 844 423 144 84
+person: 100%, 395 352 125 345
+person: 100%, 677 362 114 336
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_87.jpg: Predicted in 0.031725 seconds.
+tvmonitor: 99%, 845 423 141 85
+person: 100%, 389 332 125 374
+person: 100%, 703 365 104 329
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_88.jpg: Predicted in 0.031718 seconds.
+tvmonitor: 99%, 845 423 142 85
+person: 100%, 401 345 123 369
+person: 100%, 706 371 112 319
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_89.jpg: Predicted in 0.032902 seconds.
+tvmonitor: 99%, 844 423 142 87
+person: 100%, 742 366 92 310
+person: 100%, 420 313 149 413
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_90.jpg: Predicted in 0.031813 seconds.
+tvmonitor: 98%, 853 423 135 85
+person: 100%, 428 311 157 434
+person: 100%, 761 365 101 316
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_91.jpg: Predicted in 0.031763 seconds.
+tvmonitor: 85%, 860 422 128 85
+tvmonitor: 63%, 374 462 80 72
+person: 100%, 432 303 147 450
+person: 100%, 778 357 98 320
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_92.jpg: Predicted in 0.031756 seconds.
+tvmonitor: 96%, 877 421 110 89
+tvmonitor: 60%, 375 459 79 76
+person: 100%, 455 270 158 507
+person: 99%, 792 356 100 334
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_93.jpg: Predicted in 0.031723 seconds.
+tvmonitor: 86%, 898 423 85 80
+person: 100%, 442 283 192 521
+person: 94%, 819 374 92 257
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_94.jpg: Predicted in 0.031684 seconds.
+tvmonitor: 86%, 916 423 71 82
+person: 100%, 437 265 166 546
+person: 99%, 840 360 89 316
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_95.jpg: Predicted in 0.031681 seconds.
+tvmonitor: 79%, 929 419 64 88
+person: 100%, 428 244 179 591
+person: 94%, 856 367 85 271
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_96.jpg: Predicted in 0.031838 seconds.
+person: 100%, 379 241 237 633
+person: 100%, 883 365 96 272
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_97.jpg: Predicted in 0.031674 seconds.
+tvmonitor: 97%, 847 430 75 76
+person: 100%, 336 198 211 705
+person: 100%, 909 359 81 285
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_98.jpg: Predicted in 0.032142 seconds.
+tvmonitor: 98%, 850 428 86 81
+person: 100%, 298 182 245 755
+person: 100%, 930 377 80 249
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_99.jpg: Predicted in 0.031738 seconds.
+tvmonitor: 94%, 846 427 110 77
+person: 100%, 256 183 250 810
+person: 100%, 945 364 82 259
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_100.jpg: Predicted in 0.031732 seconds.
+tvmonitor: 92%, 851 426 125 78
+person: 100%, 160 153 283 860
+person: 100%, 961 371 75 248
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_101.jpg: Predicted in 0.031726 seconds.
+tvmonitor: 95%, 845 424 136 84
+person: 100%, 86 107 318 970
+person: 100%, 964 371 72 250
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_102.jpg: Predicted in 0.031800 seconds.
+tvmonitor: 53%, 849 424 132 83
+person: 100%, 8 112 346 962
+person: 100%, 969 367 75 244
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_103.jpg: Predicted in 0.031745 seconds.
+tvmonitor: 84%, 846 421 143 86
+person: 100%, 5 21 225 1133
+person: 98%, 980 382 76 229
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_104.jpg: Predicted in 0.031729 seconds.
+tvmonitor: 89%, 845 421 144 86
+person: 90%, 990 379 77 179
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_105.jpg: Predicted in 0.031733 seconds.
+tvmonitor: 91%, 843 422 148 85
+person: 93%, 995 382 74 171
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_106.jpg: Predicted in 0.031708 seconds.
+tvmonitor: 94%, 844 422 146 85
+person: 89%, 1004 391 64 152
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_107.jpg: Predicted in 0.031775 seconds.
+tvmonitor: 92%, 844 422 146 87
+person: 86%, 1007 385 63 156
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_108.jpg: Predicted in 0.031870 seconds.
+tvmonitor: 81%, 843 422 146 87
+person: 93%, 1008 394 63 147
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_109.jpg: Predicted in 0.032399 seconds.
+tvmonitor: 90%, 844 422 145 86
+person: 92%, 1013 390 59 150
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_110.jpg: Predicted in 0.031721 seconds.
+tvmonitor: 86%, 845 422 142 85
+person: 89%, 1021 392 52 148
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_111.jpg: Predicted in 0.031713 seconds.
+tvmonitor: 92%, 843 422 146 87
+person: 86%, 1020 397 51 149
+person: 53%, 110 442 78 184
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_112.jpg: Predicted in 0.031949 seconds.
+tvmonitor: 93%, 844 422 144 87
+person: 94%, 1025 389 45 155
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_113.jpg: Predicted in 0.031820 seconds.
+tvmonitor: 93%, 844 422 144 86
+person: 100%, 603 402 49 197
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_114.jpg: Predicted in 0.031751 seconds.
+tvmonitor: 92%, 843 422 146 85
+person: 100%, 612 404 69 196
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_115.jpg: Predicted in 0.031736 seconds.
+tvmonitor: 83%, 844 424 144 82
+person: 99%, 635 401 66 190
+person: 95%, 1001 406 70 135
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_116.jpg: Predicted in 0.031769 seconds.
+tvmonitor: 93%, 844 423 145 83
+person: 100%, 651 394 93 200
+person: 88%, 600 419 41 172
+person: 80%, 1000 407 64 138
+person: 55%, 457 408 74 196
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_117.jpg: Predicted in 0.031748 seconds.
+tvmonitor: 97%, 844 423 146 83
+person: 100%, 682 396 66 203
+person: 97%, 433 413 66 203
+person: 97%, 619 428 52 171
+person: 51%, 1000 403 67 142
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_118.jpg: Predicted in 0.031920 seconds.
+tvmonitor: 97%, 844 423 149 84
+person: 100%, 690 397 78 201
+person: 98%, 406 417 65 200
+person: 98%, 640 416 59 171
+person: 96%, 602 436 52 168
+person: 63%, 996 402 67 145
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_119.jpg: Predicted in 0.031737 seconds.
+tvmonitor: 96%, 848 423 142 84
+person: 99%, 715 388 63 213
+person: 99%, 666 414 56 176
+person: 99%, 607 424 58 180
+person: 98%, 475 429 51 177
+person: 97%, 389 427 50 177
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_120.jpg: Predicted in 0.031704 seconds.
+tvmonitor: 97%, 845 423 146 84
+person: 100%, 689 413 52 178
+person: 99%, 730 399 66 204
+person: 98%, 617 428 60 159
+person: 77%, 996 398 67 149
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_121.jpg: Predicted in 0.031727 seconds.
+tvmonitor: 94%, 845 423 144 84
+person: 99%, 704 412 55 179
+person: 99%, 750 387 74 231
+person: 96%, 633 426 54 173
+person: 95%, 435 436 46 165
+person: 60%, 476 432 43 169
+person: 58%, 990 396 81 155
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_122.jpg: Predicted in 0.031830 seconds.
+tvmonitor: 82%, 844 423 144 82
+person: 99%, 716 411 58 180
+person: 99%, 634 428 54 154
+person: 96%, 409 438 52 163
+person: 95%, 769 395 63 152
+person: 93%, 675 424 48 161
+person: 77%, 466 444 48 155
+person: 54%, 977 392 82 163
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_123.jpg: Predicted in 0.031777 seconds.
+tvmonitor: 78%, 849 423 138 82
+person: 99%, 648 420 47 171
+person: 98%, 734 411 53 181
+person: 97%, 436 441 55 160
+person: 95%, 391 446 50 161
+person: 91%, 981 402 70 141
+person: 86%, 774 388 70 217
+person: 83%, 690 422 46 161
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_124.jpg: Predicted in 0.031700 seconds.
+person: 99%, 662 420 47 168
+person: 98%, 699 419 48 173
+person: 97%, 973 382 79 247
+person: 97%, 420 439 47 163
+person: 97%, 371 433 48 174
+person: 83%, 779 384 75 177
+person: 78%, 752 406 49 177
+person: 57%, 1048 409 32 131
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_125.jpg: Predicted in 0.031843 seconds.
+person: 99%, 968 398 79 233
+person: 99%, 667 422 53 168
+person: 98%, 709 414 51 175
+person: 97%, 797 381 72 173
+person: 94%, 763 409 48 137
+person: 74%, 404 439 53 168
+person: 69%, 1044 406 34 130
+person: 53%, 375 436 35 181
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_126.jpg: Predicted in 0.031770 seconds.
+person: 100%, 961 397 86 239
+person: 100%, 802 382 82 163
+person: 99%, 675 415 50 174
+person: 98%, 719 416 53 170
+person: 95%, 766 407 53 136
+person: 79%, 387 448 51 160
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_127.jpg: Predicted in 0.032191 seconds.
+person: 100%, 959 388 86 254
+person: 99%, 688 414 54 174
+person: 99%, 801 382 88 164
+person: 99%, 733 412 51 172
+person: 92%, 782 399 45 144
+person: 83%, 376 444 49 162
+person: 53%, 1047 402 31 135
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_128.jpg: Predicted in 0.031702 seconds.
+person: 100%, 961 389 83 259
+person: 99%, 602 413 54 185
+person: 99%, 701 409 47 185
+person: 99%, 806 383 84 176
+person: 96%, 738 414 47 179
+person: 65%, 1044 406 34 129
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_129.jpg: Predicted in 0.031779 seconds.
+person: 100%, 955 391 94 257
+person: 100%, 612 427 72 172
+person: 99%, 811 382 88 169
+person: 98%, 696 400 67 210
+person: 72%, 748 413 50 161
+person: 52%, 1047 407 31 129
+person: 51%, 378 476 26 48
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_130.jpg: Predicted in 0.031730 seconds.
+person: 100%, 958 390 91 260
+person: 99%, 637 421 55 169
+person: 99%, 822 376 91 172
+person: 95%, 694 405 70 197
+person: 78%, 753 415 51 158
+person: 57%, 1047 410 32 128
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_131.jpg: Predicted in 0.031780 seconds.
+person: 100%, 963 384 96 268
+person: 99%, 827 376 87 179
+person: 99%, 710 401 64 206
+person: 98%, 655 424 60 178
+person: 89%, 455 427 78 188
+person: 86%, 759 416 57 154
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_132.jpg: Predicted in 0.031700 seconds.
+person: 100%, 962 386 92 271
+person: 99%, 829 373 86 257
+person: 99%, 680 416 49 174
+person: 98%, 721 405 53 195
+person: 98%, 428 431 45 183
+person: 83%, 766 411 49 162
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_133.jpg: Predicted in 0.031762 seconds.
+person: 99%, 962 387 105 271
+person: 99%, 709 402 69 204
+person: 98%, 761 409 59 163
+person: 98%, 831 375 80 181
+person: 97%, 400 428 83 188
+person: 76%, 125 419 80 222
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_134.jpg: Predicted in 0.031770 seconds.
+person: 100%, 717 409 52 186
+person: 99%, 964 381 105 285
+person: 91%, 762 412 55 162
+person: 85%, 856 369 68 262
+person: 68%, 820 386 52 160
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_135.jpg: Predicted in 0.031713 seconds.
+person: 97%, 858 365 71 260
+person: 97%, 724 403 50 203
+person: 92%, 963 382 104 286
+person: 80%, 376 443 47 176
+person: 74%, 831 384 53 160
+person: 66%, 778 409 52 128
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_136.jpg: Predicted in 0.032201 seconds.
+person: 99%, 729 402 48 201
+person: 98%, 960 380 110 294
+person: 96%, 848 369 80 195
+person: 66%, 780 410 52 162
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_137.jpg: Predicted in 0.031806 seconds.
+person: 99%, 959 372 114 313
+person: 98%, 727 403 50 200
+person: 95%, 828 371 93 186
+person: 73%, 763 405 56 129
+person: 55%, 811 381 52 164
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_138.jpg: Predicted in 0.031714 seconds.
+person: 100%, 715 395 59 221
+person: 98%, 962 372 111 320
+person: 96%, 824 373 98 179
+person: 65%, 761 404 58 132
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_139.jpg: Predicted in 0.031704 seconds.
+person: 99%, 713 402 61 226
+person: 99%, 961 364 113 329
+person: 96%, 819 364 108 276
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_140.jpg: Predicted in 0.031800 seconds.
+person: 100%, 705 395 61 218
+person: 99%, 826 357 93 288
+person: 97%, 963 377 107 302
+person: 59%, 800 368 61 268
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_141.jpg: Predicted in 0.031828 seconds.
+person: 100%, 700 397 66 220
+person: 96%, 891 395 49 197
+person: 96%, 963 358 107 343
+person: 87%, 799 367 95 270
+person: 59%, 751 397 71 238
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_142.jpg: Predicted in 0.031803 seconds.
+person: 100%, 692 391 69 230
+person: 98%, 795 361 86 276
+person: 98%, 888 393 77 208
+person: 95%, 964 377 107 361
+person: 67%, 756 406 53 180
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_143.jpg: Predicted in 0.033176 seconds.
+person: 100%, 701 406 67 218
+person: 100%, 795 360 76 266
+person: 100%, 899 391 67 203
+person: 97%, 953 375 124 361
+person: 64%, 750 382 67 236
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_144.jpg: Predicted in 0.031761 seconds.
+person: 100%, 788 359 84 277
+person: 100%, 705 395 61 219
+person: 99%, 935 354 141 406
+person: 76%, 919 386 59 218
+person: 50%, 752 374 61 252
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_145.jpg: Predicted in 0.031794 seconds.
+tvmonitor: 81%, 869 426 86 78
+person: 100%, 936 357 136 398
+person: 100%, 703 406 63 220
+person: 99%, 787 348 91 310
+person: 71%, 757 417 43 199
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_146.jpg: Predicted in 0.031719 seconds.
+person: 100%, 698 398 68 235
+person: 100%, 923 349 144 417
+person: 99%, 783 361 106 281
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_147.jpg: Predicted in 0.031807 seconds.
+person: 100%, 916 366 153 421
+person: 100%, 698 397 70 238
+person: 96%, 770 360 84 291
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_148.jpg: Predicted in 0.031987 seconds.
+person: 100%, 915 358 152 437
+person: 100%, 695 396 68 236
+person: 91%, 784 364 103 307
+person: 66%, 747 393 57 250
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_149.jpg: Predicted in 0.032194 seconds.
+handbag: 73%, 0 711 183 351
+person: 100%, 921 349 151 471
+person: 100%, 685 394 82 243
+person: 98%, 787 353 113 301
+person: 92%, 748 394 57 251
+person: 52%, 0 605 173 449
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_150.jpg: Predicted in 0.032326 seconds.
+person: 100%, 681 389 72 250
+person: 100%, 940 346 133 468
+person: 99%, 786 351 109 306
+person: 97%, 747 394 58 246
+person: 67%, -2 356 160 589
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_151.jpg: Predicted in 0.032172 seconds.
+person: 100%, 677 389 82 251
+person: 99%, 980 293 100 582
+person: 89%, 756 371 112 291
+person: 72%, 0 265 189 542
+person: 68%, 749 367 64 274
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_152.jpg: Predicted in 0.031731 seconds.
+tvmonitor: 74%, 886 422 106 87
+backpack: 52%, 3 492 194 209
+person: 100%, 664 385 84 258
+person: 98%, 750 350 128 310
+person: 54%, 1001 222 78 715
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_153.jpg: Predicted in 0.031877 seconds.
+tvmonitor: 96%, 882 421 106 86
+handbag: 73%, 157 690 174 194
+handbag: 67%, 3 370 274 464
+person: 100%, 653 387 90 261
+person: 97%, -15 239 316 833
+person: 92%, 772 346 118 318
+person: 89%, 747 384 60 263
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_154.jpg: Predicted in 0.031771 seconds.
+tvmonitor: 89%, 883 421 104 85
+handbag: 62%, 167 650 144 194
+person: 100%, 647 382 84 269
+person: 99%, -2 119 296 934
+person: 98%, 774 358 129 316
+person: 98%, 733 388 60 257
+person: 65%, 1014 368 60 159
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_155.jpg: Predicted in 0.031784 seconds.
+tvmonitor: 88%, 894 424 92 80
+handbag: 84%, 211 655 134 181
+person: 100%, 644 383 83 266
+person: 100%, 18 151 295 916
+person: 99%, 733 354 157 329
+person: 77%, 726 387 68 260
+person: 54%, 818 361 85 314
+person: 53%, 1016 378 60 164
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_156.jpg: Predicted in 0.031786 seconds.
+tvmonitor: 99%, 881 421 107 88
+handbag: 75%, 284 621 122 156
+person: 100%, 650 386 79 256
+person: 100%, 21 141 329 937
+person: 99%, 738 353 103 295
+person: 63%, 818 353 77 338
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_157.jpg: Predicted in 0.031708 seconds.
+tvmonitor: 98%, 879 420 109 89
+handbag: 81%, 307 621 116 140
+person: 100%, 647 388 82 254
+person: 100%, 42 236 340 828
+person: 99%, 732 356 115 296
+person: 84%, 1017 377 57 168
+person: 65%, 821 369 73 297
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_158.jpg: Predicted in 0.031731 seconds.
+tvmonitor: 95%, 879 421 108 90
+handbag: 66%, 298 598 114 135
+person: 100%, 638 390 82 252
+person: 100%, 78 224 318 775
+person: 100%, 816 363 82 309
+person: 100%, 737 353 97 302
+person: 84%, 724 366 57 276
+person: 82%, -3 348 73 694
+person: 74%, 1031 370 47 150
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_159.jpg: Predicted in 0.031750 seconds.
+tvmonitor: 95%, 894 422 91 82
+person: 100%, 636 392 78 249
+person: 99%, 139 254 257 771
+person: 99%, 811 339 90 365
+person: 98%, 729 333 90 340
+person: 97%, 0 374 105 539
+person: 83%, 1017 373 58 171
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_160.jpg: Predicted in 0.031723 seconds.
+tvmonitor: 87%, 893 421 92 84
+handbag: 80%, 376 584 102 131
+person: 100%, 635 393 77 254
+person: 100%, 186 249 233 706
+person: 100%, 0 321 145 639
+person: 100%, 714 353 91 305
+person: 99%, 810 349 93 313
+person: 75%, 1014 368 59 156
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_161.jpg: Predicted in 0.031763 seconds.
+tvmonitor: 94%, 895 423 90 80
+person: 100%, 620 390 94 259
+person: 100%, 699 351 110 312
+person: 100%, 1 318 171 644
+person: 100%, 221 267 226 678
+person: 96%, 804 351 105 302
+person: 75%, 1019 375 56 170
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_162.jpg: Predicted in 0.031708 seconds.
+tvmonitor: 93%, 895 423 91 83
+handbag: 59%, 410 585 94 112
+person: 100%, 244 260 244 665
+person: 100%, 600 387 99 272
+person: 100%, 698 342 110 329
+person: 100%, 7 333 189 597
+person: 98%, 800 352 114 299
+person: 56%, 1009 352 70 303
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_163.jpg: Predicted in 0.031752 seconds.
+tvmonitor: 98%, 898 424 90 82
+handbag: 87%, 424 585 97 112
+person: 100%, 587 389 97 273
+person: 100%, 696 335 115 340
+person: 100%, 271 283 224 621
+person: 100%, 16 332 232 557
+person: 100%, 807 342 100 327
+person: 70%, 166 413 76 324
+person: 66%, 1007 345 73 311
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_164.jpg: Predicted in 0.031755 seconds.
+tvmonitor: 96%, 891 423 97 84
+handbag: 55%, 457 566 92 101
+person: 100%, 582 383 97 277
+person: 100%, 690 350 123 329
+person: 100%, 40 354 186 513
+person: 100%, 292 287 188 600
+person: 99%, 175 364 83 384
+person: 98%, 803 340 106 364
+person: 51%, 1004 348 72 191
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_165.jpg: Predicted in 0.031756 seconds.
+tvmonitor: 96%, 884 421 103 87
+backpack: 55%, 569 432 44 80
+person: 100%, 793 341 108 351
+person: 100%, 579 378 100 290
+person: 100%, 685 324 117 366
+person: 100%, 66 356 179 485
+person: 100%, 312 304 190 571
+person: 91%, 194 392 82 334
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_166.jpg: Predicted in 0.031762 seconds.
+tvmonitor: 90%, 890 422 99 84
+person: 100%, 565 382 100 287
+person: 100%, 792 345 109 352
+person: 100%, 689 331 118 373
+person: 100%, 88 379 178 448
+person: 100%, 318 301 177 562
+person: 99%, 203 385 96 337
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_167.jpg: Predicted in 0.031734 seconds.
+tvmonitor: 97%, 896 424 91 82
+handbag: 65%, 452 563 73 101
+person: 100%, 801 337 108 363
+person: 100%, 568 382 106 296
+person: 100%, 320 305 176 548
+person: 100%, 687 331 124 371
+person: 100%, 109 367 162 447
+person: 98%, 227 384 95 328
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_168.jpg: Predicted in 0.031775 seconds.
+tvmonitor: 95%, 893 423 92 82
+person: 100%, 579 372 98 310
+person: 100%, 681 322 128 389
+person: 100%, 120 377 158 442
+person: 100%, 326 318 165 487
+person: 99%, 248 390 93 318
+person: 98%, 805 329 102 389
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_169.jpg: Predicted in 0.031778 seconds.
+tvmonitor: 96%, 894 424 90 81
+person: 100%, 568 376 106 306
+person: 100%, 667 329 134 371
+person: 100%, 130 370 162 431
+person: 100%, 793 334 111 341
+person: 100%, 266 381 85 325
+person: 100%, 335 339 162 470
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_170.jpg: Predicted in 0.031782 seconds.
+tvmonitor: 95%, 902 423 82 80
+person: 100%, 554 375 113 308
+person: 100%, 803 321 110 400
+person: 100%, 679 328 128 378
+person: 99%, 142 381 151 406
+person: 98%, 300 346 180 455
+person: 53%, 297 407 65 286
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_171.jpg: Predicted in 0.031818 seconds.
+tvmonitor: 97%, 897 424 89 81
+person: 100%, 554 380 110 302
+person: 100%, 324 350 162 414
+person: 100%, 145 383 151 403
+person: 100%, 805 331 103 349
+person: 99%, 674 327 149 381
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_172.jpg: Predicted in 0.031770 seconds.
+tvmonitor: 95%, 897 425 89 81
+person: 100%, 555 374 111 312
+person: 100%, 169 400 128 355
+person: 100%, 657 312 147 410
+person: 100%, 330 340 152 438
+person: 97%, 805 321 104 362
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_173.jpg: Predicted in 0.031747 seconds.
+tvmonitor: 98%, 898 424 90 82
+person: 100%, 551 368 114 330
+person: 100%, 174 393 126 373
+person: 100%, 794 307 121 392
+person: 100%, 652 295 140 442
+person: 99%, 331 358 151 397
+person: 86%, 1008 307 75 394
+person: 55%, 397 406 93 280
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_174.jpg: Predicted in 0.031803 seconds.
+tvmonitor: 90%, 904 424 82 80
+person: 100%, 539 367 107 336
+person: 100%, 202 386 112 381
+person: 100%, 648 293 143 447
+person: 99%, 319 380 114 343
+person: 99%, 403 399 88 265
+person: 98%, 795 330 124 380
+person: 77%, 98 406 74 237
+person: 51%, 1012 307 68 392
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_175.jpg: Predicted in 0.031775 seconds.
+tvmonitor: 95%, 903 424 84 83
+person: 100%, 651 292 146 452
+person: 100%, 212 408 116 334
+person: 100%, 534 368 108 352
+person: 100%, 328 375 105 362
+person: 100%, 793 310 124 428
+person: 99%, 419 394 85 272
+person: 81%, 1006 282 77 480
+person: 56%, 118 420 80 219
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_176.jpg: Predicted in 0.031781 seconds.
+tvmonitor: 99%, 890 424 99 83
+handbag: 85%, 442 561 58 53
+person: 100%, 533 367 114 335
+person: 100%, 234 404 109 312
+person: 100%, 787 313 110 415
+person: 100%, 648 291 146 451
+person: 100%, 436 388 82 279
+person: 100%, 341 372 99 352
+person: 99%, 139 415 84 236
+person: 99%, 987 285 91 471
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_177.jpg: Predicted in 0.031695 seconds.
+tvmonitor: 99%, 874 424 114 83
+handbag: 90%, 446 563 56 49
+person: 100%, 750 320 134 412
+person: 100%, 350 387 107 333
+person: 100%, 528 361 117 350
+person: 100%, 250 410 115 308
+person: 100%, 641 287 134 459
+person: 99%, 447 399 88 263
+person: 99%, 984 285 95 471
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_178.jpg: Predicted in 0.031746 seconds.
+tvmonitor: 97%, 861 421 126 88
+person: 100%, 743 318 136 421
+person: 100%, 527 365 111 358
+person: 100%, 281 407 97 311
+person: 100%, 634 284 138 466
+person: 100%, 471 398 65 256
+person: 100%, 979 294 99 453
+person: 99%, 363 382 100 331
+person: 77%, 152 465 54 139
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_179.jpg: Predicted in 0.031791 seconds.
+tvmonitor: 97%, 858 422 130 83
+handbag: 90%, 458 558 54 55
+person: 100%, 295 406 104 299
+person: 100%, 642 301 135 455
+person: 100%, 385 394 107 306
+person: 100%, 757 291 110 457
+person: 100%, 979 286 100 484
+person: 100%, 496 367 117 334
+person: 84%, 622 365 82 328
+person: 71%, 159 459 55 143
+person: 71%, 475 387 61 276
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_180.jpg: Predicted in 0.031757 seconds.
+tvmonitor: 96%, 846 423 120 87
+person: 100%, 314 414 100 278
+person: 100%, 489 344 112 379
+person: 100%, 691 299 156 458
+person: 100%, 419 377 87 307
+person: 100%, 956 302 124 445
+person: 98%, 766 320 89 414
+person: 89%, 621 361 82 340
+person: 88%, 661 329 119 392
+person: 80%, 168 457 51 145
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_181.jpg: Predicted in 0.031725 seconds.
+tvmonitor: 93%, 843 424 127 87
+person: 100%, 337 409 103 296
+person: 100%, 688 307 149 453
+person: 100%, 960 296 117 450
+person: 99%, 474 348 112 400
+person: 98%, 763 301 90 451
+person: 98%, 616 347 83 364
+person: 93%, 453 371 73 358
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_182.jpg: Predicted in 0.031798 seconds.
+tvmonitor: 93%, 851 424 124 80
+tvmonitor: 56%, 387 243 52 38
+person: 100%, 363 410 89 290
+person: 100%, 428 343 149 411
+person: 100%, 634 284 158 482
+person: 99%, 959 271 120 500
+person: 99%, 581 368 100 361
+person: 98%, 750 297 103 461
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_183.jpg: Predicted in 0.031705 seconds.
+tvmonitor: 94%, 850 422 113 85
+person: 100%, 633 278 162 509
+person: 100%, 950 290 128 481
+person: 100%, 405 343 141 413
+person: 99%, 558 374 109 353
+person: 97%, 754 305 104 451
+person: 77%, 394 386 81 319
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_184.jpg: Predicted in 0.031814 seconds.
+tvmonitor: 98%, 848 424 102 83
+person: 100%, 630 267 164 521
+person: 100%, 939 278 141 501
+person: 100%, 389 340 148 428
+person: 99%, 535 362 112 371
+person: 91%, 755 302 96 450
+person: 61%, 519 378 54 297
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_185.jpg: Predicted in 0.031754 seconds.
+tvmonitor: 97%, 846 425 104 81
+person: 100%, 613 263 168 544
+person: 100%, 369 331 146 457
+person: 100%, 947 265 133 525
+person: 100%, 525 336 110 429
+person: 99%, 737 254 101 537
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_186.jpg: Predicted in 0.031710 seconds.
+tvmonitor: 94%, 844 428 97 75
+person: 100%, 712 294 133 489
+person: 100%, 584 260 166 542
+person: 100%, 481 345 137 427
+person: 100%, 334 348 164 446
+person: 100%, 940 275 140 500
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_187.jpg: Predicted in 0.031736 seconds.
+person: 100%, 703 273 139 515
+person: 100%, 570 249 167 568
+person: 100%, 302 325 151 472
+person: 100%, 939 254 142 542
+person: 99%, 475 337 132 438
+person: 81%, 873 413 43 112
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_188.jpg: Predicted in 0.031759 seconds.
+tvmonitor: 86%, 855 424 112 80
+person: 100%, 697 276 139 531
+person: 100%, 573 232 160 584
+person: 100%, 289 321 157 501
+person: 100%, 472 347 116 418
+person: 100%, 952 265 125 518
+person: 65%, 829 394 35 153
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_189.jpg: Predicted in 0.031704 seconds.
+tvmonitor: 94%, 843 423 148 83
+tvmonitor: 55%, 387 243 52 39
+person: 100%, 680 258 143 567
+person: 100%, 546 208 179 657
+person: 100%, 269 324 158 498
+person: 100%, 440 320 130 473
+person: 99%, 977 247 102 552
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_190.jpg: Predicted in 0.031733 seconds.
+tvmonitor: 97%, 840 422 152 86
+person: 100%, 669 267 158 555
+person: 100%, 234 313 169 529
+person: 100%, 512 207 192 653
+person: 100%, 427 351 139 453
+person: 93%, 999 242 81 564
+person: 84%, 378 437 55 181
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_191.jpg: Predicted in 0.031714 seconds.
+tvmonitor: 97%, 844 422 146 84
+person: 100%, 657 257 175 580
+person: 100%, 200 301 157 546
+person: 100%, 503 182 180 695
+person: 100%, 409 326 134 499
+person: 53%, 1011 265 70 464
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_192.jpg: Predicted in 0.031706 seconds.
+tvmonitor: 97%, 843 423 147 84
+person: 100%, 654 243 148 610
+person: 100%, 495 186 208 689
+person: 100%, 192 298 158 565
+person: 100%, 410 336 148 490
+person: 68%, 1010 248 72 501
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_193.jpg: Predicted in 0.031683 seconds.
+tvmonitor: 95%, 842 423 148 86
+person: 100%, 642 226 158 644
+person: 100%, 174 282 167 598
+person: 100%, 491 172 193 733
+person: 100%, 408 295 139 560
+person: 73%, 1010 260 72 478
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_194.jpg: Predicted in 0.031801 seconds.
+tvmonitor: 93%, 843 422 147 85
+tvmonitor: 68%, 386 243 53 40
+person: 100%, 147 297 175 587
+person: 100%, 635 239 163 628
+person: 100%, 439 179 237 742
+person: 97%, 395 303 140 555
+person: 74%, 1006 254 75 492
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_195.jpg: Predicted in 0.031695 seconds.
+tvmonitor: 96%, 843 422 147 85
+handbag: 53%, 363 526 40 112
+person: 100%, 130 286 178 615
+person: 100%, 376 283 138 595
+person: 100%, 629 220 163 668
+person: 100%, 464 185 222 739
+person: 95%, 3 434 66 229
+person: 64%, 1006 259 73 482
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_196.jpg: Predicted in 0.031694 seconds.
+tvmonitor: 97%, 843 422 148 84
+tvmonitor: 81%, 386 242 54 41
+handbag: 52%, 348 525 55 123
+person: 100%, 147 266 171 646
+person: 100%, 468 157 254 787
+person: 99%, 748 385 80 265
+person: 99%, 357 292 234 599
+person: 95%, 998 278 80 486
+person: 88%, 631 259 132 586
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_197.jpg: Predicted in 0.031802 seconds.
+tvmonitor: 92%, 842 421 147 84
+person: 100%, 468 130 269 833
+person: 100%, 336 264 214 647
+person: 100%, 147 253 178 690
+person: 100%, 981 242 98 569
+person: 83%, 754 384 74 277
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_198.jpg: Predicted in 0.031720 seconds.
+tvmonitor: 91%, 855 426 87 76
+backpack: 53%, 95 398 109 197
+person: 100%, 317 253 228 686
+person: 100%, 105 258 200 698
+person: 100%, 937 271 143 512
+person: 100%, 461 194 267 793
+person: 100%, 702 414 66 218
+person: 94%, 770 376 72 261
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_199.jpg: Predicted in 0.031792 seconds.
+tvmonitor: 94%, 853 429 80 75
+person: 100%, 288 268 172 666
+person: 100%, 94 241 202 733
+person: 100%, 714 411 71 219
+person: 100%, 924 263 158 539
+person: 100%, 426 159 331 851
+person: 81%, 781 391 72 259
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_200.jpg: Predicted in 0.031766 seconds.
+person: 100%, 75 231 225 747
+person: 100%, 273 251 192 712
+person: 100%, 445 117 327 921
+person: 100%, 932 229 148 635
+person: 99%, 737 410 69 230
+person: 99%, 802 378 77 257
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_201.jpg: Predicted in 0.031701 seconds.
+person: 100%, 457 41 312 1029
+person: 100%, 842 224 215 709
+person: 100%, 269 249 203 712
+person: 100%, 64 217 241 781
+person: 89%, 815 392 66 148
+person: 74%, 744 416 75 214
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_202.jpg: Predicted in 0.031767 seconds.
+tvmonitor: 74%, 877 419 111 88
+person: 100%, 425 36 314 1040
+person: 100%, 708 240 258 695
+person: 100%, 246 257 207 710
+person: 100%, 16 285 254 722
+person: 86%, 953 248 122 594
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_203.jpg: Predicted in 0.031796 seconds.
+tvmonitor: 93%, 904 423 82 79
+person: 100%, 6 269 247 757
+person: 100%, 246 270 227 729
+person: 100%, 365 76 371 995
+person: 89%, 773 411 69 137
+person: 75%, 662 386 132 532
+person: 70%, 848 397 73 136
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_204.jpg: Predicted in 0.031697 seconds.
+handbag: 53%, 275 522 111 177
+person: 100%, 366 58 360 1035
+person: 100%, 10 255 254 774
+person: 98%, 253 254 243 772
+person: 93%, 864 386 73 217
+person: 86%, 773 410 74 214
+person: 67%, 673 443 51 150
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_205.jpg: Predicted in 0.031696 seconds.
+person: 100%, 307 14 469 1064
+person: 99%, 15 261 262 775
+person: 95%, 874 399 86 147
+person: 87%, 797 411 63 133
+person: 64%, 659 449 189 528
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_206.jpg: Predicted in 0.031669 seconds.
+person: 100%, 285 -33 514 1158
+person: 99%, 883 386 79 226
+person: 99%, 14 266 264 762
+person: 97%, 812 412 61 125
+person: 94%, 668 206 184 772
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_207.jpg: Predicted in 0.031786 seconds.
+person: 100%, 664 156 177 870
+person: 100%, 270 -3 447 1105
+person: 100%, 7 237 283 824
+person: 98%, 825 413 66 124
+person: 97%, 892 393 75 209
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_208.jpg: Predicted in 0.031725 seconds.
+person: 100%, 259 -18 454 1128
+person: 100%, 908 387 70 220
+person: 99%, 619 200 191 781
+person: 99%, 18 210 323 882
+person: 98%, 833 410 67 132
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_209.jpg: Predicted in 0.031784 seconds.
+handbag: 59%, 0 687 86 189
+person: 100%, 269 -15 441 1116
+person: 99%, 921 394 71 209
+person: 99%, 31 123 315 945
+person: 92%, 846 421 61 134
+person: 84%, 594 189 128 694
+person: 55%, 626 354 92 392
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_210.jpg: Predicted in 0.032863 seconds.
+backpack: 54%, 15 352 111 243
+person: 100%, 317 3 455 1088
+person: 95%, 855 410 67 130
+person: 95%, 21 178 332 831
+person: 91%, 937 385 68 211
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_211.jpg: Predicted in 0.031737 seconds.
+backpack: 93%, 10 343 118 253
+person: 100%, 430 -28 440 1136
+person: 99%, 951 394 68 203
+person: 96%, 863 410 66 129
+person: 95%, 23 144 372 916
+person: 54%, 1 559 91 321
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_212.jpg: Predicted in 0.031685 seconds.
+backpack: 75%, 37 342 113 252
+person: 100%, 480 -41 464 1160
+person: 100%, 966 386 68 208
+person: 99%, 56 123 381 934
+person: 68%, 8 328 146 544
+person: 53%, 876 401 57 147
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_213.jpg: Predicted in 0.031784 seconds.
+person: 100%, 468 0 503 1079
+person: 100%, 169 108 390 963
+person: 99%, 968 394 69 200
+person: 99%, 22 362 161 475
+person: 92%, 884 380 78 176
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_214.jpg: Predicted in 0.031731 seconds.
+person: 100%, 515 -25 424 1129
+person: 100%, 78 346 146 498
+person: 99%, 251 76 355 951
+person: 98%, 977 390 65 197
+person: 64%, 892 383 74 227
+person: 56%, 901 429 60 125
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_215.jpg: Predicted in 0.031863 seconds.
+person: 100%, 104 350 151 480
+person: 100%, 546 -11 426 1100
+person: 96%, 989 398 47 187
+person: 94%, 302 71 357 1001
+person: 92%, 292 286 111 585
+person: 84%, 919 426 47 146
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_216.jpg: Predicted in 0.031755 seconds.
+person: 100%, 122 371 151 439
+person: 99%, 507 -4 522 1087
+person: 96%, 919 424 58 141
+person: 95%, 295 53 352 1037
+person: 90%, 1000 400 62 143
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_217.jpg: Predicted in 0.031978 seconds.
+person: 100%, 116 371 171 439
+person: 100%, 437 -9 556 1095
+person: 95%, 929 418 61 137
+person: 94%, 1007 403 60 140
+person: 94%, 292 92 361 964
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_218.jpg: Predicted in 0.031740 seconds.
+person: 100%, 139 370 154 419
+person: 99%, 567 -6 400 1091
+person: 99%, 286 79 367 990
+person: 96%, 945 419 53 147
+person: 92%, 1014 398 56 139
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_219.jpg: Predicted in 0.032422 seconds.
+person: 100%, 166 371 158 415
+person: 98%, 560 23 412 1033
+person: 94%, 295 68 369 1010
+person: 88%, 950 415 55 123
+person: 83%, 1024 403 47 134
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_220.jpg: Predicted in 0.032045 seconds.
+person: 100%, 208 383 110 384
+person: 99%, 568 46 420 990
+person: 94%, 962 414 54 128
+person: 94%, 295 79 363 989
+person: 87%, 1036 400 38 133
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_221.jpg: Predicted in 0.031960 seconds.
+backpack: 76%, 282 322 130 287
+person: 100%, 547 26 456 1036
+person: 96%, 974 412 55 132
+person: 92%, 301 74 360 1001
+person: 70%, 237 307 147 474
+person: 51%, 1046 401 29 142
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_222.jpg: Predicted in 0.032229 seconds.
+backpack: 75%, 273 317 121 299
+person: 100%, 603 32 444 1027
+person: 89%, 297 64 380 1025
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_223.jpg: Predicted in 0.031947 seconds.
+person: 98%, 573 7 506 1078
+person: 83%, 294 103 379 946
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_224.jpg: Predicted in 0.031937 seconds.
+backpack: 84%, 282 306 126 321
+person: 98%, 584 5 491 1070
+person: 97%, 348 69 370 1031
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_225.jpg: Predicted in 0.031905 seconds.
+backpack: 81%, 279 304 133 330
+person: 97%, 325 67 423 1032
+person: 69%, 601 14 457 1040
+person: 59%, 569 129 185 930
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_226.jpg: Predicted in 0.031899 seconds.
+backpack: 72%, 279 305 135 322
+person: 96%, 327 79 419 1020
+person: 90%, 685 47 400 969
+person: 61%, 122 492 70 235
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_227.jpg: Predicted in 0.033607 seconds.
+backpack: 79%, 275 310 118 313
+person: 93%, 288 111 403 965
+person: 76%, 687 38 390 986
+person: 54%, 578 287 180 745
+person: 52%, 142 437 79 233
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_228.jpg: Predicted in 0.031893 seconds.
+backpack: 62%, 277 315 116 304
+person: 98%, 664 26 428 1023
+person: 98%, 290 87 390 987
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_229.jpg: Predicted in 0.031724 seconds.
+backpack: 67%, 276 312 115 311
+person: 99%, 601 24 471 1038
+person: 98%, 298 94 374 981
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_230.jpg: Predicted in 0.031718 seconds.
+backpack: 72%, 275 304 119 325
+person: 100%, 676 16 407 1053
+person: 99%, 289 92 400 981
+person: 67%, 586 155 159 889
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_231.jpg: Predicted in 0.031763 seconds.
+backpack: 80%, 283 320 131 294
+person: 100%, 749 -8 332 1102
+person: 97%, 281 107 411 960
+person: 56%, 562 82 206 1025
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_232.jpg: Predicted in 0.031811 seconds.
+backpack: 84%, 287 324 143 289
+person: 100%, 769 10 312 1070
+person: 99%, 324 78 422 1017
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_233.jpg: Predicted in 0.031737 seconds.
+backpack: 95%, 275 302 177 345
+person: 99%, 775 0 316 1079
+person: 98%, 308 113 461 971
+person: 65%, 600 279 203 745
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_234.jpg: Predicted in 0.031955 seconds.
+backpack: 96%, 281 305 142 314
+person: 99%, 766 19 327 1042
+person: 97%, 311 73 453 1033
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_235.jpg: Predicted in 0.031903 seconds.
+backpack: 91%, 268 261 182 356
+person: 100%, 750 5 334 1075
+person: 97%, 280 58 408 1044
+person: 70%, 603 267 179 774
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_236.jpg: Predicted in 0.031735 seconds.
+backpack: 91%, 274 249 186 369
+person: 100%, 677 16 409 1055
+person: 99%, 282 60 408 1025
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_237.jpg: Predicted in 0.031909 seconds.
+backpack: 88%, 275 257 184 355
+person: 98%, 595 10 469 1061
+person: 98%, 279 80 413 998
+person: 73%, 578 274 182 765
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_238.jpg: Predicted in 0.031919 seconds.
+backpack: 74%, 279 249 176 368
+person: 98%, 278 58 420 1041
+person: 98%, 663 14 431 1051
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_239.jpg: Predicted in 0.031763 seconds.
+backpack: 71%, 281 304 128 319
+person: 93%, 284 89 409 992
+person: 77%, 576 230 190 840
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_240.jpg: Predicted in 0.031744 seconds.
+backpack: 60%, 277 307 117 322
+person: 94%, 320 82 446 1023
+person: 73%, 560 145 213 917
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_241.jpg: Predicted in 0.031755 seconds.
+backpack: 73%, 281 307 128 323
+person: 94%, 337 81 404 1025
+person: 85%, 614 170 170 868
+person: 80%, 821 87 258 983
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_242.jpg: Predicted in 0.031733 seconds.
+backpack: 72%, 276 310 118 314
+person: 97%, 293 75 387 1017
+person: 91%, 614 165 168 868
+person: 86%, 767 -5 319 1089
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_243.jpg: Predicted in 0.031781 seconds.
+backpack: 84%, 276 313 114 312
+person: 98%, 288 87 402 996
+person: 94%, 606 132 185 933
+person: 85%, 817 13 257 949
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_244.jpg: Predicted in 0.031776 seconds.
+backpack: 74%, 275 296 117 338
+person: 97%, 295 81 375 1007
+person: 82%, 767 4 319 1076
+person: 79%, 603 356 181 675
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_245.jpg: Predicted in 0.031709 seconds.
+backpack: 80%, 274 302 117 327
+person: 95%, 294 81 383 1009
+person: 84%, 605 168 183 863
+person: 65%, 819 9 258 956
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_246.jpg: Predicted in 0.031821 seconds.
+backpack: 86%, 274 306 119 319
+person: 93%, 322 64 443 1066
+person: 84%, 763 26 324 1033
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_247.jpg: Predicted in 0.031940 seconds.
+backpack: 80%, 273 308 120 314
+person: 97%, 283 79 409 1007
+person: 93%, 761 0 330 1081
+person: 84%, 557 146 217 910
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_248.jpg: Predicted in 0.031698 seconds.
+backpack: 87%, 271 318 120 299
+person: 97%, 327 55 427 1075
+person: 94%, 764 0 327 1081
+person: 84%, 557 139 217 925
+person: 68%, 7 473 57 165
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_249.jpg: Predicted in 0.031705 seconds.
+backpack: 83%, 268 304 125 324
+person: 91%, 283 88 413 998
+person: 89%, 761 0 330 1084
+person: 79%, 566 164 202 880
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_250.jpg: Predicted in 0.031998 seconds.
+backpack: 80%, 265 314 128 307
+person: 99%, 294 62 375 1040
+person: 94%, 768 7 318 1065
+person: 93%, 558 106 214 988
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_251.jpg: Predicted in 0.031878 seconds.
+backpack: 92%, 257 321 135 297
+person: 97%, 290 92 375 989
+person: 96%, 772 -18 312 1103
+person: 93%, 625 154 160 888
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_252.jpg: Predicted in 0.032125 seconds.
+backpack: 93%, 233 314 142 302
+person: 96%, 268 71 428 1018
+person: 93%, 767 4 320 1067
+person: 74%, 611 164 187 870
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_253.jpg: Predicted in 0.031705 seconds.
+backpack: 96%, 218 304 143 319
+person: 98%, 211 84 451 999
+person: 94%, 776 2 305 1069
+person: 94%, 598 166 196 865
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_254.jpg: Predicted in 0.031808 seconds.
+backpack: 90%, 236 306 132 314
+person: 100%, 264 55 439 1046
+person: 98%, 601 186 195 830
+person: 94%, 762 12 319 1056
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_255.jpg: Predicted in 0.031787 seconds.
+backpack: 63%, 292 261 171 361
+person: 100%, 321 82 444 1009
+person: 93%, 761 6 316 1067
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_256.jpg: Predicted in 0.031811 seconds.
+tvmonitor: 67%, 387 242 51 40
+backpack: 74%, 359 290 120 301
+person: 100%, 396 83 399 992
+person: 95%, 770 4 309 1066
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_257.jpg: Predicted in 0.031783 seconds.
+tvmonitor: 92%, 387 242 52 40
+backpack: 94%, 387 262 178 340
+person: 99%, 440 22 414 1049
+person: 96%, 763 18 317 1044
+person: 51%, 353 550 55 107
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_258.jpg: Predicted in 0.031703 seconds.
+teddy bear: 57%, 354 578 53 82
+tvmonitor: 60%, 386 242 54 41
+backpack: 86%, 382 257 190 363
+person: 99%, 387 91 439 968
+person: 91%, 761 20 326 1040
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_259.jpg: Predicted in 0.031728 seconds.
+tvmonitor: 65%, 386 241 55 43
+backpack: 81%, 357 249 179 382
+person: 100%, 371 83 467 996
+person: 95%, 826 -24 247 1027
+person: 51%, 326 588 52 99
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_260.jpg: Predicted in 0.031689 seconds.
+tvmonitor: 81%, 386 242 54 42
+handbag: 65%, 353 248 173 384
+backpack: 68%, 355 279 166 375
+person: 99%, 376 42 446 1078
+person: 70%, 828 103 248 956
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_261.jpg: Predicted in 0.031735 seconds.
+backpack: 79%, 339 266 191 346
+person: 100%, 366 39 457 1089
+person: 73%, 825 -15 256 1000
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_262.jpg: Predicted in 0.031692 seconds.
+tvmonitor: 62%, 386 242 54 42
+backpack: 85%, 341 291 151 309
+person: 100%, 364 59 456 1061
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_263.jpg: Predicted in 0.031711 seconds.
+tvmonitor: 63%, 386 241 55 43
+backpack: 82%, 340 287 183 370
+person: 99%, 367 68 450 1035
+person: 65%, 616 195 203 800
+person: 63%, 828 -21 250 1022
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_264.jpg: Predicted in 0.031751 seconds.
+tvmonitor: 59%, 847 432 74 72
+tvmonitor: 57%, 387 242 53 42
+handbag: 76%, 348 253 184 375
+backpack: 65%, 346 281 182 374
+person: 100%, 374 67 446 1033
+person: 55%, 321 588 52 90
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_265.jpg: Predicted in 0.031795 seconds.
+tvmonitor: 97%, 847 428 103 78
+tvmonitor: 52%, 386 242 53 42
+backpack: 71%, 351 293 177 352
+person: 100%, 368 70 458 1027
+person: 59%, 905 77 174 1009
+person: 57%, 611 114 221 880
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_266.jpg: Predicted in 0.031736 seconds.
+tvmonitor: 92%, 844 423 145 82
+handbag: 70%, 347 262 184 359
+backpack: 62%, 346 285 176 358
+person: 100%, 379 55 430 1051
+person: 61%, 947 34 130 780
+person: 56%, 314 586 46 90
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_267.jpg: Predicted in 0.031835 seconds.
+tvmonitor: 91%, 842 422 150 84
+handbag: 72%, 346 267 185 351
+backpack: 59%, 344 288 178 353
+person: 100%, 373 68 445 1031
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_268.jpg: Predicted in 0.031716 seconds.
+tvmonitor: 93%, 844 422 147 85
+backpack: 80%, 341 291 181 353
+person: 100%, 374 52 442 1060
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_269.jpg: Predicted in 0.031693 seconds.
+tvmonitor: 93%, 845 423 144 85
+tvmonitor: 57%, 386 242 53 43
+backpack: 73%, 339 287 185 364
+person: 100%, 358 71 469 1031
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_270.jpg: Predicted in 0.032171 seconds.
+tvmonitor: 95%, 844 423 147 85
+tvmonitor: 64%, 386 242 54 43
+backpack: 79%, 338 282 185 373
+person: 100%, 368 68 450 1036
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_271.jpg: Predicted in 0.031745 seconds.
+tvmonitor: 92%, 845 422 146 87
+tvmonitor: 56%, 386 241 54 44
+backpack: 87%, 340 258 190 367
+person: 100%, 368 57 456 1053
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_272.jpg: Predicted in 0.031780 seconds.
+tvmonitor: 96%, 844 422 147 86
+tvmonitor: 53%, 386 242 54 42
+backpack: 84%, 336 261 199 361
+person: 100%, 368 55 447 1055
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_273.jpg: Predicted in 0.031786 seconds.
+tvmonitor: 92%, 844 423 145 85
+tvmonitor: 76%, 386 241 54 43
+backpack: 85%, 338 262 199 358
+person: 100%, 360 66 458 1037
+person: 70%, 1002 -32 76 824
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_274.jpg: Predicted in 0.031904 seconds.
+tvmonitor: 95%, 845 422 145 85
+tvmonitor: 68%, 387 242 53 41
+backpack: 86%, 335 264 204 358
+person: 100%, 359 61 470 1054
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_275.jpg: Predicted in 0.031714 seconds.
+tvmonitor: 80%, 849 421 144 86
+tvmonitor: 63%, 387 242 53 41
+backpack: 88%, 338 260 202 366
+backpack: 72%, 469 313 255 326
+person: 100%, 350 82 496 1023
+person: 51%, 997 -37 82 950
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_276.jpg: Predicted in 0.031740 seconds.
+tvmonitor: 79%, 846 421 144 87
+tvmonitor: 70%, 387 241 53 41
+backpack: 89%, 334 259 207 367
+backpack: 64%, 472 266 263 344
+person: 100%, 354 59 483 1061
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_277.jpg: Predicted in 0.031662 seconds.
+tvmonitor: 97%, 841 422 150 84
+tvmonitor: 83%, 387 242 53 39
+backpack: 92%, 335 285 186 367
+person: 100%, 370 71 446 1037
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_278.jpg: Predicted in 0.031728 seconds.
+tvmonitor: 95%, 842 423 148 86
+tvmonitor: 64%, 386 241 54 41
+backpack: 85%, 331 281 189 379
+person: 100%, 368 65 445 1048
+person: 57%, 604 213 208 773
+person: 54%, 995 -24 85 922
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_279.jpg: Predicted in 0.031723 seconds.
+tvmonitor: 94%, 843 423 148 85
+tvmonitor: 82%, 386 242 55 40
+backpack: 85%, 330 287 185 365
+backpack: 63%, 472 308 261 345
+person: 100%, 379 62 424 1054
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_280.jpg: Predicted in 0.031938 seconds.
+tvmonitor: 93%, 842 422 149 85
+tvmonitor: 79%, 386 241 54 42
+backpack: 84%, 332 282 175 373
+backpack: 70%, 464 253 278 372
+person: 100%, 380 64 421 1041
+person: 51%, 618 151 189 872
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_281.jpg: Predicted in 0.031860 seconds.
+tvmonitor: 94%, 844 422 147 85
+tvmonitor: 77%, 386 241 55 41
+backpack: 86%, 333 286 185 369
+person: 100%, 380 73 422 1024
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_282.jpg: Predicted in 0.031726 seconds.
+tvmonitor: 94%, 840 423 152 85
+tvmonitor: 71%, 386 241 54 41
+backpack: 89%, 333 286 180 370
+backpack: 50%, 485 305 237 343
+person: 100%, 377 71 426 1031
+person: 82%, 617 186 196 817
+person: 55%, 996 -24 84 921
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_283.jpg: Predicted in 0.031741 seconds.
+tvmonitor: 87%, 841 421 152 87
+tvmonitor: 73%, 387 241 53 41
+backpack: 89%, 332 283 189 373
+backpack: 51%, 487 309 241 345
+person: 100%, 384 47 419 1083
+person: 74%, 615 162 194 873
+person: 67%, 997 3 83 864
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_284.jpg: Predicted in 0.031712 seconds.
+tvmonitor: 93%, 842 422 150 87
+tvmonitor: 73%, 387 242 53 40
+backpack: 86%, 333 281 188 379
+backpack: 66%, 468 255 279 367
+person: 100%, 377 42 428 1085
+person: 76%, 620 164 193 864
+person: 67%, 995 14 83 789
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_285.jpg: Predicted in 0.031837 seconds.
+tvmonitor: 95%, 842 422 150 87
+tvmonitor: 58%, 387 242 52 41
+backpack: 83%, 336 281 186 372
+backpack: 69%, 477 299 259 355
+person: 100%, 380 47 426 1086
+person: 75%, 996 -8 82 834
+person: 58%, 618 153 196 886
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_286.jpg: Predicted in 0.031819 seconds.
+tvmonitor: 94%, 842 422 149 88
+tvmonitor: 67%, 387 242 53 42
+backpack: 91%, 338 288 180 368
+person: 100%, 390 41 404 1094
+person: 89%, 617 113 199 970
+person: 79%, 996 8 83 799
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_287.jpg: Predicted in 0.031782 seconds.
+tvmonitor: 92%, 842 422 150 86
+tvmonitor: 78%, 386 241 54 41
+backpack: 84%, 331 282 195 375
+backpack: 51%, 486 309 241 337
+person: 100%, 374 50 433 1076
+person: 76%, 619 161 198 876
+person: 75%, 995 -3 82 823
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_288.jpg: Predicted in 0.031710 seconds.
+tvmonitor: 91%, 842 422 150 87
+tvmonitor: 59%, 386 241 54 42
+handbag: 62%, 335 263 183 360
+backpack: 74%, 332 282 181 372
+backpack: 58%, 488 314 245 341
+person: 100%, 383 30 415 1108
+person: 86%, 615 124 204 939
+person: 64%, 954 44 122 772
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_289.jpg: Predicted in 0.031818 seconds.
+tvmonitor: 84%, 387 242 53 40
+tvmonitor: 77%, 841 422 151 86
+backpack: 91%, 332 286 184 374
+backpack: 60%, 474 302 251 356
+person: 100%, 384 44 416 1089
+person: 87%, 613 160 211 872
+person: 66%, 993 0 86 876
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_290.jpg: Predicted in 0.031823 seconds.
+tvmonitor: 83%, 842 423 149 84
+tvmonitor: 78%, 386 241 55 41
+backpack: 87%, 324 287 187 372
+backpack: 57%, 476 313 245 329
+person: 100%, 369 68 443 1042
+person: 72%, 616 176 205 836
+person: 72%, 949 45 127 781
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_291.jpg: Predicted in 0.031720 seconds.
+tvmonitor: 85%, 387 242 53 40
+tvmonitor: 80%, 843 422 146 84
+backpack: 85%, 330 258 189 371
+backpack: 62%, 477 319 248 323
+person: 100%, 379 53 425 1077
+person: 69%, 615 148 207 889
+person: 62%, 950 -14 124 1010
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_292.jpg: Predicted in 0.031712 seconds.
+tvmonitor: 82%, 845 424 119 80
+tvmonitor: 81%, 386 242 54 42
+backpack: 90%, 324 260 199 369
+backpack: 56%, 459 256 264 367
+person: 100%, 370 36 437 1094
+person: 82%, 928 -18 144 1018
+person: 74%, 615 126 203 913
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_293.jpg: Predicted in 0.031844 seconds.
+tvmonitor: 84%, 387 241 53 41
+tvmonitor: 83%, 846 432 77 72
+backpack: 88%, 325 259 194 368
+person: 100%, 380 54 424 1063
+person: 84%, 886 23 192 1032
+person: 68%, 612 112 204 944
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_294.jpg: Predicted in 0.032186 seconds.
+tvmonitor: 91%, 386 241 54 41
+backpack: 85%, 323 256 202 373
+person: 99%, 326 70 437 1024
+person: 84%, 871 58 206 959
+person: 73%, 619 133 192 912
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_295.jpg: Predicted in 0.031724 seconds.
+tvmonitor: 91%, 845 428 95 78
+tvmonitor: 72%, 386 241 55 42
+backpack: 86%, 326 291 181 363
+person: 99%, 335 67 413 1024
+person: 89%, 877 77 204 925
+person: 73%, 620 160 197 874
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_296.jpg: Predicted in 0.031722 seconds.
+tvmonitor: 96%, 844 424 141 80
+tvmonitor: 82%, 387 242 53 40
+handbag: 57%, 483 297 219 361
+backpack: 83%, 329 286 185 364
+person: 99%, 329 57 431 1045
+person: 91%, 912 18 161 946
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_297.jpg: Predicted in 0.031698 seconds.
+tvmonitor: 95%, 843 422 148 87
+tvmonitor: 79%, 387 242 53 41
+backpack: 83%, 328 286 186 363
+person: 99%, 363 49 463 1066
+person: 88%, 922 -29 156 1041
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_298.jpg: Predicted in 0.031731 seconds.
+tvmonitor: 96%, 843 422 146 84
+tvmonitor: 76%, 387 242 53 41
+backpack: 79%, 332 283 176 375
+person: 99%, 373 72 441 1021
+person: 64%, 946 137 132 898
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_299.jpg: Predicted in 0.031759 seconds.
+tvmonitor: 96%, 843 422 148 86
+tvmonitor: 81%, 386 242 54 40
+backpack: 86%, 327 283 194 372
+person: 99%, 374 78 433 1017
+person: 54%, 982 79 94 1005
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_300.jpg: Predicted in 0.031780 seconds.
+tvmonitor: 94%, 840 422 151 85
+tvmonitor: 82%, 386 242 54 41
+handbag: 54%, 331 260 192 364
+backpack: 77%, 326 287 189 370
+person: 100%, 367 73 450 1035
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_301.jpg: Predicted in 0.031745 seconds.
+tvmonitor: 97%, 843 423 147 83
+tvmonitor: 74%, 386 242 54 40
+backpack: 87%, 329 282 192 374
+person: 99%, 327 89 444 984
+person: 66%, 986 6 87 1056
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_302.jpg: Predicted in 0.031782 seconds.
+tvmonitor: 96%, 843 423 148 84
+tvmonitor: 62%, 387 242 54 40
+backpack: 87%, 335 277 183 377
+person: 99%, 382 63 418 1043
+person: 65%, 988 -72 89 1108
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_303.jpg: Predicted in 0.031796 seconds.
+tvmonitor: 97%, 842 422 151 88
+tvmonitor: 72%, 387 241 54 41
+backpack: 85%, 335 280 182 375
+person: 99%, 372 73 439 1023
+person: 64%, 981 -5 103 974
+person: 54%, 611 192 208 807
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_304.jpg: Predicted in 0.031851 seconds.
+tvmonitor: 96%, 842 422 151 87
+tvmonitor: 67%, 386 241 54 41
+backpack: 92%, 333 283 186 373
+person: 100%, 371 57 437 1052
+person: 83%, 980 19 103 915
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_305.jpg: Predicted in 0.031929 seconds.
+tvmonitor: 94%, 843 422 150 86
+tvmonitor: 78%, 386 241 54 42
+backpack: 84%, 336 287 179 369
+person: 99%, 378 38 416 1081
+person: 69%, 980 11 100 1051
+person: 52%, 622 125 191 853
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_306.jpg: Predicted in 0.031850 seconds.
+tvmonitor: 90%, 841 422 152 87
+tvmonitor: 83%, 387 242 53 42
+backpack: 89%, 338 285 185 363
+person: 98%, 375 52 424 1063
+person: 92%, 984 -16 90 1097
+person: 53%, 617 158 200 869
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_307.jpg: Predicted in 0.031691 seconds.
+tvmonitor: 91%, 841 422 151 86
+tvmonitor: 66%, 386 241 53 42
+backpack: 86%, 338 264 196 356
+person: 99%, 338 77 419 1011
+person: 86%, 984 -28 89 1121
+person: 78%, 687 271 144 751
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_308.jpg: Predicted in 0.031969 seconds.
+tvmonitor: 92%, 842 421 150 89
+tvmonitor: 67%, 387 242 53 41
+backpack: 89%, 338 283 175 368
+person: 99%, 376 32 422 1099
+person: 85%, 982 -29 90 1123
+person: 58%, 624 156 194 867
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_309.jpg: Predicted in 0.031782 seconds.
+tvmonitor: 83%, 842 422 151 84
+tvmonitor: 81%, 387 241 53 42
+backpack: 82%, 336 278 185 381
+person: 99%, 371 45 438 1073
+person: 80%, 983 -26 91 1119
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_310.jpg: Predicted in 0.031692 seconds.
+tvmonitor: 93%, 843 422 152 85
+tvmonitor: 66%, 387 242 52 42
+backpack: 93%, 335 284 187 371
+person: 100%, 373 57 431 1047
+person: 83%, 980 -16 94 1097
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_311.jpg: Predicted in 0.031797 seconds.
+tvmonitor: 92%, 842 423 151 85
+tvmonitor: 71%, 387 241 53 42
+backpack: 86%, 336 290 188 362
+person: 100%, 368 53 437 1062
+person: 72%, 951 87 127 1005
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_312.jpg: Predicted in 0.031711 seconds.
+tvmonitor: 78%, 840 423 152 84
+tvmonitor: 67%, 387 242 53 41
+backpack: 86%, 340 294 181 357
+person: 99%, 368 57 441 1047
+person: 73%, 954 100 123 984
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_313.jpg: Predicted in 0.031708 seconds.
+tvmonitor: 92%, 843 422 149 86
+tvmonitor: 79%, 387 242 53 43
+backpack: 91%, 340 294 184 353
+person: 100%, 373 51 433 1063
+person: 68%, 949 112 129 959
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_314.jpg: Predicted in 0.031771 seconds.
+tvmonitor: 82%, 842 422 151 85
+tvmonitor: 76%, 387 242 53 42
+backpack: 88%, 338 291 188 357
+person: 100%, 340 77 415 1016
+person: 67%, 981 -5 93 1080
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_315.jpg: Predicted in 0.031774 seconds.
+tvmonitor: 57%, 386 242 53 42
+backpack: 92%, 339 264 202 358
+person: 100%, 362 58 459 1056
+person: 82%, 980 -12 93 1092
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_316.jpg: Predicted in 0.031821 seconds.
+tvmonitor: 86%, 841 422 153 84
+tvmonitor: 68%, 387 242 53 42
+backpack: 92%, 339 286 181 368
+person: 100%, 372 43 438 1082
+person: 65%, 982 -17 92 1099
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_317.jpg: Predicted in 0.031811 seconds.
+tvmonitor: 82%, 843 422 150 85
+tvmonitor: 65%, 387 242 52 41
+backpack: 89%, 337 288 180 371
+person: 100%, 371 55 438 1060
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_318.jpg: Predicted in 0.031848 seconds.
+tvmonitor: 77%, 844 425 138 77
+tvmonitor: 71%, 386 241 54 43
+backpack: 88%, 338 285 180 375
+person: 99%, 383 53 419 1066
+person: 82%, 610 133 214 913
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_319.jpg: Predicted in 0.032454 seconds.
+tvmonitor: 81%, 387 242 53 40
+tvmonitor: 75%, 847 425 130 77
+backpack: 87%, 338 279 181 374
+person: 100%, 363 69 458 1040
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_320.jpg: Predicted in 0.031801 seconds.
+tvmonitor: 93%, 847 426 130 78
+tvmonitor: 76%, 386 241 55 42
+backpack: 86%, 333 283 186 368
+person: 100%, 368 69 444 1043
+person: 67%, 608 161 217 869
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_321.jpg: Predicted in 0.031872 seconds.
+tvmonitor: 96%, 843 424 121 85
+tvmonitor: 73%, 387 241 54 43
+backpack: 81%, 336 288 173 366
+person: 99%, 377 65 426 1035
+person: 58%, 614 154 207 881
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_322.jpg: Predicted in 0.031722 seconds.
+tvmonitor: 89%, 842 423 124 81
+tvmonitor: 81%, 387 242 53 41
+backpack: 84%, 335 254 195 368
+person: 100%, 361 55 469 1062
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_323.jpg: Predicted in 0.031715 seconds.
+tvmonitor: 91%, 847 429 102 75
+tvmonitor: 83%, 386 241 55 43
+backpack: 77%, 331 278 191 376
+person: 100%, 365 62 456 1051
+person: 57%, 603 139 217 911
+person: 54%, 983 46 92 1077
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_324.jpg: Predicted in 0.031664 seconds.
+tvmonitor: 65%, 386 242 54 41
+backpack: 85%, 325 279 203 379
+person: 100%, 315 86 460 994
+person: 64%, 937 138 141 1005
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_325.jpg: Predicted in 0.031886 seconds.
+tvmonitor: 78%, 386 242 55 41
+tvmonitor: 54%, 849 422 140 80
+backpack: 82%, 329 289 188 364
+person: 99%, 332 90 421 985
+person: 91%, 588 187 243 822
+person: 72%, 906 219 169 840
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_326.jpg: Predicted in 0.031860 seconds.
+tvmonitor: 79%, 386 242 55 42
+backpack: 81%, 332 289 194 365
+person: 100%, 321 68 448 1026
+person: 56%, 924 203 158 877
+person: 54%, 593 147 224 896
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_327.jpg: Predicted in 0.031767 seconds.
+tvmonitor: 88%, 386 241 54 42
+backpack: 79%, 329 279 192 381
+person: 99%, 321 81 444 1006
+person: 95%, 765 42 316 986
+person: 76%, 606 143 202 892
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_328.jpg: Predicted in 0.032471 seconds.
+tvmonitor: 79%, 386 241 56 43
+backpack: 79%, 332 281 187 372
+person: 99%, 366 78 451 1018
+person: 97%, 931 104 154 962
+person: 80%, 604 155 211 879
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_329.jpg: Predicted in 0.031799 seconds.
+tvmonitor: 89%, 846 425 136 80
+tvmonitor: 82%, 386 241 55 43
+backpack: 81%, 330 283 195 372
+person: 99%, 367 66 445 1036
+person: 83%, 979 51 98 1065
+person: 81%, 605 164 218 867
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_330.jpg: Predicted in 0.031684 seconds.
+tvmonitor: 96%, 844 423 147 85
+tvmonitor: 81%, 386 241 54 42
+backpack: 80%, 331 285 199 367
+person: 99%, 320 89 446 986
+person: 98%, 951 82 126 997
+person: 77%, 596 149 226 894
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_331.jpg: Predicted in 0.031758 seconds.
+tvmonitor: 95%, 843 423 148 86
+tvmonitor: 78%, 386 241 55 42
+backpack: 77%, 336 295 185 350
+person: 99%, 377 65 425 1046
+person: 98%, 956 75 121 1020
+person: 80%, 601 141 218 910
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_332.jpg: Predicted in 0.031680 seconds.
+tvmonitor: 80%, 386 241 55 44
+tvmonitor: 74%, 843 422 146 84
+backpack: 77%, 335 284 190 369
+person: 99%, 367 68 447 1036
+person: 85%, 601 132 223 919
+person: 79%, 948 100 132 967
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_333.jpg: Predicted in 0.032028 seconds.
+tvmonitor: 96%, 845 423 148 83
+tvmonitor: 83%, 387 241 54 42
+backpack: 76%, 333 281 197 371
+person: 99%, 331 85 424 992
+person: 91%, 607 170 213 856
+person: 65%, 982 81 93 1009
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_334.jpg: Predicted in 0.032143 seconds.
+tvmonitor: 90%, 386 241 54 42
+tvmonitor: 61%, 839 424 156 81
+backpack: 82%, 331 289 178 366
+person: 98%, 379 73 425 1031
+person: 88%, 596 143 225 906
+person: 76%, 947 353 135 683
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_335.jpg: Predicted in 0.031811 seconds.
+tvmonitor: 86%, 386 242 55 41
+backpack: 87%, 326 293 191 359
+person: 99%, 362 73 458 1036
+person: 96%, 893 64 188 951
+person: 73%, 597 138 221 917
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_336.jpg: Predicted in 0.031722 seconds.
+laptop: 55%, 851 423 137 81
+tvmonitor: 85%, 386 241 56 41
+backpack: 76%, 326 284 188 368
+person: 99%, 334 84 419 996
+person: 95%, 909 6 168 1065
+person: 73%, 606 165 200 854
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_337.jpg: Predicted in 0.032153 seconds.
+tvmonitor: 86%, 386 242 55 41
+tvmonitor: 81%, 847 424 132 79
+handbag: 50%, 474 321 225 323
+backpack: 81%, 322 283 184 375
+person: 99%, 328 62 427 1033
+person: 91%, 908 37 171 997
+person: 81%, 603 127 213 924
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_338.jpg: Predicted in 0.031833 seconds.
+tvmonitor: 83%, 846 424 141 77
+tvmonitor: 76%, 386 242 55 39
+handbag: 55%, 321 252 194 378
+backpack: 71%, 320 284 190 373
+person: 99%, 331 83 422 998
+person: 91%, 932 -19 140 1018
+person: 77%, 599 169 222 852
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_339.jpg: Predicted in 0.033337 seconds.
+tvmonitor: 97%, 847 425 112 81
+tvmonitor: 63%, 386 242 56 41
+handbag: 74%, 318 246 194 392
+backpack: 60%, 318 277 191 394
+person: 99%, 328 80 436 1007
+person: 88%, 920 84 165 1000
+person: 74%, 598 133 222 919
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_340.jpg: Predicted in 0.031865 seconds.
+tvmonitor: 90%, 848 428 99 75
+tvmonitor: 74%, 386 242 55 40
+handbag: 68%, 322 261 182 363
+backpack: 62%, 321 290 180 365
+person: 99%, 331 95 406 983
+person: 94%, 890 -4 183 995
+person: 92%, 601 127 217 927
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_341.jpg: Predicted in 0.031737 seconds.
+tvmonitor: 87%, 847 431 73 73
+tvmonitor: 82%, 385 241 57 42
+backpack: 78%, 325 254 183 373
+person: 98%, 342 84 404 992
+person: 96%, 603 132 221 912
+person: 94%, 833 -42 248 1060
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_342.jpg: Predicted in 0.031723 seconds.
+tvmonitor: 85%, 386 241 55 43
+backpack: 83%, 332 249 173 379
+person: 99%, 342 64 390 1034
+person: 98%, 591 126 231 937
+person: 96%, 821 -42 263 1060
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_343.jpg: Predicted in 0.031708 seconds.
+tvmonitor: 84%, 386 242 55 43
+backpack: 85%, 334 291 168 364
+person: 95%, 338 60 406 1032
+person: 93%, 820 -23 262 1029
+person: 92%, 597 115 221 953
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_344.jpg: Predicted in 0.031785 seconds.
+tvmonitor: 82%, 386 242 54 42
+backpack: 89%, 334 313 154 303
+person: 97%, 347 77 394 1014
+person: 96%, 596 109 227 969
+person: 90%, 820 -39 261 1059
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_345.jpg: Predicted in 0.031830 seconds.
+tvmonitor: 82%, 386 242 55 41
+backpack: 85%, 332 294 172 366
+person: 97%, 586 107 238 973
+person: 96%, 340 41 402 1073
+person: 95%, 823 -11 261 1005
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_346.jpg: Predicted in 0.031767 seconds.
+tvmonitor: 71%, 385 241 57 43
+backpack: 87%, 327 299 159 329
+person: 99%, 340 69 410 1019
+person: 88%, 824 -21 256 1025
+person: 78%, 608 124 208 942
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_347.jpg: Predicted in 0.031796 seconds.
+tvmonitor: 72%, 385 241 56 42
+handbag: 84%, 321 246 180 383
+person: 99%, 339 83 376 1000
+person: 97%, 606 119 212 957
+person: 89%, 823 -24 260 1028
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_348.jpg: Predicted in 0.031813 seconds.
+tvmonitor: 78%, 386 241 55 42
+backpack: 76%, 323 240 193 395
+person: 100%, 339 78 375 1019
+person: 99%, 616 155 204 889
+person: 93%, 820 -35 261 1050
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_349.jpg: Predicted in 0.031678 seconds.
+tvmonitor: 78%, 386 242 55 40
+backpack: 60%, 333 240 204 390
+handbag: 53%, 333 240 204 390
+person: 100%, 343 97 391 992
+person: 96%, 618 147 205 916
+person: 92%, 823 -41 258 1059
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_350.jpg: Predicted in 0.031770 seconds.
+tvmonitor: 84%, 386 241 56 42
+backpack: 78%, 339 234 206 410
+person: 100%, 377 91 415 1002
+person: 92%, 816 -39 267 1056
+person: 66%, 616 149 210 900
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_351.jpg: Predicted in 0.031777 seconds.
+tvmonitor: 84%, 387 242 54 40
+backpack: 65%, 348 241 192 397
+person: 100%, 389 85 399 1011
+person: 94%, 816 -41 267 1059
+person: 79%, 614 133 215 927
+person: 67%, 331 600 52 86
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_352.jpg: Predicted in 0.031944 seconds.
+tvmonitor: 85%, 386 241 54 41
+backpack: 72%, 345 232 200 409
+person: 100%, 374 79 437 1018
+person: 97%, 821 -59 261 1100
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_353.jpg: Predicted in 0.031848 seconds.
+tvmonitor: 91%, 386 241 54 42
+backpack: 60%, 341 243 199 394
+handbag: 52%, 341 243 199 394
+person: 100%, 384 73 400 1029
+person: 96%, 814 9 264 855
+person: 71%, 621 107 198 981
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_354.jpg: Predicted in 0.031712 seconds.
+tvmonitor: 89%, 386 241 54 41
+backpack: 64%, 336 235 197 405
+handbag: 67%, 336 235 197 405
+person: 99%, 354 71 383 1024
+person: 96%, 819 -37 265 1055
+person: 90%, 614 118 204 949
+person: 54%, 321 590 55 97
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_355.jpg: Predicted in 0.031785 seconds.
+tvmonitor: 84%, 386 242 54 40
+backpack: 75%, 323 239 206 400
+person: 99%, 335 68 408 1032
+person: 95%, 816 -39 270 1052
+person: 75%, 617 115 192 955
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_356.jpg: Predicted in 0.032331 seconds.
+tvmonitor: 81%, 386 241 54 43
+backpack: 77%, 325 243 205 385
+handbag: 56%, 325 243 205 385
+person: 100%, 324 81 421 1007
+person: 95%, 817 -46 266 1072
+person: 80%, 610 97 201 987
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_357.jpg: Predicted in 0.031717 seconds.
+tvmonitor: 78%, 386 241 56 42
+backpack: 88%, 331 247 183 378
+person: 99%, 327 77 419 1017
+person: 92%, 818 -38 264 1053
+person: 88%, 611 110 202 958
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_358.jpg: Predicted in 0.031755 seconds.
+tvmonitor: 87%, 386 241 55 43
+backpack: 85%, 329 245 193 383
+person: 99%, 337 89 410 993
+person: 95%, 602 93 217 995
+person: 95%, 819 -30 263 1037
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_359.jpg: Predicted in 0.031706 seconds.
+tvmonitor: 86%, 386 241 54 42
+backpack: 88%, 336 251 192 374
+person: 99%, 343 91 403 995
+person: 95%, 817 -37 266 1052
+person: 73%, 619 112 191 960
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_360.jpg: Predicted in 0.031729 seconds.
+tvmonitor: 72%, 387 242 52 39
+backpack: 87%, 336 249 197 376
+person: 100%, 333 92 420 983
+person: 93%, 815 -27 265 1035
+person: 62%, 620 131 194 918
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_361.jpg: Predicted in 0.031721 seconds.
+tvmonitor: 85%, 387 241 53 41
+backpack: 82%, 341 247 190 378
+handbag: 60%, 341 247 190 378
+person: 100%, 346 72 408 1022
+person: 97%, 820 -60 261 1095
+person: 55%, 618 135 199 918
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_362.jpg: Predicted in 0.031683 seconds.
+tvmonitor: 80%, 387 242 52 40
+backpack: 80%, 346 249 186 378
+person: 99%, 379 63 414 1043
+person: 93%, 822 -58 260 1088
+person: 68%, 614 93 202 988
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_363.jpg: Predicted in 0.031689 seconds.
+tvmonitor: 84%, 387 242 52 41
+backpack: 71%, 343 251 193 373
+handbag: 64%, 343 251 193 373
+person: 100%, 363 74 448 1030
+person: 96%, 814 -26 268 1031
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_364.jpg: Predicted in 0.031786 seconds.
+tvmonitor: 76%, 387 242 53 41
+tvmonitor: 70%, 836 426 76 81
+backpack: 66%, 341 255 193 371
+handbag: 56%, 341 255 193 371
+person: 100%, 372 49 432 1066
+person: 97%, 811 -45 272 1062
+person: 80%, 605 94 216 985
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_365.jpg: Predicted in 0.031947 seconds.
+tvmonitor: 78%, 832 426 79 82
+tvmonitor: 75%, 386 241 54 42
+backpack: 63%, 346 248 186 383
+handbag: 63%, 346 248 186 383
+person: 99%, 385 64 407 1038
+person: 97%, 813 -23 269 1014
+person: 78%, 606 123 214 853
+person: 57%, 320 590 52 96
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_366.jpg: Predicted in 0.031783 seconds.
+tvmonitor: 77%, 387 242 52 41
+backpack: 74%, 344 253 193 376
+handbag: 55%, 344 253 193 376
+person: 99%, 375 62 417 1050
+person: 97%, 775 1 307 1063
+person: 69%, 611 142 201 812
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_367.jpg: Predicted in 0.031783 seconds.
+tvmonitor: 74%, 386 242 53 41
+backpack: 75%, 346 248 190 381
+handbag: 52%, 346 248 190 381
+person: 99%, 374 65 424 1032
+person: 98%, 771 0 306 1065
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_368.jpg: Predicted in 0.031695 seconds.
+tvmonitor: 81%, 387 241 53 42
+backpack: 64%, 345 242 189 387
+handbag: 67%, 345 242 189 387
+person: 99%, 364 66 442 1029
+person: 98%, 804 17 270 951
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_369.jpg: Predicted in 0.031719 seconds.
+tvmonitor: 87%, 387 241 53 42
+backpack: 83%, 340 243 196 390
+person: 99%, 364 52 448 1051
+person: 98%, 811 -16 265 1007
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_370.jpg: Predicted in 0.031686 seconds.
+tvmonitor: 86%, 386 241 54 42
+backpack: 82%, 335 247 198 379
+person: 99%, 327 79 439 1003
+person: 98%, 811 -8 264 998
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_371.jpg: Predicted in 0.031812 seconds.
+tvmonitor: 80%, 387 241 54 42
+backpack: 74%, 334 242 202 392
+handbag: 59%, 334 242 202 392
+person: 100%, 357 68 456 1026
+person: 99%, 812 -54 266 1082
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_372.jpg: Predicted in 0.031692 seconds.
+tvmonitor: 88%, 386 241 55 43
+backpack: 80%, 335 240 203 395
+person: 99%, 336 83 421 993
+person: 99%, 812 -17 264 1015
+person: 58%, 615 79 195 938
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_373.jpg: Predicted in 0.031759 seconds.
+tvmonitor: 89%, 386 241 54 41
+handbag: 55%, 334 239 199 395
+backpack: 74%, 332 268 189 390
+person: 99%, 331 75 430 1004
+person: 99%, 812 -37 267 1050
+person: 70%, 609 28 202 1033
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_374.jpg: Predicted in 0.031790 seconds.
+tvmonitor: 89%, 386 242 54 41
+backpack: 78%, 333 243 204 389
+handbag: 58%, 333 243 204 389
+person: 100%, 362 60 454 1044
+person: 95%, 823 35 257 806
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_375.jpg: Predicted in 0.031886 seconds.
+tvmonitor: 76%, 387 242 54 40
+handbag: 61%, 337 242 200 394
+backpack: 70%, 338 269 188 388
+person: 100%, 370 56 431 1049
+person: 89%, 829 -9 246 994
+person: 65%, 614 134 195 833
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_376.jpg: Predicted in 0.031772 seconds.
+tvmonitor: 84%, 386 241 55 41
+handbag: 71%, 334 246 201 385
+backpack: 64%, 333 277 191 373
+person: 99%, 369 76 431 1013
+person: 99%, -2 287 93 700
+person: 91%, 831 -21 242 1021
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_377.jpg: Predicted in 0.031861 seconds.
+tvmonitor: 85%, 386 241 54 43
+handbag: 68%, 329 240 212 394
+backpack: 67%, 327 272 202 384
+person: 100%, -2 261 141 711
+person: 99%, 331 84 440 991
+person: 87%, 826 0 255 972
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_378.jpg: Predicted in 0.031831 seconds.
+tvmonitor: 86%, 385 241 57 42
+backpack: 76%, 327 248 210 379
+handbag: 54%, 327 248 210 379
+person: 100%, 7 267 186 726
+person: 99%, 333 85 437 988
+person: 93%, 828 -26 253 1016
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_379.jpg: Predicted in 0.031797 seconds.
+tvmonitor: 79%, 385 241 57 42
+backpack: 70%, 326 240 215 388
+handbag: 71%, 326 240 215 388
+person: 100%, 23 261 192 680
+person: 100%, 365 69 440 1028
+person: 91%, 831 -43 251 1061
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_380.jpg: Predicted in 0.031829 seconds.
+tvmonitor: 84%, 385 241 57 44
+backpack: 80%, 333 252 190 369
+backpack: 76%, 69 398 127 197
+person: 100%, 74 279 204 641
+person: 100%, 383 63 409 1038
+person: 96%, 832 -51 249 1069
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_381.jpg: Predicted in 0.031685 seconds.
+tvmonitor: 81%, 386 241 55 42
+backpack: 85%, 334 251 184 370
+backpack: 53%, 129 383 120 181
+person: 100%, 117 273 189 627
+person: 100%, 390 60 398 1042
+person: 90%, 833 -47 247 1062
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_382.jpg: Predicted in 0.031760 seconds.
+tvmonitor: 84%, 386 241 56 42
+tvmonitor: 55%, 847 432 71 73
+backpack: 81%, 335 255 198 365
+backpack: 65%, 174 403 118 181
+person: 100%, 389 66 403 1029
+person: 99%, 161 290 181 585
+person: 91%, 837 -74 240 1122
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_383.jpg: Predicted in 0.031719 seconds.
+tvmonitor: 80%, 386 241 55 42
+backpack: 95%, 333 259 204 360
+backpack: 88%, 197 379 125 192
+person: 100%, 189 303 165 550
+person: 100%, 380 76 420 1007
+person: 94%, 828 -63 255 1095
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_384.jpg: Predicted in 0.031771 seconds.
+tvmonitor: 91%, 387 242 54 42
+backpack: 86%, 344 251 186 375
+handbag: 54%, 344 251 186 375
+person: 100%, 232 314 160 530
+person: 100%, 380 76 426 1015
+person: 98%, 823 -4 260 880
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_385.jpg: Predicted in 0.031863 seconds.
+tvmonitor: 81%, 387 241 53 42
+backpack: 90%, 347 258 190 368
+person: 100%, 344 92 497 976
+person: 93%, 827 -45 252 1060
+person: 92%, 284 329 137 500
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_386.jpg: Predicted in 0.031924 seconds.
+tvmonitor: 83%, 387 242 51 40
+backpack: 95%, 342 261 200 364
+person: 99%, 355 86 487 993
+person: 95%, 836 -69 240 1109
+person: 91%, 309 327 130 500
+person: 74%, 631 135 265 919
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_387.jpg: Predicted in 0.031689 seconds.
+tvmonitor: 83%, 386 242 53 41
+backpack: 76%, 340 254 188 358
+person: 97%, 384 70 409 1011
+person: 89%, 877 -2 198 979
+person: 89%, 655 101 222 971
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_388.jpg: Predicted in 0.031688 seconds.
+tvmonitor: 90%, 387 242 51 41
+backpack: 79%, 354 258 179 364
+person: 99%, 385 68 418 1020
+person: 68%, 666 150 191 884
+person: 64%, 319 589 50 91
+person: 53%, 914 4 160 864
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_389.jpg: Predicted in 0.031900 seconds.
+tvmonitor: 72%, 387 242 52 40
+backpack: 78%, 351 249 185 381
+person: 99%, 360 79 479 1002
+person: 59%, 981 26 98 1018
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_390.jpg: Predicted in 0.031785 seconds.
+tvmonitor: 88%, 387 242 52 40
+backpack: 81%, 345 249 196 382
+person: 99%, 404 84 485 1000
+person: 67%, 932 13 149 1054
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_391.jpg: Predicted in 0.031808 seconds.
+tvmonitor: 85%, 387 243 52 40
+tvmonitor: 79%, 848 426 89 76
+backpack: 70%, 346 254 190 369
+handbag: 52%, 346 254 190 369
+person: 100%, 370 97 436 986
+person: 85%, 891 18 184 1047
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_392.jpg: Predicted in 0.031815 seconds.
+tvmonitor: 87%, 387 242 52 41
+backpack: 78%, 341 250 195 377
+handbag: 50%, 341 250 195 377
+person: 100%, 367 54 445 1046
+person: 98%, 760 25 323 1026
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_393.jpg: Predicted in 0.031700 seconds.
+tvmonitor: 87%, 386 241 54 40
+backpack: 90%, 337 249 196 372
+person: 100%, 366 73 448 1014
+person: 98%, 762 26 317 1014
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_394.jpg: Predicted in 0.031812 seconds.
+tvmonitor: 73%, 386 242 55 40
+backpack: 83%, 334 247 196 380
+person: 100%, 357 77 460 1006
+person: 98%, 702 -4 382 1075
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_395.jpg: Predicted in 0.031773 seconds.
+tvmonitor: 72%, 386 241 55 41
+backpack: 84%, 332 252 196 374
+person: 100%, 358 52 457 1053
+person: 91%, 834 -18 248 1012
+person: 62%, 603 98 217 907
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_396.jpg: Predicted in 0.031822 seconds.
+tvmonitor: 67%, 386 241 55 41
+backpack: 91%, 332 247 203 384
+person: 99%, 368 46 445 1074
+person: 86%, 899 -21 177 1028
+person: 53%, 606 122 212 930
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_397.jpg: Predicted in 0.031701 seconds.
+tvmonitor: 85%, 386 241 55 42
+backpack: 83%, 334 252 201 372
+person: 99%, 363 39 446 1082
+person: 74%, 916 -34 165 1055
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_398.jpg: Predicted in 0.031701 seconds.
+tvmonitor: 72%, 386 242 55 41
+backpack: 91%, 336 249 194 378
+person: 99%, 374 59 423 1048
+person: 88%, 911 22 170 834
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_399.jpg: Predicted in 0.031700 seconds.
+tvmonitor: 78%, 386 242 54 42
+backpack: 87%, 336 252 199 376
+person: 99%, 331 84 446 993
+person: 93%, 805 4 265 869
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_400.jpg: Predicted in 0.031694 seconds.
+tvmonitor: 70%, 385 241 56 42
+backpack: 84%, 332 247 205 377
+person: 99%, 323 111 454 958
+person: 93%, 819 -22 260 1121
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_401.jpg: Predicted in 0.031877 seconds.
+tvmonitor: 78%, 386 241 56 42
+umbrella: 61%, 365 57 363 276
+backpack: 90%, 334 247 202 381
+person: 99%, 325 104 453 965
+person: 92%, 823 -59 252 1106
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_402.jpg: Predicted in 0.031702 seconds.
+tvmonitor: 75%, 386 241 56 41
+backpack: 88%, 334 248 202 376
+person: 99%, 362 100 450 982
+person: 98%, 772 20 309 1037
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_403.jpg: Predicted in 0.031720 seconds.
+tvmonitor: 79%, 386 241 54 41
+backpack: 88%, 333 257 201 368
+person: 99%, 369 90 437 997
+person: 97%, 778 -18 297 1115
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_404.jpg: Predicted in 0.031986 seconds.
+tvmonitor: 81%, 386 241 54 41
+backpack: 73%, 335 246 199 382
+handbag: 63%, 335 246 199 382
+person: 99%, 383 91 401 992
+person: 96%, 822 -23 261 1040
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_405.jpg: Predicted in 0.031808 seconds.
+tvmonitor: 78%, 386 241 54 40
+backpack: 80%, 333 272 188 384
+person: 99%, 376 66 418 1029
+person: 92%, 830 -17 246 1025
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_406.jpg: Predicted in 0.031799 seconds.
+tvmonitor: 86%, 387 241 52 41
+handbag: 63%, 336 245 201 389
+backpack: 72%, 335 275 194 385
+person: 99%, 334 58 426 1041
+person: 84%, 764 20 324 1059
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_407.jpg: Predicted in 0.031829 seconds.
+tvmonitor: 81%, 387 242 53 41
+backpack: 73%, 337 251 195 375
+handbag: 58%, 337 251 195 375
+person: 100%, 377 60 420 1041
+person: 97%, 780 16 299 1057
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_408.jpg: Predicted in 0.031889 seconds.
+tvmonitor: 78%, 386 241 55 41
+backpack: 85%, 335 248 202 380
+handbag: 50%, 335 248 202 380
+person: 99%, 378 62 417 1034
+person: 95%, 829 -3 253 1095
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_409.jpg: Predicted in 0.031802 seconds.
+tvmonitor: 79%, 387 242 54 40
+backpack: 79%, 336 253 195 370
+handbag: 60%, 336 253 195 370
+person: 99%, 366 45 444 1068
+person: 96%, 762 34 323 1031
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_410.jpg: Predicted in 0.031875 seconds.
+tvmonitor: 69%, 386 242 54 41
+handbag: 61%, 334 251 199 373
+backpack: 78%, 333 279 190 372
+person: 100%, 373 48 430 1065
+person: 92%, 817 76 267 1007
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_411.jpg: Predicted in 0.031769 seconds.
+tvmonitor: 70%, 386 242 54 41
+backpack: 75%, 334 251 203 373
+handbag: 60%, 334 251 203 373
+person: 100%, 368 57 439 1050
+person: 98%, 768 -7 313 1107
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_412.jpg: Predicted in 0.031708 seconds.
+tvmonitor: 88%, 386 241 54 42
+backpack: 83%, 334 250 194 376
+person: 100%, 375 56 422 1051
+person: 99%, 765 -12 320 1118
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_413.jpg: Predicted in 0.031695 seconds.
+tvmonitor: 82%, 386 241 55 42
+backpack: 85%, 332 250 206 378
+backpack: 51%, 541 284 218 385
+person: 100%, 368 39 438 1086
+person: 99%, 768 -23 316 1131
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_414.jpg: Predicted in 0.031784 seconds.
+tvmonitor: 77%, 386 241 55 41
+backpack: 89%, 333 247 199 384
+person: 99%, 767 -26 314 1139
+person: 99%, 379 42 415 1073
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_415.jpg: Predicted in 0.031825 seconds.
+tvmonitor: 74%, 386 242 55 41
+backpack: 90%, 333 253 199 373
+person: 100%, 375 63 422 1037
+person: 99%, 775 -10 307 1106
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_416.jpg: Predicted in 0.031827 seconds.
+tvmonitor: 64%, 386 241 56 42
+backpack: 86%, 330 252 206 374
+person: 99%, 325 58 450 1043
+person: 98%, 783 -39 305 1165
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_417.jpg: Predicted in 0.031700 seconds.
+tvmonitor: 58%, 386 241 56 41
+backpack: 87%, 333 248 200 379
+person: 100%, 373 56 425 1054
+person: 88%, 830 115 251 945
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_418.jpg: Predicted in 0.031744 seconds.
+tvmonitor: 69%, 386 241 55 41
+backpack: 89%, 331 249 203 378
+person: 99%, 327 64 443 1030
+person: 83%, 831 34 246 1083
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_419.jpg: Predicted in 0.031733 seconds.
+tvmonitor: 67%, 386 241 55 41
+handbag: 51%, 329 249 211 379
+backpack: 82%, 326 276 204 382
+person: 100%, 368 52 441 1056
+person: 92%, 875 4 202 1068
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_420.jpg: Predicted in 0.031769 seconds.
+tvmonitor: 63%, 386 241 55 40
+backpack: 87%, 328 276 196 378
+person: 100%, 327 57 433 1047
+person: 87%, 821 5 261 1072
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_421.jpg: Predicted in 0.031728 seconds.
+tvmonitor: 69%, 386 241 55 41
+backpack: 91%, 331 252 199 375
+person: 99%, 379 46 413 1070
+person: 88%, 834 5 244 1070
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_422.jpg: Predicted in 0.031704 seconds.
+tvmonitor: 59%, 386 241 57 40
+handbag: 54%, 332 251 194 377
+backpack: 77%, 331 279 186 370
+person: 99%, 330 66 437 1027
+person: 83%, 838 14 235 1053
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_423.jpg: Predicted in 0.031702 seconds.
+tvmonitor: 63%, 385 241 57 41
+backpack: 91%, 330 279 195 377
+person: 99%, 324 81 445 1008
+person: 88%, 835 54 244 1057
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_424.jpg: Predicted in 0.031998 seconds.
+tvmonitor: 66%, 385 241 57 42
+handbag: 59%, 330 250 207 381
+backpack: 79%, 328 277 197 378
+person: 100%, 369 50 430 1058
+person: 89%, 830 71 252 1019
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_425.jpg: Predicted in 0.031816 seconds.
+tvmonitor: 75%, 385 241 57 41
+backpack: 84%, 331 242 199 387
+person: 99%, 370 56 438 1046
+person: 84%, 834 37 246 1082
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_426.jpg: Predicted in 0.031781 seconds.
+tvmonitor: 83%, 386 240 56 43
+backpack: 84%, 331 277 189 381
+person: 99%, 329 73 429 1014
+person: 94%, 829 15 253 963
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_427.jpg: Predicted in 0.031866 seconds.
+tvmonitor: 72%, 386 242 54 41
+backpack: 85%, 335 242 197 387
+person: 98%, 336 76 424 1006
+person: 95%, 830 0 252 989
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_428.jpg: Predicted in 0.031800 seconds.
+tvmonitor: 89%, 387 241 53 41
+backpack: 92%, 337 253 196 372
+person: 99%, 373 62 427 1044
+person: 92%, 783 -1 314 1091
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_429.jpg: Predicted in 0.031739 seconds.
+tvmonitor: 91%, 387 242 53 40
+handbag: 55%, 339 263 193 359
+backpack: 80%, 341 292 182 353
+person: 99%, 375 97 419 986
+person: 98%, 777 -5 321 1106
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_430.jpg: Predicted in 0.031838 seconds.
+tvmonitor: 75%, 386 241 55 40
+backpack: 85%, 344 238 201 403
+backpack: 70%, 605 289 202 382
+person: 100%, 379 55 415 1055
+person: 91%, 778 9 309 1072
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_431.jpg: Predicted in 0.031811 seconds.
+tvmonitor: 79%, 385 241 58 44
+handbag: 74%, 341 237 199 394
+backpack: 56%, 355 220 208 414
+person: 100%, 394 53 388 1062
+person: 89%, 825 9 255 1137
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_432.jpg: Predicted in 0.032284 seconds.
+tvmonitor: 72%, 385 240 59 45
+backpack: 72%, 321 235 212 393
+handbag: 67%, 321 235 212 393
+person: 100%, 342 67 410 1022
+person: 96%, 831 -46 246 1187
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_433.jpg: Predicted in 0.031994 seconds.
+tvmonitor: 68%, 384 240 61 43
+handbag: 64%, 318 201 231 379
+backpack: 80%, 318 234 205 390
+person: 100%, 337 63 405 1028
+person: 88%, 840 39 234 1084
+person: 71%, 298 583 45 90
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_434.jpg: Predicted in 0.031743 seconds.
+tvmonitor: 70%, 386 242 56 42
+backpack: 87%, 327 293 184 355
+person: 100%, 340 96 417 968
+person: 91%, 838 41 235 1074
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_435.jpg: Predicted in 0.031855 seconds.
+tvmonitor: 87%, 386 241 56 42
+tvmonitor: 64%, 851 434 65 72
+handbag: 71%, 335 258 174 365
+backpack: 91%, 332 306 156 317
+person: 100%, 381 54 414 1052
+person: 95%, 869 -26 206 1138
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_436.jpg: Predicted in 0.031958 seconds.
+tvmonitor: 95%, 848 427 103 80
+tvmonitor: 78%, 386 241 55 42
+backpack: 73%, 338 261 196 354
+person: 100%, 388 76 406 1018
+person: 91%, 886 42 191 995
+person: 57%, 322 584 45 91
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_437.jpg: Predicted in 0.031762 seconds.
+tvmonitor: 84%, 385 241 57 42
+backpack: 85%, 339 296 173 340
+person: 100%, 391 69 399 1042
+person: 91%, 935 149 149 874
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_438.jpg: Predicted in 0.031960 seconds.
+tvmonitor: 83%, 385 241 57 42
+backpack: 84%, 336 261 186 356
+person: 100%, 370 74 433 1036
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_439.jpg: Predicted in 0.032097 seconds.
+tvmonitor: 77%, 846 422 145 89
+tvmonitor: 73%, 386 242 56 41
+backpack: 84%, 331 260 186 359
+person: 99%, 371 76 438 1035
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_440.jpg: Predicted in 0.031949 seconds.
+tvmonitor: 86%, 385 241 57 41
+tvmonitor: 54%, 842 424 152 84
+backpack: 75%, 320 288 190 359
+person: 99%, 323 99 451 981
+person: 88%, 951 85 127 1013
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_441.jpg: Predicted in 0.032232 seconds.
+cell phone: 63%, 906 363 47 50
+tvmonitor: 91%, 844 429 89 81
+tvmonitor: 79%, 386 241 55 43
+handbag: 73%, 311 256 208 370
+backpack: 72%, 313 280 199 375
+person: 99%, 318 86 452 1011
+person: 98%, 898 74 176 1040
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_442.jpg: Predicted in 0.031778 seconds.
+handbag: 69%, 313 254 196 371
+backpack: 74%, 316 277 186 383
+person: 99%, 320 79 447 1005
+person: 97%, 910 -2 173 871
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_443.jpg: Predicted in 0.031749 seconds.
+tvmonitor: 92%, 842 425 153 84
+tvmonitor: 55%, 383 240 51 45
+handbag: 57%, 308 263 166 364
+backpack: 74%, 316 253 192 375
+person: 100%, 323 81 438 1011
+person: 80%, 638 271 150 764
+person: 52%, 934 233 145 818
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_444.jpg: Predicted in 0.031681 seconds.
+tvmonitor: 90%, 844 422 148 86
+tvmonitor: 53%, 383 240 52 46
+backpack: 85%, 316 262 187 361
+person: 100%, 327 85 424 1008
+person: 93%, 975 25 107 913
+person: 76%, 635 274 157 760
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_445.jpg: Predicted in 0.031786 seconds.
+tvmonitor: 93%, 844 423 147 85
+backpack: 80%, 315 257 190 365
+person: 100%, 326 72 438 1031
+person: 97%, 952 28 126 803
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_446.jpg: Predicted in 0.031861 seconds.
+tvmonitor: 85%, 841 423 151 83
+tvmonitor: 55%, 383 241 51 44
+backpack: 79%, 320 284 181 369
+person: 100%, 331 75 430 1018
+person: 99%, 913 -22 161 1033
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_447.jpg: Predicted in 0.031755 seconds.
+tvmonitor: 90%, 841 427 148 78
+backpack: 86%, 311 279 197 380
+person: 99%, 325 86 430 1002
+person: 99%, 881 -49 194 1177
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_448.jpg: Predicted in 0.031703 seconds.
+tvmonitor: 90%, 841 427 148 78
+tvmonitor: 54%, 383 242 50 42
+backpack: 82%, 313 278 194 381
+person: 100%, 319 81 445 1007
+person: 99%, 879 -36 196 1148
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_449.jpg: Predicted in 0.031916 seconds.
+tvmonitor: 95%, 843 427 144 80
+backpack: 89%, 315 284 191 375
+person: 100%, 327 81 431 1013
+person: 99%, 888 5 186 1063
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_450.jpg: Predicted in 0.031729 seconds.
+cell phone: 66%, 714 295 56 41
+tvmonitor: 79%, 841 424 153 82
+backpack: 87%, 310 255 201 373
+person: 100%, 912 16 164 844
+person: 99%, 315 76 450 1015
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_451.jpg: Predicted in 0.031742 seconds.
+tvmonitor: 89%, 844 423 148 86
+tvmonitor: 62%, 383 241 50 44
+backpack: 81%, 309 243 202 390
+person: 100%, 373 87 430 1006
+person: 97%, 935 -17 146 995
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_452.jpg: Predicted in 0.031804 seconds.
+tvmonitor: 92%, 844 422 147 88
+tvmonitor: 61%, 382 241 52 46
+handbag: 54%, 314 247 192 381
+backpack: 77%, 311 285 162 378
+person: 100%, 323 107 447 972
+person: 87%, 978 -47 104 1161
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_453.jpg: Predicted in 0.031780 seconds.
+tvmonitor: 87%, 846 423 142 85
+tvmonitor: 52%, 384 241 50 44
+handbag: 67%, 312 251 194 379
+backpack: 73%, 308 277 169 393
+person: 100%, 375 51 429 1065
+person: 65%, 1001 352 75 685
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_454.jpg: Predicted in 0.031747 seconds.
+tvmonitor: 53%, 382 242 49 44
+backpack: 84%, 310 253 198 375
+person: 99%, 385 74 413 1033
+person: 87%, 881 37 195 1009
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_455.jpg: Predicted in 0.031696 seconds.
+backpack: 81%, 305 293 170 376
+person: 99%, 321 62 439 1046
+person: 96%, 753 16 335 1030
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_456.jpg: Predicted in 0.031727 seconds.
+backpack: 95%, 304 294 165 366
+person: 100%, 676 -4 410 1093
+person: 98%, 342 88 379 997
+person: 52%, 559 71 201 1027
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_457.jpg: Predicted in 0.031749 seconds.
+backpack: 95%, 299 292 174 369
+person: 100%, 489 12 539 1047
+person: 98%, 310 59 460 1034
+person: 64%, 948 120 129 845
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_458.jpg: Predicted in 0.031706 seconds.
+person: 100%, 318 -20 561 1124
+person: 99%, 830 246 242 697
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_459.jpg: Predicted in 0.032213 seconds.
+person: 100%, 664 114 332 957
+person: 99%, 112 4 609 1078
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_460.jpg: Predicted in 0.031715 seconds.
+bottle: 55%, 890 338 83 216
+person: 100%, 669 128 409 906
+person: 98%, -16 -59 546 1196
+person: 73%, 377 331 230 732
+person: 63%, 618 244 171 698
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_461.jpg: Predicted in 0.031673 seconds.
+person: 99%, 824 49 252 1062
+person: 98%, 516 236 193 727
+person: 94%, 238 188 382 911
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_462.jpg: Predicted in 0.031971 seconds.
+person: 100%, 690 157 227 790
+person: 100%, 221 53 396 1000
+person: 91%, 882 102 195 958
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_463.jpg: Predicted in 0.031739 seconds.
+backpack: 82%, 9 409 127 233
+person: 100%, 269 39 407 1016
+person: 100%, -1 306 196 654
+person: 97%, 625 231 153 703
+person: 94%, 834 78 241 1002
+person: 93%, 745 279 157 742
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_464.jpg: Predicted in 0.031729 seconds.
+cup: 83%, 708 321 49 47
+person: 100%, 20 329 214 606
+person: 100%, 277 18 422 1055
+person: 99%, 784 126 283 918
+person: 89%, 660 253 197 787
+person: 61%, 233 353 162 592
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_465.jpg: Predicted in 0.031751 seconds.
+person: 100%, 239 47 472 1050
+person: 99%, 56 299 175 603
+person: 94%, 612 -8 194 1092
+person: 90%, 757 30 324 1021
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_466.jpg: Predicted in 0.031756 seconds.
+handbag: 68%, 801 194 261 697
+person: 99%, 66 36 486 1002
+person: 98%, 500 3 229 1154
+person: 96%, 768 149 311 887
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_467.jpg: Predicted in 0.031791 seconds.
+cup: 58%, 481 258 67 146
+person: 100%, 23 10 448 1067
+person: 99%, 362 8 342 1067
+person: 87%, 705 199 347 880
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_468.jpg: Predicted in 0.031766 seconds.
+handbag: 52%, 6 170 289 741
+person: 99%, -10 29 382 1019
+person: 93%, 275 -9 404 1101
+person: 82%, 486 67 580 1013
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_469.jpg: Predicted in 0.031748 seconds.
+bottle: 65%, 401 181 175 585
+person: 99%, 285 50 745 1043
+person: 92%, 9 9 295 1067
+person: 56%, 241 62 246 1050
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_470.jpg: Predicted in 0.031792 seconds.
+tvmonitor: 96%, 849 422 141 85
+person: 96%, 0 -14 976 1115
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_471.jpg: Predicted in 0.031822 seconds.
+tvmonitor: 91%, 845 422 144 86
+person: 82%, 5 64 843 1029
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_472.jpg: Predicted in 0.031764 seconds.
+tvmonitor: 96%, 845 423 145 85
+handbag: 68%, 421 463 94 109
+person: 97%, 3 -5 508 1098
+person: 96%, 427 394 144 394
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_473.jpg: Predicted in 0.033335 seconds.
+tvmonitor: 95%, 846 422 145 86
+backpack: 96%, 479 420 97 149
+person: 100%, 472 345 142 430
+person: 96%, -9 20 443 1043
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_474.jpg: Predicted in 0.031782 seconds.
+tvmonitor: 96%, 845 422 145 85
+backpack: 94%, 530 426 97 142
+person: 100%, 519 348 135 416
+person: 90%, 9 70 302 933
+person: 82%, 173 340 134 528
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_475.jpg: Predicted in 0.031926 seconds.
+tvmonitor: 97%, 845 423 146 85
+backpack: 97%, 564 416 85 146
+person: 100%, 562 339 149 431
+person: 98%, 104 357 173 494
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_476.jpg: Predicted in 0.031695 seconds.
+tvmonitor: 97%, 845 423 146 85
+backpack: 95%, 610 432 80 133
+person: 100%, -5 288 278 589
+person: 100%, 602 353 136 412
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_477.jpg: Predicted in 0.031683 seconds.
+tvmonitor: 99%, 846 424 145 85
+tvmonitor: 56%, 386 242 53 40
+backpack: 95%, 655 403 86 153
+person: 100%, 2 389 101 392
+person: 100%, 661 354 114 391
+person: 100%, 70 302 230 510
+person: 79%, 206 491 80 287
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_478.jpg: Predicted in 0.031711 seconds.
+tvmonitor: 99%, 846 423 141 85
+backpack: 87%, 700 404 89 150
+person: 100%, 26 317 252 516
+person: 100%, 706 346 132 413
+person: 96%, 193 324 138 465
+person: 89%, 9 428 108 358
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_479.jpg: Predicted in 0.031784 seconds.
+tvmonitor: 99%, 853 422 134 88
+backpack: 83%, 746 438 64 111
+person: 100%, 55 312 199 523
+person: 100%, 744 344 141 403
+person: 100%, 229 372 117 401
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_480.jpg: Predicted in 0.031684 seconds.
+tvmonitor: 80%, 907 420 80 85
+person: 100%, 228 344 151 430
+person: 100%, 70 306 181 535
+person: 93%, 841 333 102 393
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_481.jpg: Predicted in 0.031820 seconds.
+person: 100%, 239 341 141 419
+person: 100%, 896 335 172 387
+person: 100%, 99 318 188 484
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_482.jpg: Predicted in 0.031755 seconds.
+tvmonitor: 92%, 849 425 102 83
+person: 100%, 126 323 175 467
+person: 100%, 264 354 110 405
+person: 100%, 948 339 124 373
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_483.jpg: Predicted in 0.031791 seconds.
+tvmonitor: 77%, 847 422 144 84
+person: 100%, 280 385 110 339
+person: 100%, 133 329 179 447
+person: 98%, 984 325 97 413
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_484.jpg: Predicted in 0.031772 seconds.
+tvmonitor: 82%, 846 421 145 88
+person: 100%, 155 335 169 442
+person: 100%, 303 368 104 369
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_485.jpg: Predicted in 0.031785 seconds.
+tvmonitor: 84%, 845 423 145 85
+person: 100%, 189 331 163 452
+person: 100%, 322 366 107 364
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_486.jpg: Predicted in 0.031799 seconds.
+tvmonitor: 95%, 848 423 142 86
+person: 100%, 204 333 171 430
+person: 100%, 341 391 104 325
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_487.jpg: Predicted in 0.031752 seconds.
+tvmonitor: 90%, 847 422 142 86
+person: 100%, 218 340 157 420
+person: 100%, 371 391 100 312
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_488.jpg: Predicted in 0.031713 seconds.
+tvmonitor: 94%, 848 423 142 86
+person: 100%, 227 334 162 421
+person: 100%, 378 384 113 321
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_489.jpg: Predicted in 0.031761 seconds.
+tvmonitor: 92%, 845 422 144 87
+person: 100%, 257 342 145 413
+person: 100%, 401 389 99 291
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_490.jpg: Predicted in 0.031818 seconds.
+tvmonitor: 90%, 842 424 155 84
+person: 100%, 284 338 146 401
+person: 100%, 418 399 105 296
+person: 99%, 990 269 90 555
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_491.jpg: Predicted in 0.031762 seconds.
+tvmonitor: 88%, 847 424 139 85
+person: 100%, 296 357 142 375
+person: 100%, 440 382 102 301
+person: 98%, 947 286 130 532
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_492.jpg: Predicted in 0.031757 seconds.
+tvmonitor: 88%, 840 425 147 84
+person: 100%, 464 388 105 288
+person: 100%, 312 349 143 376
+person: 99%, 937 285 142 531
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_493.jpg: Predicted in 0.031700 seconds.
+tvmonitor: 86%, 847 427 104 80
+person: 100%, 345 359 154 358
+person: 100%, 481 380 98 286
+person: 99%, 920 275 160 550
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_494.jpg: Predicted in 0.031750 seconds.
+tvmonitor: 95%, 845 428 80 76
+person: 100%, 383 354 160 357
+person: 100%, 501 374 106 311
+person: 100%, 919 273 165 558
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_495.jpg: Predicted in 0.031687 seconds.
+tvmonitor: 86%, 850 426 105 79
+person: 100%, 405 386 137 289
+person: 100%, 528 389 91 284
+person: 100%, 949 266 132 575
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_496.jpg: Predicted in 0.032026 seconds.
+tvmonitor: 88%, 844 422 147 86
+person: 100%, 546 382 78 285
+person: 100%, 452 378 127 298
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_497.jpg: Predicted in 0.031813 seconds.
+tvmonitor: 92%, 845 422 144 86
+tvmonitor: 64%, 386 242 53 40
+handbag: 88%, 629 512 34 69
+person: 99%, 459 369 162 332
+person: 97%, 444 404 87 278
+person: 90%, 565 381 75 288
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_498.jpg: Predicted in 0.031726 seconds.
+tvmonitor: 97%, 845 422 145 85
+person: 100%, 449 410 106 248
+person: 100%, 532 373 117 294
+Enter Image Path: ../test_data_smu_setup/Overlap_Estimator/Sample_Images/viewer_4/frame1_499.jpg: Predicted in 0.031697 seconds.
+tvmonitor: 95%, 846 422 144 85
+person: 100%, 547 377 118 287
+person: 100%, 469 406 100 255
+Enter Image Path: 

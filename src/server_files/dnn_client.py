@@ -7,8 +7,8 @@ import base64
 import json
 
 # server_url = "http://10.4.16.29:5550/mm/"
-server_url = "http://10.0.106.181:5940/mm/"
-# server_url = "http://172.17.0.7:5550/mm/"
+server_url = "http://10.0.109.82:5917/mm/"
+# server_url = "http://172.17.0.5:5950/mm/"
 
 
 def get_embeddings(test_img_path):
@@ -30,3 +30,5 @@ def get_embeddings(test_img_path):
     # print("response : {}".format(labels))
 
     return embedding
+
+# print(get_embeddings(r"C:\Users\tango\Downloads\\color_corrected2.jpg"))
