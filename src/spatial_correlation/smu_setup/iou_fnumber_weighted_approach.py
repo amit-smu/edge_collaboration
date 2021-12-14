@@ -60,27 +60,31 @@ def get_key(x):
 
 
 if __name__ == "__main__":
-    dir_name = "../../../rpi_hardware/raw_image_processing/data/episode_2/"
+    dir_name = "../../../rpi_hardware/raw_image_processing/data/episode_1/"
     ref_cam = 2
     collab_cam = 1
     # gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates(ref_cam, collab_cam)
-    gt_box_coords_vw_1 = [360, 0, 990, 1080]
+    # gt_box_coords_vw_1 = [360, 0, 990, 1080]
+    gt_box_coords_vw_1 = [360, 0, 1010, 1080]
     max_pixel_intensity = 170
+
+    scale = 1056 / 1080
+    gt_box_coords_vw_1 = [int(t * scale) for t in gt_box_coords_vw_1]
 
     iou_scores = []
     est_area_global = []
 
-    frame_list = os.listdir("{}/intermediate_frames/cam_2_{}".format(dir_name, collab_cam))
+    frame_list = os.listdir("{}/intermediate_frames/cam_{}_{}".format(dir_name, ref_cam, collab_cam))
     frame_list = sorted(frame_list, key=lambda x: get_key(x))
     # frame_list = np.arange(0, 2000, 5)
     for f_num in frame_list:
         # f_name = "marked_area_f_{}.jpg".format(f_num)
         print(f_num)
-        frame_path = "{}/{}/cam_2_{}/{}".format(dir_name, "intermediate_frames", collab_cam, f_num)
+        frame_path = "{}/{}/cam_{}_{}/{}".format(dir_name, "intermediate_frames", ref_cam, collab_cam, f_num)
         # print(frame_path)
 
         if not os.path.exists(frame_path):
-            print("path doesn't exist")
+            print("path doesn't exist: {}".format(frame_path))
             continue
         frame = cv2.imread(frame_path)
         assert frame is not None
@@ -125,9 +129,8 @@ if __name__ == "__main__":
                           (est_area_global[2], est_area_global[3]),
                           (255, 0, 0), 2)
             cv2.imwrite("final_area.jpg", frame_copy)
-
-        break
-    with open("overlap_vs_pixel_int_{}.txt".format(max_pixel_intensity), 'w') as out:
+        # break
+    with open("{}/overlap_vs_pixel_int_{}.txt".format(dir_name, max_pixel_intensity), 'w') as out:
         for i in iou_scores:
             print(i)
             out.write("{}\n".format(i))

@@ -18,7 +18,7 @@ import os, sys
 DEBUG = True
 THR_color_hist = 0.2
 THR_sift = 0.3
-REID_EUCL_DIST = 12
+REID_EUCL_DIST = 13.4
 
 
 def get_object_features(img_obj, obj_loc, obj_id):
@@ -433,15 +433,18 @@ def load_detected_objects(filename):
 
 if __name__ == "__main__":
     # dir_name = "../../../dataset/SMU_Setup/Spatial_Overlap/Sample_Images"
-    dir_name = "../../../rpi_hardware/raw_image_processing/data/episode_2/"
+    dir_name = "../../../rpi_hardware/raw_image_processing/data/episode_1/"
     ref_cam = 2
-    collab_cam = 3
-    view_1_name = "pi_{}_frames".format(ref_cam)
-    view_2_name = "pi_{}_frames".format(collab_cam)
+    collab_cam = 1
+    image_size = (1056, 1056)  # (width, height)
+    # gt_box_coords_vw_1 = [0, 0, 470, 1080]
+    gt_box_coords_vw_1 = [360, 0, 1010, 1080]
+    gt_box_coords_vw_2 = [510, 0, 1080, 1080]
+
+    view_1_name = "pi_{}_frames_{}_v2".format(ref_cam, image_size[0])
+    view_2_name = "pi_{}_frames_{}_v2".format(collab_cam, image_size[1])
     view_1_detected_objs = "result_pi_{}_single_detections.txt".format(ref_cam)
     view_2_detected_objs = "result_pi_{}_single_detections.txt".format(collab_cam)
-
-    image_size = (1080, 1080)  # (width, height)
 
     SAME_OBJECTS_ANALYSIS = False  # whether to do same obj analysis or not
     INCLUDE_COLOR = False
@@ -457,8 +460,10 @@ if __name__ == "__main__":
     # ground truth spatial overlap area coordinates
     # gt_box_coords_vw_1 = get_gt_sp_overlap_coordinates("07", "08")
     # gt_box_coords_vw_2 = get_gt_sp_overlap_coordinates("08", "07")
-    gt_box_coords_vw_1 = [0, 0, 470, 1080]
-    gt_box_coords_vw_2 = [510, 0, 1080, 1080]
+    # scale gt to image size
+    scale = 1056 / 1080
+    gt_box_coords_vw_1 = [int(t * scale) for t in gt_box_coords_vw_1]
+    gt_box_coords_vw_2 = [int(t * scale) for t in gt_box_coords_vw_2]
 
     # estimated spatial overlap area coordinates
     est_box_coords_vw1_global = []
@@ -478,7 +483,7 @@ if __name__ == "__main__":
     view_1_objects = load_detected_objects("{}/{}".format(dir_name, view_1_detected_objs))
     view_2_objects = load_detected_objects("{}/{}".format(dir_name, view_2_detected_objs))
 
-    for frame_number in range(0, 3500, 8):  # 50% training data
+    for frame_number in range(10, 3500, 8):  # 50% training data
         print("frame number : {}".format(frame_number))
         ref_frame_name = "frame_{}_{}".format(ref_cam, frame_number)
         collab_frame_name = "frame_{}_{}".format(collab_cam, frame_number)
@@ -519,7 +524,7 @@ if __name__ == "__main__":
             # cv2.imwrite("intermediate_frames/marked_area_cam_7_f_{}.jpg".format(frame_number), view_1_area)
             # cv2.imwrite("intermediate_frames/marked_area_cam_8_f_{}.jpg".format(frame_number), view_2_area)
             cv2.imwrite(
-                "{}/intermediate_frames/cam_2_{}/marked_area_f_{}.jpg".format(dir_name, collab_cam, frame_number),
+                "{}/intermediate_frames/cam_{}_{}/frame_{}.jpg".format(dir_name, ref_cam, collab_cam, frame_number),
                 view_1_area)
             # cv2.imwrite(
             #     "{}/intermediate_frames/cam_2_{}/marked_area_f_{}.jpg".format(dir_name, collab_cam, frame_number),
@@ -532,7 +537,7 @@ if __name__ == "__main__":
                                view_1_obj_features=view_1_obj_features, view_2_obj_features=view_2_obj_features)
 
         cv2.imwrite(
-            "{}/intermediate_frames/cam_2_{}/marked_area_f_{}.jpg".format(dir_name, collab_cam, frame_number),
+            "{}/intermediate_frames/cam_{}_{}/frame_{}.jpg".format(dir_name, ref_cam, collab_cam, frame_number),
             view_1_area)
         # cv2.imwrite(
         #     "{}/intermediate_frames/cam_2_{}/marked_area_f_{}.jpg".format(dir_name, collab_cam, frame_number),
@@ -606,10 +611,10 @@ if __name__ == "__main__":
     # plot number of frames vs iou of estimated spatial overlap
 
     # save the masked frames from both camera views
-    cv2.imwrite("cam_{}.jpg".format(ref_cam), view_1_frame)
-    cv2.imwrite("cam_{}.jpg".format(collab_cam), view_2_frame)
-    cv2.imwrite("cam_{}_area.jpg".format(ref_cam), view_1_area)
-    cv2.imwrite("cam_{}_area.jpg".format(collab_cam), view_2_area)
+        cv2.imwrite("{}/cam_{}.jpg".format(dir_name, ref_cam), view_1_frame)
+        cv2.imwrite("{}/cam_{}.jpg".format(dir_name, collab_cam), view_2_frame)
+        cv2.imwrite("{}/cam_{}_area.jpg".format(dir_name, ref_cam), view_1_area)
+        cv2.imwrite("{}/cam_{}_area.jpg".format(dir_name, collab_cam), view_2_area)
 
     x_axis = np.arange(1, len(iou_values_1) + 1)
     y_axis = iou_values_1
