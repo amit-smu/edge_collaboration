@@ -2,6 +2,7 @@
 regression estimator for coordinate mapping from one frame to another. Linear regression
 use multiple points from each bounding box. These points are on the road.
 Optimized version -- including feature normalization, regularization etc.
+main file used for coordinate mapping
 """
 
 import cv2
@@ -118,7 +119,7 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(train_df):
     :return:
     """
     poly_features = PolynomialFeatures(degree=degree, interaction_only=False)
-    model = LinearRegression(normalize=False)
+    model = LinearRegression(normalize=True)
     # model = Ridge(alpha=100)
     # model = SVR()
     # model = RandomForestRegressor(max_features=5)
@@ -212,22 +213,35 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(train_df):
         pickle.dump(model, ofile)
 
 
+def create_filenames(cam, f_numbers_file):
+    filenames = []
+    with open(f_numbers_file) as input_file:
+        names = input_file.read().split("\n")
+        for n in names:
+            if len(n) == 0:
+                continue
+            f_name = "frame_{}_{}.json".format(cam, n.strip())
+            filenames.append(f_name)
+    return filenames
+
+
 if __name__ == "__main__":
     DEBUG = False
     NORMALIZE = False
     REGULARIZE = False
     img_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/pi_{}_frames_1056_v2/"
     annot_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/ground_truth/frame_wise_gt_json/"
+    train_f_numbers = r"../dnn_training/train_frame_numbers.txt"
+    test_f_numbers = r"../dnn_training/test_frame_numbers.txt"
 
-    src_cam = 3  # collab cam
+    src_cam = 1  # collab cam
     dst_cam = 2  # ref cam
     degree = 3
     TRAINING_FRAMES = 1400  # out of 400 total, 119 frames kept for testing. Frame no range = (0, 2000)
 
     s_pts_train = []  # source/dst points for testing and training
     d_pts_train = []
-    s_pts_test = []
-    d_pts_test = []
+
 
     print("Degree: {}, Normalize: {}, Regularize: {}".format(degree, NORMALIZE, REGULARIZE))
     # read training frame names
@@ -237,9 +251,10 @@ if __name__ == "__main__":
     src_dir = "{}/cam_{}".format(annot_dir, src_cam)
     dst_dir = "{}/cam_{}".format(annot_dir, dst_cam)
 
-    src_filenames = os.listdir(src_dir)
-    src_filenames = sorted(src_filenames, key=lambda x: int(x[:-5].split("_")[2]))
-    for name in src_filenames:
+    # src_filenames = os.listdir(src_dir)
+    train_filenames = create_filenames(src_cam, train_f_numbers)
+    # src_filenames = sorted(src_filenames, key=lambda x: int(x[:-5].split("_")[2]))
+    for name in train_filenames:
         # print(name)
         f_num = name[:-5].split("_")[2]
         dst_annot_name = "frame_{}_{}.json".format(dst_cam, f_num)
@@ -314,11 +329,41 @@ if __name__ == "__main__":
     #                 break
 
     # separate training and test frames -- 70:30 split
-    dataframe = create_df(s_pts_train, d_pts_train)
-    train, test = train_test_split(dataframe, test_size=0.30, random_state=20, shuffle=True)
+    train = create_df(s_pts_train, d_pts_train)
+    # train, test = train_test_split(dataframe, test_size=0.30, random_state=20, shuffle=True)
 
     print("\nTraining points: src {}\n".format(len(train)))
     fit_poly_feature_linear_reg_bt_pt_height_width(train)
 
+    ################### TEST PERFORMANCE ####################################################
+    test_filenames = create_filenames(src_cam, test_f_numbers)
+    # src_filenames = sorted(src_filenames, key=lambda x: int(x[:-5].split("_")[2]))
+    s_pts_train = []  # source/dst points for testing and training
+    d_pts_train = []
+    for name in test_filenames:
+        # print(name)
+        f_num = name[:-5].split("_")[2]
+        dst_annot_name = "frame_{}_{}.json".format(dst_cam, f_num)
+
+        with open("{}/{}".format(src_dir, name)) as src_file:
+            src_json = json.load(src_file)
+            with open("{}/{}".format(dst_dir, dst_annot_name)) as dst_file:
+                dst_json = json.load(dst_file)
+                if len(src_json) == 0 or len(dst_json) == 0:
+                    continue
+                # extract common objects
+                for src_obj in src_json:
+                    src_obj_id = src_obj["obj_id"]
+                    for dst_obj in dst_json:
+                        if src_obj_id == dst_obj["obj_id"]:
+                            # clip values to a range
+                            src_obj_coords = src_obj["coords"]
+                            dst_obj_coords = dst_obj["coords"]
+                            src_obj_coords = np.clip(src_obj_coords, a_min=0, a_max=1056)
+                            dst_obj_coords = np.clip(dst_obj_coords, a_min=0, a_max=1056)
+                            s_pts_train.append(src_obj_coords.tolist())
+                            d_pts_train.append(dst_obj_coords.tolist())
+                            continue
+    test = create_df(s_pts_train, d_pts_train)
     print("\nTest points: src {}\n".format(len(test)))
     test_poly_feature_linear_reg_bt_pt_height_width(test)
