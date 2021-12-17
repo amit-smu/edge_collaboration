@@ -433,7 +433,7 @@ def load_detected_objects(filename):
 
 if __name__ == "__main__":
     # dir_name = "../../../dataset/SMU_Setup/Spatial_Overlap/Sample_Images"
-    dir_name = "../../../rpi_hardware/raw_image_processing/data/episode_1/"
+    dir_name = "../../../rpi_hardware/raw_image_processing/data/episode_2/"
     ref_cam = 2
     collab_cam = 1
     image_size = (1056, 1056)  # (width, height)
@@ -483,7 +483,7 @@ if __name__ == "__main__":
     view_1_objects = load_detected_objects("{}/{}".format(dir_name, view_1_detected_objs))
     view_2_objects = load_detected_objects("{}/{}".format(dir_name, view_2_detected_objs))
 
-    for frame_number in range(10, 3500, 8):  # 50% training data
+    for frame_number in range(10, 350, 8):  # 50% training data
         print("frame number : {}".format(frame_number))
         ref_frame_name = "frame_{}_{}".format(ref_cam, frame_number)
         collab_frame_name = "frame_{}_{}".format(collab_cam, frame_number)
@@ -608,9 +608,9 @@ if __name__ == "__main__":
 
             cv2.waitKey(1)
 
-    # plot number of frames vs iou of estimated spatial overlap
+        # plot number of frames vs iou of estimated spatial overlap
 
-    # save the masked frames from both camera views
+        # save the masked frames from both camera views
         cv2.imwrite("{}/cam_{}.jpg".format(dir_name, ref_cam), view_1_frame)
         cv2.imwrite("{}/cam_{}.jpg".format(dir_name, collab_cam), view_2_frame)
         cv2.imwrite("{}/cam_{}_area.jpg".format(dir_name, ref_cam), view_1_area)

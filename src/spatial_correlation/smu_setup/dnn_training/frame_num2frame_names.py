@@ -16,11 +16,11 @@ if __name__ == "__main__":
             for number in frame_numbers:
                 if len(number) == 0:
                     continue
-                name_1 = "{}/frame_{}_{}.jpg".format(prefix, 1, number)
-                framenames.append(name_1)
+                name_2 = "{}/frame_{}_{}.jpg".format(prefix, 2, number)
+                framenames.append(name_2)
 
                 if FLAG == "train":
-                    name_2 = "{}/frame_{}_{}.jpg".format(prefix, 2, number)
+                    name_1 = "{}/frame_{}_{}.jpg".format(prefix, 1, number)
                     name_3 = "{}/frame_{}_{}.jpg".format(prefix, 3, number)
                     framenames.append(name_2)
                     framenames.append(name_3)

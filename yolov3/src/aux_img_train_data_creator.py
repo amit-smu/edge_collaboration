@@ -1,6 +1,7 @@
 """
 module to create training data for image + prior model.
 Images would contain randomly generated regions of various resolutions and correpsonding ground truth as fourth channel
+main file
 """
 
 import cv2

@@ -26,3 +26,4 @@ ssd_keras/**/*.zip
 yolov4/**/temp/*
 yolov3/**/temp/*
 rpi_hardware/**/*.jpg
+src/spatial_correlation/smu_setup/**/*.txt
