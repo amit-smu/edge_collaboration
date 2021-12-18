@@ -33,8 +33,8 @@ def draw_gt(image, image_name):
 
 
 if __name__ == "__main__":
-    labels_dir =r"../../../../rpi_hardware/raw_image_processing/data/episode_1/ground_truth/frame_wise_gt_yolo/cam_2"
-    img_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/pi_2_frames_1056_v2"
+    labels_dir =r"../../../../rpi_hardware/raw_image_processing/data/episode_1/ground_truth/frame_wise_gt_yolo/cam_1"
+    img_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/pi_1_frames_1056_v2"
     result_file = r"./result_1056.txt"
 
     SEPARATOR_KEY = "Enter Image Path:"

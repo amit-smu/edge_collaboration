@@ -483,7 +483,7 @@ if __name__ == "__main__":
     view_1_objects = load_detected_objects("{}/{}".format(dir_name, view_1_detected_objs))
     view_2_objects = load_detected_objects("{}/{}".format(dir_name, view_2_detected_objs))
 
-    for frame_number in range(10, 350, 8):  # 50% training data
+    for frame_number in range(10, 3500, 8):  # 50% training data
         print("frame number : {}".format(frame_number))
         ref_frame_name = "frame_{}_{}".format(ref_cam, frame_number)
         collab_frame_name = "frame_{}_{}".format(collab_cam, frame_number)
@@ -644,6 +644,6 @@ if __name__ == "__main__":
         for value in iou_values_2:
             cam8.write("{}\n".format(value))
 
-    cv2.waitKey(-1)
-    plt.show()
+    cv2.waitKey(100)
+    # plt.show()
     # cv2.waitKey(-1)

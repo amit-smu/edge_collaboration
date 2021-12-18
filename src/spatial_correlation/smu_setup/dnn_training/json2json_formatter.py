@@ -1,5 +1,6 @@
 """
 module to convert a single json file to multiple files (each for each frame in each camera)
+main file
 """
 import os
 import json

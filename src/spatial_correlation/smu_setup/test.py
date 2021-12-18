@@ -1,38 +1,18 @@
 import cv2
 
+img_1 = cv2.imread("CAMPUS_spatial_overlap.jpg")
+img_2 = cv2.imread("CAMPUS_spatial_overlap_weighted.jpg")
 
+gt_box_coords_vw_1 = [360, 0, 1010, 1080]
+scale = 1056 / 1080
+gt_box_coords_vw_1 = [int(t * scale) for t in gt_box_coords_vw_1]
 
+img_1 = cv2.rectangle(img_1, (0, 0), (1056, 1056), (0, 0, 255), 30)
+img_2 = cv2.rectangle(img_2, (gt_box_coords_vw_1[0], gt_box_coords_vw_1[1]),
+                      (gt_box_coords_vw_1[2], gt_box_coords_vw_1[2]), (0, 255, 0), 7)
+cv2.imshow("img_1", img_1)
+cv2.imshow("img_2", img_2)
 
-
-def load_detected_objects(filename):
-    """
-    use the detected objects data (from darknet) and convert it to a python dict
-    :return:
-    """
-    detected_objs = {}
-    with open(filename) as in_file:
-        line = in_file.readline()
-        key = line.split("/")[-1].split(":")[0][:-4]
-        obj_list = []
-        while len(line) > 5:
-            line = in_file.readline()
-            if line.__contains__("Enter"):
-                detected_objs[key] = obj_list
-                draw_boxes(key, obj_list)
-                obj_list = []
-                key = line.split("/")[-1].split(":")[0][:-4]
-                # print(detected_objs)
-            else:
-                obj_class = line.split(":")[0]
-                if obj_class != "person":
-                    continue
-                x, y, w, h = line.strip().split(", ")[1].split(" ")
-                x = int(x)
-                y = int(y)
-                w = int(w)
-                h = int(h)
-                obj_list.append([x, y, w, h])
-    return detected_objs
-
-
-load_detected_objects("result_4.txt")
+cv2.imwrite("CAMPUS_spatial_overlap.jpg", img_1)
+cv2.imwrite("CAMPUS_spatial_overlap_weighted.jpg", img_2)
+cv2.waitKey(-1)
