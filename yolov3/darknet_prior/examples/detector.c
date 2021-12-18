@@ -1,7 +1,22 @@
 #include "darknet.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 static int coco_ids[] = {1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,25,27,28,31,32,33,34,35,36,37,38,39,40,41,42,43,44,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,67,70,72,73,74,75,76,77,78,79,80,81,82,84,85,86,87,88,89,90};
 
+// function for logging loss every 10 iterations
+void log_loss(int iteration, float loss, float avg_loss){
+    FILE *file;
+    file = fopen("loss_log.txt", "a");
+    if(file==NULL){
+        printf("\nError opening file\n");
+        exit(1);
+    } else{
+        fprintf(file, "%d, %f, %f\n", iteration, loss, avg_loss);
+    }
+    fclose(file);
+    return;
+}
 
 void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, int ngpus, int clear)
 {
@@ -62,8 +77,10 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
     while(get_current_batch(net) < net->max_batches){
         if(l.random && count++%10 == 0){
             printf("Resizing\n");
-            int dim = (rand() % 10 + 10) * 32;
-            if (get_current_batch(net)+200 > net->max_batches) dim = 608;
+            // *************** amit *********************
+            //changing resize to accomodate 1056x1056 images
+            int dim = (rand() % 10 + 24) * 32;
+            if (get_current_batch(net)+200 > net->max_batches) dim = 1056;
             //int dim = (rand() % 4 + 16) * 32;
             printf("%d\n", dim);
             args.w = dim;
@@ -127,12 +144,20 @@ void train_detector(char *datacfg, char *cfgfile, char *weightfile, int *gpus, i
 
         i = get_current_batch(net);
         printf("%ld: %f, %f avg, %f rate, %lf seconds, %d images\n", get_current_batch(net), loss, avg_loss, get_current_rate(net), what_time_is_it_now()-time, i*imgs);
+
+        // **************** log the loss every 10 iterations *******************
+        if(i%10==0){
+            log_loss(get_current_batch(net),loss, avg_loss);
+        }
+        // ********************************************************************
+
         if(i%100==0){
 #ifdef GPU
             if(ngpus != 1) sync_nets(nets, ngpus, 0);
 #endif
             char buff[256];
-            sprintf(buff, "%s/%s.backup", backup_directory, base);
+//            sprintf(buff, "%s/%s.backup", backup_directory, base);
+            sprintf(buff, "%s/%s_%d.weights", backup_directory, base, i);
             save_weights(net, buff);
         }
         if(i%10000==0 || (i < 1000 && i%100 == 0)){
@@ -565,6 +590,8 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
     char *name_list = option_find_str(options, "names", "data/names.list");
     char **names = get_labels(name_list);
 
+    //cuda_set_device(0);
+
     image **alphabet = load_alphabet();
     network *net = load_network(cfgfile, weightfile, 0);
     set_batch_network(net, 1);
@@ -576,6 +603,8 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
     while(1){
         if(filename){
             strncpy(input, filename, 256);
+            //printf("\nINFO: input name : %s", input);
+            //fflush(stdout);
         } else {
             printf("Enter Image Path: ");
             fflush(stdout);
@@ -584,7 +613,14 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
             strtok(input, "\n");
         }
         image im = load_image_color(input,0,0);
+
+        //printf("\nINFO-- image width = %d, height = %d", im.w, im.h);
+        //fflush(stdout);
+
         image sized = letterbox_image(im, net->w, net->h);
+
+        //printf("\nINFO-- sized image width = %d, height = %d", sized.w, sized.h);
+        //fflush(stdout);
         //image sized = resize_image(im, net->w, net->h);
         //image sized2 = resize_max(im, net->w);
         //image sized = crop_image(sized2, -((net->w - sized2.w)/2), -((net->h - sized2.h)/2), net->w, net->h);
@@ -592,23 +628,31 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         layer l = net->layers[net->n-1];
 
         float *X = sized.data;
-        if (net->prior) {
-          printf("Loading prior .. \n"); fflush(stdout);
-          void *sized_prior = malloc(net->w * net->h * (im.c + net->prior) * sizeof(float));
-          unsigned int orig_image_size = net->h * net->w * im.c * sizeof(float);
-          memcpy(sized_prior, sized.data, orig_image_size);
 
-          int p;
-          for (p = 0; p < net->prior; p++) {
-            image prior = load_image(input, 0, 0, 1);
-            image s_prior = letterbox_prior(prior, net->w, net->h);
-            memcpy(sized_prior + orig_image_size + (net->h * net->w * p),
-                   s_prior.data, net->h * net->w * sizeof(float));
-            free_image(prior);
-            free_image(s_prior);
-          }
-          X = sized_prior;
-          free_image(sized);
+        // ###################### amit ********************************
+        if (net->prior) {
+            printf("Loading prior .. \n");
+            fflush(stdout);
+            void *sized_prior = malloc(net->w * net->h * (im.c + net->prior) * sizeof(float));
+            unsigned int orig_image_size = net->h * net->w * im.c * sizeof(float);
+            memcpy(sized_prior, sized.data, orig_image_size);
+
+            int p;
+            for (p = 0; p < net->prior; p++) {
+                image prior = load_prior(input, 0, 0, 1);
+                image s_prior = letterbox_image(prior, net->w, net->h);
+
+//                char priorname[4096];
+//                find_replace(input, ".png", "_prior.png", priorname);
+//                save_image_options(s_prior, priorname, PNG, 100);
+
+                memcpy(sized_prior + orig_image_size + (net->h * net->w * p),
+                       s_prior.data, net->h * net->w * sizeof(float));
+                free_image(prior);
+                free_image(s_prior);
+            }
+            X = sized_prior;
+            free_image(sized);
         }
 
         time=what_time_is_it_now();
@@ -616,7 +660,7 @@ void test_detector(char *datacfg, char *cfgfile, char *weightfile, char *filenam
         printf("%s: Predicted in %f seconds.\n", input, what_time_is_it_now()-time);
         int nboxes = 0;
         detection *dets = get_network_boxes(net, im.w, im.h, thresh, hier_thresh, 0, 1, &nboxes);
-        //printf("%d\n", nboxes);
+        printf("Number of predicted boxes: %d\n", nboxes);
         //if (nms) do_nms_obj(boxes, probs, l.w*l.h*l.n, l.classes, nms);
         if (nms) do_nms_sort(dets, nboxes, l.classes, nms);
         draw_detections(im, dets, nboxes, thresh, names, alphabet, l.classes);
