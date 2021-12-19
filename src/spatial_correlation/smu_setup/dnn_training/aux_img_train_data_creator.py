@@ -87,7 +87,7 @@ if __name__ == "__main__":
     img_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/pi_{}_frames_1056_v2"
     annot_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/ground_truth/frame_wise_gt_yolo/cam_{}"
     img_output_dir = r"./temp"
-    training_frames = r"test_frame_numbers.txt"
+    training_frames = r"train_frame_numbers.txt"
 
     img_height, img_width = (1056, 1056)
     ICOV_THRESHOLD = 0.5
@@ -96,7 +96,7 @@ if __name__ == "__main__":
         frame_numbers = t_frames.read().split("\n")
 
     for number in frame_numbers:
-        for cam in range(2, 3):
+        for cam in range(1, 4):
             name = "frame_{}_{}.jpg".format(cam, number)
             print(name)
             image = cv2.imread("{}/{}".format(img_dir.format(cam), name))
@@ -125,7 +125,7 @@ if __name__ == "__main__":
             r_int = np.random.randint(1, 10)
             if r_int > 9:
                 # write prior to a file
-                cv2.imwrite("{}/{}_prior.png".format(img_output_dir.format(cam), name[:-4]), prior)
+                cv2.imwrite("{}/{}_prior.jpg".format(img_output_dir.format(cam), name[:-4]), prior)
                 # copy label file
                 copyfile(src=annot_file_path, dst="{}/{}.txt".format(img_output_dir, name[:-4]))
                 continue
@@ -150,7 +150,7 @@ if __name__ == "__main__":
                     annot = annot_file.readline().strip("\n").split(" ")
 
             # write prior to a file
-            cv2.imwrite("{}/{}_prior.png".format(img_output_dir, name[:-4]), prior)
+            cv2.imwrite("{}/{}_prior.jpg".format(img_output_dir, name[:-4]), prior)
             # copy label file
             copyfile(src=annot_file_path, dst="{}/{}.txt".format(img_output_dir, name[:-4]))
             # break

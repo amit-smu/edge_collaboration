@@ -260,6 +260,7 @@ void draw_detections(image im, detection *dets, int num, float thresh, char **na
                 int height_amit = bx.h * im.h;
 //                printf("Img width=%d, height=%d\n", im.w, im.h);
                 printf("%s: %.0f%%, %d %d %d %d\n", names[j], dets[i].prob[j]*100, left_amit, top_amit, width_amit, height_amit);
+//                printf("%s: %.0f%%\n", names[j], dets[i].prob[j]*100);
             }
         }
         if(class >= 0){
@@ -1306,7 +1307,6 @@ image load_image_stb(char *filename, int channels)
         exit(0);
     }
     if(channels) c = channels;
-//    printf("\n w=%d, h=%d, c=%d\n", w, h, c);
     int i,j,k;
     image im = make_image(w, h, c);
     for(k = 0; k < c; ++k){
@@ -1326,14 +1326,13 @@ image load_prior(char *fname, int w, int h, int c){
     //load the prior from the same directory
     char priorname[4096];
 //    printf("\nInfo -- fname : %s\n", fname);
-    find_replace(fname, ".jpg", "_prior.jpg", priorname);
-    //printf("priorname -- %s, fname = %s\n", priorname, fname);
+    find_replace(fname, ".png", "_prior.png", priorname);
+//    printf("\npriorname -- %s, fname = %s\n", priorname, fname);
     return load_image(priorname, w, h, c);
 }
 
 image load_image(char *filename, int w, int h, int c)
 {
-//    printf("filename : %s\n", filename);
 #ifdef OPENCV
     image out = load_image_cv(filename, c);
 #else
@@ -1345,7 +1344,6 @@ image load_image(char *filename, int w, int h, int c)
         free_image(out);
         out = resized;
     }
-//    save_image_options(out, filename, PNG, 100);
     return out;
 }
 

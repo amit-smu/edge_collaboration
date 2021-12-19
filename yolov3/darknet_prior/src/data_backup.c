@@ -1033,29 +1033,19 @@ data load_data_swag(char **paths, int n, int classes, float jitter)
     return d;
 }
 
-//data load_data_detection(int n, char **paths, int m, int w, int h, int boxes, int classes, float jitter, float hue, float saturation, float exposure)
-data load_data_detection(int n, char **paths, int m, int w, int h, int boxes, int classes, float jitter, float hue, float saturation, float exposure, int prior)
+data load_data_detection(int n, char **paths, int m, int w, int h, int boxes, int classes, float jitter, float hue, float saturation, float exposure)
 {
     char **random_paths = get_random_paths(paths, n, m);
     int i;
     data d = {0};
     d.shallow = 0;
-//    printf("n : %d, prior: %d\n", n, prior);
+
     d.X.rows = n;
     d.X.vals = calloc(d.X.rows, sizeof(float*));
-//    d.X.cols = h*w*3;
-    d.X.cols = h*w*3 + h*w*prior;
+    d.X.cols = h*w*3;
 
     d.y = make_matrix(n, 5*boxes);
     for(i = 0; i < n; ++i){
-// ############################## amit #######################################
-//        image orig;
-//        if (prior){
-//            orig = load_image(random_paths[i], 0, 0, 3+prior);
-//        } else{
-//            orig = load_image_color(random_paths[i], 0, 0);
-//        }
-// ############################## amit #######################################
         image orig = load_image_color(random_paths[i], 0, 0);
         image sized = make_image(w, h, orig.c);
         fill_image(sized, .5);
@@ -1087,30 +1077,7 @@ data load_data_detection(int n, char **paths, int m, int w, int h, int boxes, in
         int flip = rand()%2;
         if(flip) flip_image(sized);
         d.X.vals[i] = sized.data;
-// ############################# amit #########################################################################
-        if (prior) {
-            /* load and place prior */
-            void *sized_prior = malloc(w*h*(orig.c + prior) * sizeof(float));
-            unsigned int orig_image_size = h*w*orig.c*sizeof(float);
-            memcpy(sized_prior, sized.data, orig_image_size);
-            int p;
-            for (p = 0; p < prior; p++) {
-//                printf("\n random paths[i] = %s\n", random_paths[i]);
-//                image o_prior = load_image(random_paths[i], 0, 0, 1);
-                //printf("%s", random_paths[i]);
-                image o_prior = load_prior(random_paths[i], 0, 0, 1);
-                image s_prior = make_image(w, h, 1);
-                fill_image(s_prior, .5);
-                place_image(o_prior, nw, nh, dx, dy, s_prior);
-                if(flip) flip_image(s_prior);
-                memcpy(sized_prior + orig_image_size + h*w*p, s_prior.data, h*w*sizeof(float));
-                free_image(o_prior);
-                free_image(s_prior);
-            }
-            d.X.vals[i] = sized_prior;
-            free_image(sized);
-        }
-// ############################# amit #########################################################################
+
 
         fill_truth_detection(random_paths[i], boxes, d.y.vals[i], classes, flip, -dx/w, -dy/h, nw/w, nh/h);
 
@@ -1147,10 +1114,7 @@ void *load_thread(void *ptr)
     } else if (a.type == REGION_DATA){
         *a.d = load_data_region(a.n, a.paths, a.m, a.w, a.h, a.num_boxes, a.classes, a.jitter, a.hue, a.saturation, a.exposure);
     } else if (a.type == DETECTION_DATA){
-//        *a.d = load_data_detection(a.n, a.paths, a.m, a.w, a.h, a.num_boxes, a.classes, a.jitter, a.hue, a.saturation, a.exposure);
-        // ********************************amit #############################################################################################################
-        *a.d = load_data_detection(a.n, a.paths, a.m, a.w, a.h, a.num_boxes, a.classes, a.jitter, a.hue, a.saturation, a.exposure, a.prior);
-        // ********************************amit #############################################################################################################
+        *a.d = load_data_detection(a.n, a.paths, a.m, a.w, a.h, a.num_boxes, a.classes, a.jitter, a.hue, a.saturation, a.exposure);
     } else if (a.type == SWAG_DATA){
         *a.d = load_data_swag(a.paths, a.n, a.classes, a.jitter);
     } else if (a.type == COMPARE_DATA){
