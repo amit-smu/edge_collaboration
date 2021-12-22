@@ -13,7 +13,7 @@ if __name__ == "__main__":
             if len(number) == 0:
                 continue
             print(number)
-            for cam in range(1, 4):
+            for cam in range(2, 3):
                 frame_name = "frame_{}_{}.txt".format(cam, number)
                 src_dir = annot_dir.format(cam)
                 dst_dir = output_dir.format(cam)

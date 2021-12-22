@@ -88,7 +88,7 @@ if __name__ == "__main__":
 
                 #  check overlap with shared region
                 if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[position]) >= IOU_TH:
-                    prior[top:bottom, left:right] = 250
+                    prior[top:bottom, left:right] = 255
 
         # write prior
         cv2.imwrite("{}/{}_prior.png".format(img_out_dir, image_name[:-4]), prior)

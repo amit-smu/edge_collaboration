@@ -1,7 +1,8 @@
 """
-module to downsample shared region of images as per the given resolution. This creates a mixed-resolution image.
+module to create mixed resolution images using hypothetical 33%, 66% shared regions -- variable location of shared region
 main file
 """
+
 import cv2
 import os
 import shutil
@@ -10,25 +11,26 @@ if __name__ == "__main__":
     in_data_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/pi_2_frames_1056_v2"
     frame_numbers_path = "./test_frame_numbers.txt"
     out_data_dir = "./data"
-    cam_pair = "2_1"
+    region_loc = "66_right"
     ref_cam = 2
 
     resolutions = [1056, 512, 416, 320, 224, 128, 70]
-    shared_region_res = 70
+    shared_region_res = 1056
 
     img_dim = (1056.0, 1056.0)
     spatial_overlap = {
-        "2_1": [360, 0, 1010, 1080],
-        "2_3": [0, 0, 470, 1080],
-        "1_2": [0, 0, 480, 1080],
-        "3_2": []
+        "33_left": [0, 0, 348, 1056],
+        "33_right": [696, 0, 1056, 1056],
+        "66_left": [0, 0, 696, 1056],
+        "66_right": [348, 0, 1056, 1056]
     }
-    scale = 1056 / 1080
-    spatial_overlap[cam_pair] = [int(d * scale) for d in spatial_overlap[cam_pair]]
+    # scale = 1056 / 1080
+    # spatial_overlap[cam_pair] = [int(d * scale) for d in spatial_overlap[cam_pair]]
 
-    x1, y1, x2, y2 = spatial_overlap[cam_pair]
-    print("Cam pair: {}, Spatial Overlap : {}, Resolution: {}\n".format(cam_pair, spatial_overlap[cam_pair],
-                                                                        shared_region_res))
+    x1, y1, x2, y2 = spatial_overlap[region_loc]
+    print("Shared Reg Location : {}, Spatial Overlap : {}, Resolution: {}\n".format(region_loc,
+                                                                                    spatial_overlap[region_loc],
+                                                                                    shared_region_res))
     sh_width = x2 - x1
     sh_height = y2 - y1
 

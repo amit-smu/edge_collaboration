@@ -2,7 +2,7 @@
 regression estimator for coordinate mapping from one frame to another. Linear regression
 use multiple points from each bounding box. These points are on the road.
 Optimized version -- including feature normalization, regularization etc.
-main file used for coordinate mapping
+main file used for coordinate mapping and IoU vs Degree analysis as well
 """
 
 import cv2
@@ -27,6 +27,67 @@ def load_scalar():
         scalar = pickle.load(ifile)  # load minmaxscalar
         assert scalar is not None
     return scalar
+
+
+def plot_regression_results(iou_values):
+    iou_ticks = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+    iou_fractions = []
+    for tick in iou_ticks:
+        # find fraction of iou values above this iou
+        target_iou = [j for j in iou_values if j >= tick]
+        total_iou = len(iou_values)
+        fraction = len(target_iou) / total_iou
+        iou_fractions.append(np.round(fraction * 100.0, decimals=2))
+
+    for k, t in enumerate(iou_fractions):
+        print(iou_ticks[k], int(t))
+    print(np.array(iou_fractions))
+    # print(iou_fractions)
+
+
+def bb_iou(boxA, boxB):
+    # determine the (x, y)-coordinates of the intersection rectangle
+    xA = max(boxA[0], boxB[0])
+    yA = max(boxA[1], boxB[1])
+    xB = min(boxA[2], boxB[2])
+    yB = min(boxA[3], boxB[3])
+
+    # compute the area of intersection rectangle
+    interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
+
+    # compute the area of both the prediction and ground-truth
+    # rectangles
+    boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
+    boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
+
+    # compute the intersection over union by taking the intersection
+    # area and dividing it by the sum of prediction + ground-truth
+    # areas - the interesection area
+    iou = interArea / float(boxAArea + boxBArea - interArea)
+    return np.round(iou, decimals=2)
+
+
+def compute_iou_score(pred_coords, actual_coords):
+    """
+    :param pred_bbox: [bottom mid center (X,Y), width, height]
+    :param actual_bbox:
+    :return:
+    """
+    # compute top & bottom points of bboxes
+    pred_bbox = []  # x1 y1 x2 y2
+    pred_bbox.append(int(pred_coords[0] - pred_coords[2] / 2))
+    pred_bbox.append(int(pred_coords[1] - pred_coords[3]))
+    pred_bbox.append(int(pred_coords[0] + pred_coords[2] / 2))
+    pred_bbox.append(int(pred_coords[1]))
+
+    actual_bbox = []
+    actual_bbox.append(int(actual_coords[0] - actual_coords[2] / 2))
+    actual_bbox.append(int(actual_coords[1] - actual_coords[3]))
+    actual_bbox.append(int(actual_coords[0] + actual_coords[2] / 2))
+    actual_bbox.append(int(actual_coords[1]))
+
+    score = bb_iou(boxA=pred_bbox, boxB=actual_bbox)
+    return score
 
 
 def create_df(s_points, d_points):
@@ -109,6 +170,21 @@ def test_poly_feature_linear_reg_bt_pt_height_width(test_df):
     rmse = np.sqrt(mean_squared_error(y_true=Y, y_pred=reg_model.predict(X_poly)))
     print("Test!! RMSE : {}, R2: {}".format(round(rmse), np.round(r_score, decimals=2)))
 
+    # ##################### COMPUTE IoU SCORES ########################################
+    if not IOU_ANALYSIS:
+        return
+    iou_scores = []
+    for index, row in enumerate(X_poly):
+        row = np.reshape(row, newshape=(1, -1))
+        row_pred = reg_model.predict(row)
+        if NORMALIZE:
+            row_pred = min_max_scalar.inverse_transform(row_pred)
+        row_pred = np.array(row_pred, dtype=np.int32)
+        # score = compute_iou_score(row_pred[0], actual_bbox=Y[index])
+        score = compute_iou_score(pred_coords=row_pred[0], actual_coords=Y[index])
+        iou_scores.append(score)
+    plot_regression_results(iou_scores)
+
 
 def fit_poly_feature_linear_reg_bt_pt_height_width(train_df):
     """
@@ -124,7 +200,7 @@ def fit_poly_feature_linear_reg_bt_pt_height_width(train_df):
     # model = SVR()
     # model = RandomForestRegressor(max_features=5)
     # model = GradientBoostingRegressor()
-    min_max_scalar = StandardScaler()
+    # min_max_scalar = StandardScaler()
 
     # visualize points
     if DEBUG:
@@ -231,19 +307,19 @@ if __name__ == "__main__":
     REGULARIZE = False
     img_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/pi_{}_frames_1056_v2/"
     annot_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/ground_truth/frame_wise_gt_json/"
-    train_f_numbers = r"../dnn_training/train_frame_numbers.txt"
-    test_f_numbers = r"../dnn_training/test_frame_numbers.txt"
+    train_f_numbers = r"./train_frame_numbers.txt"
+    test_f_numbers = r"./test_frame_numbers.txt"
+    IOU_ANALYSIS = True
 
     src_cam = 1  # collab cam
     dst_cam = 2  # ref cam
-    degree = 3
-    TRAINING_FRAMES = 1400  # out of 400 total, 119 frames kept for testing. Frame no range = (0, 2000)
+    degree = 4
 
     s_pts_train = []  # source/dst points for testing and training
     d_pts_train = []
 
-
-    print("Degree: {}, Normalize: {}, Regularize: {}".format(degree, NORMALIZE, REGULARIZE))
+    print("Degree: {}, Normalize: {}, Regularize: {}, src_cam : {}, dst_cam: {}".format(degree, NORMALIZE, REGULARIZE,
+                                                                                        src_cam, dst_cam))
     # read training frame names
     # trainval_frames = np.loadtxt("{}/PETS_org/ImageSets/Main/coord_mapping_trainval_70.txt".format(DATASET_DIR),
     #                              dtype=np.int32)

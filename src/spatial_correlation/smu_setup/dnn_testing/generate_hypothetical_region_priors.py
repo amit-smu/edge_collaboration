@@ -1,5 +1,5 @@
 """
-module to generate priors (self ground truth), for a given set of test images
+generates self gt priors for hypothetical shared regions of 33% and 66%.
 """
 import cv2
 import numpy as np
@@ -26,32 +26,37 @@ if __name__ == "__main__":
     img_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/pi_2_frames_1056_v2"
     label_dir = r"../../../../rpi_hardware/raw_image_processing/data/episode_1/ground_truth/frame_wise_gt_yolo/cam_2"
     img_out_dir = "./data"
-    cam_pair = "2_1"
     frame_numbers_path = "./test_frame_numbers.txt"
+    # cam_pair = "5_7"
+    region_loc = "66_right"
     ref_cam = 2
     VISUALIZE = False
 
     IOU_TH = 0.2
-    width, height = (1056.0, 1056.0)
+    img_width, img_height = (1056.0, 1056.0)
+    resolutions = [1056, 512, 416, 320, 224, 128, 70]
+    shared_region_res = 128
+
     spatial_overlap = {
-        "2_1": [360, 0, 1010, 1080],
-        "2_3": [0, 0, 470, 1080]
+        "33_left": [0, 0, 348, 1056],
+        "33_right": [696, 0, 1056, 1056],
+        "66_left": [0, 0, 696, 1056],
+        "66_right": [348, 0, 1056, 1056]
     }
-    scale = 1056 / 1080
-    spatial_overlap[cam_pair] = [int(d * scale) for d in spatial_overlap[cam_pair]]
 
-    x1, y1, x2, y2 = spatial_overlap[cam_pair]
-    print("Cam pair: {}, Spatial Overlap : {}\n".format(cam_pair, spatial_overlap[cam_pair]))
-
+    x1, y1, x2, y2 = spatial_overlap[region_loc]
+    print("Shared Reg Location : {}, Spatial Overlap : {}, Resolution: {}\n".format(region_loc,
+                                                                                    spatial_overlap[region_loc],
+                                                                                    shared_region_res))
     sh_width = x2 - x1
     sh_height = y2 - y1
 
     with open(frame_numbers_path) as in_file:
         frame_numbers = in_file.read().split("\n")
-    # for i in range(1400, 2000, 5):
     for number in frame_numbers:
         if len(number) == 0:
             continue
+        # create prior
         label_name = "frame_{}_{}.txt".format(ref_cam, number)
         print(label_name)
 
@@ -61,7 +66,7 @@ if __name__ == "__main__":
 
         with open("{}/{}".format(label_dir, label_name)) as label_file:
             content = label_file.readlines()
-            prior = np.full(shape=(int(height), int(width), 1), fill_value=0, dtype=np.uint8)
+            prior = np.full(shape=(int(img_height), int(img_width), 1), fill_value=0, dtype=np.uint8)
             for line in content:
                 if len(line) <= 1:
                     continue
@@ -69,25 +74,25 @@ if __name__ == "__main__":
                 # read gt for this image
                 _, mid_x, mid_y, box_width, box_height = [x for x in line.split()]
 
-                mid_x = float(mid_x) * width
-                mid_y = float(mid_y) * height
-                box_width = float(box_width) * width
-                box_height = float(box_height) * height
+                mid_x = float(mid_x) * img_width
+                mid_y = float(mid_y) * img_height
+                box_width = float(box_width) * img_width
+                box_height = float(box_height) * img_height
 
                 # enforce constraints
                 left = int(max(1, mid_x - box_width / 2))
                 top = int(max(1, mid_y - box_height / 2))
-                right = int(min(mid_x + box_width / 2, width - 1))
-                bottom = int(min(mid_y + box_height / 2, height - 1))
+                right = int(min(mid_x + box_width / 2, img_width - 1))
+                bottom = int(min(mid_y + box_height / 2, img_height - 1))
 
                 #  check overlap with shared region
-                if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[cam_pair]) >= IOU_TH:
+                if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[region_loc]) >= IOU_TH:
                     prior[top:bottom, left:right] = 255
                     if VISUALIZE:
                         cv2.rectangle(image, (left, top), (right, bottom), (0, 255, 0))
             # write prior to file
             out_prior_name = "{}/{}_prior.jpg".format(img_out_dir, label_name[:-4])
-            print(out_prior_name)
+            # print(out_prior_name)
             cv2.imwrite(out_prior_name, prior)
             if VISUALIZE:
                 # cv2.imwrite("{}/{}.png".format(img_out_dir, label_name[:-4]), image)

@@ -1,5 +1,5 @@
 """
-module to generate priors (self ground truth), for a given set of test images
+module to change ground truth for "shared-region only" study
 """
 import cv2
 import numpy as np
@@ -61,38 +61,34 @@ if __name__ == "__main__":
 
         with open("{}/{}".format(label_dir, label_name)) as label_file:
             content = label_file.readlines()
-            prior = np.full(shape=(int(height), int(width), 1), fill_value=0, dtype=np.uint8)
-            for line in content:
-                if len(line) <= 1:
-                    continue
-                line = line.strip()
-                # read gt for this image
-                _, mid_x, mid_y, box_width, box_height = [x for x in line.split()]
+            with open("{}/{}".format(img_out_dir, label_name), 'w') as out_label_file:
 
-                mid_x = float(mid_x) * width
-                mid_y = float(mid_y) * height
-                box_width = float(box_width) * width
-                box_height = float(box_height) * height
+                for line in content:
+                    if len(line) <= 1:
+                        continue
+                    line_copy = line
+                    line = line.strip()
+                    # read gt for this image
+                    _, mid_x, mid_y, box_width, box_height = [x for x in line.split()]
 
-                # enforce constraints
-                left = int(max(1, mid_x - box_width / 2))
-                top = int(max(1, mid_y - box_height / 2))
-                right = int(min(mid_x + box_width / 2, width - 1))
-                bottom = int(min(mid_y + box_height / 2, height - 1))
+                    mid_x = float(mid_x) * width
+                    mid_y = float(mid_y) * height
+                    box_width = float(box_width) * width
+                    box_height = float(box_height) * height
 
-                #  check overlap with shared region
-                if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[cam_pair]) >= IOU_TH:
-                    prior[top:bottom, left:right] = 255
-                    if VISUALIZE:
-                        cv2.rectangle(image, (left, top), (right, bottom), (0, 255, 0))
-            # write prior to file
-            out_prior_name = "{}/{}_prior.jpg".format(img_out_dir, label_name[:-4])
-            print(out_prior_name)
-            cv2.imwrite(out_prior_name, prior)
-            if VISUALIZE:
-                # cv2.imwrite("{}/{}.png".format(img_out_dir, label_name[:-4]), image)
-                image_copy = cv2.resize(image, (700, 700))
-                cv2.imshow("img", image_copy)
-                prior_copy = cv2.resize(prior, (700, 700))
-                cv2.imshow("prior", prior_copy)
-                cv2.waitKey(-1)
+                    # enforce constraints
+                    left = int(max(1, mid_x - box_width / 2))
+                    top = int(max(1, mid_y - box_height / 2))
+                    right = int(min(mid_x + box_width / 2, width - 1))
+                    bottom = int(min(mid_y + box_height / 2, height - 1))
+
+                    #  check overlap with shared region
+                    if bb_icov(gt_box=[left, top, right, bottom], cropped_img_box=spatial_overlap[cam_pair]) >= IOU_TH:
+                        out_label_file.write("{}".format(line_copy))
+                        if VISUALIZE:
+                            cv2.rectangle(image, (left, top), (right, bottom), (0, 255, 0))
+                if VISUALIZE:
+                    # cv2.imwrite("{}/{}.png".format(img_out_dir, label_name[:-4]), image)
+                    image_copy = cv2.resize(image, (700, 700))
+                    cv2.imshow("img", image_copy)
+                    cv2.waitKey(-1)
