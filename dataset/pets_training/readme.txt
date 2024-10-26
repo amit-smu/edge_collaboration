@@ -1,2 +1,0 @@
-subset of dataset from PETS dataset (views 5-8). First 101 frames from each view are selected. The goal is to use these frames for deciding the threshold values of features
-e.g. color-histogram threshold for deciding equality of two objects. 

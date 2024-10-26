@@ -1,1 +1,0 @@
-JPEGImages_det_box : contains files copied and renamed from JPEGImages folder (contains files used in regression model creation) as per format used  by  ssd_512_eval_XX_det_box files

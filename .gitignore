@@ -2,10 +2,12 @@
 *.iml
 *.mp4
 .idea/
-src/**/*.jpg
+*.jpg
+*/dataset/*
+*.txt
 src/**/*.h264
 src/**/*.xlsx
-src/**/*.png
+*.png
 src/**/*.xml
 src/**/*.csv
 src/**/*.zip
@@ -24,6 +26,6 @@ src/**/regression_models/*
 src/**/*.zip
 ssd_keras/**/*.zip
 yolov4/**/temp/*
-yolov3/**/temp/*
+TIoT_Major_Revision/yolov3/**/temp/*
 rpi_hardware/**/*.jpg
 src/spatial_correlation/smu_setup/**/*.txt
